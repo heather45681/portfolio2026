@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fifi Lee 作品集</title>
+<meta name="description" content="Fifi Lee — Product Designer. 註冊、登入、帳號找回與多市場流程設計作品集。">
+<meta property="og:title" content="Fifi Lee 作品集">
+<meta property="og:description" content="Fifi Lee — Product Designer. 註冊、登入、帳號找回與多市場流程設計作品集。">
+<meta property="og:image" content="img/5a12622855edc63d02846815d123024b.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&amp;family=Noto+Sans+TC:wght@400;500;700&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+.ar{display:inline-block;transition:transform .25s ease}
+a:hover .ar-r,a:focus-visible .ar-r{transform:translateX(5px)}
+a:hover .ar-l,a:focus-visible .ar-l{transform:translateX(-5px)}
+a:hover .ar-ne,a:focus-visible .ar-ne{transform:translate(3px,-3px)}
+a:hover .ar-d,a:focus-visible .ar-d{transform:translateY(3px)}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mq-track{display:inline-flex;animation:mq 70s linear infinite}
+.mq-track:hover{animation-play-state:paused}
+@media (prefers-reduced-motion: reduce){.mq-track{animation:none}.ar{transition:none}}
+
+body{margin:0;background:#F3F0E8}
+a{color:#1F2427}a:hover{color:#A8482F}
+.ct,.ct-sp{background:#A8482F;border-color:#A8482F !important;color:#FBF9F4 !important;font-weight:500;transition:background .2s}.ct:hover,.ct-sp:hover{background:#8A3A25;border-color:#8A3A25 !important;color:#FBF9F4 !important}
+.vt{writing-mode:vertical-rl;text-orientation:upright}
+.vt-en{writing-mode:vertical-rl;text-orientation:mixed}
+@media (max-width:760px){.hd{display:grid !important;grid-template-columns:1fr auto auto;align-items:center;gap:0 10px !important}.hd>a:first-child{white-space:nowrap}.hb{display:flex !important}.nv{display:none !important;grid-column:1/-1}.nv.open{display:flex !important;flex-direction:column;align-items:flex-start !important;gap:24px !important;padding:16px 0 8px}.lk{flex-direction:column;align-items:stretch !important;gap:0 !important;width:100%}.lk a{padding:14px 0;border-bottom:1px solid #C9C3B4;font-size:14px}.lk a.ct{display:none !important}.ct-sp{display:inline-flex !important}.hide-sp{display:none !important}.hero-title{font-size:38px !important}.c-row{flex-wrap:wrap;gap:4px 12px !important}.c-lab{flex-basis:100% !important}.c-card{padding:64px 24px !important;border-radius:10px !important}.c-h{font-size:30px !important}.c-h-en{font-size:38px !important}}
+</style>
+
+</head>
+<body>
+<div id="app"></div>
+<template id="tpl">
+<div style="min-height: 100vh; background: #F3F0E8; color: #1F2427; font-family: 'Noto Sans TC', sans-serif; font-size: 16px; line-height: 1.9; letter-spacing: 0.04em">
+
+<header class="hd" style="max-width: 1200px; margin: 0 auto; padding: 28px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px">
+<a href="#top" style="text-decoration: none; display: flex; align-items: baseline; gap: 12px">
+<span style="font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 500; letter-spacing: 0.08em">Fifi Lee</span>
+<span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #5E625F">李芸澧</span>
+</a>
+<a class="ct-sp" href="#contact" onClick="{{closeMenu}}" style="font-family: 'DM Mono', monospace; text-decoration: none; display: none; align-items: center; box-sizing: border-box; height: 34px; padding: 0 16px; border: 1px solid #1F2427; border-radius: 999px; font-size: 12px; letter-spacing: 0.08em; line-height: 1">{{t.contactSp}}</a>
+<button type="button" class="hb" aria-label="{{t.menu}}" aria-expanded="{{menuOpen}}" onClick="{{toggleMenu}}" style="display: none; width: 34px; height: 34px; align-items: center; justify-content: center; border: 1px solid #1F2427; border-radius: 999px; background: transparent; cursor: pointer; padding: 0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F2427" stroke-width="1.6" stroke-linecap="round"><path d="{{menuIcon}}"/></svg></button>
+<nav class="{{navCls}}" aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.12em">
+<div class="lk" style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px">
+<a href="#about" onClick="{{closeMenu}}" style="text-decoration: none">{{t.about}}</a>
+<a href="#works" onClick="{{closeMenu}}" style="text-decoration: none">{{t.works}}</a>
+<a href="#process" onClick="{{closeMenu}}" style="text-decoration: none">{{t.process}}</a>
+<a href="#career" onClick="{{closeMenu}}" style="text-decoration: none">{{t.career}}</a>
+<a class="ct" href="#contact" onClick="{{closeMenu}}" style="text-decoration: none; display: inline-flex; align-items: center; box-sizing: border-box; height: 34px; padding: 0 16px; border: 1px solid #1F2427; border-radius: 999px; font-size: 12px; letter-spacing: 0.08em; line-height: 1">{{t.contact}}</a>
+</div>
+<div class="lg" role="group" aria-label="Language" style="display: flex; border: 1px solid #1F2427; border-radius: 999px; overflow: hidden">
+<button type="button" aria-pressed="{{isZh}}" onClick="{{setZh}}" style="{{zhStyle}}">中文</button>
+<button type="button" aria-pressed="{{isEn}}" onClick="{{setEn}}" style="{{enStyle}}">EN</button>
+</div>
+</nav>
+</header>
+
+<sc-if value="{{isZh}}" hint-placeholder-val="{{ true }}">
+<section id="top" style="max-width: 1200px; margin: 0 auto; padding: 72px 24px 96px; display: flex; flex-wrap: wrap; gap: 64px; align-items: flex-start; justify-content: space-between">
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 32px">
+<p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">PRODUCT DESIGNER｜台北</p>
+<h1 class="hero-title" style="margin: 0; font-family: 'Noto Serif TC', serif; font-weight: 700; font-size: 64px; line-height: 1.35; letter-spacing: 0.06em">從規則到畫面，<br>陪產品走上線。</h1>
+<p style="margin: 0; max-width: 560px; font-size: 17px; color: #3C403E">10 年設計經驗，近年主要負責註冊、登入和帳號找回。畫圖前習慣先把例外情況列出來，像是手機號重複、錯誤訊息會不會透露帳號是否存在、三個市場規則不同時以哪個為準。從 mockup、規格到 UAT 都自己把關。</p>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; font-size: 13px">
+<span style="padding: 4px 14px; border: 1px solid #C9C3B4; border-radius: 999px">#流程設計</span>
+<span style="padding: 4px 14px; border: 1px solid #C9C3B4; border-radius: 999px">#規格撰寫</span>
+<span style="padding: 4px 14px; border: 1px solid #C9C3B4; border-radius: 999px">#多品牌・多市場</span>
+<span style="padding: 4px 14px; border: 1px solid #C9C3B4; border-radius: 999px">#UAT 品質把關</span>
+<span style="padding: 4px 14px; border: 1px solid #C9C3B4; border-radius: 999px">#AI 協作</span>
+<span style="padding: 4px 14px; border: 1px solid #C9C3B4; border-radius: 999px">#中・英・日</span>
+</div>
+</div>
+<div class="hide-sp" style="flex: 0 0 auto; display: flex; gap: 20px; align-items: flex-start; padding-top: 8px">
+<span class="vt" style="font-family: 'Noto Serif TC', serif; font-size: 22px; letter-spacing: 0.4em">例外情境</span>
+<span class="vt" style="font-family: 'Noto Serif TC', serif; font-size: 22px; letter-spacing: 0.4em; color: #A8482F; margin-top: 48px">跨市場規則</span>
+<span class="vt" style="font-family: 'Noto Serif TC', serif; font-size: 22px; letter-spacing: 0.4em; margin-top: 96px">上線把關</span>
+</div>
+</section>
+
+<div aria-hidden="true" style="border-top: 1px solid #1F2427; border-bottom: 1px solid #1F2427; padding: 14px 0; overflow: hidden; white-space: nowrap; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 26px; letter-spacing: 0.08em"><div class="mq-track"><span style="padding-right: 0">Bridging design, engineering &amp; markets — 設計 × 工程 × 市場 — From rules to screens to launch — 規則 × 畫面 × 上線 — Bridging design, engineering &amp; markets — 設計 × 工程 × 市場 — From rules to screens to launch — 規則 × 畫面 × 上線 — </span><span style="padding-right: 0">Bridging design, engineering &amp; markets — 設計 × 工程 × 市場 — From rules to screens to launch — 規則 × 畫面 × 上線 — Bridging design, engineering &amp; markets — 設計 × 工程 × 市場 — From rules to screens to launch — 規則 × 畫面 × 上線 — </span></div></div>
+
+<section id="about" style="max-width: 1200px; margin: 0 auto; padding: 112px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 4px">
+<p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">About|</p>
+<h2 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 34px; font-weight: 700">關於我</h2>
+</div>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 40px">
+<p style="margin: 0; font-size: 17px">功能上線後沒出狀況、沒有人需要加班補救，是我覺得這份工作最有成就感的時候。2025 年底團隊改成 squad 編制後，我擔任 Onboarding squad 的主要 UI/UX 設計師，負責三個品牌在中國、泰國、越南市場的註冊、登入與帳號找回流程：畫 mockup、審核驗收標準、主導 UAT 驗收；團隊還沒導入 AI 前，也先用 AI 實驗自己的規格檢查流程。</p>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: #C9C3B4; border: 1px solid #C9C3B4">
+<div style="background: #F3F0E8; padding: 28px 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 52px; line-height: 1">10</span><span style="font-size: 13px; color: #5E625F">年設計經驗</span></div>
+<div style="background: #F3F0E8; padding: 28px 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 52px; line-height: 1">3×3</span><span style="font-size: 13px; color: #5E625F">三品牌・三市場</span></div>
+<div style="background: #F3F0E8; padding: 28px 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 52px; line-height: 1">30+</span><span style="font-size: 13px; color: #5E625F">個 RWD 網站完成上線</span></div>
+</div>
+</div>
+</section>
+
+<section id="works" style="background: #1F2427; color: #F3F0E8; padding: 112px 0">
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; gap: 64px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #E59A7F">Works|</p>
+<h2 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 34px; font-weight: 700">作品</h2>
+</div>
+<p style="margin: 0; font-size: 14px; line-height: calc(34px * 1.9); color: #B9BDB8">所有畫面皆已去識別化</p>
+</div>
+
+<article style="display: flex; flex-wrap: wrap; gap: 48px; align-items: center; border-top: 1px solid #4A504D; padding-top: 48px">
+<img src="img/5a12622855edc63d02846815d123024b.png" alt="註冊頁改版前後對比：改版前一頁填完所有欄位，改版後分成帳號與手機號兩種註冊方式" style="flex: 1 1 480px; min-width: 0; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; display: block">
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; gap: 20px; align-items: baseline"><span style="font-family: 'Cormorant Garamond', serif; font-size: 56px; line-height: 1; color: #E59A7F">01</span><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #B9BDB8">2025.12 – 2026.09</span></div>
+<h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 26px; line-height: 1.5">三個品牌、三種規則，收斂成一套</h3>
+<p style="margin: -4px 0 0; font-family: 'Noto Sans TC', sans-serif; font-size: 14px; letter-spacing: 0.06em; color: #B9BDB8">跨三品牌 Onboarding 優化</p>
+<p style="margin: 0; color: #D6D3CA">需求只有一句「新增手機號碼註冊」，最後卻改寫了三個品牌整套的註冊與登入流程。</p>
+<div style="display: flex; flex-wrap: wrap; gap: 32px; padding: 20px 0; border-top: 1px solid #4A504D; border-bottom: 1px solid #4A504D">
+<div style="display: flex; flex-direction: column"><span style="font-family: 'Cormorant Garamond', serif; font-size: 40px; line-height: 1.1">+18.6%</span><span style="font-size: 12px; color: #B9BDB8">註冊送出日均（對照品牌 +11.8%）</span></div>
+<div style="display: flex; flex-direction: column"><span style="font-family: 'Cormorant Garamond', serif; font-size: 40px; line-height: 1.1">−19%</span><span style="font-size: 12px; color: #B9BDB8">每人重複送出（對照品牌 +9%）</span></div>
+</div>
+<p style="margin: 0; font-size: 13px; color: #B9BDB8">#註冊・登入　#帳號找回　#在地化　#UAT</p>
+<a href="work01.html" style="align-self: flex-start; color: #F3F0E8; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.12em; padding: 10px 22px; border: 1px solid #F3F0E8; border-radius: 999px; text-decoration: none">閱讀案例 <span class="ar ar-r">→</span></a>
+</div>
+</article>
+
+<article style="display: flex; flex-wrap: wrap-reverse; gap: 48px; align-items: center; border-top: 1px solid #4A504D; padding-top: 48px">
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<span style="font-family: 'Cormorant Garamond', serif; font-size: 56px; line-height: 1; color: #E59A7F">02</span>
+<h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 26px; line-height: 1.5">讓卡住的用戶，每一步都有路走</h3>
+<p style="margin: -4px 0 0; font-family: 'Noto Sans TC', sans-serif; font-size: 14px; letter-spacing: 0.06em; color: #B9BDB8">帳號密碼找回流程</p>
+<p style="margin: 0; color: #D6D3CA">如果有人輸入沒註冊過的手機號，畫面該怎麼回應，才不會被拿來逐一試探哪些號碼註冊過？</p>
+<p style="margin: 0; font-size: 13px; color: #B9BDB8">#帳號找回　#例外流程　#資安</p>
+<a href="work02.html" style="align-self: flex-start; color: #F3F0E8; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.12em; padding: 10px 22px; border: 1px solid #F3F0E8; border-radius: 999px; text-decoration: none">閱讀案例 <span class="ar ar-r">→</span></a>
+</div>
+<img src="img/e0343933aa3ca612701bed202f0016be.png" alt="帳號密碼找回流程的三個畫面：輸入、無法找回的提示、重設密碼" style="flex: 1 1 480px; min-width: 0; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; display: block">
+</article>
+
+<article style="display: flex; flex-wrap: wrap; gap: 48px; align-items: center; border-top: 1px solid #4A504D; padding-top: 48px">
+<img src="img/ae63ed4d86440ceaf4572afe22014b19.png" alt="UIUX 決策庫的資料表畫面，標註品牌、市場、平台、模組與狀態（去識別化重繪）" style="flex: 1 1 480px; min-width: 0; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; display: block">
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<span style="font-family: 'Cormorant Garamond', serif; font-size: 56px; line-height: 1; color: #E59A7F">03</span>
+<h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 26px; line-height: 1.5">讓 AI 在上線前，先抓出規格裡的矛盾</h3>
+<p style="margin: -4px 0 0; font-family: 'Noto Sans TC', sans-serif; font-size: 14px; letter-spacing: 0.06em; color: #B9BDB8">AI 輔助的 UIUX 決策庫</p>
+<p style="margin: 0; color: #D6D3CA">同一條規則被問了一次又一次，我乾脆替自己建了一個會回答問題的決策庫。</p>
+<p style="margin: 0; font-size: 13px; color: #B9BDB8">#流程系統建置　#AI 協作　#規格管理</p>
+<a href="work03.html" style="align-self: flex-start; color: #F3F0E8; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.12em; padding: 10px 22px; border: 1px solid #F3F0E8; border-radius: 999px; text-decoration: none">閱讀案例 <span class="ar ar-r">→</span></a>
+</div>
+</article>
+</div>
+</section>
+
+<div style="background: #FBF9F4"><section id="earlier" style="max-width: 1200px; margin: 0 auto; padding: 112px 24px; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">Earlier works|</p>
+<h2 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 34px; font-weight: 700">早期作品</h2>
+<p style="margin: 0; font-size: 14px; color: #5E625F">2018 – 2024｜設計公司的客戶專案與企業內部系統</p>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 48px 32px">
+<article style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+<img src="img/3cef47719c703da2af696817e6bf645d.png" alt="內部採購系統套用三種企業色的畫面" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 4px; display: block">
+<span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">2021–2024｜內部系統・UI 與前端</span>
+<h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 20px; line-height: 1.5">企業內部採購與報帳系統</h3>
+<p style="margin: 0; font-size: 14px; color: #3C403E">全公司共用的採購、驗收與請款系統。我負責 UI，把 Bootstrap 升級到新版，並規劃一套顏色系統，讓 3 間企業各自套用自己的企業色；前端人力不足時接手切版，最後完成全部畫面與功能的前端開發。</p>
+</article>
+<article style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+<img src="img/403a1b5a878fa37ce48402b13b3dc2fe.png" alt="國語小舖網站在電腦、平板、手機上的畫面" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 4px; display: block; background: #FBF9F4">
+<span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">2019｜RWD 網站・會員系統</span>
+<h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 20px; line-height: 1.5">國語日報・國語小舖 訂閱網站</h3>
+<p style="margin: 0; font-size: 14px; color: #3C403E">刊物讀者是學生，實際下單的是老師和家長，所以元件以易用為先：大輸入框、醒目按鈕。也從這個專案開始建立元件化的設計方式。</p>
+</article>
+<article style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+<img src="img/1e5379076a3847fceb613e754d7bac29.png" alt="台灣網際網路協會官網主視覺" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 4px; display: block">
+<span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">2019｜RWD 網站改版</span>
+<h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 20px; line-height: 1.5">台灣網際網路協會 官網改版</h3>
+<p style="margin: 0; font-size: 14px; color: #3C403E">內容以條文、法規等長篇文字為主，設計重點放在閱讀性，以深藍為主色，建立沉穩、有公信力的協會形象。</p>
+</article>
+<article style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+<img src="img/7f4288e47ab0e008b83c12693bea046e.png" alt="勝博殿餐飲 App 改版主視覺" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: left center; border-radius: 4px; display: block">
+<span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">2018｜APP 設計</span>
+<h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 20px; line-height: 1.5">勝博殿 Saboten 餐飲 App 改版</h3>
+<p style="margin: 0; font-size: 14px; color: #3C403E">與品牌、行銷公司、App 廠商四方協作，設計集點、贈品兌換等會員功能。第一次做 App 從零自學，之後也為公司導入新的設計軟體與流程。</p>
+</article>
+</div>
+</section></div>
+
+<section id="process" style="max-width: 1200px; margin: 0 auto; padding: 112px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 4px; align-self: flex-start">
+<p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">Approach|</p>
+<h2 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 34px; font-weight: 700">我怎麼設計</h2>
+</div>
+<ol style="flex: 999 1 560px; min-width: 0; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 40px 48px"><li style="display: flex; flex-direction: column; gap: 14px; padding-bottom: 32px; border-bottom: 1px solid #C9C3B4"><span style="width: 44px; height: 44px; border: 1px solid #C9C3B4; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 12px; color: #5E625F">01</span><h3 style="margin: 8px 0 0; font-family: 'Noto Serif TC', serif; font-size: 20px; font-weight: 700">先把所有情境攤開</h3><p style="margin: 0; font-size: 14px; line-height: 1.9; color: #3C403E">畫新的 mockup 前，我會先在 production 走一遍，把主流程和例外都列出來，像是手機號重複、尚未驗證、帳號被鎖。這些情況都先想好，後面才不容易需要整個重改。</p></li><li style="display: flex; flex-direction: column; gap: 14px; padding-bottom: 32px; border-bottom: 1px solid #C9C3B4"><span style="width: 44px; height: 44px; border: 1px solid #C9C3B4; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 12px; color: #5E625F">02</span><h3 style="margin: 8px 0 0; font-family: 'Noto Serif TC', serif; font-size: 20px; font-weight: 700">依用戶在這一頁的目標決定行為</h3><p style="margin: 0; font-size: 14px; line-height: 1.9; color: #3C403E">在註冊和登入都有「手機／帳號」兩個 tab，但切換規則我刻意做得不一樣：註冊是想盡快完成，因此共用的欄位切換時會連動；登入是兩組不同的憑證，所以必須各自記住、不互相影響。</p></li><li style="display: flex; flex-direction: column; gap: 14px; padding-bottom: 32px; border-bottom: 1px solid #C9C3B4"><span style="width: 44px; height: 44px; border: 1px solid #C9C3B4; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 12px; color: #5E625F">03</span><h3 style="margin: 8px 0 0; font-family: 'Noto Serif TC', serif; font-size: 20px; font-weight: 700">好用和安全一起想</h3><p style="margin: 0; font-size: 14px; line-height: 1.9; color: #3C403E">錯誤訊息要寫到用戶看得懂，但不能讓人從訊息判斷帳號存不存在。帳號找回流程裡，沒註冊的手機一樣會進到 OTP 頁，但是不會寄出驗證碼；一般用戶察覺不到差別，想試探的人也問不出結果。</p></li><li style="display: flex; flex-direction: column; gap: 14px; padding-bottom: 32px; border-bottom: 1px solid #C9C3B4"><span style="width: 44px; height: 44px; border: 1px solid #C9C3B4; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 12px; color: #5E625F">04</span><h3 style="margin: 8px 0 0; font-family: 'Noto Serif TC', serif; font-size: 20px; font-weight: 700">規則先統一，差異再標清楚</h3><p style="margin: 0; font-size: 14px; line-height: 1.9; color: #3C403E">三個品牌、三個市場先訂出共用的規則，各品牌特有的再另外標。mockup 上我會用「新增」「修改」標出和 production 不同的地方，工程師知道要改哪裡，QA 也知道要如何測試。</p></li></ol>
+</section>
+
+<div style="background: #FBF9F4"><section id="career" style="max-width: 1200px; margin: 0 auto; padding: 112px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 4px">
+<p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">Career|</p>
+<h2 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 34px; font-weight: 700">經歷</h2>
+</div>
+<ol style="flex: 999 1 560px; min-width: 0; list-style: none; margin: 0; padding: 0; border-top: 1px solid #C9C3B4">
+<li style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 32px; padding: 20px 0; border-bottom: 1px solid #C9C3B4"><span style="flex: 0 0 170px; font-family: 'DM Mono', monospace; font-size: 13px; color: #5E625F">2024.03 – 2026.09</span><span style="flex: 1 1 300px">Product Designer｜彼爾科技有限公司</span></li>
+<li style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 32px; padding: 20px 0; border-bottom: 1px solid #C9C3B4"><span style="flex: 0 0 170px; font-family: 'DM Mono', monospace; font-size: 13px; color: #5E625F">2021.06 – 2024.02</span><span style="flex: 1 1 300px">UI/UX Designer｜堯晉科技有限公司</span></li>
+<li style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 32px; padding: 20px 0; border-bottom: 1px solid #C9C3B4"><span style="flex: 0 0 170px; font-family: 'DM Mono', monospace; font-size: 13px; color: #5E625F">2020.05 – 2021.05</span><span style="flex: 1 1 300px">網頁設計工程師｜追日潤股份有限公司</span></li>
+<li style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 32px; padding: 20px 0; border-bottom: 1px solid #C9C3B4"><span style="flex: 0 0 170px; font-family: 'DM Mono', monospace; font-size: 13px; color: #5E625F">2019.06 – 2020.03</span><span style="flex: 1 1 300px">日本大阪・日語進修（JLPT N2）</span></li>
+<li style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 32px; padding: 20px 0; border-bottom: 1px solid #C9C3B4"><span style="flex: 0 0 170px; font-family: 'DM Mono', monospace; font-size: 13px; color: #5E625F">2017.02 – 2019.06</span><span style="flex: 1 1 300px">UI/UX 網頁設計師｜傑立資訊事業有限公司</span></li>
+<li style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 32px; padding: 20px 0; border-bottom: 1px solid #C9C3B4"><span style="flex: 0 0 170px; font-family: 'DM Mono', monospace; font-size: 13px; color: #5E625F">2016.08 – 2016.12</span><span style="flex: 1 1 300px">UI/UX 設計培訓｜資策會</span></li>
+<li style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 32px; padding: 20px 0; border-bottom: 1px solid #C9C3B4"><span style="flex: 0 0 170px; font-family: 'DM Mono', monospace; font-size: 13px; color: #5E625F">2015.02 – 2016.05</span><span style="flex: 1 1 300px">行銷美編助理｜立展資訊科技股份有限公司（Apple Premium Reseller）</span></li>
+<li style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 32px; padding: 20px 0; border-bottom: 1px solid #C9C3B4"><span style="flex: 0 0 170px; font-family: 'DM Mono', monospace; font-size: 13px; color: #5E625F">2010 – 2014</span><span style="flex: 1 1 300px">輔仁大學 景觀設計系</span></li>
+</ol>
+</section></div>
+
+<section id="contact" style="background: #FBF9F4; padding: 0 24px 24px">
+<div class="c-card" style="max-width: 1392px; margin: 0 auto; background: #1F2427; color: #F3F0E8; border-radius: 12px; padding: 104px 72px">
+<div style="max-width: 1152px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 48px 64px; align-items: flex-end">
+<div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #E59A7F">Contact|</p>
+<h2 class="c-h" style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 40px; font-weight: 700; line-height: 1.5; color: #F3F0E8">一起讓下一個產品<br>順利上線吧。</h2>
+<p style="margin: 0; font-size: 15px; color: #B9BDB8"><span style="display: inline-block">正在尋找產品設計相關職缺，</span><span style="display: inline-block">歡迎來信聊聊。</span></p>
+</div>
+<ul style="flex: 1 1 420px; min-width: 0; list-style: none; margin: 0; padding: 0; border-top: 1px solid #4A504D"><li style="border-bottom: 1px solid #4A504D"><a class="c-row" href="mailto:heather45681@gmail.com" style="display: flex; align-items: center; gap: 24px; padding: 22px 0; color: #F3F0E8; text-decoration: none"><span class="c-lab" style="flex: 0 0 120px; display: inline-flex; align-items: center; gap: 10px; line-height: 1; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.12em; color: #E59A7F"><svg aria-hidden="true" width="18" height="18" style="display: block; flex: 0 0 auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3.5 6.5 8.5 6.5 8.5-6.5"></path></svg><span style="display: block; line-height: 1; padding-top: 1px">EMAIL</span></span><span style="flex: 1 1 auto; min-width: 0; font-size: 18px; overflow-wrap: anywhere">heather45681@gmail.com</span><span aria-hidden="true" style="flex: 0 0 auto; font-family: 'DM Mono', monospace; font-size: 16px" class="ar ar-r">→</span></a></li><li style="border-bottom: 1px solid #4A504D"><a class="c-row" href="https://www.linkedin.com/in/heather45681/" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 24px; padding: 22px 0; color: #F3F0E8; text-decoration: none"><span class="c-lab" style="flex: 0 0 120px; display: inline-flex; align-items: center; gap: 10px; line-height: 1; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.12em; color: #E59A7F"><svg aria-hidden="true" width="18" height="18" style="display: block; flex: 0 0 auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 10.5V17"></path><path d="M8 7.25v.01"></path><path d="M12 17v-6.5"></path><path d="M12 13.5c0-1.7 1.2-3 2.75-3S17 11.6 17 13.3V17"></path></svg><span style="display: block; line-height: 1; padding-top: 1px">LINKEDIN</span></span><span style="flex: 1 1 auto; min-width: 0; font-size: 18px; overflow-wrap: anywhere">linkedin.com/in/heather45681</span><span aria-hidden="true" style="flex: 0 0 auto; font-family: 'DM Mono', monospace; font-size: 16px" class="ar ar-ne">↗</span></a></li><li style="border-bottom: 1px solid #4A504D"><a class="c-row" href="https://drive.google.com/file/d/1tnToqKCTv_Ke2XTYoaLnVYg7BVWP9fC0/view?usp=drive_link" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 24px; padding: 22px 0; color: #F3F0E8; text-decoration: none"><span class="c-lab" style="flex: 0 0 120px; display: inline-flex; align-items: center; gap: 10px; line-height: 1; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.12em; color: #E59A7F"><svg aria-hidden="true" width="18" height="18" style="display: block; flex: 0 0 auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"></path><path d="M14 3v5h5"></path><path d="M9 13h6M9 17h4"></path></svg><span style="display: block; line-height: 1; padding-top: 1px">RÉSUMÉ</span></span><span style="flex: 1 1 auto; min-width: 0; font-size: 18px; overflow-wrap: anywhere">下載履歷 PDF</span><span aria-hidden="true" style="flex: 0 0 auto; font-family: 'DM Mono', monospace; font-size: 16px" class="ar ar-ne">↗</span></a></li></ul>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{isEn}}" hint-placeholder-val="{{ false }}">
+<section id="top" style="max-width: 1200px; margin: 0 auto; padding: 72px 24px 96px; display: flex; flex-wrap: wrap; gap: 64px; align-items: flex-start; justify-content: space-between">
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 32px">
+<p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">PRODUCT DESIGNER — TAIPEI</p>
+<h1 class="hero-title" style="margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 68px; line-height: 1.15; letter-spacing: 0.01em">From rules to screens,<br>I see products through to launch.</h1>
+<p style="margin: 0; max-width: 560px; font-size: 17px; color: #3C403E">Ten years in design, lately focused on sign-up, login and account recovery. Before I draw, I list the exceptions: a mobile number that's already in use, whether an error message reveals that an account exists, which rule wins when three markets differ. I own the work from mockups and specs through UAT.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; font-size: 13px">
+<span style="padding: 4px 14px; border: 1px solid #C9C3B4; border-radius: 999px">#Flow design</span>
+<span style="padding: 4px 14px; border: 1px solid #C9C3B4; border-radius: 999px">#Spec writing</span>
+<span style="padding: 4px 14px; border: 1px solid #C9C3B4; border-radius: 999px">#Multi-brand, multi-market</span>
+<span style="padding: 4px 14px; border: 1px solid #C9C3B4; border-radius: 999px">#UAT &amp; QA</span>
+<span style="padding: 4px 14px; border: 1px solid #C9C3B4; border-radius: 999px">#AI workflows</span>
+<span style="padding: 4px 14px; border: 1px solid #C9C3B4; border-radius: 999px">#ZH・EN・JA</span>
+</div>
+</div>
+<div class="hide-sp" style="flex: 0 0 auto; display: flex; gap: 24px; align-items: flex-start; padding-top: 8px">
+<span class="vt-en" style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 24px; letter-spacing: 0.2em">Edge cases</span>
+<span class="vt-en" style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 24px; letter-spacing: 0.2em; color: #A8482F; margin-top: 48px">Multi-market rules</span>
+<span class="vt-en" style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 24px; letter-spacing: 0.2em; margin-top: 96px">Launch quality</span>
+</div>
+</section>
+
+<div aria-hidden="true" style="border-top: 1px solid #1F2427; border-bottom: 1px solid #1F2427; padding: 14px 0; overflow: hidden; white-space: nowrap; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 26px; letter-spacing: 0.08em"><div class="mq-track"><span style="padding-right: 0">Bridging design, engineering &amp; markets — 設計 × 工程 × 市場 — From rules to screens to launch — 規則 × 畫面 × 上線 — Bridging design, engineering &amp; markets — 設計 × 工程 × 市場 — From rules to screens to launch — 規則 × 畫面 × 上線 — </span><span style="padding-right: 0">Bridging design, engineering &amp; markets — 設計 × 工程 × 市場 — From rules to screens to launch — 規則 × 畫面 × 上線 — Bridging design, engineering &amp; markets — 設計 × 工程 × 市場 — From rules to screens to launch — 規則 × 畫面 × 上線 — </span></div></div>
+
+<section id="about" style="max-width: 1200px; margin: 0 auto; padding: 112px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 4px">
+<p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">About|</p>
+<h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 500">About me</h2>
+</div>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 40px">
+<p style="margin: 0; font-size: 17px">What I find most rewarding is a launch that goes smoothly, with no one staying late to fix it. After the team reorganized into squads in late 2025, I became the lead UI/UX designer on the onboarding squad, owning sign-up, login and account recovery for three brands across China, Thailand and Vietnam: mockups, reviewing acceptance criteria, leading UI/UX checks in UAT. Before my team adopted AI, I was already testing an AI-assisted spec review workflow on my own.</p>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: #C9C3B4; border: 1px solid #C9C3B4">
+<div style="background: #F3F0E8; padding: 28px 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 52px; line-height: 1">10</span><span style="font-size: 13px; color: #5E625F">years in design</span></div>
+<div style="background: #F3F0E8; padding: 28px 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 52px; line-height: 1">3×3</span><span style="font-size: 13px; color: #5E625F">brands × markets</span></div>
+<div style="background: #F3F0E8; padding: 28px 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 52px; line-height: 1">30+</span><span style="font-size: 13px; color: #5E625F">responsive websites shipped</span></div>
+</div>
+</div>
+</section>
+
+<section id="works" style="background: #1F2427; color: #F3F0E8; padding: 112px 0">
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; gap: 64px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #E59A7F">Works|</p>
+<h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 500">Selected work</h2>
+</div>
+<p style="margin: 0; font-size: 14px; line-height: calc(40px * 1.9); color: #B9BDB8">All screens anonymized</p>
+</div>
+
+<article style="display: flex; flex-wrap: wrap; gap: 48px; align-items: center; border-top: 1px solid #4A504D; padding-top: 48px">
+<img src="img/5a12622855edc63d02846815d123024b.png" alt="Sign-up before and after: one long form before, separate username and mobile sign-up after" style="flex: 1 1 480px; min-width: 0; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; display: block">
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; gap: 20px; align-items: baseline"><span style="font-family: 'Cormorant Garamond', serif; font-size: 56px; line-height: 1; color: #E59A7F">01</span><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #B9BDB8">2025.12 – 2026.09</span></div>
+<h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 500; line-height: 1.3">Three brands, three rule sets, one standard</h3>
+<p style="margin: -4px 0 0; font-family: 'Noto Sans TC', sans-serif; font-size: 14px; letter-spacing: 0.06em; color: #B9BDB8">Onboarding redesign across three brands</p>
+<p style="margin: 0; color: #D6D3CA">The brief was one line: "add mobile sign-up." It ended up reshaping sign-up and login across three brands.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 32px; padding: 20px 0; border-top: 1px solid #4A504D; border-bottom: 1px solid #4A504D">
+<div style="display: flex; flex-direction: column"><span style="font-family: 'Cormorant Garamond', serif; font-size: 40px; line-height: 1.1">+18.6%</span><span style="font-size: 12px; color: #B9BDB8">daily sign-up submits (control +11.8%)</span></div>
+<div style="display: flex; flex-direction: column"><span style="font-family: 'Cormorant Garamond', serif; font-size: 40px; line-height: 1.1">−19%</span><span style="font-size: 12px; color: #B9BDB8">repeat submits per user (control +9%)</span></div>
+</div>
+<p style="margin: 0; font-size: 13px; color: #B9BDB8">#Sign-up &amp; login　#Account recovery　#Localization　#UAT</p>
+<a href="work01.html" style="align-self: flex-start; color: #F3F0E8; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.12em; padding: 10px 22px; border: 1px solid #F3F0E8; border-radius: 999px; text-decoration: none">READ MORE <span class="ar ar-r">→</span></a>
+</div>
+</article>
+
+<article style="display: flex; flex-wrap: wrap-reverse; gap: 48px; align-items: center; border-top: 1px solid #4A504D; padding-top: 48px">
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<span style="font-family: 'Cormorant Garamond', serif; font-size: 56px; line-height: 1; color: #E59A7F">02</span>
+<h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 500; line-height: 1.3">A way forward at every step a user gets stuck</h3>
+<p style="margin: -4px 0 0; font-family: 'Noto Sans TC', sans-serif; font-size: 14px; letter-spacing: 0.06em; color: #B9BDB8">Username &amp; password recovery</p>
+<p style="margin: 0; color: #D6D3CA">When someone enters a mobile number that was never registered, how should the screen respond so it can't be used to test numbers one by one?</p>
+<p style="margin: 0; font-size: 13px; color: #B9BDB8">#Account recovery　#Edge cases　#Security</p>
+<a href="work02.html" style="align-self: flex-start; color: #F3F0E8; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.12em; padding: 10px 22px; border: 1px solid #F3F0E8; border-radius: 999px; text-decoration: none">READ MORE <span class="ar ar-r">→</span></a>
+</div>
+<img src="img/e0343933aa3ca612701bed202f0016be.png" alt="Three account recovery screens: input, fallback prompt, password reset" style="flex: 1 1 480px; min-width: 0; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; display: block">
+</article>
+
+<article style="display: flex; flex-wrap: wrap; gap: 48px; align-items: center; border-top: 1px solid #4A504D; padding-top: 48px">
+<img src="img/ae63ed4d86440ceaf4572afe22014b19.png" alt="Decision library table tagged by brand, market, platform, module and status, redrawn without company data" style="flex: 1 1 480px; min-width: 0; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; display: block">
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<span style="font-family: 'Cormorant Garamond', serif; font-size: 56px; line-height: 1; color: #E59A7F">03</span>
+<h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 500; line-height: 1.3">Letting AI catch contradictions in specs before launch</h3>
+<p style="margin: -4px 0 0; font-family: 'Noto Sans TC', sans-serif; font-size: 14px; letter-spacing: 0.06em; color: #B9BDB8">An AI-assisted design decision library</p>
+<p style="margin: 0; color: #D6D3CA">After answering the same rule questions again and again, I built myself a decision library that answers them.</p>
+<p style="margin: 0; font-size: 13px; color: #B9BDB8">#Workflow systems　#AI workflows　#Spec management</p>
+<a href="work03.html" style="align-self: flex-start; color: #F3F0E8; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.12em; padding: 10px 22px; border: 1px solid #F3F0E8; border-radius: 999px; text-decoration: none">READ MORE <span class="ar ar-r">→</span></a>
+</div>
+</article>
+</div>
+</section>
+
+<div style="background: #FBF9F4"><section id="earlier" style="max-width: 1200px; margin: 0 auto; padding: 112px 24px; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">Earlier works|</p>
+<h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 500">Earlier work</h2>
+<p style="margin: 0; font-size: 14px; color: #5E625F">2018 – 2024, agency client projects and an in-house system</p>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 48px 32px">
+<article style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+<img src="img/3cef47719c703da2af696817e6bf645d.png" alt="The internal procurement system in three company color themes" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 4px; display: block">
+<span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">2021–2024｜INTERNAL TOOL・UI &amp; FRONT-END</span>
+<h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500; line-height: 1.3">Internal procurement &amp; expense system</h3>
+<p style="margin: 0; font-size: 14px; color: #3C403E">A company-wide tool for purchasing, receiving and claims. I owned the UI, upgrading Bootstrap and planning a color system so three companies could each run it in their own brand colors; when front-end help ran short, I built every screen, functionality included.</p>
+</article>
+<article style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+<img src="img/403a1b5a878fa37ce48402b13b3dc2fe.png" alt="Mandarin Daily News shop on desktop, tablet and phone" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 4px; display: block; background: #FBF9F4">
+<span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">2019｜RWD SITE・MEMBERSHIP</span>
+<h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500; line-height: 1.3">Mandarin Daily News subscription shop</h3>
+<p style="margin: 0; font-size: 14px; color: #3C403E">Readers are children, but buyers are teachers and parents, so every component put ease of use first: large inputs, clear buttons. It was also where I started designing with reusable components.</p>
+</article>
+<article style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+<img src="img/1e5379076a3847fceb613e754d7bac29.png" alt="Taiwan Internet Association website key visual" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 4px; display: block">
+<span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">2019｜WEBSITE REDESIGN</span>
+<h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500; line-height: 1.3">Taiwan Internet Association website</h3>
+<p style="margin: 0; font-size: 14px; color: #3C403E">Mostly long regulatory text, so readability led the design, with a deep-blue palette for a calm, credible identity.</p>
+</article>
+<article style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+<img src="img/7f4288e47ab0e008b83c12693bea046e.png" alt="Saboten restaurant app redesign key visual" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: left center; border-radius: 4px; display: block">
+<span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">2018｜APP DESIGN</span>
+<h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500; line-height: 1.3">Saboten restaurant app redesign</h3>
+<p style="margin: 0; font-size: 14px; color: #3C403E">Worked across four parties (the brand, a marketing agency, the app vendor and our studio) on loyalty points and reward redemption. My first app, self-taught from scratch; it later led me to bring new design tools and workflow into the studio.</p>
+</article>
+</div>
+</section></div>
+
+<section id="process" style="max-width: 1200px; margin: 0 auto; padding: 112px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 4px; align-self: flex-start">
+<p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">Approach|</p>
+<h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 500">How I design</h2>
+</div>
+<ol style="flex: 999 1 560px; min-width: 0; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 40px 48px"><li style="display: flex; flex-direction: column; gap: 14px; padding-bottom: 32px; border-bottom: 1px solid #C9C3B4"><span style="width: 44px; height: 44px; border: 1px solid #C9C3B4; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 12px; color: #5E625F">01</span><h3 style="margin: 8px 0 0; font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500">Lay out every scenario first</h3><p style="margin: 0; font-size: 14px; line-height: 1.9; color: #3C403E">Before drawing a new mockup, I walk through production and list the main path and the exceptions, such as a mobile number already in use, an unverified account or a locked account. Working these out early means fewer full redesigns later.</p></li><li style="display: flex; flex-direction: column; gap: 14px; padding-bottom: 32px; border-bottom: 1px solid #C9C3B4"><span style="width: 44px; height: 44px; border: 1px solid #C9C3B4; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 12px; color: #5E625F">02</span><h3 style="margin: 8px 0 0; font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500">Let the user's goal on the page decide the behavior</h3><p style="margin: 0; font-size: 14px; line-height: 1.9; color: #3C403E">Sign-up and login both have Mobile and Username tabs, but I deliberately gave them different switching rules. Sign-up is about finishing fast, so shared fields carry over when you switch; login holds two different sets of credentials, so each tab remembers its own and they don't interfere.</p></li><li style="display: flex; flex-direction: column; gap: 14px; padding-bottom: 32px; border-bottom: 1px solid #C9C3B4"><span style="width: 44px; height: 44px; border: 1px solid #C9C3B4; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 12px; color: #5E625F">03</span><h3 style="margin: 8px 0 0; font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500">Design for ease and security together</h3><p style="margin: 0; font-size: 14px; line-height: 1.9; color: #3C403E">Error messages should make sense to users without letting anyone tell whether an account exists. In account recovery, an unregistered number still reaches the OTP page, but no code is sent. Real users don't notice a difference, and anyone probing learns nothing.</p></li><li style="display: flex; flex-direction: column; gap: 14px; padding-bottom: 32px; border-bottom: 1px solid #C9C3B4"><span style="width: 44px; height: 44px; border: 1px solid #C9C3B4; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 12px; color: #5E625F">04</span><h3 style="margin: 8px 0 0; font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500">Unify the rules, then mark the differences</h3><p style="margin: 0; font-size: 14px; line-height: 1.9; color: #3C403E">Across three brands and three markets, we first set the shared rules, then marked what's brand-specific. On mockups I tag what's new and what's changed against production, so engineers know what to change and QA knows how to test it.</p></li></ol>
+</section>
+
+<div style="background: #FBF9F4"><section id="career" style="max-width: 1200px; margin: 0 auto; padding: 112px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 4px">
+<p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">Career|</p>
+<h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 500">Experience</h2>
+</div>
+<ol style="flex: 999 1 560px; min-width: 0; list-style: none; margin: 0; padding: 0; border-top: 1px solid #C9C3B4">
+<li style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 32px; padding: 20px 0; border-bottom: 1px solid #C9C3B4"><span style="flex: 0 0 170px; font-family: 'DM Mono', monospace; font-size: 13px; color: #5E625F">2024.03 – 2026.09</span><span style="flex: 1 1 300px">Product Designer, CXC STUDIO</span></li>
+<li style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 32px; padding: 20px 0; border-bottom: 1px solid #C9C3B4"><span style="flex: 0 0 170px; font-family: 'DM Mono', monospace; font-size: 13px; color: #5E625F">2021.06 – 2024.02</span><span style="flex: 1 1 300px">UI/UX Designer, YJ Tech</span></li>
+<li style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 32px; padding: 20px 0; border-bottom: 1px solid #C9C3B4"><span style="flex: 0 0 170px; font-family: 'DM Mono', monospace; font-size: 13px; color: #5E625F">2020.05 – 2021.05</span><span style="flex: 1 1 300px">Web Design Engineer, SL LINK CO., LTD.</span></li>
+<li style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 32px; padding: 20px 0; border-bottom: 1px solid #C9C3B4"><span style="flex: 0 0 170px; font-family: 'DM Mono', monospace; font-size: 13px; color: #5E625F">2019.06 – 2020.03</span><span style="flex: 1 1 300px">Japanese studies in Osaka (JLPT N2)</span></li>
+<li style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 32px; padding: 20px 0; border-bottom: 1px solid #C9C3B4"><span style="flex: 0 0 170px; font-family: 'DM Mono', monospace; font-size: 13px; color: #5E625F">2017.02 – 2019.06</span><span style="flex: 1 1 300px">UI/UX Web Designer, Julyinfo</span></li>
+<li style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 32px; padding: 20px 0; border-bottom: 1px solid #C9C3B4"><span style="flex: 0 0 170px; font-family: 'DM Mono', monospace; font-size: 13px; color: #5E625F">2016.08 – 2016.12</span><span style="flex: 1 1 300px">UI/UX design training, III (Institute for Information Industry)</span></li>
+<li style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 32px; padding: 20px 0; border-bottom: 1px solid #C9C3B4"><span style="flex: 0 0 170px; font-family: 'DM Mono', monospace; font-size: 13px; color: #5E625F">2015.02 – 2016.05</span><span style="flex: 1 1 300px">Marketing Design Assistant, iStore (Apple Premium Reseller)</span></li>
+<li style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 32px; padding: 20px 0; border-bottom: 1px solid #C9C3B4"><span style="flex: 0 0 170px; font-family: 'DM Mono', monospace; font-size: 13px; color: #5E625F">2010 – 2014</span><span style="flex: 1 1 300px">B.A. Landscape Design, Fu Jen Catholic University</span></li>
+</ol>
+</section></div>
+
+<section id="contact" style="background: #FBF9F4; padding: 0 24px 24px">
+<div class="c-card" style="max-width: 1392px; margin: 0 auto; background: #1F2427; color: #F3F0E8; border-radius: 12px; padding: 104px 72px">
+<div style="max-width: 1152px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 48px 64px; align-items: flex-end">
+<div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #E59A7F">Contact|</p>
+<h2 class="c-h-en" style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 500; line-height: 1.2; color: #F3F0E8">Let's ship the next one<br>together.</h2>
+<p style="margin: 0; font-size: 15px; color: #B9BDB8">Open to product design roles. I would love to hear from you.</p>
+</div>
+<ul style="flex: 1 1 420px; min-width: 0; list-style: none; margin: 0; padding: 0; border-top: 1px solid #4A504D"><li style="border-bottom: 1px solid #4A504D"><a class="c-row" href="mailto:heather45681@gmail.com" style="display: flex; align-items: center; gap: 24px; padding: 22px 0; color: #F3F0E8; text-decoration: none"><span class="c-lab" style="flex: 0 0 120px; display: inline-flex; align-items: center; gap: 10px; line-height: 1; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.12em; color: #E59A7F"><svg aria-hidden="true" width="18" height="18" style="display: block; flex: 0 0 auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3.5 6.5 8.5 6.5 8.5-6.5"></path></svg><span style="display: block; line-height: 1; padding-top: 1px">EMAIL</span></span><span style="flex: 1 1 auto; min-width: 0; font-size: 18px; overflow-wrap: anywhere">heather45681@gmail.com</span><span aria-hidden="true" style="flex: 0 0 auto; font-family: 'DM Mono', monospace; font-size: 16px" class="ar ar-r">→</span></a></li><li style="border-bottom: 1px solid #4A504D"><a class="c-row" href="https://www.linkedin.com/in/heather45681/" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 24px; padding: 22px 0; color: #F3F0E8; text-decoration: none"><span class="c-lab" style="flex: 0 0 120px; display: inline-flex; align-items: center; gap: 10px; line-height: 1; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.12em; color: #E59A7F"><svg aria-hidden="true" width="18" height="18" style="display: block; flex: 0 0 auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 10.5V17"></path><path d="M8 7.25v.01"></path><path d="M12 17v-6.5"></path><path d="M12 13.5c0-1.7 1.2-3 2.75-3S17 11.6 17 13.3V17"></path></svg><span style="display: block; line-height: 1; padding-top: 1px">LINKEDIN</span></span><span style="flex: 1 1 auto; min-width: 0; font-size: 18px; overflow-wrap: anywhere">linkedin.com/in/heather45681</span><span aria-hidden="true" style="flex: 0 0 auto; font-family: 'DM Mono', monospace; font-size: 16px" class="ar ar-ne">↗</span></a></li><li style="border-bottom: 1px solid #4A504D"><a class="c-row" href="https://drive.google.com/file/d/148EFTsk6rUbsjEoALWY6wrKdYOMi_BtY/view?usp=drive_link" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 24px; padding: 22px 0; color: #F3F0E8; text-decoration: none"><span class="c-lab" style="flex: 0 0 120px; display: inline-flex; align-items: center; gap: 10px; line-height: 1; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.12em; color: #E59A7F"><svg aria-hidden="true" width="18" height="18" style="display: block; flex: 0 0 auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"></path><path d="M14 3v5h5"></path><path d="M9 13h6M9 17h4"></path></svg><span style="display: block; line-height: 1; padding-top: 1px">RÉSUMÉ</span></span><span style="flex: 1 1 auto; min-width: 0; font-size: 18px; overflow-wrap: anywhere">Download résumé (PDF)</span><span aria-hidden="true" style="flex: 0 0 auto; font-family: 'DM Mono', monospace; font-size: 16px" class="ar ar-ne">↗</span></a></li></ul>
+</div>
+</div>
+</section>
+</sc-if>
+
+<div style="background: #FBF9F4"><footer style="max-width: 1200px; margin: 0 auto; padding: 32px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-family: 'DM Mono', monospace; font-size: 12px; color: #5E625F">
+<span>© 2026 Fifi Lee</span>
+<a href="#top" style="color: #5E625F">{{t.top}}</a>
+</footer></div>
+</div>
+</template>
+<script src="dc.js"></script>
+<script>
+
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { lang: 'zh', menu: false };
+try { if (window.localStorage.getItem('fifi-lang') === 'en') this.state = { lang: 'en', menu: false }; } catch (e) {}
+try { window.addEventListener('storage', (ev) => { if (ev.key === 'fifi-lang') this.setState({ lang: ev.newValue === 'en' ? 'en' : 'zh' }); }); } catch (e) {}
+}
+renderVals() {
+var isZh = this.state.lang === 'zh';
+var base = 'min-height: 32px; padding: 4px 14px; border: 0; cursor: pointer; font-family: "DM Mono", monospace; font-size: 12px; letter-spacing: 0.08em; ';
+var on = base + 'background: #1F2427; color: #F3F0E8;';
+var off = base + 'background: transparent; color: #1F2427;';
+var t = isZh
+? { about: '關於', works: '作品', process: '設計方式', career: '經歷', contact: '與我聯繫', contactSp: '與我聯繫', menu: '選單', top: '回到頂部 ↑' }
+: { about: 'About', works: 'Works', process: 'Approach', career: 'Career', contact: 'Get in touch', contactSp: 'Contact', menu: 'Menu', top: 'Page Top ↑' };
+return {
+t: t,
+isZh: isZh,
+isEn: !isZh,
+zhStyle: isZh ? on : off,
+enStyle: isZh ? off : on,
+menuOpen: this.state.menu ? 'true' : 'false',
+navCls: this.state.menu ? 'nv open' : 'nv',
+menuIcon: this.state.menu ? 'M6 6l12 12M18 6L6 18' : 'M4 7h16M4 12h16M4 17h16',
+toggleMenu: () => { this.setState({ lang: this.state.lang, menu: !this.state.menu }); },
+closeMenu: () => { if (this.state.menu) this.setState({ lang: this.state.lang, menu: false }); },
+setZh: () => { try { window.localStorage.setItem('fifi-lang', 'zh'); } catch (e) {} this.setState({ lang: 'zh', menu: this.state.menu }); },
+setEn: () => { try { window.localStorage.setItem('fifi-lang', 'en'); } catch (e) {} this.setState({ lang: 'en', menu: this.state.menu }); }
+};
+}
+}
+
+DC.mount(Component);
+</script>
+</body>
+</html>

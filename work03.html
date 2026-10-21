@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>03 AI 輔助的 UIUX 決策庫</title>
+<meta name="description" content="03 AI 輔助的 UIUX 決策庫">
+<meta property="og:title" content="03 AI 輔助的 UIUX 決策庫">
+<meta property="og:description" content="03 AI 輔助的 UIUX 決策庫">
+<meta property="og:image" content="img/5a12622855edc63d02846815d123024b.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&amp;family=Noto+Sans+TC:wght@400;500;700&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+.ar{display:inline-block;transition:transform .25s ease}
+a:hover .ar-r,a:focus-visible .ar-r{transform:translateX(5px)}
+a:hover .ar-l,a:focus-visible .ar-l{transform:translateX(-5px)}
+a:hover .ar-ne,a:focus-visible .ar-ne{transform:translate(3px,-3px)}
+a:hover .ar-d,a:focus-visible .ar-d{transform:translateY(3px)}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mq-track{display:inline-flex;animation:mq 40s linear infinite}
+.mq-track:hover{animation-play-state:paused}
+@media (prefers-reduced-motion: reduce){.mq-track{animation:none}.ar{transition:none}}
+
+body{margin:0;background:#F3F0E8}
+a{color:#1F2427}a:hover{color:#A8482F}
+@media (max-width:760px){.zm{display:block !important;padding:64px 0 48px !important}.zm-img{width:240% !important;max-width:none !important;border-radius:0 !important}.zm-hint{display:block !important}.meta{grid-template-columns:1fr !important}.meta>div{flex-direction:row !important;align-items:baseline;gap:16px !important;padding:14px 16px !important}.meta dt{flex:0 0 64px}.hd{display:grid !important;grid-template-columns:1fr auto;align-items:center;gap:20px 16px !important}.nv{display:contents !important}.lg{grid-row:1;grid-column:2}.lk{grid-column:1/-1;grid-row:2;gap:20px !important}.hero-title{font-size:34px !important}}
+</style>
+
+</head>
+<body>
+<div id="app"></div>
+<template id="tpl">
+<div style="min-height: 100vh; background: #F3F0E8; color: #1F2427; font-family: 'Noto Sans TC', sans-serif; font-size: 16px; line-height: 1.9; letter-spacing: 0.04em">
+
+<header class="hd" style="max-width: 1200px; margin: 0 auto; padding: 28px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px">
+<a href="index.html" style="text-decoration: none; display: flex; align-items: baseline; gap: 12px">
+<span style="font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 500; letter-spacing: 0.08em">Fifi Lee</span>
+<span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #5E625F">李芸澧</span>
+</a>
+<nav class="nv" aria-label="Case study" style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.12em">
+<a class="lk" href="index.html" style="text-decoration: none">{{t.back}}</a>
+<div class="lg" role="group" aria-label="Language" style="display: flex; border: 1px solid #1F2427; border-radius: 999px; overflow: hidden">
+<button type="button" aria-pressed="{{isZh}}" onClick="{{setZh}}" style="{{zhStyle}}">中文</button>
+<button type="button" aria-pressed="{{isEn}}" onClick="{{setEn}}" style="{{enStyle}}">EN</button>
+</div>
+</nav>
+</header>
+
+<sc-if value="{{isZh}}" hint-placeholder-val="{{ true }}">
+<section style="max-width: 1200px; margin: 0 auto; padding: 56px 24px 64px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; gap: 20px; align-items: baseline"><span style="font-family: 'Cormorant Garamond', serif; font-size: 72px; line-height: 1; color: #A8482F">03</span><span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #5E625F">2025 年底 – 2026.09</span></div>
+<h1 class="hero-title" style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 52px; font-weight: 700; line-height: 1.4">AI 輔助的 UIUX 決策庫</h1>
+<p style="margin: 0; max-width: 760px; font-size: 18px; color: #3C403E">團隊還沒有共用的 AI 工具時，我先用 Notion 和 Claude 替自己建了一個決策庫。每條規則都查得到出處，用來檢查規格、整理 UAT 問題單，也回答 squad 裡反覆被問到的規則。</p>
+<dl class="meta" style="margin: 8px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: #C9C3B4; border: 1px solid #C9C3B4">
+<div style="background: #F3F0E8; padding: 20px; display: flex; flex-direction: column; gap: 4px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">角色</dt><dd style="margin: 0; font-size: 14px">發起、設計與建置</dd></div>
+<div style="background: #F3F0E8; padding: 20px; display: flex; flex-direction: column; gap: 4px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">工具</dt><dd style="margin: 0; font-size: 14px">Notion・Claude・Jira・Figma</dd></div>
+<div style="background: #F3F0E8; padding: 20px; display: flex; flex-direction: column; gap: 4px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">範圍</dt><dd style="margin: 0; font-size: 14px">3 品牌・3 市場・多平台規則</dd></div>
+<div style="background: #F3F0E8; padding: 20px; display: flex; flex-direction: column; gap: 4px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">狀態</dt><dd style="margin: 0; font-size: 14px">個人工作流程實驗</dd></div>
+</dl>
+</section>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 64px 24px 0; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 4px"><p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">Background|</p><h2 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 30px">背景與問題</h2></div>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<p style="margin: 0">2025 年底團隊重新分成 squad，很多成員原本不是做產品出身，對既有規則不熟。每次開會，同一條規則常被問好幾次，而第一個被問的就是設計師。</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<div style="flex: 1 1 200px; min-width: 0; border-top: 2px solid #1F2427; padding-top: 14px; display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-size: 16px">規則被重複詢問</h3><p style="margin: 0; font-size: 14px; color: #3C403E">連 PDM 也常不確定規則，會議時間花在重新確認。</p></div>
+<div style="flex: 1 1 200px; min-width: 0; border-top: 2px solid #1F2427; padding-top: 14px; display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-size: 16px">三品牌互相矛盾</h3><p style="margin: 0; font-size: 14px; color: #3C403E">同一個欄位，在不同品牌、市場、平台各有一套行為。</p></div>
+<div style="flex: 1 1 200px; min-width: 0; border-top: 2px solid #1F2427; padding-top: 14px; display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-size: 16px">決策散落各處</h3><p style="margin: 0; font-size: 14px; color: #3C403E">隨機寫在 mockup 或 Jira 單裡，找不到是誰、為什麼定的。</p></div>
+</div>
+</div>
+</section>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 112px 24px 0; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 4px"><p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">System|</p><h2 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 30px">系統怎麼運作</h2><p style="margin: 0; font-size: 14px; color: #5E625F">示意圖，依實際結構重新繪製，不含公司內部資料。</p></div>
+<div style="overflow-x: auto; background: #FBF9F4; border-radius: 16px; padding: 48px 40px">
+<div style="position: relative; width: 864px; height: 472px; margin: 0 auto; font-size: 14px; line-height: 20px">
+<svg width="56" height="8" viewBox="0 0 56 8" preserveAspectRatio="none" style="position: absolute; left: 200px; top: 72px; width: 56px; height: 8px; overflow: visible; fill: none; stroke: #6E716D; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M 0 4 L 56 4"></path></svg>
+<svg width="56" height="8" viewBox="0 0 56 8" preserveAspectRatio="none" style="position: absolute; left: 200px; top: 296px; width: 56px; height: 8px; overflow: visible; fill: none; stroke: #6E716D; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M 0 4 L 56 4"></path></svg>
+<svg width="56" height="8" viewBox="0 0 56 8" preserveAspectRatio="none" style="position: absolute; left: 200px; top: 184px; width: 56px; height: 8px; overflow: visible; fill: none; stroke: #6E716D; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M 0 4 L 56 4"></path></svg>
+<svg width="8" height="224" viewBox="0 0 8 224" preserveAspectRatio="none" style="position: absolute; left: 252px; top: 76px; width: 8px; height: 224px; overflow: visible; fill: none; stroke: #6E716D; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M 4 0 L 4 224"></path></svg>
+<svg width="55" height="8" viewBox="0 0 55 8" preserveAspectRatio="none" style="position: absolute; left: 256px; top: 184px; width: 55px; height: 8px; overflow: visible; fill: none; stroke: #6E716D; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled-1" orient="auto" markerWidth="5" markerHeight="5" refX="2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#6E716D" stroke="none" style="stroke: none; fill: #6E716D; fill: context-stroke"/></marker></defs><path d="M 0 4 L 51 4" marker-end="url(#dc-arrow-head-filled-1)"></path></svg>
+<svg width="56" height="8" viewBox="0 0 56 8" preserveAspectRatio="none" style="position: absolute; left: 552px; top: 184px; width: 56px; height: 8px; overflow: visible; fill: none; stroke: #6E716D; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M 0 4 L 56 4"></path></svg>
+<svg width="8" height="224" viewBox="0 0 8 224" preserveAspectRatio="none" style="position: absolute; left: 604px; top: 76px; width: 8px; height: 224px; overflow: visible; fill: none; stroke: #6E716D; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M 4 0 L 4 224"></path></svg>
+<svg width="55" height="8" viewBox="0 0 55 8" preserveAspectRatio="none" style="position: absolute; left: 608px; top: 72px; width: 55px; height: 8px; overflow: visible; fill: none; stroke: #6E716D; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled-2" orient="auto" markerWidth="5" markerHeight="5" refX="2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#6E716D" stroke="none" style="stroke: none; fill: #6E716D; fill: context-stroke"/></marker></defs><path d="M 0 4 L 51 4" marker-end="url(#dc-arrow-head-filled-2)"></path></svg>
+<svg width="55" height="8" viewBox="0 0 55 8" preserveAspectRatio="none" style="position: absolute; left: 608px; top: 184px; width: 55px; height: 8px; overflow: visible; fill: none; stroke: #6E716D; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled-11" orient="auto" markerWidth="5" markerHeight="5" refX="2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#6E716D" stroke="none" style="stroke: none; fill: #6E716D; fill: context-stroke"/></marker></defs><path d="M 0 4 L 51 4" marker-end="url(#dc-arrow-head-filled-11)"></path></svg>
+<svg width="55" height="8" viewBox="0 0 55 8" preserveAspectRatio="none" style="position: absolute; left: 608px; top: 296px; width: 55px; height: 8px; overflow: visible; fill: none; stroke: #6E716D; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled-3" orient="auto" markerWidth="5" markerHeight="5" refX="2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#6E716D" stroke="none" style="stroke: none; fill: #6E716D; fill: context-stroke"/></marker></defs><path d="M 0 4 L 51 4" marker-end="url(#dc-arrow-head-filled-3)"></path></svg>
+<svg width="8" height="159" viewBox="0 0 8 159" preserveAspectRatio="none" style="position: absolute; left: 428px; top: 241px; width: 8px; height: 159px; overflow: visible; fill: none; stroke: #A8482F; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled-4" orient="auto" markerWidth="5" markerHeight="5" refX="2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#A8482F" stroke="none" style="stroke: none; fill: #A8482F; fill: context-stroke"/></marker></defs><path d="M 4 159 L 4 4" marker-end="url(#dc-arrow-head-filled-4)"></path></svg>
+<svg width="111" height="8" viewBox="0 0 111 8" preserveAspectRatio="none" style="position: absolute; left: 552px; top: 432px; width: 111px; height: 8px; overflow: visible; fill: none; stroke: #A8482F; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled-5" orient="auto" markerWidth="5" markerHeight="5" refX="2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#A8482F" stroke="none" style="stroke: none; fill: #A8482F; fill: context-stroke"/></marker></defs><path d="M 0 4 L 107 4" marker-end="url(#dc-arrow-head-filled-5)"></path></svg>
+<div style="position: absolute; left: 0px; top: 40px; width: 200px; height: 72px; box-sizing: border-box; padding: 8px; display: flex; align-items: center; justify-content: center; text-align: center; background: #F3F0E8; border: 1px dashed #8E938F; border-radius: 10px; color: #3C403E">Mockup 標註</div>
+<div style="position: absolute; left: 0px; top: 152px; width: 200px; height: 72px; box-sizing: border-box; padding: 8px; display: flex; align-items: center; justify-content: center; text-align: center; background: #F3F0E8; border: 1px dashed #8E938F; border-radius: 10px; color: #3C403E">Jira 單留言</div>
+<div style="position: absolute; left: 0px; top: 264px; width: 200px; height: 72px; box-sizing: border-box; padding: 8px; display: flex; align-items: center; justify-content: center; text-align: center; background: #F3F0E8; border: 1px dashed #8E938F; border-radius: 10px; color: #3C403E">會議・聊天紀錄</div>
+<div style="position: absolute; left: 312px; top: 136px; width: 240px; height: 104px; box-sizing: border-box; padding: 12px; display: flex; align-items: center; justify-content: center; text-align: center; background: #1F2427; color: #F3F0E8; border-radius: 10px"><span><b>UIUX 決策庫</b><br>一條規則一句話<br>規則集中・出處可查</span></div>
+<div style="position: absolute; left: 664px; top: 40px; width: 200px; height: 72px; box-sizing: border-box; padding: 8px; display: flex; align-items: center; justify-content: center; text-align: center; background: #FFFFFF; border: 1px solid #C9C3B4; border-radius: 10px"><span><b>開發迭代記錄</b><br>一個 Epic＝一波上線</span></div>
+<div style="position: absolute; left: 664px; top: 264px; width: 200px; height: 72px; box-sizing: border-box; padding: 8px; display: flex; align-items: center; justify-content: center; text-align: center; background: #FFFFFF; border: 1px solid #C9C3B4; border-radius: 10px"><span><b>品牌知識庫 A・B・C</b><br>標出品牌特有的規則</span></div>
+<div style="position: absolute; left: 664px; top: 152px; width: 200px; height: 72px; box-sizing: border-box; padding: 8px; display: flex; align-items: center; justify-content: center; text-align: center; background: #FFFFFF; border: 1px solid #C9C3B4; border-radius: 10px"><span><b>品牌對齊狀態</b><br>同一功能，誰還沒開發</span></div>
+<div style="position: absolute; left: 312px; top: 400px; width: 240px; height: 72px; box-sizing: border-box; padding: 8px; display: flex; align-items: center; justify-content: center; text-align: center; background: #F7E3DA; border: 1px solid #A8482F; border-radius: 10px"><span><b>Claude</b><br>讀取 Notion 的決策頁</span></div>
+<div style="position: absolute; left: 664px; top: 400px; width: 200px; height: 72px; box-sizing: border-box; padding: 8px; display: flex; align-items: center; justify-content: center; text-align: center; background: #FFFFFF; border: 1px solid #A8482F; border-radius: 10px"><span>規格比對・UAT 開單<br>回答規則提問</span></div>
+<div style="position: absolute; left: 0px; top: 0px; width: 200px; font-family: 'DM Mono', monospace; font-size: 12px; color: #6E716D; text-align: center">原本｜散落各處</div>
+<div style="position: absolute; left: 444px; top: 312px; width: 48px; text-align: center; font-size: 13px; line-height: 16px; color: #A8482F">比對</div>
+</div>
+</div>
+</section>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 64px 24px 0; display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start">
+<div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 22px">每條決策長這樣</h3>
+<p style="margin: 0; color: #3C403E">一條規則只寫一句話，再用標籤標出它適用在哪裡、目前狀態，以及依據的出處。被推翻的規則不刪除，標成「已作廢」，保留當初為什麼改的紀錄。</p>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 15px">
+<li>品牌・市場・平台・模組・元件</li>
+<li>狀態：已定案／待確認／已作廢</li>
+<li>依據：連回 Jira 單與 Figma 畫面</li>
+<li>迭代記錄和決策雙向連結</li>
+</ul>
+</div>
+<div style="flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+<div style="background: #FFFFFF; border: 1px solid #C9C3B4; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+<span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #6E716D">決策範例</span>
+<p style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 19px; line-height: 1.6">欄位錯誤訊息在離開欄位時才顯示，輸入中只做長度上限的靜默截斷。</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 12px">
+<span style="padding: 2px 10px; background: #F3F0E8; border-radius: 999px">全品牌</span>
+<span style="padding: 2px 10px; background: #F3F0E8; border-radius: 999px">全市場</span>
+<span style="padding: 2px 10px; background: #F3F0E8; border-radius: 999px">Web・App</span>
+<span style="padding: 2px 10px; background: #F3F0E8; border-radius: 999px">註冊表單</span>
+<span style="padding: 2px 10px; background: #DCEBDD; color: #24502C; border-radius: 999px">已定案</span>
+</div>
+<p style="margin: 0; font-size: 13px; color: #5E625F">依據：Jira 單・Figma 畫面（連結）</p>
+</div>
+<div style="background: #FBF9F4; border: 1px solid #E3DED2; border-radius: 12px; padding: 16px 24px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
+<span style="padding: 2px 10px; background: #E9E3D6; color: #5E625F; border-radius: 999px; font-size: 12px">已作廢</span>
+<span style="font-size: 14px; color: #6E716D; text-decoration: line-through">輸入時即時檢查並擋下錯誤</span>
+</div>
+</div>
+</section>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 64px 24px 0; display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start">
+<div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">決策庫還能回答的問題</span>
+<h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 22px; line-height: 1.4">同一個功能，三個品牌走到哪了？</h3>
+<p style="margin: 0; color: #3C403E">每條決策都標了品牌，所以決策庫也能反過來看：哪個品牌還沒跟上、哪些規則是某個品牌獨有。以下為示意。</p>
+</div>
+<div style="flex: 1 1 480px; min-width: 0; overflow-x: auto; background: #FFFFFF; border: 1px solid #C9C3B4; border-radius: 12px">
+<table style="width: 100%; min-width: 440px; border-collapse: collapse; font-size: 14px">
+<caption style="caption-side: bottom; text-align: left; padding: 10px 16px; font-size: 12px; color: #6E716D">品牌對齊狀態示意</caption>
+<thead><tr><th scope="col" style="text-align: left; padding: 12px 16px; font-weight: 500; font-size: 13px; color: #5E625F; border-bottom: 1px solid #C9C3B4">功能</th><th scope="col" style="text-align: left; padding: 12px 16px; font-weight: 500; font-size: 13px; color: #5E625F; border-bottom: 1px solid #C9C3B4">品牌 A</th><th scope="col" style="text-align: left; padding: 12px 16px; font-weight: 500; font-size: 13px; color: #5E625F; border-bottom: 1px solid #C9C3B4">品牌 B</th><th scope="col" style="text-align: left; padding: 12px 16px; font-weight: 500; font-size: 13px; color: #5E625F; border-bottom: 1px solid #C9C3B4">品牌 C</th></tr></thead>
+<tbody><tr><th scope="row" style="text-align: left; padding: 12px 16px; font-weight: 400; border-bottom: 1px solid #E3DED2">手機號碼註冊</th><td style="padding: 12px 16px; border-bottom: 1px solid #E3DED2"><span style="display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; white-space: nowrap; background: #DCEBDD; color: #24502C">已上線</span></td><td style="padding: 12px 16px; border-bottom: 1px solid #E3DED2"><span style="display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; white-space: nowrap; background: #DCEBDD; color: #24502C">已上線</span></td><td style="padding: 12px 16px; border-bottom: 1px solid #E3DED2"><span style="display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; white-space: nowrap; background: #DCEBDD; color: #24502C">已上線</span></td></tr><tr><th scope="row" style="text-align: left; padding: 12px 16px; font-weight: 400; border-bottom: 1px solid #E3DED2">切換 tab 時保留欄位</th><td style="padding: 12px 16px; border-bottom: 1px solid #E3DED2"><span style="display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; white-space: nowrap; background: #FFFFFF; border: 1px solid #A8482F; color: #8A3A25">待開發</span></td><td style="padding: 12px 16px; border-bottom: 1px solid #E3DED2"><span style="display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; white-space: nowrap; background: #DCEBDD; color: #24502C">已上線</span></td><td style="padding: 12px 16px; border-bottom: 1px solid #E3DED2"><span style="display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; white-space: nowrap; background: #DCEBDD; color: #24502C">已上線</span></td></tr><tr><th scope="row" style="text-align: left; padding: 12px 16px; font-weight: 400; border-bottom: 1px solid #E3DED2">手機號碼不可重複</th><td style="padding: 12px 16px; border-bottom: 1px solid #E3DED2"><span style="color: #8E938F">—</span></td><td style="padding: 12px 16px; border-bottom: 1px solid #E3DED2"><span style="color: #8E938F">—</span></td><td style="padding: 12px 16px; border-bottom: 1px solid #E3DED2"><span style="display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; white-space: nowrap; background: #1F2427; color: #F3F0E8">品牌特有</span></td></tr><tr><th scope="row" style="text-align: left; padding: 12px 16px; font-weight: 400; border-bottom: 1px solid #E3DED2">深淺色模式</th><td style="padding: 12px 16px; border-bottom: 1px solid #E3DED2"><span style="color: #8E938F">—</span></td><td style="padding: 12px 16px; border-bottom: 1px solid #E3DED2"><span style="color: #8E938F">—</span></td><td style="padding: 12px 16px; border-bottom: 1px solid #E3DED2"><span style="display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; white-space: nowrap; background: #1F2427; color: #F3F0E8">品牌特有</span></td></tr></tbody>
+</table>
+</div>
+</section>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 112px 24px 0; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 4px"><p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">With AI|</p><h2 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 30px">AI 在哪裡幫上忙</h2></div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px">
+<div style="flex: 1 1 300px; min-width: 0; background: #FBF9F4; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 10px"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A8482F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display: block"><path d="M14 3H6v18h6"></path><path d="M14 3l4 4v4"></path><circle cx="16" cy="16" r="3"></circle><path d="m21 21-2.8-2.8"></path></svg><span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #A8482F">畫 mockup 前</span><h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 20px">畫之前先比對</h3><p style="margin: 0; font-size: 14px; color: #3C403E">新需求進來時，請 Claude 比對決策庫，提醒哪些規則已經定過、哪些和其他品牌衝突。</p></div>
+<div style="flex: 1 1 300px; min-width: 0; background: #FBF9F4; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 10px"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A8482F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display: block"><path d="M4 7h16v3a2 2 0 0 0 0 4v3H4v-3a2 2 0 0 0 0-4z"></path><path d="M10 7v10" stroke-dasharray="2 2"></path></svg><span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #A8482F">UAT 期間</span><h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 20px">開單和抓錯</h3><p style="margin: 0; font-size: 14px; color: #3C403E">把 UAT 發現的問題丟給 AI，整理成統一的雙語開單格式。它也曾經抓到我自己沒發現的錯誤。</p></div>
+<div style="flex: 1 1 300px; min-width: 0; background: #FBF9F4; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 10px"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A8482F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display: block"><path d="M4 5h16v11H9l-5 4z"></path><path d="M9 10.5h6"></path></svg><span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #A8482F">隨時</span><h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 20px">回答規則提問</h3><p style="margin: 0; font-size: 14px; color: #3C403E">PDM 來問規則時，我先問 AI、再對照依據，回覆時直接附上出處，不用再翻聊天紀錄。</p></div>
+</div>
+<div style="padding: 20px 24px; background: #FBF9F4; border-left: 3px solid #A8482F; border-radius: 4px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">實際例子</span><p style="margin: 0; font-size: 15px; color: #3C403E">我在寫一張 UAT 單時把畫面截圖丟給 AI，它比對決策庫後提醒我：畫面上的一句錯誤訊息和 mockup 不一樣，也和其他平台不同，要我先去確認。結果是工程師把文案打錯了。這種跨文件、跨平台的不一致，人工檢查時很容易漏掉。</p></div>
+<img src="img/9eca097b6c620529c79c9dd38bbaa0c6.png" alt="示意：撰寫 UAT 單時，AI 比對截圖、決策庫、mockup 與其他平台後，發現錯誤訊息文案打錯" onClick="{{openZoom}}" style="cursor: zoom-in; width: 100%; aspect-ratio: 1600 / 690; object-fit: cover; border-radius: 8px; display: block">
+</section>
+
+<section style="background: #1F2427; color: #F3F0E8; margin-top: 112px; padding: 112px 24px">
+<div style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 4px"><p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #E59A7F">Outcome|</p><h2 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 30px">成果</h2></div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px">
+<div style="flex: 1 1 300px; min-width: 0; border-top: 1px solid #4A504D; padding-top: 20px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Noto Serif TC', serif; font-size: 24px; line-height: 1.5">翻聊天紀錄 → 一搜就有</span><span style="font-size: 14px; color: #D6D3CA">找一條規則從「回想在哪裡講過」變成直接搜尋，答案附上出處。</span></div>
+<div style="flex: 1 1 300px; min-width: 0; border-top: 1px solid #4A504D; padding-top: 20px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Noto Serif TC', serif; font-size: 24px; line-height: 1.5">在設計 Recap 分享 AI 用法</span><span style="font-size: 14px; color: #D6D3CA">建立測試帳號、設定 Jira filter、判讀問題單並估 story point，其他設計師都覺得實用。</span></div>
+<div style="flex: 1 1 300px; min-width: 0; border-top: 1px solid #4A504D; padding-top: 20px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Noto Serif TC', serif; font-size: 24px; line-height: 1.5">同事認為有延展價值</span><span style="font-size: 14px; color: #D6D3CA">決策庫的架構分享給幾位同事看過，他們認為可以延伸成團隊共用的知識來源。</span></div>
+</div>
+</div>
+</section>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 112px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 4px"><p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">Reflection|</p><h2 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 30px">反思與下一步</h2></div>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 20px">先有結構，AI 才可靠</h3><p style="margin: 0; color: #3C403E">AI 能準確比對，是因為每條規則都寫成一句話、標好適用範圍。先把散落的資料整理好，比選用哪個 AI 工具更重要。</p></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 20px">限制：只有我在用</h3><p style="margin: 0; color: #3C403E">團隊當時沒有 AI 工具，這套方法只能停在個人實驗。我先在 Recap 分享做法，讓大家知道可以怎麼用。</p></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 20px">下一步：加入「待優化」狀態</h3><p style="margin: 0; color: #3C403E">AC 確認後，開發就很難再調整。這可以理解，每次修改都要多花時間，但當下來不及做的改善，不該就這樣被忘記。我想在決策庫加入「待優化」狀態，把來不及做的改善記下來，等同一個功能再排進 sprint 時，帶著依據提出。</p></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 20px">如果團隊導入 AI</h3><p style="margin: 0; color: #3C403E">如果團隊導入 AI，決策庫可以直接成為共用的知識來源，讓 PDM、工程、QA 都能自己查規則。</p></div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{isEn}}" hint-placeholder-val="{{ false }}">
+<section style="max-width: 1200px; margin: 0 auto; padding: 56px 24px 64px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; gap: 20px; align-items: baseline"><span style="font-family: 'Cormorant Garamond', serif; font-size: 72px; line-height: 1; color: #A8482F">03</span><span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #5E625F">Late 2025 – 2026.09</span></div>
+<h1 class="hero-title" style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 60px; font-weight: 500; line-height: 1.15">An AI-assisted design decision library</h1>
+<p style="margin: 0; max-width: 760px; font-size: 18px; color: #3C403E">Before my team had shared AI tools, I used Notion and Claude to build myself a decision library. Every rule links back to its source, and I use it to check specs, write UAT tickets, and answer the rule questions my squad kept asking.</p>
+<dl class="meta" style="margin: 8px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: #C9C3B4; border: 1px solid #C9C3B4">
+<div style="background: #F3F0E8; padding: 20px; display: flex; flex-direction: column; gap: 4px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">ROLE</dt><dd style="margin: 0; font-size: 14px">Initiated, designed &amp; built</dd></div>
+<div style="background: #F3F0E8; padding: 20px; display: flex; flex-direction: column; gap: 4px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">TOOLS</dt><dd style="margin: 0; font-size: 14px">Notion, Claude, Jira, Figma</dd></div>
+<div style="background: #F3F0E8; padding: 20px; display: flex; flex-direction: column; gap: 4px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">SCOPE</dt><dd style="margin: 0; font-size: 14px">Rules for 3 brands, 3 markets, all platforms</dd></div>
+<div style="background: #F3F0E8; padding: 20px; display: flex; flex-direction: column; gap: 4px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">STATUS</dt><dd style="margin: 0; font-size: 14px">Personal workflow experiment</dd></div>
+</dl>
+</section>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 64px 24px 0; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 4px"><p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">Background|</p><h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 500">The problem</h2></div>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<p style="margin: 0">In late 2025 the team reorganized into squads, and many members came from outside product work. In meetings the same rule would be asked about again and again, and designers were the first to be asked.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<div style="flex: 1 1 200px; min-width: 0; border-top: 2px solid #1F2427; padding-top: 14px; display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-size: 16px">Rules asked on repeat</h3><p style="margin: 0; font-size: 14px; color: #3C403E">Even the PDM was often unsure, so meeting time went to re-confirming.</p></div>
+<div style="flex: 1 1 200px; min-width: 0; border-top: 2px solid #1F2427; padding-top: 14px; display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-size: 16px">Brands contradicting</h3><p style="margin: 0; font-size: 14px; color: #3C403E">One field behaved differently by brand, market and platform.</p></div>
+<div style="flex: 1 1 200px; min-width: 0; border-top: 2px solid #1F2427; padding-top: 14px; display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-size: 16px">Decisions scattered</h3><p style="margin: 0; font-size: 14px; color: #3C403E">Buried in mockups or tickets, with no trace of who decided or why.</p></div>
+</div>
+</div>
+</section>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 112px 24px 0; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 4px"><p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">System|</p><h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 500">How it works</h2><p style="margin: 0; font-size: 14px; color: #5E625F">A redrawn diagram of the real structure, with no company data.</p></div>
+<div style="overflow-x: auto; background: #FBF9F4; border-radius: 16px; padding: 48px 40px">
+<div style="position: relative; width: 864px; height: 472px; margin: 0 auto; font-size: 14px; line-height: 20px">
+<svg width="56" height="8" viewBox="0 0 56 8" preserveAspectRatio="none" style="position: absolute; left: 200px; top: 72px; width: 56px; height: 8px; overflow: visible; fill: none; stroke: #6E716D; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M 0 4 L 56 4"></path></svg>
+<svg width="56" height="8" viewBox="0 0 56 8" preserveAspectRatio="none" style="position: absolute; left: 200px; top: 296px; width: 56px; height: 8px; overflow: visible; fill: none; stroke: #6E716D; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M 0 4 L 56 4"></path></svg>
+<svg width="56" height="8" viewBox="0 0 56 8" preserveAspectRatio="none" style="position: absolute; left: 200px; top: 184px; width: 56px; height: 8px; overflow: visible; fill: none; stroke: #6E716D; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M 0 4 L 56 4"></path></svg>
+<svg width="8" height="224" viewBox="0 0 8 224" preserveAspectRatio="none" style="position: absolute; left: 252px; top: 76px; width: 8px; height: 224px; overflow: visible; fill: none; stroke: #6E716D; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M 4 0 L 4 224"></path></svg>
+<svg width="55" height="8" viewBox="0 0 55 8" preserveAspectRatio="none" style="position: absolute; left: 256px; top: 184px; width: 55px; height: 8px; overflow: visible; fill: none; stroke: #6E716D; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled-6" orient="auto" markerWidth="5" markerHeight="5" refX="2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#6E716D" stroke="none" style="stroke: none; fill: #6E716D; fill: context-stroke"/></marker></defs><path d="M 0 4 L 51 4" marker-end="url(#dc-arrow-head-filled-6)"></path></svg>
+<svg width="56" height="8" viewBox="0 0 56 8" preserveAspectRatio="none" style="position: absolute; left: 552px; top: 184px; width: 56px; height: 8px; overflow: visible; fill: none; stroke: #6E716D; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M 0 4 L 56 4"></path></svg>
+<svg width="8" height="224" viewBox="0 0 8 224" preserveAspectRatio="none" style="position: absolute; left: 604px; top: 76px; width: 8px; height: 224px; overflow: visible; fill: none; stroke: #6E716D; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M 4 0 L 4 224"></path></svg>
+<svg width="55" height="8" viewBox="0 0 55 8" preserveAspectRatio="none" style="position: absolute; left: 608px; top: 72px; width: 55px; height: 8px; overflow: visible; fill: none; stroke: #6E716D; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled-7" orient="auto" markerWidth="5" markerHeight="5" refX="2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#6E716D" stroke="none" style="stroke: none; fill: #6E716D; fill: context-stroke"/></marker></defs><path d="M 0 4 L 51 4" marker-end="url(#dc-arrow-head-filled-7)"></path></svg>
+<svg width="55" height="8" viewBox="0 0 55 8" preserveAspectRatio="none" style="position: absolute; left: 608px; top: 184px; width: 55px; height: 8px; overflow: visible; fill: none; stroke: #6E716D; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled-12" orient="auto" markerWidth="5" markerHeight="5" refX="2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#6E716D" stroke="none" style="stroke: none; fill: #6E716D; fill: context-stroke"/></marker></defs><path d="M 0 4 L 51 4" marker-end="url(#dc-arrow-head-filled-12)"></path></svg>
+<svg width="55" height="8" viewBox="0 0 55 8" preserveAspectRatio="none" style="position: absolute; left: 608px; top: 296px; width: 55px; height: 8px; overflow: visible; fill: none; stroke: #6E716D; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled-8" orient="auto" markerWidth="5" markerHeight="5" refX="2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#6E716D" stroke="none" style="stroke: none; fill: #6E716D; fill: context-stroke"/></marker></defs><path d="M 0 4 L 51 4" marker-end="url(#dc-arrow-head-filled-8)"></path></svg>
+<svg width="8" height="159" viewBox="0 0 8 159" preserveAspectRatio="none" style="position: absolute; left: 428px; top: 241px; width: 8px; height: 159px; overflow: visible; fill: none; stroke: #A8482F; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled-9" orient="auto" markerWidth="5" markerHeight="5" refX="2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#A8482F" stroke="none" style="stroke: none; fill: #A8482F; fill: context-stroke"/></marker></defs><path d="M 4 159 L 4 4" marker-end="url(#dc-arrow-head-filled-9)"></path></svg>
+<svg width="111" height="8" viewBox="0 0 111 8" preserveAspectRatio="none" style="position: absolute; left: 552px; top: 432px; width: 111px; height: 8px; overflow: visible; fill: none; stroke: #A8482F; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled-10" orient="auto" markerWidth="5" markerHeight="5" refX="2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#A8482F" stroke="none" style="stroke: none; fill: #A8482F; fill: context-stroke"/></marker></defs><path d="M 0 4 L 107 4" marker-end="url(#dc-arrow-head-filled-10)"></path></svg>
+<div style="position: absolute; left: 0px; top: 40px; width: 200px; height: 72px; box-sizing: border-box; padding: 8px; display: flex; align-items: center; justify-content: center; text-align: center; background: #F3F0E8; border: 1px dashed #8E938F; border-radius: 10px; color: #3C403E">Mockup notes</div>
+<div style="position: absolute; left: 0px; top: 152px; width: 200px; height: 72px; box-sizing: border-box; padding: 8px; display: flex; align-items: center; justify-content: center; text-align: center; background: #F3F0E8; border: 1px dashed #8E938F; border-radius: 10px; color: #3C403E">Jira comments</div>
+<div style="position: absolute; left: 0px; top: 264px; width: 200px; height: 72px; box-sizing: border-box; padding: 8px; display: flex; align-items: center; justify-content: center; text-align: center; background: #F3F0E8; border: 1px dashed #8E938F; border-radius: 10px; color: #3C403E">Meetings &amp; chat</div>
+<div style="position: absolute; left: 312px; top: 136px; width: 240px; height: 104px; box-sizing: border-box; padding: 12px; display: flex; align-items: center; justify-content: center; text-align: center; background: #1F2427; color: #F3F0E8; border-radius: 10px"><span><b>Decision library</b><br>One rule, one sentence<br>A single source of truth</span></div>
+<div style="position: absolute; left: 664px; top: 40px; width: 200px; height: 72px; box-sizing: border-box; padding: 8px; display: flex; align-items: center; justify-content: center; text-align: center; background: #FFFFFF; border: 1px solid #C9C3B4; border-radius: 10px"><span><b>Iteration log</b><br>One epic = one release</span></div>
+<div style="position: absolute; left: 664px; top: 264px; width: 200px; height: 72px; box-sizing: border-box; padding: 8px; display: flex; align-items: center; justify-content: center; text-align: center; background: #FFFFFF; border: 1px solid #C9C3B4; border-radius: 10px"><span><b>Brand wikis A・B・C</b><br>Flags brand-only rules</span></div>
+<div style="position: absolute; left: 664px; top: 152px; width: 200px; height: 72px; box-sizing: border-box; padding: 8px; display: flex; align-items: center; justify-content: center; text-align: center; background: #FFFFFF; border: 1px solid #C9C3B4; border-radius: 10px"><span><b>Brand alignment</b><br>Who hasn't built it yet</span></div>
+<div style="position: absolute; left: 312px; top: 400px; width: 240px; height: 72px; box-sizing: border-box; padding: 8px; display: flex; align-items: center; justify-content: center; text-align: center; background: #F7E3DA; border: 1px solid #A8482F; border-radius: 10px"><span><b>Claude</b><br>Reads the Notion pages</span></div>
+<div style="position: absolute; left: 664px; top: 400px; width: 200px; height: 72px; box-sizing: border-box; padding: 8px; display: flex; align-items: center; justify-content: center; text-align: center; background: #FFFFFF; border: 1px solid #A8482F; border-radius: 10px"><span>Spec checks, UAT tickets<br>Rule questions</span></div>
+<div style="position: absolute; left: 0px; top: 0px; width: 200px; font-family: 'DM Mono', monospace; font-size: 12px; color: #6E716D; text-align: center">BEFORE — SCATTERED</div>
+<div style="position: absolute; left: 444px; top: 312px; width: 64px; text-align: center; font-size: 13px; line-height: 16px; color: #A8482F">checks</div>
+</div>
+</div>
+</section>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 64px 24px 0; display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start">
+<div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 500">What a decision looks like</h3>
+<p style="margin: 0; color: #3C403E">Each rule is one sentence, tagged with where it applies, its status and its source. Overturned rules are never deleted; they are marked "deprecated" so the reason for each change is kept on record.</p>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 15px">
+<li>Brand, market, platform, module, component</li>
+<li>Status: decided / pending / deprecated</li>
+<li>Source: links back to Jira and Figma</li>
+<li>Two-way links to the iteration log</li>
+</ul>
+</div>
+<div style="flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+<div style="background: #FFFFFF; border: 1px solid #C9C3B4; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+<span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #6E716D">DECISION — EXAMPLE</span>
+<p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 24px; line-height: 1.35">Field errors appear on blur; while typing, only a silent length cap applies.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 12px">
+<span style="padding: 2px 10px; background: #F3F0E8; border-radius: 999px">All brands</span>
+<span style="padding: 2px 10px; background: #F3F0E8; border-radius: 999px">All markets</span>
+<span style="padding: 2px 10px; background: #F3F0E8; border-radius: 999px">Web・App</span>
+<span style="padding: 2px 10px; background: #F3F0E8; border-radius: 999px">Sign-up form</span>
+<span style="padding: 2px 10px; background: #DCEBDD; color: #24502C; border-radius: 999px">Decided</span>
+</div>
+<p style="margin: 0; font-size: 13px; color: #5E625F">Source: Jira ticket, Figma frame (links)</p>
+</div>
+<div style="background: #FBF9F4; border: 1px solid #E3DED2; border-radius: 12px; padding: 16px 24px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
+<span style="padding: 2px 10px; background: #E9E3D6; color: #5E625F; border-radius: 999px; font-size: 12px">Deprecated</span>
+<span style="font-size: 14px; color: #6E716D; text-decoration: line-through">Validate and block errors while typing</span>
+</div>
+</div>
+</section>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 64px 24px 0; display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start">
+<div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">What else the library answers</span>
+<h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 500; line-height: 1.4">Where is each brand on the same feature?</h3>
+<p style="margin: 0; color: #3C403E">Every decision is tagged by brand, so the library can be read the other way too: which brand is behind, and which rules belong to one brand only. Illustrative example below.</p>
+</div>
+<div style="flex: 1 1 480px; min-width: 0; overflow-x: auto; background: #FFFFFF; border: 1px solid #C9C3B4; border-radius: 12px">
+<table style="width: 100%; min-width: 440px; border-collapse: collapse; font-size: 14px">
+<caption style="caption-side: bottom; text-align: left; padding: 10px 16px; font-size: 12px; color: #6E716D">Brand alignment, illustrative</caption>
+<thead><tr><th scope="col" style="text-align: left; padding: 12px 16px; font-weight: 500; font-size: 13px; color: #5E625F; border-bottom: 1px solid #C9C3B4">Feature</th><th scope="col" style="text-align: left; padding: 12px 16px; font-weight: 500; font-size: 13px; color: #5E625F; border-bottom: 1px solid #C9C3B4">Brand A</th><th scope="col" style="text-align: left; padding: 12px 16px; font-weight: 500; font-size: 13px; color: #5E625F; border-bottom: 1px solid #C9C3B4">Brand B</th><th scope="col" style="text-align: left; padding: 12px 16px; font-weight: 500; font-size: 13px; color: #5E625F; border-bottom: 1px solid #C9C3B4">Brand C</th></tr></thead>
+<tbody><tr><th scope="row" style="text-align: left; padding: 12px 16px; font-weight: 400; border-bottom: 1px solid #E3DED2">Phone sign-up</th><td style="padding: 12px 16px; border-bottom: 1px solid #E3DED2"><span style="display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; white-space: nowrap; background: #DCEBDD; color: #24502C">Live</span></td><td style="padding: 12px 16px; border-bottom: 1px solid #E3DED2"><span style="display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; white-space: nowrap; background: #DCEBDD; color: #24502C">Live</span></td><td style="padding: 12px 16px; border-bottom: 1px solid #E3DED2"><span style="display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; white-space: nowrap; background: #DCEBDD; color: #24502C">Live</span></td></tr><tr><th scope="row" style="text-align: left; padding: 12px 16px; font-weight: 400; border-bottom: 1px solid #E3DED2">Keep fields when switching tabs</th><td style="padding: 12px 16px; border-bottom: 1px solid #E3DED2"><span style="display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; white-space: nowrap; background: #FFFFFF; border: 1px solid #A8482F; color: #8A3A25">To build</span></td><td style="padding: 12px 16px; border-bottom: 1px solid #E3DED2"><span style="display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; white-space: nowrap; background: #DCEBDD; color: #24502C">Live</span></td><td style="padding: 12px 16px; border-bottom: 1px solid #E3DED2"><span style="display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; white-space: nowrap; background: #DCEBDD; color: #24502C">Live</span></td></tr><tr><th scope="row" style="text-align: left; padding: 12px 16px; font-weight: 400; border-bottom: 1px solid #E3DED2">Unique phone numbers</th><td style="padding: 12px 16px; border-bottom: 1px solid #E3DED2"><span style="color: #8E938F">—</span></td><td style="padding: 12px 16px; border-bottom: 1px solid #E3DED2"><span style="color: #8E938F">—</span></td><td style="padding: 12px 16px; border-bottom: 1px solid #E3DED2"><span style="display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; white-space: nowrap; background: #1F2427; color: #F3F0E8">Brand only</span></td></tr><tr><th scope="row" style="text-align: left; padding: 12px 16px; font-weight: 400; border-bottom: 1px solid #E3DED2">Light &amp; dark modes</th><td style="padding: 12px 16px; border-bottom: 1px solid #E3DED2"><span style="color: #8E938F">—</span></td><td style="padding: 12px 16px; border-bottom: 1px solid #E3DED2"><span style="color: #8E938F">—</span></td><td style="padding: 12px 16px; border-bottom: 1px solid #E3DED2"><span style="display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; white-space: nowrap; background: #1F2427; color: #F3F0E8">Brand only</span></td></tr></tbody>
+</table>
+</div>
+</section>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 112px 24px 0; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 4px"><p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">With AI|</p><h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 500">Where AI helps</h2></div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px">
+<div style="flex: 1 1 300px; min-width: 0; background: #FBF9F4; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 10px"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A8482F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display: block"><path d="M14 3H6v18h6"></path><path d="M14 3l4 4v4"></path><circle cx="16" cy="16" r="3"></circle><path d="m21 21-2.8-2.8"></path></svg><span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #A8482F">BEFORE MOCKUP</span><h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500">Check before drawing</h3><p style="margin: 0; font-size: 14px; color: #3C403E">For each new request, Claude checks the library and flags rules already decided or conflicting across brands.</p></div>
+<div style="flex: 1 1 300px; min-width: 0; background: #FBF9F4; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 10px"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A8482F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display: block"><path d="M4 7h16v3a2 2 0 0 0 0 4v3H4v-3a2 2 0 0 0 0-4z"></path><path d="M10 7v10" stroke-dasharray="2 2"></path></svg><span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #A8482F">DURING UAT</span><h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500">Tickets and catches</h3><p style="margin: 0; font-size: 14px; color: #3C403E">UAT findings go to AI and come back as consistent bilingual tickets. It has caught errors I had missed.</p></div>
+<div style="flex: 1 1 300px; min-width: 0; background: #FBF9F4; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 10px"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A8482F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display: block"><path d="M4 5h16v11H9l-5 4z"></path><path d="M9 10.5h6"></path></svg><span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #A8482F">ANY TIME</span><h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500">Answer rule questions</h3><p style="margin: 0; font-size: 14px; color: #3C403E">When the PDM asks about a rule, I ask AI, check the source, and reply with the link instead of digging through chat.</p></div>
+</div>
+<div style="padding: 20px 24px; background: #FBF9F4; border-left: 3px solid #A8482F; border-radius: 4px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">A REAL CATCH</span><p style="margin: 0; font-size: 15px; color: #3C403E">While I was writing a UAT ticket, I gave AI a screenshot of the build. It checked it against the library and flagged that an error message differed from the mockup and from the other platforms, and asked me to confirm. The engineer had mistyped the copy. Inconsistencies across documents and platforms like this are easy to miss by eye.</p></div>
+<img src="img/9745c3a954cd34198324b8f4fa11c6c3.png" alt="Illustration: while writing a UAT ticket, AI checks the screenshot against the decision library, mockup and other platforms and catches a typo in an error message" onClick="{{openZoom}}" style="cursor: zoom-in; width: 100%; aspect-ratio: 1600 / 690; object-fit: cover; border-radius: 8px; display: block">
+</section>
+
+<section style="background: #1F2427; color: #F3F0E8; margin-top: 112px; padding: 112px 24px">
+<div style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 4px"><p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #E59A7F">Outcome|</p><h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 500">Outcome</h2></div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px">
+<div style="flex: 1 1 300px; min-width: 0; border-top: 1px solid #4A504D; padding-top: 20px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 28px; line-height: 1.3">From digging through chat to one search</span><span style="font-size: 14px; color: #D6D3CA">Finding a rule went from "where did we say that?" to a search, with the source attached.</span></div>
+<div style="flex: 1 1 300px; min-width: 0; border-top: 1px solid #4A504D; padding-top: 20px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 28px; line-height: 1.3">Shared at design recaps</span><span style="font-size: 14px; color: #D6D3CA">Setting up test accounts, Jira filters, reading tickets to estimate story points. Fellow designers found it useful.</span></div>
+<div style="flex: 1 1 300px; min-width: 0; border-top: 1px solid #4A504D; padding-top: 20px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 28px; line-height: 1.3">Seen as worth scaling</span><span style="font-size: 14px; color: #D6D3CA">Colleagues who saw the structure felt it could grow into a shared team knowledge base.</span></div>
+</div>
+</div>
+</section>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 112px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 4px"><p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">Reflection|</p><h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 500">What's next</h2></div>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500">Structure first, then AI</h3><p style="margin: 0; color: #3C403E">AI could compare reliably because every rule was one tagged sentence. Getting scattered information organized first mattered more than which AI tool I used.</p></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500">The limit: only I used it</h3><p style="margin: 0; color: #3C403E">Without team AI tools, it stayed a personal experiment. I shared the approach at recaps so others could see how to use it.</p></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500">Next: a "to improve" status</h3><p style="margin: 0; color: #3C403E">Once an AC is signed off, development rarely changes course. That is fair, since every change costs time, but improvements we could not fit in at the time should not be forgotten. I want to add a "to improve" status to the library, so improvements we could not fit in are logged and can be raised, with reasoning, the next time that feature enters a sprint.</p></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500">If the team adopts AI</h3><p style="margin: 0; color: #3C403E">With team-wide AI, the library could become a shared source where PDM, engineering and QA look up rules themselves.</p></div>
+</div>
+</section>
+</sc-if>
+
+<nav aria-label="More work" style="border-top: 1px solid #1F2427; max-width: 1200px; margin: 0 auto; padding: 40px 24px 64px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 16px">
+<a href="work02.html" style="text-decoration: none; display: flex; flex-direction: column; gap: 6px; padding: 22px 24px; border: 1px solid #C9C3B4; border-radius: 12px; background: #FBF9F4"><span style="font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.12em; color: #A8482F"><span class="ar ar-l">←</span> {{t.pl}}</span><span style="font-family: 'Noto Serif TC', serif; font-size: 18px; font-weight: 700">{{t.pt}}</span></a>
+<a href="index.html" style="text-decoration: none; display: flex; flex-direction: column; gap: 6px; padding: 22px 24px; border: 1px solid #C9C3B4; border-radius: 12px; background: #FBF9F4; align-items: flex-end; text-align: right"><span style="font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.12em; color: #A8482F">{{t.nl}} <span class="ar ar-r">→</span></span><span style="font-family: 'Noto Serif TC', serif; font-size: 18px; font-weight: 700">{{t.nt}}</span></a>
+</nav>
+<sc-if value="{{zoomOpen}}">
+<div class="zm" role="dialog" aria-modal="true" aria-label="{{t.zoom}}" onClick="{{closeZoom}}" style="position: fixed; inset: 0; z-index: 50; background: rgba(31,36,39,.94); overflow: auto; display: flex; align-items: center; justify-content: center; padding: 56px 24px 32px; cursor: zoom-out">
+<img class="zm-img" src="{{zoomSrc}}" alt="" style="display: block; width: 100%; max-width: 1600px; height: auto; border-radius: 4px">
+<button type="button" onClick="{{closeZoom}}" aria-label="{{t.close}}" style="position: fixed; top: 14px; right: 14px; width: 40px; height: 40px; border-radius: 999px; border: 1px solid #F3F0E8; background: rgba(31,36,39,.6); color: #F3F0E8; font-size: 18px; cursor: pointer">✕</button>
+<p class="zm-hint" style="display: none; position: fixed; left: 0; right: 0; bottom: 14px; margin: 0; text-align: center; font-size: 12px; color: #B9BDB8">{{t.pan}}</p>
+</div>
+</sc-if>
+</div>
+</template>
+<script src="dc.js"></script>
+<script>
+
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { lang: 'zh', zoom: null };
+try { if (window.localStorage.getItem('fifi-lang') === 'en') this.state = { lang: 'en', zoom: null }; } catch (e) {}
+try { window.addEventListener('storage', (ev) => { if (ev.key === 'fifi-lang') this.setState({ lang: ev.newValue === 'en' ? 'en' : 'zh' }); }); } catch (e) {}
+}
+renderVals() {
+var isZh = this.state.lang === 'zh';
+var base = 'min-height: 32px; padding: 4px 14px; border: 0; cursor: pointer; font-family: "DM Mono", monospace; font-size: 12px; letter-spacing: 0.08em; ';
+var on = base + 'background: #1F2427; color: #F3F0E8;';
+var off = base + 'background: transparent; color: #1F2427;';
+var t = isZh
+? { pl: '上一個', pt: '02 帳號密碼找回流程', nl: '返回', nt: '所有作品', zoom: '放大檢視', close: '關閉', pan: '左右滑動查看完整圖片，點一下關閉', back: '← 作品', prev: '← 02 帳號密碼找回流程', all: '所有作品 →' }
+: { pl: 'PREVIOUS', pt: '02 Password recovery', nl: 'BACK', nt: 'All works', zoom: 'Enlarged image', close: 'Close', pan: 'Swipe to pan, tap to close', back: '← Works', prev: '← 02 Password recovery', all: 'All works →' };
+return {
+t: t,
+isZh: isZh,
+isEn: !isZh,
+zhStyle: isZh ? on : off,
+enStyle: isZh ? off : on,
+zoomOpen: !!this.state.zoom,
+zoomSrc: this.state.zoom || '',
+openZoom: (ev) => { var el = ev && (ev.currentTarget || ev.target); var src = el && el.getAttribute ? el.getAttribute('src') : null; if (src) this.setState({ lang: this.state.lang, zoom: src }); },
+closeZoom: (ev) => { if (ev && ev.stopPropagation) ev.stopPropagation(); this.setState({ lang: this.state.lang, zoom: null }); },
+setZh: () => { try { window.localStorage.setItem('fifi-lang', 'zh'); } catch (e) {} this.setState({ lang: 'zh', zoom: null }); },
+setEn: () => { try { window.localStorage.setItem('fifi-lang', 'en'); } catch (e) {} this.setState({ lang: 'en', zoom: null }); }
+};
+}
+}
+
+DC.mount(Component);
+</script>
+</body>
+</html>

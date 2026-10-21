@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>01 跨三品牌 Onboarding 優化</title>
+<meta name="description" content="01 跨三品牌 Onboarding 優化">
+<meta property="og:title" content="01 跨三品牌 Onboarding 優化">
+<meta property="og:description" content="01 跨三品牌 Onboarding 優化">
+<meta property="og:image" content="img/5a12622855edc63d02846815d123024b.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&amp;family=Noto+Sans+TC:wght@400;500;700&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+.ar{display:inline-block;transition:transform .25s ease}
+a:hover .ar-r,a:focus-visible .ar-r{transform:translateX(5px)}
+a:hover .ar-l,a:focus-visible .ar-l{transform:translateX(-5px)}
+a:hover .ar-ne,a:focus-visible .ar-ne{transform:translate(3px,-3px)}
+a:hover .ar-d,a:focus-visible .ar-d{transform:translateY(3px)}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mq-track{display:inline-flex;animation:mq 40s linear infinite}
+.mq-track:hover{animation-play-state:paused}
+@media (prefers-reduced-motion: reduce){.mq-track{animation:none}.ar{transition:none}}
+
+body{margin:0;background:#F3F0E8}
+a{color:#1F2427}a:hover{color:#A8482F}
+@media (max-width:760px){.zm{display:block !important;padding:64px 0 48px !important}.zm-img{width:240% !important;max-width:none !important;border-radius:0 !important}.zm-hint{display:block !important}.meta{grid-template-columns:1fr !important}.meta>div{flex-direction:row !important;align-items:baseline;gap:16px !important;padding:14px 16px !important}.meta dt{flex:0 0 64px}.hd{display:grid !important;grid-template-columns:1fr auto;align-items:center;gap:20px 16px !important}.nv{display:contents !important}.lg{grid-row:1;grid-column:2}.lk{grid-column:1/-1;grid-row:2;gap:20px !important}.hero-title{font-size:34px !important}}
+</style>
+
+</head>
+<body>
+<div id="app"></div>
+<template id="tpl">
+<div style="min-height: 100vh; background: #F3F0E8; color: #1F2427; font-family: 'Noto Sans TC', sans-serif; font-size: 16px; line-height: 1.9; letter-spacing: 0.04em">
+
+<header class="hd" style="max-width: 1200px; margin: 0 auto; padding: 28px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px">
+<a href="index.html" style="text-decoration: none; display: flex; align-items: baseline; gap: 12px">
+<span style="font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 500; letter-spacing: 0.08em">Fifi Lee</span>
+<span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #5E625F">李芸澧</span>
+</a>
+<nav class="nv" aria-label="Case study" style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.12em">
+<a class="lk" href="index.html" style="text-decoration: none">{{t.back}}</a>
+<div class="lg" role="group" aria-label="Language" style="display: flex; border: 1px solid #1F2427; border-radius: 999px; overflow: hidden">
+<button type="button" aria-pressed="{{isZh}}" onClick="{{setZh}}" style="{{zhStyle}}">中文</button>
+<button type="button" aria-pressed="{{isEn}}" onClick="{{setEn}}" style="{{enStyle}}">EN</button>
+</div>
+</nav>
+</header>
+
+<sc-if value="{{isZh}}" hint-placeholder-val="{{ true }}">
+<section style="max-width: 1200px; margin: 0 auto; padding: 56px 24px 64px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; gap: 20px; align-items: baseline"><span style="font-family: 'Cormorant Garamond', serif; font-size: 72px; line-height: 1; color: #A8482F">01</span><span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #5E625F">2025.12 – 2026.09</span></div>
+<h1 class="hero-title" style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 52px; font-weight: 700; line-height: 1.4">跨三品牌 Onboarding 優化</h1>
+<p style="margin: 0; max-width: 760px; font-size: 18px; color: #3C403E">看似只是新增一條註冊路徑，但三個品牌、三個市場的欄位規則各不相同，還得同時移除 Email。我花了一年依序重新設計三個品牌的註冊與登入，最後把三套規則統一成一套。</p>
+<dl class="meta" style="margin: 8px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: #C9C3B4; border: 1px solid #C9C3B4">
+<div style="background: #F3F0E8; padding: 20px; display: flex; flex-direction: column; gap: 4px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">角色</dt><dd style="margin: 0; font-size: 14px">主要 UI/UX 設計師</dd></div>
+<div style="background: #F3F0E8; padding: 20px; display: flex; flex-direction: column; gap: 4px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">團隊</dt><dd style="margin: 0; font-size: 14px">PDM、PM、前端、後端</dd></div>
+<div style="background: #F3F0E8; padding: 20px; display: flex; flex-direction: column; gap: 4px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">範圍</dt><dd style="margin: 0; font-size: 14px">3 品牌・3 市場・Web／App</dd></div>
+<div style="background: #F3F0E8; padding: 20px; display: flex; flex-direction: column; gap: 4px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">產出</dt><dd style="margin: 0; font-size: 14px">全部 mockup・AC 審核・UAT 115 張單</dd></div>
+</dl>
+</section>
+
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 24px"><img src="img/18d2d9336b790d6cdfe05d408da5dc21.png" alt="改版前後的註冊頁對比：改版前一頁填完所有欄位，改版後分成帳號與手機號兩種註冊方式" onClick="{{openZoom}}" style="cursor: zoom-in; width: 100%; aspect-ratio: 16 / 8; object-fit: cover; border-radius: 4px; display: block"></div>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 112px 24px 0; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 4px"><p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">Background|</p><h2 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 30px">背景與問題</h2></div>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<p style="margin: 0">舊的註冊頁把 5 個欄位一次攤開：用戶名、密碼、手機號碼、Email 和推薦碼。推薦碼雖然選填，對新用戶來說仍像是 5 個都得填完。這次的需求只有一句話：「新增手機號碼註冊」，給用戶一條更快的路。</p>
+<p style="margin: 0">我每次畫 mockup 前都會先在 production 上實際操作一遍，很多舊流程的問題就在這一步被抓出來。例如註冊和登入原本擠在同一頁用 tab 切換，加入手機號碼後資訊會過多，因此拆成兩頁；同時又接到「把 Email 從註冊表單移除」的需求。專案就從「加一條註冊路徑」擴大成整體註冊與登入流程的優化。</p>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; padding: 24px 28px; background: #FBF9F4; border-radius: 12px"><div style="flex: 0 0 auto; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 60px; line-height: 1; color: #A8482F">5 → 1</span><span style="font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #5E625F">註冊欄位</span></div><p style="flex: 1 1 280px; min-width: 0; margin: 0; font-size: 15px; color: #3C403E">這個需求來自上層，背後的假設很直接：舊的註冊要填 5 個欄位，改成手機註冊後只剩 1 個，預期能大幅提升轉換率。當時沒有舊流程的流失數據或用戶回饋，所以要等上線後的數據，才能驗證這個假設。</p></div>
+</div>
+</section>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 112px 24px 0; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 4px"><p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">Constraints|</p><h2 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 30px">限制條件</h2></div>
+<div style="display: flex; flex-wrap: wrap; gap: 20px">
+<div style="flex: 1 1 240px; min-width: 0; border-top: 2px solid #1F2427; padding-top: 16px; display: flex; flex-direction: column; gap: 8px"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A8482F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display: block"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg><h3 style="margin: 0; font-size: 17px">硬 deadline</h3><p style="margin: 0; font-size: 14px; color: #3C403E">前兩個品牌必須在年度流量最高的檔期前上線。</p></div>
+<div style="flex: 1 1 240px; min-width: 0; border-top: 2px solid #1F2427; padding-top: 16px; display: flex; flex-direction: column; gap: 8px"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A8482F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display: block"><circle cx="9" cy="8" r="3.5"></circle><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"></path><path d="M16 4.5a3.5 3.5 0 0 1 0 7"></path><path d="M18 14.5c2 .8 3 2.7 3 5.5"></path></svg><h3 style="margin: 0; font-size: 17px">兼顧既有會員</h3><p style="margin: 0; font-size: 14px; color: #3C403E">移除 Email 牽動所有用到 Email 的舊功能，登入頁也不能套用新規則。</p></div>
+<div style="flex: 1 1 240px; min-width: 0; border-top: 2px solid #1F2427; padding-top: 16px; display: flex; flex-direction: column; gap: 8px"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A8482F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display: block"><path d="M12 21v-8"></path><path d="M12 13 5 6"></path><path d="M12 13l7-7"></path><path d="M5 10V6h4"></path><path d="M19 10V6h-4"></path></svg><h3 style="margin: 0; font-size: 17px">規則各自不同</h3><p style="margin: 0; font-size: 14px; color: #3C403E">三個品牌、三個市場，加上 Web 和 App 多個平台，同一個欄位的現行行為都不一樣。</p></div>
+<div style="flex: 1 1 240px; min-width: 0; border-top: 2px solid #1F2427; padding-top: 16px; display: flex; flex-direction: column; gap: 8px"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A8482F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display: block"><path d="M3 3v18h18"></path><path d="M7 14l4-4 3 3 5-6"></path><path d="M7 18h12" stroke-dasharray="2 3"></path></svg><h3 style="margin: 0; font-size: 17px">沒有 baseline</h3><p style="margin: 0; font-size: 14px; color: #3C403E">上線前沒有同樣的追蹤數據，成效只能用前後期與對照品牌比較。</p></div>
+</div>
+</section>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 112px 24px 0; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 4px"><p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">Key decisions|</p><h2 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 30px">關鍵決策與取捨</h2></div>
+
+<article style="display: flex; flex-wrap: wrap; gap: 32px 48px; border-top: 1px solid #C9C3B4; padding-top: 32px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 44px; line-height: 1; color: #A8482F">1</span><h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 22px; line-height: 1.5">移除 Email：先列出所有受影響的畫面</h3></div>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<p style="margin: 0">拿掉一個欄位看似簡單，但帳戶資訊、安全等級、推薦好友、優惠申請、重新驗證等功能都依賴 Email。我在 production 上逐頁檢查所有會用到 Email 的地方，再和工程師從前端與後端兩個方向交叉確認，並設計統一的補救機制：用戶進入這些功能卻沒填過 Email 時，彈出 bottom sheet 補填並完成 OTP 驗證。</p>
+<img src="img/9bb146914baf8891f67193afe948bf07.png" alt="受影響的五個功能入口，沒有 Email 時彈出補填 Email 與 OTP 驗證的 bottom sheet" onClick="{{openZoom}}" style="cursor: zoom-in; width: 100%; aspect-ratio: 16 / 7; object-fit: cover; border-radius: 4px; display: block">
+</div>
+</article>
+
+<article style="display: flex; flex-wrap: wrap; gap: 32px 48px; border-top: 1px solid #C9C3B4; padding-top: 32px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 44px; line-height: 1; color: #A8482F">2</span><h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 22px; line-height: 1.5">「沿用原本規則」不是規格</h3></div>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<p style="margin: 0">第一個品牌的驗證規則只寫了「沿用原本規則」，到 QA 和 UAT 才發現幾乎每個欄位在不同市場或平台的行為都不同，QA 無從測起。之後我做了兩個改變：</p>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px">
+<li>mockup 上用「新增」「修改」標註與 production 的差異，讓 QA 知道該測什麼</li>
+<li>與其他設計師統一驗證時機：錯誤訊息一律 onBlur 才顯示，onChange 只做長度上限的靜默截斷，唯一性檢查留到送出時</li>
+</ul>
+<p style="margin: 0; padding: 16px 20px; background: #FBF9F4; border-radius: 12px; font-size: 15px; color: #3C403E"><strong>取捨</strong>：登入頁刻意不套新的註冊規則。登入 API 本來就不驗長度，密碼上限設太緊，舊用戶會永遠登不進來。</p>
+</div>
+</article>
+
+<article style="display: flex; flex-wrap: wrap; gap: 32px 48px; border-top: 1px solid #C9C3B4; padding-top: 32px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 44px; line-height: 1; color: #A8482F">3</span><h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 22px; line-height: 1.5">同一個 tab 元件，兩套切換邏輯</h3></div>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<p style="margin: 0">註冊和登入都有「手機／帳號」兩個 tab，但規則刻意不同，因為用戶在這兩頁的目標不一樣。這些切換的邊界情境是在品牌 C 開發時由 PDM 提出，再由我們設計師定案：</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<div style="flex: 1 1 240px; min-width: 0; background: #FBF9F4; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">註冊</span><p style="margin: 0; font-size: 14px">目標是盡快完成，共用欄位（手機、推薦碼）切換時連動、不清空。</p></div>
+<div style="flex: 1 1 240px; min-width: 0; background: #FBF9F4; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">登入</span><p style="margin: 0; font-size: 14px">兩種方式是不同憑證，各自記住、互不干擾。</p></div>
+</div>
+<p style="margin: 0; font-size: 15px; color: #3C403E">這次也一併修正了「記住我」：原本對外說明與實際行為衝突，決議統一記住帳號＋密碼，checkbox 文案也改成明確告知密碼會被記住。取消勾選時，原本記住的登入資料會立即清除、不需要送出表單，因為這符合用戶預期，也有資安上的考量。</p>
+</div>
+</article>
+
+<article style="display: flex; flex-wrap: wrap; gap: 32px 48px; border-top: 1px solid #C9C3B4; padding-top: 32px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 44px; line-height: 1; color: #A8482F">4</span><h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 22px; line-height: 1.5">登入驗證順序：清楚，但不洩漏資訊</h3></div>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<p style="margin: 0">加入手機號碼登入時，後端直接把手機驗證接在原本的登入 API 後面，再請團隊確認。我檢視後提出這套驗證順序和統一的錯誤訊息，讓用戶看得懂，也不讓有心人從中得到資訊：</p>
+<ol aria-label="驗證順序" style="margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; font-size: 14px">
+<li style="padding: 8px 14px; background: #FBF9F4; border: 1px solid #C9C3B4; border-radius: 999px">1 格式檢查</li>
+<li aria-hidden="true" style="color: #A8482F">→</li>
+<li style="padding: 8px 14px; background: #FBF9F4; border: 1px solid #C9C3B4; border-radius: 999px">2 帳號／手機是否存在</li>
+<li aria-hidden="true" style="color: #A8482F">→</li>
+<li style="padding: 8px 14px; background: #FBF9F4; border: 1px solid #C9C3B4; border-radius: 999px">3 密碼是否正確</li>
+<li aria-hidden="true" style="color: #A8482F">→</li>
+<li style="padding: 8px 14px; background: #FBF9F4; border: 1px solid #C9C3B4; border-radius: 999px">4 帳號狀態</li>
+</ol>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px">
+<li><strong>格式錯誤先在前端擋下</strong>，不浪費一次 API 呼叫，提示也最精準</li>
+<li><strong>帳號不存在、帳號或手機號錯、密碼錯</strong>，一律顯示「帳號或密碼錯誤」，不讓人從錯誤訊息判斷某個帳號或手機號是否已註冊，避免枚舉攻擊</li>
+<li><strong>帳號狀態放在最後</strong>：帳密都正確之後，才需要處理停用、未驗證等情況</li>
+</ul>
+</div>
+</article>
+
+<article style="display: flex; flex-wrap: wrap; gap: 32px 48px; border-top: 1px solid #C9C3B4; padding-top: 32px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 44px; line-height: 1; color: #A8482F">5</span><h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 22px; line-height: 1.5">三個品牌，一路收斂</h3></div>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; border-left: 1px solid #1F2427">
+<li style="padding: 0 0 20px 24px; display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #5E625F">品牌 A｜2025.12 – 2026.04</span><span style="font-size: 15px">最先上線手機註冊與移除 Email，欄位驗證問題在這一輪浮現。</span></li>
+<li style="padding: 0 0 20px 24px; display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #5E625F">品牌 B｜2026.04 – 06（約 6 週）</span><span style="font-size: 15px">統一後的欄位驗證規則先在這裡落地。</span></li>
+<li style="padding: 0 0 0 24px; display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #5E625F">品牌 C｜2026.06 – 09</span><span style="font-size: 15px">統一後的規則在這一輪全部上線，tab 切換規則也是這時定案，之後再補回品牌 B。</span><span style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 8px; font-size: 12px; line-height: 1.6"><span style="color: #8A3A25; font-weight: 700">品牌特有</span><span style="padding: 2px 10px; background: #FFFFFF; border: 1px solid #A8482F; color: #8A3A25; border-radius: 999px">手機不可重複・兩條錯誤同時顯示</span><span style="padding: 2px 10px; background: #FFFFFF; border: 1px solid #A8482F; color: #8A3A25; border-radius: 999px">深淺色模式</span></span></li>
+</ol>
+<p style="margin: 0; padding: 16px 20px; background: #FBF9F4; border-radius: 12px; font-size: 15px; color: #3C403E"><strong>全品牌統一</strong>：預設手機 tab、系統自動產生帳密並排除 O／0、I／l／1 等易混淆字元。最後也盤點了品牌 A 尚未跟上的地方，做成對齊狀態表與設計稿。</p>
+</div>
+</article>
+</section>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 112px 24px 0; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 4px"><p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">Collaboration|</p><h2 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 30px">跨部門協作：Banner 規格</h2></div>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<p style="margin: 0">註冊流程上的 banner 由品牌團隊製作、從後台上架，再由前端顯示。我和前端一起訂定各版位的尺寸與顯示行為，再整理成給品牌設計師的出圖規範，讓素材上架後在每種裝置上都正確顯示。</p>
+<ol style="list-style: none; margin: 0; padding: 0; border-top: 1px solid #C9C3B4"><li style="display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #C9C3B4"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F; padding-top: 4px">01</span><span style="font-size: 15px">依版位給固定尺寸：桌機註冊頁、手機註冊頁、註冊成功頁各一種，皆以 2 倍圖交付，並限定 PNG 格式與檔案大小</span></li><li style="display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #C9C3B4"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F; padding-top: 4px">02</span><span style="font-size: 15px">素材不變形、不裁切，載入時也不造成版面跳動</span></li><li style="display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #C9C3B4"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F; padding-top: 4px">03</span><span style="font-size: 15px">四周預留邊距，文字與重點只放在安全區內，各裝置都完整可讀</span></li><li style="display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #C9C3B4"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F; padding-top: 4px">04</span><span style="font-size: 15px">上方 40px 不放複雜圖案，避免擋住 logo 與關閉按鈕</span></li><li style="display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #C9C3B4"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F; padding-top: 4px">05</span><span style="font-size: 15px">建議用半透明或漸層收邊，讓 banner 融入背景，不用硬切的去背圖</span></li><li style="display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #C9C3B4"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F; padding-top: 4px">06</span><span style="font-size: 15px">兩張以上自動輪播，重點內容不能被輪播指示點蓋住</span></li><li style="display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #C9C3B4"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F; padding-top: 4px">07</span><span style="font-size: 15px">Mobile Web 與 App 同時提供深色、淺色兩套素材</span></li><li style="display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #C9C3B4"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F; padding-top: 4px">08</span><span style="font-size: 15px">後台讀取失敗或未設定時，自動顯示預設 banner，不留空白</span></li></ol>
+<img src="img/7023af51d34f0180893efb23205400e3.png" alt="註冊流程 banner 規格示意：三種版位尺寸與安全區" onClick="{{openZoom}}" style="cursor: zoom-in; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 4px; display: block">
+</div>
+</section>
+
+<section style="background: #1F2427; color: #F3F0E8; margin-top: 112px; padding: 112px 24px">
+<div style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 4px"><p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #E59A7F">Outcome|</p><h2 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 30px">成果</h2></div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px">
+<div style="flex: 1 1 260px; min-width: 0; border-top: 1px solid #4A504D; padding-top: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 56px; line-height: 1">+18.6%</span><span style="font-size: 14px; color: #D6D3CA">註冊送出日均（同期對照品牌 +11.8%，扣除大環境約多 6–7 個百分點）</span></div>
+<div style="flex: 1 1 260px; min-width: 0; border-top: 1px solid #4A504D; padding-top: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 56px; line-height: 1">1.36 → 1.11</span><span style="font-size: 14px; color: #D6D3CA">每人平均送出次數（約 −19%，對照品牌反而 +9%）</span></div>
+<div style="flex: 1 1 260px; min-width: 0; border-top: 1px solid #4A504D; padding-top: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 56px; line-height: 1">22–33% → 91%</span><span style="font-size: 14px; color: #D6D3CA">團隊 Sprint 完成率（團隊成果）</span></div>
+</div>
+<p style="margin: 0; font-size: 14px; color: #B9BDB8">改版前 39 天、改版後 37 天，排除事故期間，比較日均。數據限制：指標記錄的是「送出」而非「註冊成功」；對照品牌並非完美對照組。前兩個品牌都在年度流量高峰前上線。</p>
+</div>
+</section>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 112px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 4px"><p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">Reflection|</p><h2 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 30px">反思</h2></div>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 20px">設計交付完整，不代表上線時會同步到位</h3><p style="margin: 0; color: #3C403E">移除 Email 的周邊畫面都畫好了，卻沒有和主要功能一起上線，第一次發版後 rollback。之後我會逐張確認 AC 和 mockup 一致，並在每次 sprint 開始前的 planning 會議，主動提出功能之間的開發相依性。</p></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 20px">「沿用原本規則」只是把問題往後延</h3><p style="margin: 0; color: #3C403E">寫起來省事，但各市場、各平台的差異最後還是要有人處理，通常就落到 QA 身上。</p></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 20px">如果重來一次</h3><p style="margin: 0; color: #3C403E">畫 mockup 前我一直會先操作 production，但當時看的是流程，沒有逐一比對各市場、各平台的欄位驗證規則。重來一次，我會在專案一開始就把這些規則整理成對照表，再開始設計。</p></div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{isEn}}" hint-placeholder-val="{{ false }}">
+<section style="max-width: 1200px; margin: 0 auto; padding: 56px 24px 64px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; gap: 20px; align-items: baseline"><span style="font-family: 'Cormorant Garamond', serif; font-size: 72px; line-height: 1; color: #A8482F">01</span><span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #5E625F">2025.12 – 2026.09</span></div>
+<h1 class="hero-title" style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 60px; font-weight: 500; line-height: 1.15">Onboarding redesign across three brands</h1>
+<p style="margin: 0; max-width: 760px; font-size: 18px; color: #3C403E">It looked like just one more way to sign up, but field rules differed across three brands and three markets, and Email had to come off the sign-up form at the same time. Over one year I redesigned sign-up and login for each brand in turn and unified three sets of rules into one.</p>
+<dl class="meta" style="margin: 8px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: #C9C3B4; border: 1px solid #C9C3B4">
+<div style="background: #F3F0E8; padding: 20px; display: flex; flex-direction: column; gap: 4px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">ROLE</dt><dd style="margin: 0; font-size: 14px">Lead UI/UX designer</dd></div>
+<div style="background: #F3F0E8; padding: 20px; display: flex; flex-direction: column; gap: 4px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">TEAM</dt><dd style="margin: 0; font-size: 14px">PDM, PM, front end, back end</dd></div>
+<div style="background: #F3F0E8; padding: 20px; display: flex; flex-direction: column; gap: 4px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">SCOPE</dt><dd style="margin: 0; font-size: 14px">3 brands, 3 markets, web &amp; app</dd></div>
+<div style="background: #F3F0E8; padding: 20px; display: flex; flex-direction: column; gap: 4px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">OUTPUT</dt><dd style="margin: 0; font-size: 14px">All mockups, AC review, 115 UAT tickets</dd></div>
+</dl>
+</section>
+
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 24px"><img src="img/18d2d9336b790d6cdfe05d408da5dc21.png" alt="Sign-up page before and after: one long form before, separate username and mobile sign-up after" onClick="{{openZoom}}" style="cursor: zoom-in; width: 100%; aspect-ratio: 16 / 8; object-fit: cover; border-radius: 4px; display: block"></div>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 112px 24px 0; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 4px"><p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">Background|</p><h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 500">The problem</h2></div>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<p style="margin: 0">The old sign-up page laid out 5 fields at once: username, password, phone number, Email and a referral code. The referral code was optional, but to a new user it still looked like five fields to fill. The brief was one line: "add phone number sign-up," to give users a faster way in.</p>
+<p style="margin: 0">Before drawing any mockup I walk through the live product, and that is where most of the old flow's problems surfaced. Sign-up and login shared one page behind tabs, which would get crowded once phone options were added, so I split them into two pages. A request to remove Email from the form landed at the same time, and the project grew from "one more sign-up path" into a redesign of the whole sign-up and login flow.</p>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; padding: 24px 28px; background: #FBF9F4; border-radius: 12px"><div style="flex: 0 0 auto; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 60px; line-height: 1; color: #A8482F">5 → 1</span><span style="font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #5E625F">SIGN-UP FIELDS</span></div><p style="flex: 1 1 280px; min-width: 0; margin: 0; font-size: 15px; color: #3C403E">The request came from leadership, and the hypothesis was simple: the old sign-up had 5 fields, mobile sign-up needs just 1, so conversion should rise sharply. There was no drop-off data or user feedback on the old flow, so only post-launch data could test that hypothesis.</p></div>
+</div>
+</section>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 112px 24px 0; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 4px"><p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">Constraints|</p><h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 500">Constraints</h2></div>
+<div style="display: flex; flex-wrap: wrap; gap: 20px">
+<div style="flex: 1 1 240px; min-width: 0; border-top: 2px solid #1F2427; padding-top: 16px; display: flex; flex-direction: column; gap: 8px"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A8482F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display: block"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg><h3 style="margin: 0; font-size: 17px">A hard deadline</h3><p style="margin: 0; font-size: 14px; color: #3C403E">The first two brands had to launch before the busiest traffic period of the year.</p></div>
+<div style="flex: 1 1 240px; min-width: 0; border-top: 2px solid #1F2427; padding-top: 16px; display: flex; flex-direction: column; gap: 8px"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A8482F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display: block"><circle cx="9" cy="8" r="3.5"></circle><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"></path><path d="M16 4.5a3.5 3.5 0 0 1 0 7"></path><path d="M18 14.5c2 .8 3 2.7 3 5.5"></path></svg><h3 style="margin: 0; font-size: 17px">Existing members</h3><p style="margin: 0; font-size: 14px; color: #3C403E">Removing Email touched every older feature that relied on it, and login could not adopt the new rules.</p></div>
+<div style="flex: 1 1 240px; min-width: 0; border-top: 2px solid #1F2427; padding-top: 16px; display: flex; flex-direction: column; gap: 8px"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A8482F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display: block"><path d="M12 21v-8"></path><path d="M12 13 5 6"></path><path d="M12 13l7-7"></path><path d="M5 10V6h4"></path><path d="M19 10V6h-4"></path></svg><h3 style="margin: 0; font-size: 17px">Inconsistent rules</h3><p style="margin: 0; font-size: 14px; color: #3C403E">Across three brands, three markets and both web and app, the same field behaved differently.</p></div>
+<div style="flex: 1 1 240px; min-width: 0; border-top: 2px solid #1F2427; padding-top: 16px; display: flex; flex-direction: column; gap: 8px"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A8482F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display: block"><path d="M3 3v18h18"></path><path d="M7 14l4-4 3 3 5-6"></path><path d="M7 18h12" stroke-dasharray="2 3"></path></svg><h3 style="margin: 0; font-size: 17px">No baseline</h3><p style="margin: 0; font-size: 14px; color: #3C403E">Without prior tracking, impact could only be read from before/after periods and a control brand.</p></div>
+</div>
+</section>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 112px 24px 0; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 4px"><p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">Key decisions|</p><h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 500">Key decisions &amp; trade-offs</h2></div>
+
+<article style="display: flex; flex-wrap: wrap; gap: 32px 48px; border-top: 1px solid #C9C3B4; padding-top: 32px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 44px; line-height: 1; color: #A8482F">1</span><h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 500; line-height: 1.3">Removing Email: map every affected screen first</h3></div>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<p style="margin: 0">Dropping one field looks trivial, but account info, security level, refer-a-friend, promotion applications and revalidation all depended on Email. I checked, page by page, every place in production that used Email, cross-checked front and back end with engineers, and designed one recovery pattern: if a user without Email opens one of these features, a bottom sheet asks for it and verifies it by OTP.</p>
+<img src="img/867be16b9af6ad2f34ea15d068e9a114.png" alt="Five affected entry points; without an Email on file, a bottom sheet asks for one and verifies it by OTP" onClick="{{openZoom}}" style="cursor: zoom-in; width: 100%; aspect-ratio: 16 / 7; object-fit: cover; border-radius: 4px; display: block">
+</div>
+</article>
+
+<article style="display: flex; flex-wrap: wrap; gap: 32px 48px; border-top: 1px solid #C9C3B4; padding-top: 32px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 44px; line-height: 1; color: #A8482F">2</span><h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 500; line-height: 1.3">"Keep the existing rules" is not a spec</h3></div>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<p style="margin: 0">The first brand's validation said only "keep the existing rules". In QA and UAT we found nearly every field behaved differently by market or platform, and QA had nothing to test against. I changed two things:</p>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px">
+<li>Mockups now mark "new" and "changed" against production, so QA knows what to test</li>
+<li>With the other designers, I aligned validation timing: errors show on blur, typing only enforces a silent length cap, and uniqueness is checked on submit</li>
+</ul>
+<p style="margin: 0; padding: 16px 20px; background: #FBF9F4; border-radius: 12px; font-size: 15px; color: #3C403E"><strong>Trade-off</strong>: login deliberately kept the old rules. The login API never checked length, and a tight password cap would have locked existing users out for good.</p>
+</div>
+</article>
+
+<article style="display: flex; flex-wrap: wrap; gap: 32px 48px; border-top: 1px solid #C9C3B4; padding-top: 32px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 44px; line-height: 1; color: #A8482F">3</span><h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 500; line-height: 1.3">One tab component, two behaviors</h3></div>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<p style="margin: 0">Sign-up and login both have Phone / Username tabs, but they deliberately behave differently, because users want different things on these two pages. These edge cases were raised by the PDM during Brand C, and we designers decided the rules:</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<div style="flex: 1 1 240px; min-width: 0; background: #FBF9F4; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">SIGN-UP</span><p style="margin: 0; font-size: 14px">The goal is to finish fast, so shared fields (phone, referral code) carry over when switching tabs.</p></div>
+<div style="flex: 1 1 240px; min-width: 0; background: #FBF9F4; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">LOGIN</span><p style="margin: 0; font-size: 14px">The two methods are different credentials, so each tab remembers its own and never overwrites the other.</p></div>
+</div>
+<p style="margin: 0; font-size: 15px; color: #3C403E">We also fixed "Remember me": public messaging contradicted actual behavior, so it now remembers username and password, and the checkbox copy says so plainly. Unchecking it clears the saved credentials immediately, with no need to submit the form, because that is what users expect and it is safer.</p>
+</div>
+</article>
+
+<article style="display: flex; flex-wrap: wrap; gap: 32px 48px; border-top: 1px solid #C9C3B4; padding-top: 32px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 44px; line-height: 1; color: #A8482F">4</span><h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 500; line-height: 1.3">Login validation order: clear, but revealing nothing</h3></div>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<p style="margin: 0">To add phone login, the back end appended phone validation to the existing login API and asked the team to confirm. I reviewed it and proposed this validation order with a single shared error message, so errors are clear to users without giving anything away to people probing for accounts:</p>
+<ol aria-label="Validation order" style="margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; font-size: 14px">
+<li style="padding: 8px 14px; background: #FBF9F4; border: 1px solid #C9C3B4; border-radius: 999px">1 Format</li>
+<li aria-hidden="true" style="color: #A8482F">→</li>
+<li style="padding: 8px 14px; background: #FBF9F4; border: 1px solid #C9C3B4; border-radius: 999px">2 Account / phone exists</li>
+<li aria-hidden="true" style="color: #A8482F">→</li>
+<li style="padding: 8px 14px; background: #FBF9F4; border: 1px solid #C9C3B4; border-radius: 999px">3 Password</li>
+<li aria-hidden="true" style="color: #A8482F">→</li>
+<li style="padding: 8px 14px; background: #FBF9F4; border: 1px solid #C9C3B4; border-radius: 999px">4 Account status</li>
+</ol>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px">
+<li><strong>Format errors are caught on the front end</strong>, saving an API call with the most precise hint</li>
+<li><strong>Unknown account, wrong username or phone, wrong password</strong> all show "Incorrect account or password", so no one can tell from the error whether an account or number is registered (preventing enumeration attacks)</li>
+<li><strong>Account status comes last</strong>: suspended or unverified cases only matter once the credentials are correct</li>
+</ul>
+</div>
+</article>
+
+<article style="display: flex; flex-wrap: wrap; gap: 32px 48px; border-top: 1px solid #C9C3B4; padding-top: 32px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 44px; line-height: 1; color: #A8482F">5</span><h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 500; line-height: 1.3">Three brands, converging</h3></div>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; border-left: 1px solid #1F2427">
+<li style="padding: 0 0 20px 24px; display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #5E625F">Brand A — 2025.12 – 2026.04</span><span style="font-size: 15px">Shipped phone sign-up and Email removal first; the validation gaps surfaced here.</span></li>
+<li style="padding: 0 0 20px 24px; display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #5E625F">Brand B — 2026.04 – 06 (about 6 weeks)</span><span style="font-size: 15px">The unified validation rules landed here first.</span></li>
+<li style="padding: 0 0 0 24px; display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #5E625F">Brand C — 2026.06 – 09</span><span style="font-size: 15px">All the unified rules shipped in this round. The tab-switching rules were settled here too, then added back to Brand B.</span><span style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 8px; font-size: 12px; line-height: 1.6"><span style="color: #8A3A25; font-weight: 700">Brand C only</span><span style="padding: 2px 10px; background: #FFFFFF; border: 1px solid #A8482F; color: #8A3A25; border-radius: 999px">Unique phone numbers, two errors at once</span><span style="padding: 2px 10px; background: #FFFFFF; border: 1px solid #A8482F; color: #8A3A25; border-radius: 999px">Light &amp; dark modes</span></span></li>
+</ol>
+<p style="margin: 0; padding: 16px 20px; background: #FBF9F4; border-radius: 12px; font-size: 15px; color: #3C403E"><strong>Shared across brands</strong>: Phone tab by default, and auto-generated credentials that skip look-alike characters such as O/0 and I/l/1. I also audited where Brand A still lagged and prepared an alignment table and designs.</p>
+</div>
+</article>
+</section>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 112px 24px 0; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 4px"><p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">Collaboration|</p><h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 500">Cross-team: banner specs</h2></div>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<p style="margin: 0">Banners in the sign-up flow are made by the brand team, uploaded through the CMS and displayed by front-end. With front-end I defined the size and behavior of each slot, then turned it into artwork guidelines for the brand designers, so every banner displays correctly on every device once it goes live.</p>
+<ol style="list-style: none; margin: 0; padding: 0; border-top: 1px solid #C9C3B4"><li style="display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #C9C3B4"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F; padding-top: 4px">01</span><span style="font-size: 15px">One fixed size per slot (desktop sign-up, mobile sign-up, success page), delivered at 2x as PNG within a file-size cap</span></li><li style="display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #C9C3B4"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F; padding-top: 4px">02</span><span style="font-size: 15px">Assets are never stretched or cropped, and loading never shifts the layout</span></li><li style="display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #C9C3B4"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F; padding-top: 4px">03</span><span style="font-size: 15px">Margins on every side; text and key content stay inside the safe area so every device shows them in full</span></li><li style="display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #C9C3B4"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F; padding-top: 4px">04</span><span style="font-size: 15px">No busy patterns in the top 40px, so the logo and close button stay visible</span></li><li style="display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #C9C3B4"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F; padding-top: 4px">05</span><span style="font-size: 15px">Translucent or gradient edges that blend into the background, not hard cut-outs</span></li><li style="display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #C9C3B4"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F; padding-top: 4px">06</span><span style="font-size: 15px">Two or more banners rotate as a carousel; key content stays clear of the indicator dots</span></li><li style="display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #C9C3B4"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F; padding-top: 4px">07</span><span style="font-size: 15px">Mobile web and app each get a dark and a light asset</span></li><li style="display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #C9C3B4"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F; padding-top: 4px">08</span><span style="font-size: 15px">If the CMS fails or nothing is set, a default banner shows. Never a blank slot</span></li></ol>
+<img src="img/0b3a48db8cacac4fe85ac3043afd5248.png" alt="Sign-up banner spec: three slot sizes and safe areas" onClick="{{openZoom}}" style="cursor: zoom-in; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 4px; display: block">
+</div>
+</section>
+
+<section style="background: #1F2427; color: #F3F0E8; margin-top: 112px; padding: 112px 24px">
+<div style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 4px"><p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #E59A7F">Outcome|</p><h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 500">Outcome</h2></div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px">
+<div style="flex: 1 1 260px; min-width: 0; border-top: 1px solid #4A504D; padding-top: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 56px; line-height: 1">+18.6%</span><span style="font-size: 14px; color: #D6D3CA">daily sign-up submits (control brand +11.8%, about 6–7 points above the market)</span></div>
+<div style="flex: 1 1 260px; min-width: 0; border-top: 1px solid #4A504D; padding-top: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 56px; line-height: 1">1.36 → 1.11</span><span style="font-size: 14px; color: #D6D3CA">submits per user (about −19%, while the control rose 9%)</span></div>
+<div style="flex: 1 1 260px; min-width: 0; border-top: 1px solid #4A504D; padding-top: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 56px; line-height: 1">22–33% → 91%</span><span style="font-size: 14px; color: #D6D3CA">sprint completion rate (team result)</span></div>
+</div>
+<p style="margin: 0; font-size: 14px; color: #B9BDB8">39 days before vs 37 days after, compared as daily averages, incident period excluded. Limits: the metric counts submits, not successful sign-ups, and the control brand is not a perfect control. Both early brands launched before the yearly traffic peak.</p>
+</div>
+</section>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 112px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 4px"><p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #A8482F">Reflection|</p><h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 500">What I learned</h2></div>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500">Complete designs don't guarantee a complete release</h3><p style="margin: 0; color: #3C403E">Every screen affected by the Email removal was designed, yet they didn't ship with the main feature, and the first release was rolled back. Since then I check each AC against the mockup and raise feature dependencies at every sprint planning meeting.</p></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500">"Keep the existing rules" just postpones the problem</h3><p style="margin: 0; color: #3C403E">It is quick to write, but someone still has to deal with the differences across markets and platforms, and that usually ends up being QA.</p></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500">If I did it again</h3><p style="margin: 0; color: #3C403E">I always walked through production before designing, but I was looking at flows, not comparing field validation rules across every market and platform. Next time I would map those rules into a comparison table at the very start, before designing anything.</p></div>
+</div>
+</section>
+</sc-if>
+
+<nav aria-label="More work" style="border-top: 1px solid #1F2427; max-width: 1200px; margin: 0 auto; padding: 40px 24px 64px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 16px">
+<a href="index.html" style="text-decoration: none; display: flex; flex-direction: column; gap: 6px; padding: 22px 24px; border: 1px solid #C9C3B4; border-radius: 12px; background: #FBF9F4"><span style="font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.12em; color: #A8482F"><span class="ar ar-l">←</span> {{t.pl}}</span><span style="font-family: 'Noto Serif TC', serif; font-size: 18px; font-weight: 700">{{t.pt}}</span></a>
+<a href="work02.html" style="text-decoration: none; display: flex; flex-direction: column; gap: 6px; padding: 22px 24px; border: 1px solid #C9C3B4; border-radius: 12px; background: #FBF9F4; align-items: flex-end; text-align: right"><span style="font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.12em; color: #A8482F">{{t.nl}} <span class="ar ar-r">→</span></span><span style="font-family: 'Noto Serif TC', serif; font-size: 18px; font-weight: 700">{{t.nt}}</span></a>
+</nav>
+<sc-if value="{{zoomOpen}}">
+<div class="zm" role="dialog" aria-modal="true" aria-label="{{t.zoom}}" onClick="{{closeZoom}}" style="position: fixed; inset: 0; z-index: 50; background: rgba(31,36,39,.94); overflow: auto; display: flex; align-items: center; justify-content: center; padding: 56px 24px 32px; cursor: zoom-out">
+<img class="zm-img" src="{{zoomSrc}}" alt="" style="display: block; width: 100%; max-width: 1600px; height: auto; border-radius: 4px">
+<button type="button" onClick="{{closeZoom}}" aria-label="{{t.close}}" style="position: fixed; top: 14px; right: 14px; width: 40px; height: 40px; border-radius: 999px; border: 1px solid #F3F0E8; background: rgba(31,36,39,.6); color: #F3F0E8; font-size: 18px; cursor: pointer">✕</button>
+<p class="zm-hint" style="display: none; position: fixed; left: 0; right: 0; bottom: 14px; margin: 0; text-align: center; font-size: 12px; color: #B9BDB8">{{t.pan}}</p>
+</div>
+</sc-if>
+</div>
+</template>
+<script src="dc.js"></script>
+<script>
+
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { lang: 'zh', zoom: null };
+try { if (window.localStorage.getItem('fifi-lang') === 'en') this.state = { lang: 'en', zoom: null }; } catch (e) {}
+try { window.addEventListener('storage', (ev) => { if (ev.key === 'fifi-lang') this.setState({ lang: ev.newValue === 'en' ? 'en' : 'zh' }); }); } catch (e) {}
+}
+renderVals() {
+var isZh = this.state.lang === 'zh';
+var base = 'min-height: 32px; padding: 4px 14px; border: 0; cursor: pointer; font-family: "DM Mono", monospace; font-size: 12px; letter-spacing: 0.08em; ';
+var on = base + 'background: #1F2427; color: #F3F0E8;';
+var off = base + 'background: transparent; color: #1F2427;';
+var t = isZh
+? { pl: '返回', pt: '所有作品', nl: '下一個', nt: '02 帳號密碼找回流程', zoom: '放大檢視', close: '關閉', pan: '左右滑動查看完整圖片，點一下關閉', back: '← 作品', all: '← 所有作品', next: '下一個：02 帳號密碼找回流程 →' }
+: { pl: 'BACK', pt: 'All works', nl: 'NEXT', nt: '02 Password recovery', zoom: 'Enlarged image', close: 'Close', pan: 'Swipe to pan, tap to close', back: '← Works', all: '← All works', next: 'Next: 02 Password recovery →' };
+return {
+t: t,
+isZh: isZh,
+isEn: !isZh,
+zhStyle: isZh ? on : off,
+enStyle: isZh ? off : on,
+zoomOpen: !!this.state.zoom,
+zoomSrc: this.state.zoom || '',
+openZoom: (ev) => { var el = ev && (ev.currentTarget || ev.target); var src = el && el.getAttribute ? el.getAttribute('src') : null; if (src) this.setState({ lang: this.state.lang, zoom: src }); },
+closeZoom: (ev) => { if (ev && ev.stopPropagation) ev.stopPropagation(); this.setState({ lang: this.state.lang, zoom: null }); },
+setZh: () => { try { window.localStorage.setItem('fifi-lang', 'zh'); } catch (e) {} this.setState({ lang: 'zh', zoom: null }); },
+setEn: () => { try { window.localStorage.setItem('fifi-lang', 'en'); } catch (e) {} this.setState({ lang: 'en', zoom: null }); }
+};
+}
+}
+
+DC.mount(Component);
+</script>
+</body>
+</html>
