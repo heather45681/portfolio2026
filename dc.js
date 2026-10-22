@@ -9,7 +9,7 @@
   window.DCLogic=function(props){this.props=props||{};this.state={};};
   DCLogic.prototype.setState=function(s){this.state=Object.assign({},this.state,s);DC.render(this);};
   window.DC={
-    mount:function(C){var c=new C({});DC.inst=c;DC.render(c);if(location.hash){var t=document.getElementById(decodeURIComponent(location.hash.slice(1)));if(t)setTimeout(function(){t.scrollIntoView();},50);}},
+    mount:function(C){try{var q=new URLSearchParams(location.search).get('lang');if(q==='en'||q==='zh')localStorage.setItem('fifi-lang',q);}catch(e){}var c=new C({});DC.inst=c;DC.render(c);if(location.hash){var t=document.getElementById(decodeURIComponent(location.hash.slice(1)));if(t)setTimeout(function(){t.scrollIntoView();},50);}},
     render:function(c){
       var vals=c.renderVals(), tpl=document.getElementById('tpl').innerHTML, fns={}, n=0;
       var html=tpl.replace(/\son([a-zA-Z]+)="\{\{([^}]+)\}\}"/gi,function(m,ev,ex){var k='f'+(n++);fns[k]={ev:ev.toLowerCase(),fn:get(vals,ex)};return ' data-dcev="'+k+'"';})
