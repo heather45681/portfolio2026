@@ -23,6 +23,7 @@
       box.querySelectorAll('[data-dcev]').forEach(function(el){var f=fns[el.getAttribute('data-dcev')];el.removeAttribute('data-dcev');if(typeof f.fn==='function')el.addEventListener(f.ev,f.fn);});
       app.replaceChildren.apply(app,Array.prototype.slice.call(box.childNodes));
       window.scrollTo(0,y);
+      try{var en=c.state.lang==='en',m=document.querySelector('meta[name=dc-title]');if(m)document.title=m.getAttribute(en?'data-en':'data-zh');document.documentElement.lang=en?'en':'zh-Hant';}catch(e){}
     }
   };
 })();
