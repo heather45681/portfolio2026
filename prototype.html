@@ -8,179 +8,389 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#F3F0E8;--paper:#FBF9F4;--beige:#E9E3D6;--ink:#1F2427;--soft:#3B4246;--mute:#6E716D;--line:#D6D0C3;--acc:#A8482F;--err:#B3261E;--dark:#2C3236}
+:root{--bg:#F3F0E8;--paper:#FBF9F4;--beige:#E9E3D6;--ink:#1F2427;--soft:#3B4246;--mute:#6E716D;--line:#D6D0C3;--acc:#A8482F;--err:#B3261E;--ok:#2E7D5B;--dark:#2C3236}
 *{box-sizing:border-box;margin:0}
+html,body{overflow-x:hidden}
 body{background:var(--bg);color:var(--ink);font-family:"Noto Sans","Noto Sans TC",sans-serif;min-height:100vh}
-a{color:inherit}
-.top{display:flex;justify-content:space-between;align-items:center;max-width:1040px;margin:0 auto;padding:24px 24px 0;gap:16px}
+button{font-family:inherit}
+.top{display:flex;justify-content:space-between;align-items:center;max-width:1060px;margin:0 auto;padding:24px 24px 0;gap:16px}
 .back{font-family:"DM Mono",monospace;font-size:13px;letter-spacing:.08em;text-decoration:none;color:var(--soft)}
 .back:hover{color:var(--acc)}
 .lang{display:flex;border:1px solid var(--ink);border-radius:999px;overflow:hidden}
 .lang button{border:0;background:transparent;font-family:"DM Mono",monospace;font-size:12px;letter-spacing:.08em;padding:6px 14px;cursor:pointer;color:var(--ink)}
 .lang button.on{background:var(--ink);color:var(--paper)}
-.wrap{max-width:1040px;margin:0 auto;padding:24px 24px 64px;display:flex;gap:48px;align-items:flex-start;justify-content:center}
+.wrap{max-width:1060px;margin:0 auto;padding:24px 24px 64px;display:flex;gap:48px;align-items:flex-start;justify-content:center}
 /* phone */
-.phone{width:375px;height:780px;flex:none;background:var(--paper);border-radius:44px;overflow:hidden;position:relative;box-shadow:0 24px 60px rgba(31,36,39,.22);border:8px solid var(--dark)}
+.phone{width:375px;height:800px;flex:none;background:var(--paper);border-radius:44px;overflow:hidden;position:relative;box-shadow:0 24px 60px rgba(31,36,39,.22);border:8px solid var(--dark)}
 .status{height:40px;display:flex;justify-content:space-between;align-items:center;padding:0 24px 0 28px;font-size:14px;font-weight:600;position:relative;z-index:2}
 .island{position:absolute;left:50%;top:8px;transform:translateX(-50%);width:104px;height:28px;border-radius:16px;background:#111;z-index:3}
-.hdr{position:absolute;left:0;right:0;top:0;height:200px;background:var(--beige);overflow:hidden}
-.hdr svg{position:absolute;top:30px}
-.brand{position:absolute;left:22px;top:104px;font-size:11px;font-weight:700;letter-spacing:.12em}
-.sheet{position:absolute;left:0;right:0;top:168px;bottom:0;background:var(--paper);border-radius:22px 22px 0 0;padding:18px 0 24px;overflow-y:auto}
+.hdr{position:absolute;left:0;right:0;top:0;height:180px;background:var(--beige);overflow:hidden}
+.hdr svg{position:absolute;top:26px}
+.brand{position:absolute;left:22px;top:96px;font-size:11px;font-weight:700;letter-spacing:.12em}
+.sheet{position:absolute;left:0;right:0;top:150px;bottom:0;background:var(--paper);border-radius:22px 22px 0 0;padding:18px 0 28px;overflow-y:auto}
 .title{font-size:21px;font-weight:700;text-align:center}
-.tabs{display:flex;margin:12px 22px 4px;border-bottom:1px solid #E3DED2}
-.tab{flex:1;text-align:center;padding:10px 0;font-size:14.5px;color:#8E938F;background:none;border:0;cursor:pointer;font-family:inherit}
+.sub{font-size:13.5px;color:var(--mute);text-align:center;margin:6px 24px 0;line-height:1.5}
+.tabs{display:flex;margin:12px 22px 2px;border-bottom:1px solid #E3DED2}
+.tab{flex:1;text-align:center;padding:10px 0;font-size:14.5px;color:#8E938F;background:none;border:0;cursor:pointer}
 .tab.on{color:var(--ink);font-weight:600;border-bottom:2.5px solid var(--acc);margin-bottom:-1px}
 .fld{margin:12px 22px 0}
 .box{height:46px;border:1px solid var(--line);border-radius:10px;background:#fff;display:flex;align-items:center;gap:10px;padding:0 14px}
 .box svg{flex:none}
 .box input{border:0;outline:0;flex:1;font:inherit;font-size:15px;color:var(--ink);background:transparent;min-width:0}
 .box input::placeholder{color:#9A9E99}
-.box:focus-within{border-color:var(--ink)}
+.fld.foc .box{border-color:var(--ink)}
 .fld.bad .box{border-color:var(--err);border-width:1.5px}
-.msg{font-size:12.5px;color:var(--err);margin-top:5px;min-height:0}
+.below{font-size:12.5px;margin-top:6px;line-height:1.5}
+.below.err{color:var(--err)}
+.below.hint{color:var(--mute)}
+.chk{display:flex;flex-direction:column;gap:3px;margin-top:6px}
+.chk span{display:flex;gap:6px;align-items:flex-start;font-size:12px;line-height:1.45;color:var(--mute)}
+.chk span i{font-style:normal;font-weight:700;width:12px;flex:none;text-align:center}
+.chk span.pass{color:var(--ok)}.chk span.fail{color:var(--err)}
 .eye{border:0;background:none;cursor:pointer;padding:0;display:flex}
-.reflab{margin:12px 22px -4px;font-size:12.5px;color:var(--mute);background:none;border:0;cursor:pointer;font-family:inherit;padding:0}
+.reflab{margin:14px 22px 0;font-size:13px;color:var(--mute);background:none;border:0;cursor:pointer;padding:0;display:flex;gap:6px;align-items:center}
 .terms{margin:14px 22px 0;font-size:12px;color:var(--mute);line-height:1.55}.terms b{color:var(--acc);font-weight:500}
-.rem{margin:14px 22px 0;display:flex;justify-content:space-between;align-items:center;font-size:13.5px;color:var(--mute)}
+.rem{margin:14px 22px 0;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--mute);gap:8px}
 .rem label{display:flex;align-items:center;gap:8px;cursor:pointer}
-.rem input{width:16px;height:16px;accent-color:var(--ink)}
-.rem span.link{color:var(--acc)}
-.cta{margin:18px 22px 0;height:46px;width:calc(100% - 44px);border-radius:10px;border:0;font:inherit;font-size:16px;font-weight:600;cursor:pointer;background:var(--ink);color:var(--paper)}
+.rem input{width:16px;height:16px;accent-color:var(--ink);flex:none}
+.rem .link{color:var(--acc);white-space:nowrap;border:0;background:transparent;padding:0;font:inherit;cursor:pointer}
+.cta{display:block;margin:18px 22px 0;height:46px;width:calc(100% - 44px);border-radius:10px;border:0;font-size:16px;font-weight:600;cursor:pointer;background:var(--ink);color:var(--paper)}
+.cta:disabled{background:#E3DED2;color:#9A9E99;cursor:not-allowed}
 .alt{text-align:center;margin-top:16px;font-size:13.5px;color:var(--mute)}
-.alt button{background:none;border:0;color:var(--acc);font:inherit;font-weight:600;cursor:pointer;padding:0}
+.alt button{background:none;border:0;color:var(--acc);font-weight:600;cursor:pointer;padding:0;font-size:inherit}
 .dim{position:absolute;inset:0;background:rgba(31,36,39,.45);z-index:4}
-.toast{position:absolute;left:18px;right:18px;top:52px;z-index:5;background:var(--paper);border-radius:12px;padding:13px 15px;display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;box-shadow:0 8px 24px rgba(0,0,0,.2)}
-.dlg{position:absolute;left:30px;right:30px;top:250px;z-index:5;background:var(--paper);border-radius:16px;padding:24px 20px 20px;text-align:center;box-shadow:0 12px 32px rgba(0,0,0,.25)}
+.toast{position:absolute;left:18px;right:18px;top:50px;z-index:5;background:var(--paper);border-radius:12px;padding:13px 15px;display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.dlg{position:absolute;left:30px;right:30px;top:240px;z-index:5;background:var(--paper);border-radius:16px;padding:24px 20px 20px;text-align:center;box-shadow:0 12px 32px rgba(0,0,0,.25)}
 .dlg h4{font-size:17px}.warn{width:42px;height:42px;border-radius:21px;background:#E8B04A;font-weight:800;font-size:22px;display:flex;align-items:center;justify-content:center;margin:14px auto 12px}
 .dlg p{font-size:14px;line-height:1.55;color:#4A504D}
 .dlg .cta{margin:16px 0 0;width:100%}
-.done{position:absolute;left:0;right:0;top:168px;bottom:0;background:var(--paper);border-radius:22px 22px 0 0;padding:60px 28px;text-align:center}
-.done .ok{width:56px;height:56px;border-radius:28px;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:26px}
-.done h3{font-size:20px}.done p{font-size:14px;color:var(--mute);margin-top:8px;line-height:1.5}
-.done .cta{width:100%;margin:28px 0 0}
+.otp{display:flex;gap:8px;justify-content:center;margin:22px 22px 0}
+.otp input{width:44px;height:52px;text-align:center;font-size:20px;border:1px solid var(--line);border-radius:10px;font-family:inherit;outline:0;background:#fff}
+.otp input:focus{border-color:var(--ink)}
+.done{padding:34px 24px 0;text-align:center}
+.done .okc{width:56px;height:56px;border-radius:28px;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:26px}
+.done h3{font-size:20px}.done p{font-size:13.5px;color:var(--mute);margin-top:8px;line-height:1.55}
+.cred{margin:18px 0 0;border:1px solid var(--line);border-radius:12px;background:#fff;text-align:left;display:flex;overflow:hidden}
+.cred .rows{flex:1;min-width:0}
+.cred .row{display:flex;align-items:center;padding:12px 14px;gap:12px}
+.cred .row+.row{border-top:1px solid #EEE9DF}
+.cred small{flex:none;width:68px;font-size:12px;color:var(--mute)}
+.cred b{font-family:"DM Mono",monospace;font-size:15px;font-weight:500;letter-spacing:.04em;word-break:break-all}
+.cred .cp{flex:none;width:56px;border:0;border-left:1px solid #EEE9DF;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.cred .cp:hover{background:#F6F3EC}
+.cred .cp.ok svg{stroke:#2E7D4F}
+.done p.copied{font-size:12px;color:#2E7D4F;margin-top:8px;min-height:16px;text-align:left}
+.done .cta{width:100%;margin:22px 0 0}
 .done .sec{background:transparent;color:var(--ink);border:1.5px solid var(--ink);margin-top:12px}
 /* panel */
-.panel{width:400px;flex:none;display:flex;flex-direction:column;gap:20px}
+.panel{width:420px;flex:none;display:flex;flex-direction:column;gap:18px}
 .panel h1{font-family:"Noto Serif TC",serif;font-size:26px;line-height:1.35}
 .panel .lede{font-size:14.5px;line-height:1.7;color:var(--soft)}
-.card{background:var(--paper);border:1px solid #C9C3B4;border-radius:12px;padding:18px 18px}
+.card{background:var(--paper);border:1px solid #C9C3B4;border-radius:12px;padding:16px 18px}
 .card h2{font-family:"DM Mono",monospace;font-size:12px;letter-spacing:.14em;color:var(--acc);font-weight:500;margin-bottom:10px}
-.tries{display:flex;flex-direction:column;gap:8px}
+.seg{display:flex;background:var(--beige);border-radius:999px;padding:3px;margin-bottom:12px}
+.seg button{flex:1;border:0;background:transparent;border-radius:999px;padding:7px 0;font-size:13.5px;font-weight:600;color:var(--soft);cursor:pointer;font-family:inherit}
+.seg button.on{background:var(--ink);color:var(--paper)}
+.tries{display:flex;flex-direction:column}
+.try{width:100%;border:0;border-top:1px solid #E2DDD1;background:transparent;text-align:left;padding:10px 4px;cursor:pointer;font-family:inherit;color:var(--ink)}
+.try:first-child{border-top:0}
+.try:hover{background:#F3F0E8}
+.try .ar{flex:none;font-family:"DM Mono",monospace;font-size:13px;color:var(--acc)}
 .try{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13.5px;line-height:1.45}
-.try code{font-family:"DM Mono",monospace;font-size:12px;background:var(--beige);padding:1px 5px;border-radius:4px}
-.try button{flex:none;border:1px solid var(--ink);background:transparent;border-radius:999px;font-family:"DM Mono",monospace;font-size:11px;letter-spacing:.06em;padding:4px 10px;cursor:pointer}
-.try button:hover{background:var(--ink);color:var(--paper)}
-.log{display:flex;flex-direction:column;gap:10px;max-height:300px;overflow-y:auto}
+.try code,.note code,.acct code{font-family:"DM Mono",monospace;font-size:12px;background:var(--beige);padding:1px 5px;border-radius:4px}
+
+.log{display:flex;flex-direction:column;gap:10px;max-height:320px;overflow-y:auto}
 .log .it{font-size:13.5px;line-height:1.6;color:var(--soft);padding-left:12px;border-left:2px solid var(--acc)}
 .log .it b{color:var(--ink)}
 .log .empty{font-size:13.5px;color:var(--mute)}
-.note{font-size:12px;color:var(--mute);line-height:1.6}
-@media (max-width:900px){.wrap{flex-direction:column;align-items:center;gap:28px}.panel{width:100%;max-width:420px}}
-@media (max-width:420px){.top{padding:16px 16px 0}.wrap{padding:16px 12px 48px}.phone{width:100%;max-width:375px}.panel{max-width:none}}
-html,body{overflow-x:hidden}
+.acct{font-size:12.5px;line-height:1.9;color:var(--soft)}
+.note{font-size:12px;color:var(--mute);line-height:1.65}
+@media (max-width:920px){.wrap{flex-direction:column;align-items:center;gap:18px}
+.panel{display:contents}
+.panel>*{width:100%;max-width:440px}
+.panel h1{order:1}.panel .lede{order:2}.c-try{order:3}.phone{order:4;margin:6px 0;scroll-margin-top:12px}.c-log{order:5}.c-acct{order:6}.note{order:7}}
+@media (max-width:420px){.top{padding:16px 16px 0}.wrap{padding:16px 12px 48px}.phone{width:100%;max-width:375px}.panel>*{max-width:none}}
 </style>
 </head>
 <body>
 <div class="top">
-<a class="back" href="work01.html" id="back">← Fifi Lee</a>
-<div class="lang"><button id="lzh">中文</button><button id="len">EN</button></div>
+<a class="back" href="work01.html" id="back">←</a>
+<div class="lang"><button id="lzh" type="button">中文</button><button id="len" type="button">EN</button></div>
 </div>
 <div class="wrap">
-<div class="phone" id="phone"></div>
+<div class="phone" id="dev"></div>
 <aside class="panel">
 <h1 id="ph"></h1>
 <p class="lede" id="pl"></p>
-<div class="card"><h2 id="tt"></h2><div class="tries" id="tries"></div></div>
-<div class="card"><h2 id="lt"></h2><div class="log" id="log"></div></div>
+<div class="card c-try"><h2 id="tt"></h2><div id="tries"></div></div>
+<div class="card c-log"><h2 id="lt"></h2><div class="log" id="log"></div></div>
+<div class="card c-acct"><h2 id="at"></h2><div class="acct" id="acct"></div></div>
 <p class="note" id="nt"></p>
 </aside>
 </div>
 <script>
 (function(){
-var L='zh';try{var q=new URLSearchParams(location.search).get('lang');if(q==='en'||q==='zh')localStorage.setItem('fifi-lang',q);if(localStorage.getItem('fifi-lang')==='en')L='en';}catch(e){}
+var L='zh';try{if(new URLSearchParams(location.search).get('lang')==='en')L='en';}catch(e){}
+
+/* ---------- panel copy ---------- */
 var T={
-zh:{h:'互動 prototype：註冊與登入的規則',l:'實際操作案例 01 的四條規則：驗證時機、tab 切換、錯誤訊息順序、記住我。畫面是英文，說明區會即時解釋剛才發生了什麼。',tt:'試試看',lt:'剛才發生了什麼',empty:'在左邊的畫面輸入或切換看看。',back:'← 回到案例 01',
-note:'依實際設計重建的示意 prototype，已去識別化。欄位長度等驗證數字為示意，不是正式規格。',
-tries:[['註冊：在 Username tab 填手機號，再切到 Mobile tab','signupCarry'],['註冊：手機號只輸入幾碼，然後點下一欄','blur'],['註冊：用已註冊的手機 <code>13800000000</code> 送出','dup'],['登入：手機號輸入 <code>123</code> 就按登入','format'],['登入：輸入沒註冊過的手機號','generic'],['登入：手機號未驗證的帳號','status'],['登入：<code>13800000000</code> / <code>Demo1234</code>','ok']],fill:'帶入',
-ev:{carry:['切換 tab，手機號和推薦碼保留下來','註冊的目標是盡快完成，共用欄位切換時不清空。'],keep:['登入的兩個 tab 各自保留內容','手機和帳號是兩組不同的憑證，切換不會互相覆蓋。'],blur:['離開欄位才顯示錯誤','打字時不打斷用戶；錯誤只在 onBlur 時出現。'],cap:['超過長度上限，直接靜默截斷','onChange 只做長度上限，不跳錯誤訊息。'],dup:['送出時才檢查是否重複','唯一性需要查資料庫，所以留到送出時才檢查。'],format:['格式錯誤在前端擋下','不送出 API，提示也最精準。'],generic:['統一顯示「手機號或密碼錯誤」','不論是沒註冊、號碼錯或密碼錯，訊息都一樣，避免被拿來試探哪些號碼註冊過。'],status:['帳密正確後，才處理帳號狀態','手機號未驗證時，給用戶下一步：改用帳號登入。'],ok:['登入成功',''],rememberOff:['取消「記住我」，記住的資料立即清除','不需要送出表單，符合用戶預期，也較安全。'],remembered:['已記住這組帳密','登出後回到登入頁，會自動帶入。'],signup:['註冊完成','']}},
-en:{h:'Interactive prototype: sign-up and login rules',l:'Try the four rules from case study 01: validation timing, tab switching, error order and Remember me. The panel explains what just happened.',tt:'Try this',lt:'What just happened',empty:'Type or switch tabs on the left.',back:'← Back to case 01',
-note:'A rebuilt, de-identified prototype of the shipped design. Field lengths and other numbers are illustrative, not the production spec.',
-tries:[['Sign-up: fill a mobile number on the Username tab, then switch to Mobile','signupCarry'],['Sign-up: type a few digits, then move to the next field','blur'],['Sign-up: submit with a registered number <code>13800000000</code>','dup'],['Log in: enter <code>123</code> as the number and tap Log in','format'],['Log in: use a number that isn’t registered','generic'],['Log in: an account with an unverified number','status'],['Log in: <code>13800000000</code> / <code>Demo1234</code>','ok']],fill:'Fill',
-ev:{carry:['Tab switched; mobile and referral code carried over','Sign-up is about finishing fast, so shared fields aren’t cleared.'],keep:['Each login tab keeps its own input','Mobile and username are different credentials, so switching never overwrites the other.'],blur:['Error shown when leaving the field','Typing isn’t interrupted; errors appear on blur.'],cap:['Input silently capped at the limit','On change we only enforce the length cap, with no error.'],dup:['Uniqueness checked on submit','It needs a server lookup, so it waits for submit.'],format:['Format error caught on the front end','No API call, and the most precise hint.'],generic:['One shared “incorrect mobile number or password”','Unknown number, wrong number or wrong password look the same, so no one can probe which numbers are registered.'],status:['Account status handled only after credentials pass','An unverified number gets a way forward: log in with the username.'],ok:['Logged in',''],rememberOff:['Remember me unchecked; saved credentials cleared now','No submit needed. It matches what users expect and is safer.'],remembered:['Credentials remembered','After logging out, the login page fills them in.'],signup:['Account created','']}}};
-var REG='13800000000',UNV='13900000000',PW='Demo1234';
-var S={page:'login',su:{tab:'user',username:'',password:'',mobile:'',ref:'',bad:{}},li:{tab:'mobile',mobile:{id:'',pw:''},user:{id:'',pw:''},bad:{},rem:{mobile:false,user:false}},saved:{mobile:null,user:null},toast:null,dialog:false,log:[],shownPw:false};
-var phone=document.getElementById('phone');
+zh:{back:'← 回到案例 01',h:'互動 prototype：註冊與登入的規則',
+l:'依決策庫定案規則重建的註冊與登入。切換「註冊／登入」、點選情境即可重現，說明區會解釋剛才觸發的是哪條規則、為什麼這樣設計。',
+tt:'試試看',lt:'剛才發生了什麼',at:'示範帳號',empty:'在畫面上輸入、離開欄位或切換 tab 看看。',fill:'帶入',
+acct:'用戶名 <code>demouser</code>／密碼 <code>Demo@1234</code><br>demouser 的已驗證手機 <code>13812345678</code>／密碼 <code>Demo@1234</code><br>未驗證手機 <code>13766667777</code>／密碼 <code>Demo@1234</code><br>已有人註冊過的手機 <code>13955556666</code><br>已被使用的用戶名 <code>demouser</code>',
+note:'以品牌 A、B 在手機 11 碼市場的定案規則為準，畫面已去識別化。',
+grp:['註冊','登入'],
+tries:{su:[
+['在「Username」tab 填好手機與推薦碼，再切到「Phone」tab','carry'],
+['用戶名輸入 <code>ab</code> 後離開欄位','userBlur'],
+['密碼欄位 focus，邊打邊看規則','pwCheck'],
+['用已被使用的用戶名 <code>demouser</code> 送出','taken'],
+['用已有人註冊過的手機再註冊一次','dupPhone']],
+li:[
+['手機號輸入 <code>123</code> 後離開欄位','loginLen'],
+['密碼打錯','wrong'],
+['用未驗證的手機號登入','unverified'],
+['連續打錯 5 次','lock'],
+['勾選「Remember Login」後登入，再登出','remember']]},
+ev:{
+carry:['切換方式，共用欄位一起帶過去','手機號與推薦碼的值、驗證狀態、錯誤訊息都保留，並依新方式重新評估必填欄位。註冊的所有輸入描述的是「同一個正在建立的帳戶」。'],
+uHint:['focus 時才顯示規則 checklist','輸入中即時打勾或打叉，不打斷輸入；離開欄位時才判斷要不要報錯。'],
+blur:['離開欄位才顯示錯誤（onBlur）','打字途中不跳錯；欄位空著也不報錯。'],
+clear:['重新 focus 或開始輸入，錯誤立即清除','回到預設的提示狀態；全部刪掉則回到未填狀態。'],
+cap:['達到長度上限，直接擋住輸入','用戶名 14 碼、密碼 20 碼、手機 15 碼、推薦碼 20 碼；手打與貼上都只保留上限內的字元，不跳錯誤訊息。'],
+enable:['必填都有效時，送出鍵立即啟用','不用等離開欄位（不等 onBlur）。'],
+taken:['用戶名重複：送出後才檢查，用 toast 告知','基於安全考量，移除輸入當下的即時重複提示，避免被拿來逐一試探。'],
+dupok:['同一支手機，可以再註冊新帳號','品牌 A、B 允許一支手機對應多個帳號，註冊時不擋也不提示；代價放在登入端：手機重複就不能用手機登入。'],
+otp:['手機註冊需要 OTP 驗證','驗證成功才進入註冊成功頁。'],
+gen:['系統自動產生帳密','用戶名 6–14 碼英數（手機末 4 碼＋市場字元＋隨機字串），密碼 8 碼含大小寫與特殊字元，並排除 O I L l o i 0 1 等易混淆字元。'],
+copyBoth:['一鍵複製用戶名和密碼','複製鍵放在帳密欄位旁，一次複製兩項資訊，方便保存。品牌 B 上線後驗證，約一半用戶會使用這個按鈕。'],
+signup:['註冊完成',''],
+loginLen:['登入的手機號只在離開欄位時檢查位數','登入不套用註冊的新規則：用戶名不檢查最短長度、上限 20 碼，避免擋到舊會員。'],
+keep:['登入的兩個 tab 各自保留自己的帳密','識別碼＋密碼是一組憑證，切換時不帶到另一個 tab；切回來還原本次輸入。'],
+generic:['帳密錯誤，一律同一句 toast','手機或用戶名不存在、密碼錯誤，都顯示同一句，不透露帳號是否存在。'],
+unverified:['以手機登入，手機需唯一且已驗證','否則擋下並引導改用用戶名登入。手機號＋密碼要先正確、確認是用戶本人，才會顯示手機未驗證的提示；密碼不正確時，只會顯示帳密錯誤的同一句 toast，不透露這支手機是否存在或已驗證。'],
+lock:['同一帳號連續失敗 5 次即鎖帳','依帳號計算，用戶名與手機登入合併計算；popup 引導到帳號找回流程解鎖。不存在的帳號不計次，只顯示帳密錯誤的 toast。'],
+lockedTry:['帳號鎖定中：不論密碼對錯都顯示鎖帳 popup','鎖定看的是帳號，重設密碼成功才解鎖。'],
+forgot:['導向帳號找回流程','完整流程見作品集案例 02。'],
+recover:['導向帳號找回流程','完整流程見作品集案例 02。這裡直接視為重設密碼成功、解除鎖定，以便繼續試玩。'],
+saved:['成功登入時，才寫入記住的帳密','只存一組，新的覆蓋舊的。'],
+restore:['回到登入頁：開在記住的那個 tab，帳密已帶入','另一個 tab 維持空白、未勾選。'],
+remOff:['在記住的 tab 取消勾選，立即清除已存的帳密','不需要送出或登入；撤銷即時、授予要等驗證成功。'],
+remOther:['在另一個 tab 取消勾選，不影響已存的帳密','那個 tab 本來就沒有存任何東西。'],
+eyeClear:['點「顯示密碼」會清空帶入的密碼','拿到裝置的人可以直接登入，但讀不到密碼明文。'],
+ok:['登入成功','']}},
+en:{back:'← Back to case 01',h:'Interactive prototype: sign-up and login rules',
+l:'Sign-up and login rebuilt from the finalized rules in my decision library. Pick Sign up or Log in, then tap a scenario to replay it; the panel explains which rule just fired and why.',
+tt:'Try this',lt:'What just happened',at:'Demo accounts',empty:'Type, leave a field or switch tabs.',fill:'Fill',
+acct:'Username <code>demouser</code> / password <code>Demo@1234</code><br>demouser’s verified phone <code>13812345678</code> / password <code>Demo@1234</code><br>Unverified phone <code>13766667777</code> / password <code>Demo@1234</code><br>Phone already registered <code>13955556666</code><br>Taken username <code>demouser</code>',
+note:'Built on the finalized rules of Brands A and B, for a market with 11-digit phone numbers, de-identified.',
+grp:['Sign up','Log in'],
+tries:{su:[
+['Fill phone and referral code on the Username tab, then switch to Phone','carry'],
+['Type <code>ab</code> as the username and leave the field','userBlur'],
+['Focus the password field and watch the checklist','pwCheck'],
+['Submit with the taken username <code>demouser</code>','taken'],
+['Register again with a phone number already in use','dupPhone']],
+li:[
+['Type <code>123</code> as the phone number and leave the field','loginLen'],
+['Wrong password','wrong'],
+['An unverified phone number','unverified'],
+['Get it wrong 5 times in a row','lock'],
+['Check “Remember Login”, log in, then log out','remember']]},
+ev:{
+carry:['Method switched; shared fields came along','Phone and referral code keep their values, validation state and error messages, and required fields are re-evaluated. Everything on sign-up describes the one account being created.'],
+uHint:['The rule checklist shows only while focused','It ticks as you type without interrupting; the error decision waits until you leave the field.'],
+blur:['Errors appear when leaving the field (on blur)','Nothing fires mid-typing, and an empty field never shows an error.'],
+clear:['Re-focus or typing clears the error at once','The field returns to its default hint; deleting everything returns it to unfilled.'],
+cap:['Input stops at the length cap','Username 14, password 20, phone 15, referral code 20. Typed or pasted, extra characters are dropped with no error.'],
+enable:['Submit turns on as soon as required fields are valid','No need to leave the field first.'],
+taken:['Duplicate username: checked after submit, shown as a toast','The real-time duplicate hint was removed for security, so it can’t be used to probe usernames.'],
+dupok:['The same phone number can register another account','Brands A and B allow one phone for many accounts, with no block or message at sign-up. The cost moves to login: a shared number can’t be used to log in.'],
+otp:['Phone sign-up needs OTP verification','The success page appears only after OTP passes.'],
+gen:['Credentials generated by the system','Username: 6–14 letters/digits (last 4 digits + market character + random string). Password: 8 characters with upper, lower and special. Look-alikes such as O I L l o i 0 1 are excluded.'],
+copyBoth:['One tap copies username and password','The copy button sits beside the credentials and copies both at once, so they’re easy to save. Validated after launch on Brand B: about half of users tap it.'],
+signup:['Account created',''],
+loginLen:['On login, phone length is checked only on blur','Login doesn’t adopt the new sign-up rules: no minimum username length and a 20-character cap, so existing members aren’t locked out.'],
+keep:['Each login tab keeps its own credentials','Identifier + password are one pair, never carried to the other tab; switching back restores what you typed.'],
+generic:['Wrong credentials: always the same toast','Unknown phone, unknown username or wrong password all read the same, revealing nothing about which accounts exist.'],
+unverified:['Phone login needs a unique, verified number','Otherwise it’s blocked, with a way forward: log in with the username. The unverified-phone message appears only after phone number and password are both correct, so we know it’s the real user. With a wrong password, only the shared “incorrect” toast shows, revealing nothing about whether the number exists or is verified.'],
+lock:['Five failures in a row lock that account','Counted per account, with username and phone attempts combined; the popup leads to account recovery. Unknown accounts aren’t counted and only get the shared “incorrect” toast.'],
+lockedTry:['Account locked: the popup shows whether or not the password is right','The lock belongs to the account; only a successful password reset unlocks it.'],
+forgot:['Leads to account recovery','See case study 02 for that flow.'],
+recover:['Leads to account recovery','See case study 02 for that flow. Here it counts as a successful password reset, so the account unlocks and you can keep trying.'],
+saved:['Credentials are stored only on a successful login','One set only; a new one replaces the old.'],
+restore:['Back on login: it opens the remembered tab, pre-filled','The other tab stays empty and unchecked.'],
+remOff:['Unchecked on the remembered tab: stored credentials cleared now','No submit or login needed. Revoke immediately; grant only after a verified login.'],
+remOther:['Unchecking on the other tab changes nothing','That tab never held stored credentials.'],
+eyeClear:['“Show password” clears a pre-filled password','Whoever holds the device can still log in, but can never read the password.'],
+ok:['Logged in','']}}};
+
+/* ---------- data ---------- */
+var PW='Demo@1234', TAKEN='demouser';
+/* accounts: phone entries point to the owning username, so failed attempts and locks are per account */
+var ACC={user:{demouser:{pw:PW},member77:{pw:PW}},phone:{'13812345678':{owner:'demouser',verified:true,unique:true},'13766667777':{owner:'member77',verified:false,unique:true}}};
+function phoneUsed(ph){return ph===DUP_PHONE||!!ACC.phone[ph];}
+function addAcct(name,pw,ph,verified){ACC.user[name.toLowerCase()]={pw:pw};if(ph&&!phoneUsed(ph))ACC.phone[ph]={owner:name.toLowerCase(),verified:verified,unique:true};}
+var DUP_PHONE='13955556666';
+var phoneEl=document.getElementById("dev");
+var S;
+function fresh(){return {page:'login',su:{tab:'phone',v:{username:'',password:'',phone:'',ref:''},err:{},refOpen:false,done:{}},li:null,stored:null,fails:{},locked:{},log:(S&&S.log)||[],gen:null,signupKind:'',shown:false};}
+S=fresh();
 function t(){return T[L];}
-function logEv(k){var e=t().ev[k];if(!e)return;S.log.unshift(k);if(S.log.length>12)S.log.pop();drawLog();}
+
+/* ---------- panel ---------- */
+/* one user action = one group of related rules; a new action replaces the list */
+var ACT=0,LACT=-1;
+document.addEventListener('pointerdown',function(){ACT++;},true);
+document.addEventListener('keydown',function(){ACT++;},true);
+function logEv(k){if(!t().ev[k])return;if(LACT!==ACT){S.log=[];LACT=ACT;}if(S.log.indexOf(k)>=0)return;S.log.push(k);drawLog();}
 function drawLog(){var el=document.getElementById('log');if(!S.log.length){el.innerHTML='<p class="empty">'+t().empty+'</p>';return;}el.innerHTML=S.log.map(function(k){var e=t().ev[k];return '<div class="it"><b>'+e[0]+'</b>'+(e[1]?'<br>'+e[1]:'')+'</div>';}).join('');}
-function panel(){document.documentElement.lang=L==='en'?'en':'zh-Hant';document.getElementById('ph').textContent=t().h;document.getElementById('pl').textContent=t().l;document.getElementById('tt').textContent=t().tt;document.getElementById('lt').textContent=t().lt;document.getElementById('nt').textContent=t().note;document.getElementById('back').textContent=t().back;
+function panel(){document.documentElement.lang=L==='en'?'en':'zh-Hant';
+['ph','pl','tt','lt','at','nt'].forEach(function(id){});
+document.getElementById('ph').textContent=t().h;document.getElementById('pl').textContent=t().l;document.getElementById('tt').textContent=t().tt;document.getElementById('lt').textContent=t().lt;document.getElementById('at').textContent=t().at;document.getElementById('acct').innerHTML=t().acct;document.getElementById('nt').textContent=t().note;var bk=document.getElementById('back');bk.textContent=t().back;bk.href='https://heather45681.github.io/portfolio2026/work01.html?lang='+L;if(!/github\.io$/.test(location.hostname))bk.target='_blank';
 document.getElementById('lzh').className=L==='zh'?'on':'';document.getElementById('len').className=L==='en'?'on':'';
-document.getElementById('tries').innerHTML=t().tries.map(function(x){return '<div class="try"><span>'+x[0]+'</span><button data-k="'+x[1]+'">'+t().fill+'</button></div>';}).join('');
-document.querySelectorAll('.try button').forEach(function(b){b.onclick=function(){fill(b.getAttribute('data-k'));};});drawLog();}
-function setL(x){L=x;try{localStorage.setItem('fifi-lang',x);}catch(e){}panel();}
+drawTries();drawLog();}
+var G='li';
+function curG(){return (S.page==='signup'||S.page==='otp'||(S.page==='done'&&S.signupKind))?'su':'li';}
+function drawTries(){G=curG();var el=document.getElementById('tries');
+ el.innerHTML='<div class="seg"><button type="button" data-g="su" class="'+(G==='su'?'on':'')+'">'+t().grp[0]+'</button><button type="button" data-g="li" class="'+(G==='li'?'on':'')+'">'+t().grp[1]+'</button></div>'+
+ '<div class="tries">'+t().tries[G].map(function(x){return '<button type="button" class="try" data-k="'+x[1]+'"><span>'+x[0]+'</span><span class="ar">→</span></button>';}).join('')+'</div>';
+ el.querySelectorAll('[data-g]').forEach(function(b){b.onclick=function(){var g=b.getAttribute('data-g');if(g===G)return;if(g==='su'){S.page='signup';render();}else enterLogin();};});
+ el.querySelectorAll('.try').forEach(function(b){b.onclick=function(){fill(b.getAttribute('data-k'));};});}
+function setL(x){L=x;panel();}
 document.getElementById('lzh').onclick=function(){setL('zh');};document.getElementById('len').onclick=function(){setL('en');};
+
+/* ---------- rules ---------- */
+var RU={
+username:{max:14,ph:'Username',icon:'user',check:function(v){return /^[A-Za-z0-9]{6,14}$/.test(v);},msg:'Invalid username format.',
+ list:function(v){return [[v.length>=6&&v.length<=14,'Username must be 6 to 14 characters'],[v.length>0&&/^[A-Za-z0-9]*$/.test(v),'Only letters A–Z, a–z and digits 0–9 are allowed']];}},
+password:{max:20,ph:'Password',icon:'lock',pw:1,check:function(v){return v.length>=8&&v.length<=20&&/[A-Z]/.test(v)&&/[a-z]/.test(v)&&/[^A-Za-z0-9 .]/.test(v);},msg:'Invalid password format.',
+ list:function(v){return [[v.length>=8&&v.length<=20,'Password must be 8 to 20 characters'],[/[A-Z]/.test(v)&&/[a-z]/.test(v),'Must include at least one uppercase (A–Z) and one lowercase letter (a–z)'],[/[^A-Za-z0-9 .]/.test(v),'Must include at least one special character (spaces and periods excluded)']];}},
+phone:{max:15,ph:'Phone number',icon:'phone',num:1,check:function(v){return /^\d{11}$/.test(v);},msg:'The valid mobile phone number must be 11 digits',hint:'Please ensure the phone number entered is correct to receive rewards smoothly'},
+ref:{max:20,ph:'Referral code',icon:'ref',check:function(v){return v===''||/^\d{6}$/.test(v);},msg:'Invalid referral code format',hint:'Enter referral code (6 digits, e.g. 100003)'}};
+var RL={
+uid:{max:20,ph:'Username',icon:'user',check:function(){return true;}},
+pid:{max:15,ph:'Phone number',icon:'phone',num:1,check:function(v){return /^\d{11}$/.test(v);},msg:'The valid mobile phone number must be 11 digits'},
+pw:{max:20,ph:'Password',icon:'lock',pw:1,check:function(){return true;}}};
+
+/* ---------- ui helpers ---------- */
 var ic={user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',phone:'<rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18h2"/>',ref:'<rect x="3" y="7" width="12" height="12" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2"/>'};
 function svg(k){return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8E938F" stroke-width="1.6">'+ic[k]+'</svg>';}
+var eyeSvg='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8E938F" stroke-width="1.6" stroke-linecap="round"><path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z"/><circle cx="12" cy="12" r="2.5"/></svg>';
+var copySvg='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F2427" stroke-width="1.6" stroke-linejoin="round"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h2"/><path d="M11 12.5h6M11 16h6"/></svg>';
+var eyeOffSvg='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8E938F" stroke-width="1.6" stroke-linecap="round"><path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z"/><circle cx="12" cy="12" r="2.5"/><path d="M4 4l16 16"/></svg>';
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
-function field(id,icon,ph,val,opt){opt=opt||{};return '<div class="fld" id="f-'+id+'"><div class="box">'+svg(icon)+'<input id="'+id+'" placeholder="'+ph+'" value="'+esc(val)+'" '+(opt.type?'type="'+opt.type+'"':'')+' '+(opt.mode?'inputmode="'+opt.mode+'"':'')+' maxlength="'+(opt.max||40)+'" autocomplete="off">'+(opt.eye?'<button class="eye" type="button" data-eye="'+id+'" aria-label="Show password"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8E938F" stroke-width="1.6" stroke-linecap="round"><path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z"/><circle cx="12" cy="12" r="2.5"/></svg></button>':'')+'</div><div class="msg"></div></div>';}
-var status='<div class="island"></div><div class="status"><span>9:41</span><span style="display:flex;gap:5px;align-items:center"><i style="width:3px;height:6px;background:#1F2427;display:inline-block"></i><i style="width:3px;height:8px;background:#1F2427;display:inline-block"></i><i style="width:3px;height:10px;background:#1F2427;display:inline-block"></i><span style="width:22px;height:11px;border:1.5px solid #1F2427;border-radius:3px;margin-left:4px"></span></span></div>';
-var hdr='<div class="hdr"><svg width="375" height="170" viewBox="0 0 375 170"><circle cx="305" cy="85" r="66" fill="#A8482F" opacity=".9"/><rect x="225" y="100" width="116" height="100" rx="22" fill="#1F2427"/><circle cx="232" cy="48" r="19" fill="#FBF9F4"/></svg><span class="brand">BRAND A</span></div>';
-var RULES={username:{max:16,check:function(v){return /^[A-Za-z][A-Za-z0-9]{5,15}$/.test(v)?'':'Use 6–16 letters or numbers, starting with a letter';}},password:{max:20,check:function(v){return (v.length>=8&&/[A-Za-z]/.test(v)&&/\d/.test(v))?'':'Use 8–20 characters with letters and numbers';}},mobile:{max:11,check:function(v){return /^\d{11}$/.test(v)?'':'Enter a valid 11-digit mobile number';}},ref:{max:8,check:function(){return '';}}};
-function setErr(id,msg){var f=document.getElementById('f-'+id);if(!f)return;f.classList.toggle('bad',!!msg);f.querySelector('.msg').textContent=msg||'';}
-function render(){S.toast=null;S.dialog=false;
-if(S.page==='signup'){var s=S.su,u=s.tab==='user';
-phone.innerHTML=status+hdr+'<div class="sheet"><div class="title">Sign up</div><div class="tabs"><button class="tab'+(u?' on':'')+'" data-tab="user">Username</button><button class="tab'+(!u?' on':'')+'" data-tab="mobile">Mobile</button></div>'+
-(u?field('username','user','Username',s.username,{max:16})+field('password','lock','Password',s.password,{type:S.shownPw?'text':'password',max:20,eye:1}):'')+
-field('mobile','phone','Mobile number',s.mobile,{mode:'numeric',max:11})+'<button class="reflab" type="button">Referral code (optional)</button>'+field('ref','ref','Referral code',s.ref,{max:8})+
-'<p class="terms">By tapping Sign up, you confirm you meet the age requirement and accept our <b>Terms</b>.</p><button class="cta" id="go">Sign up</button><p class="alt">Have an account? <button data-page="login">Log in</button></p></div>';
-['username','password','mobile','ref'].forEach(function(k){var el=document.getElementById(k);if(!el)return;
-el.oninput=function(){var v=el.value;if(k==='mobile'){var d=v.replace(/\D/g,'');if(d!==v){el.value=d;v=d;}}if(v.length>=RULES[k].max&&s[k].length<RULES[k].max)logEv('cap');s[k]=v;if(s.bad[k]){var m=RULES[k].check(v);if(!m){s.bad[k]=false;setErr(k,'');}}};
-el.onblur=function(){if(!s[k])return;var m=RULES[k].check(s[k]);if(m){s.bad[k]=true;setErr(k,m);logEv('blur');}};
-if(s.bad[k])setErr(k,RULES[k].check(s[k])||s.badMsg&&s.badMsg[k]||'');});
-document.getElementById('go').onclick=function(){var need=u?['username','password','mobile']:['mobile'],first='';need.forEach(function(k){var m=s[k]?RULES[k].check(s[k]):'Required';if(m){s.bad[k]=true;setErr(k,m);}});
-if(need.some(function(k){return s.bad[k]||!s[k];}))return;
-if(s.mobile===REG||s.mobile===UNV){s.bad.mobile=true;setErr('mobile','This mobile number is already registered');logEv('dup');return;}
-if(u&&s.username.toLowerCase()==='demouser'){s.bad.username=true;setErr('username','This username is taken');logEv('dup');return;}
-logEv('signup');S.page='done';S.doneKind='signup';render();};
-}else if(S.page==='login'){var l=S.li,m=l.tab==='mobile',c=l[l.tab];
-phone.innerHTML=status+hdr+'<div class="sheet"><div class="title">Log in</div><div class="tabs"><button class="tab'+(!m?' on':'')+'" data-tab="user">Username</button><button class="tab'+(m?' on':'')+'" data-tab="mobile">Mobile</button></div>'+
-field('lid',m?'phone':'user',m?'Mobile number':'Username',c.id,{mode:m?'numeric':'',max:m?11:16})+field('lpw','lock','Password',c.pw,{type:S.shownPw?'text':'password',max:20,eye:1})+
-'<div class="rem"><label><input type="checkbox" id="rem" '+(l.rem[l.tab]?'checked':'')+'>Remember me</label><span class="link">Forgot login details?</span></div><button class="cta" id="go">Log in</button><p class="alt">No account yet? <button data-page="signup">Sign up</button></p></div>';
-var idEl=document.getElementById('lid'),pwEl=document.getElementById('lpw');
-idEl.oninput=function(){var v=idEl.value;if(m){var d=v.replace(/\D/g,'');if(d!==v){idEl.value=d;v=d;}}c.id=v;if(l.bad.lid){l.bad.lid=false;setErr('lid','');}};
-pwEl.oninput=function(){c.pw=pwEl.value;if(l.bad.lpw){l.bad.lpw=false;setErr('lpw','');}};
-idEl.onblur=function(){if(m&&c.id&&!/^\d{11}$/.test(c.id)){l.bad.lid=true;setErr('lid','Enter a valid 11-digit mobile number');logEv('blur');}};
-document.getElementById('rem').onchange=function(e){l.rem[l.tab]=e.target.checked;if(!e.target.checked&&S.saved[l.tab]){S.saved[l.tab]=null;c.id='';c.pw='';idEl.value='';pwEl.value='';logEv('rememberOff');}};
-document.getElementById('go').onclick=function(){var bad=false;
-if(!c.id){l.bad.lid=true;setErr('lid',m?'Enter your mobile number':'Enter your username');bad=true;}else if(m&&!/^\d{11}$/.test(c.id)){l.bad.lid=true;setErr('lid','Enter a valid 11-digit mobile number');bad=true;}
-if(!c.pw){l.bad.lpw=true;setErr('lpw','Enter your password');bad=true;}
-if(bad){logEv('format');return;}
-var okM=m&&c.id===REG&&c.pw===PW, okU=!m&&c.id.toLowerCase()==='demouser'&&c.pw===PW, unv=m&&c.id===UNV&&c.pw===PW;
-if(unv){showDialog();logEv('status');return;}
-if(okM||okU){if(l.rem[l.tab]){S.saved[l.tab]={id:c.id,pw:c.pw};logEv('remembered');}logEv('ok');S.page='done';S.doneKind='login';render();return;}
-showToast(m?'Incorrect mobile number or password. Please try again.':'Incorrect username or password. Please try again.');logEv('generic');};
-}else{phone.innerHTML=status+hdr+'<div class="done"><div class="ok">✓</div><h3>'+(S.doneKind==='signup'?'Account created':'You’re logged in')+'</h3><p>'+(S.doneKind==='signup'?'Welcome aboard. This is where onboarding would continue.':'Log out to try another scenario.')+'</p><button class="cta" id="out">'+(S.doneKind==='signup'?'Go to log in':'Log out')+'</button><button class="cta sec" id="reset">Start over</button></div>';
-document.getElementById('out').onclick=function(){var l=S.li;['mobile','user'].forEach(function(k){if(S.saved[k]){l[k].id=S.saved[k].id;l[k].pw=S.saved[k].pw;}else{l[k].pw='';}});S.page='login';render();};
-document.getElementById('reset').onclick=reset;}
-phone.querySelectorAll('[data-tab]').forEach(function(b){b.onclick=function(){var k=b.getAttribute('data-tab');if(S.page==='signup'){if(S.su.tab===k)return;S.su.tab=k;S.su.bad={};render();if(S.su.mobile||S.su.ref)logEv('carry');}else{if(S.li.tab===k)return;S.li.tab=k;S.li.bad={};render();if(S.li.mobile.id||S.li.user.id)logEv('keep');}};});
-phone.querySelectorAll('[data-page]').forEach(function(b){b.onclick=function(){S.page=b.getAttribute('data-page');render();};});
-phone.querySelectorAll('[data-eye]').forEach(function(b){b.onclick=function(){S.shownPw=!S.shownPw;var i=document.getElementById(b.getAttribute('data-eye'));i.type=S.shownPw?'text':'password';};});}
-function showToast(msg){clearOverlays();var d=document.createElement('div');d.className='toast';d.setAttribute('role','alert');d.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B3261E" stroke-width="2" style="flex:none"><circle cx="12" cy="12" r="9.5"/><path d="M9 9l6 6M15 9l-6 6" stroke-linecap="round"/></svg><span>'+msg+'</span>';phone.appendChild(d);setTimeout(function(){if(d.parentNode)d.remove();},2600);}
-function showDialog(){clearOverlays();var dim=document.createElement('div');dim.className='dim';var d=document.createElement('div');d.className='dlg';d.setAttribute('role','dialog');d.innerHTML='<h4>Can\'t log in with mobile number</h4><div class="warn">!</div><p>Your mobile number hasn\'t been verified yet. Please log in with your username for now.</p><button class="cta" id="touser">Log in with username</button>';phone.appendChild(dim);phone.appendChild(d);
-document.getElementById('touser').onclick=function(){S.li.tab='user';S.li.bad={};render();};dim.onclick=function(){dim.remove();d.remove();};}
-function clearOverlays(){phone.querySelectorAll('.toast,.dlg,.dim').forEach(function(n){n.remove();});}
-function reset(){var lg=S.log;S={page:'login',su:{tab:'user',username:'',password:'',mobile:'',ref:'',bad:{}},li:{tab:'mobile',mobile:{id:'',pw:''},user:{id:'',pw:''},bad:{},rem:{mobile:false,user:false}},saved:{mobile:null,user:null},log:lg,shownPw:false};render();}
-function fill(k){var s=S.su,l=S.li;
-if(k==='signupCarry'){S.page='signup';s.tab='user';s.username='fifi2048';s.password='Design2026';s.mobile='13712345678';s.ref='A1B2C3';s.bad={};render();setTimeout(function(){var b=phone.querySelector('[data-tab="mobile"]');b&&b.focus();},50);}
-else if(k==='blur'){S.page='signup';s.tab='mobile';s.mobile='1371';s.bad={};render();var e=document.getElementById('mobile');e.focus();setTimeout(function(){document.getElementById('ref').focus();},350);}
-else if(k==='dup'){S.page='signup';s.tab='mobile';s.mobile=REG;s.ref='';s.bad={};render();setTimeout(function(){document.getElementById('go').click();},300);}
-else if(k==='format'){S.page='login';l.tab='mobile';l.mobile={id:'123',pw:'Demo1234'};l.bad={};render();setTimeout(function(){document.getElementById('go').click();},300);}
-else if(k==='generic'){S.page='login';l.tab='mobile';l.mobile={id:'13755550000',pw:'Demo1234'};l.bad={};render();setTimeout(function(){document.getElementById('go').click();},300);}
-else if(k==='status'){S.page='login';l.tab='mobile';l.mobile={id:UNV,pw:PW};l.bad={};render();setTimeout(function(){document.getElementById('go').click();},300);}
-else if(k==='ok'){S.page='login';l.tab='mobile';l.mobile={id:REG,pw:PW};l.bad={};render();}
+var statusBar='<div class="island"></div><div class="status"><span>9:41</span><span style="display:flex;gap:5px;align-items:center"><i style="width:3px;height:6px;background:#1F2427;display:inline-block"></i><i style="width:3px;height:8px;background:#1F2427;display:inline-block"></i><i style="width:3px;height:10px;background:#1F2427;display:inline-block"></i><span style="width:22px;height:11px;border:1.5px solid #1F2427;border-radius:3px;margin-left:4px"></span></span></div>';
+var hdr='<div class="hdr"><svg width="375" height="160" viewBox="0 0 375 160"><circle cx="305" cy="78" r="62" fill="#A8482F" opacity=".9"/><rect x="225" y="92" width="116" height="96" rx="22" fill="#1F2427"/><circle cx="232" cy="44" r="18" fill="#FBF9F4"/></svg><span class="brand">BRAND A</span></div>';
+function fieldHTML(id,r,val,opt){opt=opt||{};return '<div class="fld" id="f-'+id+'"><div class="box">'+svg(r.icon)+'<input id="'+id+'" placeholder="'+r.ph+'" value="'+esc(val)+'" maxlength="'+r.max+'" '+(r.pw?'type="'+(opt.show?'text':'password')+'"':'type="text"')+' '+(r.num?'inputmode="numeric"':'')+' autocomplete="off" spellcheck="false">'+(r.pw?'<button class="eye" type="button" data-eye="'+id+'" aria-label="'+(opt.show?'Hide password':'Show password')+'">'+(opt.show?eyeSvg:eyeOffSvg)+'</button>':'')+'</div><div class="belowwrap"></div></div>';}
+function belowHTML(r,val,focused,err){
+ if(focused){ if(r.list){return '<div class="chk">'+r.list(val).map(function(x){var st=val.length?(x[0]?'pass':'fail'):'';return '<span class="'+st+'"><i>'+(val.length?(x[0]?'✓':'×'):'•')+'</i>'+x[1]+'</span>';}).join('')+'</div>';}
+  if(r.hint)return '<p class="below hint">'+r.hint+'</p>'; return '';}
+ if(err)return '<p class="below err">'+err+'</p>'; return '';}
+function paint(id,r,val,focused,err){var f=document.getElementById('f-'+id);if(!f)return;f.classList.toggle('foc',!!focused);f.classList.toggle('bad',!!err&&!focused);f.querySelector('.belowwrap').innerHTML=belowHTML(r,val,focused,err);}
+function wire(id,r,get,set,errObj,onChange){var el=document.getElementById(id);if(!el)return;
+ var focused=false;
+ el.addEventListener('beforeinput',function(e){if(e.inputType&&e.inputType.indexOf('insert')===0&&el.value.length>=r.max&&el.selectionStart===el.selectionEnd)logEv('cap');});
+ el.addEventListener('paste',function(e){var txt=(e.clipboardData||window.clipboardData).getData('text')||'';if(el.value.length+txt.length>r.max)setTimeout(function(){logEv('cap');},0);});
+ el.addEventListener('focus',function(){focused=true;if(errObj[id]){errObj[id]='';logEv('clear');}paint(id,r,get(),true,'');if(r.list)logEv('uHint');});
+ el.addEventListener('input',function(){var v=el.value;if(r.num){var d=v.replace(/\D/g,'');if(d!==v){el.value=d;v=d;}}if(v.length>r.max){v=v.slice(0,r.max);el.value=v;}set(v);errObj[id]='';paint(id,r,v,true,'');onChange&&onChange();});
+ el.addEventListener('blur',function(){focused=false;var v=get();if(v&&!r.check(v)&&r.msg){errObj[id]=r.msg;logEv(S.page==='login'?'loginLen':'blur');}paint(id,r,v,false,errObj[id]);onChange&&onChange();});
+ paint(id,r,get(),false,errObj[id]);}
+function clearOverlays(){phoneEl.querySelectorAll('.toast,.dlg,.dim').forEach(function(n){n.remove();});}
+function showToast(msg){clearOverlays();var d=document.createElement('div');d.className='toast';d.setAttribute('role','alert');d.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B3261E" stroke-width="2" style="flex:none"><circle cx="12" cy="12" r="9.5"/><path d="M9 9l6 6M15 9l-6 6" stroke-linecap="round"/></svg><span>'+msg+'</span>';phoneEl.appendChild(d);setTimeout(function(){if(d.parentNode)d.remove();},2800);}
+function showDialog(title,body,cta,fn){clearOverlays();var dim=document.createElement('div');dim.className='dim';var d=document.createElement('div');d.className='dlg';d.setAttribute('role','dialog');d.innerHTML='<h4>'+title+'</h4><div class="warn">!</div><p>'+body+'</p><button class="cta" type="button" id="dlgcta">'+cta+'</button>';phoneEl.appendChild(dim);phoneEl.appendChild(d);document.getElementById('dlgcta').onclick=function(){clearOverlays();fn();};}
+
+/* ---------- sign-up ---------- */
+function suRequired(){return S.su.tab==='user'?['username','password','phone']:['phone'];}
+function suValid(){var s=S.su;var ok=suRequired().every(function(k){return s.v[k]&&RU[k].check(s.v[k])&&!s.err[k];});return ok&&!s.err.ref&&RU.ref.check(s.v.ref);}
+function renderSignup(){var s=S.su,u=s.tab==='user';
+ phoneEl.innerHTML=statusBar+hdr+'<div class="sheet"><div class="title">Sign up</div><div class="tabs"><button type="button" class="tab'+(u?' on':'')+'" data-tab="user">Username</button><button type="button" class="tab'+(!u?' on':'')+'" data-tab="phone">Phone</button></div>'+
+ (u?fieldHTML('username',RU.username,s.v.username)+fieldHTML('password',RU.password,s.v.password,{show:S.shown}):'')+
+ fieldHTML('phone',RU.phone,s.v.phone)+
+ '<button type="button" class="reflab" id="reft">Referral code (optional) <span>'+(s.refOpen?'▴':'▾')+'</span></button>'+(s.refOpen?fieldHTML('ref',RU.ref,s.v.ref):(s.err.ref?'<p class="below err" style="margin:6px 22px 0">'+s.err.ref+'</p>':''))+
+ '<p class="terms">By tapping Sign up, you accept our <b>Terms</b>.</p><button type="button" class="cta" id="go">Sign up</button><p class="alt">Have an account? <button type="button" data-goto="login">Log in</button></p></div>';
+ var go=document.getElementById('go');var was=suValid();
+ function upd(){var v=suValid();go.disabled=!v;if(v&&!was)logEv('enable');was=v;}
+ ['username','password','phone','ref'].forEach(function(k){wire(k,RU[k],function(){return s.v[k];},function(v){s.v[k]=v;},s.err,upd);});
+ go.disabled=!suValid();
+ document.getElementById('reft').onclick=function(){s.refOpen=!s.refOpen;renderSignup();};
+ go.onclick=function(){if(!suValid())return;
+  if(u&&ACC.user[s.v.username.toLowerCase()]){showToast('This username is unavailable. Please try a different one.');logEv('taken');return;}
+  var dup=phoneUsed(s.v.phone);
+  if(u){addAcct(s.v.username,s.v.password,s.v.phone,false);S.signupKind='user';S.page='done';render();logEv('signup');}else{S.page='otp';render();logEv('otp');}
+  if(dup)logEv('dupok');};
+ bindCommon();}
+function renderOtp(){phoneEl.innerHTML=statusBar+hdr+'<div class="sheet"><div class="title">Verify your phone</div><p class="sub">Enter the 6-digit code sent to '+esc(S.su.v.phone)+'</p><div class="otp">'+[0,1,2,3,4,5].map(function(i){return '<input inputmode="numeric" maxlength="1" data-i="'+i+'" aria-label="Digit '+(i+1)+'">';}).join('')+'</div><button type="button" class="cta" id="vf" disabled>Verify</button><p class="alt"><button type="button" data-goto="signup">Back</button></p></div>';
+ var ins=[].slice.call(phoneEl.querySelectorAll('.otp input')),vf=document.getElementById('vf');
+ ins.forEach(function(el,i){el.oninput=function(){el.value=el.value.replace(/\D/g,'').slice(0,1);if(el.value&&ins[i+1])ins[i+1].focus();vf.disabled=!ins.every(function(x){return x.value;});};el.onkeydown=function(e){if(e.key==='Backspace'&&!el.value&&ins[i-1])ins[i-1].focus();};});
+ ins[0].focus();vf.onclick=function(){S.gen=genCreds(S.su.v.phone);addAcct(S.gen.u,S.gen.p,S.su.v.phone,true);S.signupKind='phone';S.page='done';render();logEv('gen');};bindCommon();}
+function rnd(set,n){var o='';for(var i=0;i<n;i++)o+=set[Math.floor(Math.random()*set.length)];return o;}
+function genCreds(ph){var A='abcdefghjkmnpqrstuvwxyz23456789',U='ABCDEFGHJKMNPQRSTUVWXYZ',Lw='abcdefghjkmnpqrstuvwxyz',D='23456789',SP='!@#$%^&*';
+ var uname=ph.slice(-4)+'m'+rnd(A,5);var p=[rnd(U,2),rnd(Lw,3),rnd(D,2),rnd(SP,1)].join('').split('');p.sort(function(){return Math.random()-.5;});return {u:uname,p:p.join('')};}
+
+/* ---------- login ---------- */
+function enterLogin(){var st=S.stored;S.li={tab:st?st.method:'user',user:{id:'',pw:'',chk:false,pre:false},phone:{id:'',pw:'',chk:false,pre:false},err:{}};
+ if(st){var c=S.li[st.method];c.id=st.id;c.pw=st.pw;c.chk=true;c.pre=true;}S.page='login';S.shown=false;render();if(st)logEv('restore');}
+function renderLogin(){var l=S.li,isP=l.tab==='phone',c=l[l.tab],idK=isP?'pid':'uid';
+ phoneEl.innerHTML=statusBar+hdr+'<div class="sheet"><div class="title">Log in</div><div class="tabs"><button type="button" class="tab'+(!isP?' on':'')+'" data-tab="user">Username</button><button type="button" class="tab'+(isP?' on':'')+'" data-tab="phone">Phone</button></div>'+
+ fieldHTML(idK,RL[idK],c.id)+fieldHTML('pw',RL.pw,c.pw,{show:S.shown&&!c.pre})+
+ '<div class="rem"><label><input type="checkbox" id="rem" '+(c.chk?'checked':'')+'>Remember Login</label><button type="button" class="link" id="forgot">Forgot Login Credentials?</button></div><button type="button" class="cta" id="go">Log in</button><p class="alt">No account yet? <button type="button" data-goto="signup">Sign up</button></p></div>';
+ var go=document.getElementById('go');function upd(){go.disabled=!(c.id&&c.pw&&!l.err[idK]);}
+ wire(idK,RL[idK],function(){return c.id;},function(v){c.id=v;},l.err,upd);
+ wire('pw',RL.pw,function(){return c.pw;},function(v){c.pw=v;c.pre=false;},l.err,upd);upd();
+ document.getElementById('forgot').onclick=function(){logEv('forgot');};
+ document.getElementById('rem').onchange=function(e){c.chk=e.target.checked;if(!c.chk){if(S.stored&&S.stored.method===l.tab){S.stored=null;logEv('remOff');}else logEv('remOther');}};
+ go.onclick=function(){if(go.disabled)return;
+  var a=isP?ACC.phone[c.id]:null,owner=isP?(a&&a.owner):(ACC.user[c.id.toLowerCase()]?c.id.toLowerCase():null);
+  function lockDlg(){showDialog('Too many attempts','You’ve reached the maximum number of attempts.','Recover username or password',function(){S.locked[owner]=false;S.fails[owner]=0;logEv('recover');renderLogin();});}
+  function bad(){showToast(isP?'Phone number or password is incorrect. Please try again.':'Username or password incorrect, Please try again');logEv('generic');}
+  if(owner&&S.locked[owner]){logEv('lockedTry');lockDlg();return;}
+  if(!owner){bad();return;}
+  if(ACC.user[owner].pw!==c.pw){S.fails[owner]=(S.fails[owner]||0)+1;if(S.fails[owner]>=5){S.locked[owner]=true;logEv('lock');lockDlg();return;}bad();return;}
+  if(isP&&(!a.verified||!a.unique)){logEv('unverified');showDialog('Can’t log in with phone number','Your phone number hasn’t been verified yet, so you can’t log in with it for now. Please log in with your username.','Log in with username',function(){l.tab='user';renderLogin();});return;}
+  S.fails[owner]=0;if(c.chk){S.stored={method:l.tab,id:c.id,pw:c.pw};logEv('saved');}logEv('ok');S.page='done';S.signupKind='';render();};
+ bindCommon();}
+
+/* ---------- done ---------- */
+function renderDone(){var k=S.signupKind,body;
+ if(k==='phone')body='<div class="okc">✓</div><h3>Account created</h3><p>Your login details were generated for you. Save them before you continue.</p><div class="cred"><div class="rows"><div class="row"><small>Username</small><b id="gu">'+S.gen.u+'</b></div><div class="row"><small>Password</small><b id="gp">'+esc(S.gen.p)+'</b></div></div><button type="button" class="cp" id="cpall" aria-label="Copy username and password">'+copySvg+'</button></div><p class="copied" id="cpmsg" aria-live="polite"></p><button type="button" class="cta" data-goto="login">Go to log in</button><button type="button" class="cta sec" id="reset">Start over</button>';
+ else if(k==='user')body='<div class="okc">✓</div><h3>Account created</h3><p>Welcome aboard.</p><button type="button" class="cta" data-goto="login">Go to log in</button><button type="button" class="cta sec" id="reset">Start over</button>';
+ else body='<div class="okc">✓</div><h3>You’re logged in</h3><p>Log out to try another scenario.</p><button type="button" class="cta" id="out">Log out</button><button type="button" class="cta sec" id="reset">Start over</button>';
+ phoneEl.innerHTML=statusBar+hdr+'<div class="sheet"><div class="done">'+body+'</div></div>';
+ var out=document.getElementById('out');if(out)out.onclick=enterLogin;
+ document.getElementById('reset').onclick=function(){var lg=S.log;S=fresh();S.log=lg;enterLogin();};
+ var cp=document.getElementById('cpall');if(cp)cp.onclick=function(){var tx='Username: '+S.gen.u+'\nPassword: '+S.gen.p;try{navigator.clipboard.writeText(tx);}catch(e){}cp.classList.add('ok');document.getElementById('cpmsg').textContent='Username and password copied';logEv('copyBoth');};
+ bindCommon();}
+
+/* ---------- common ---------- */
+function bindCommon(){
+ phoneEl.querySelectorAll('[data-tab]').forEach(function(b){b.onclick=function(){var k=b.getAttribute('data-tab');clearOverlays();
+  if(S.page==='signup'){if(S.su.tab===k)return;S.su.tab=k;renderSignup();if(S.su.v.phone||S.su.v.ref)logEv('carry');}
+  else{if(S.li.tab===k)return;S.li.tab=k;renderLogin();if(S.li.user.id||S.li.phone.id)logEv('keep');}};});
+ phoneEl.querySelectorAll('[data-goto]').forEach(function(b){b.onclick=function(){var g=b.getAttribute('data-goto');if(g==='login')enterLogin();else{S.page='signup';render();}};});
+ phoneEl.querySelectorAll('[data-eye]').forEach(function(b){b.onmousedown=function(e){e.preventDefault();};b.onclick=function(){var id=b.getAttribute('data-eye'),el=document.getElementById(id);
+  if(S.page==='login'){var c=S.li[S.li.tab];if(c.pre){c.pw='';c.pre=false;el.value='';el.type='password';el.focus();logEv('eyeClear');document.getElementById('go').disabled=true;return;}}
+  var ss=el.selectionStart,se=el.selectionEnd,hadF=document.activeElement===el;S.shown=!S.shown;el.type=S.shown?'text':'password';if(hadF){var a=ss==null?el.value.length:ss,z=se==null?el.value.length:se;var fix=function(){try{el.focus();el.setSelectionRange(a,z);}catch(e){}};fix();setTimeout(fix,0);}b.innerHTML=S.shown?eyeSvg:eyeOffSvg;b.setAttribute('aria-label',S.shown?'Hide password':'Show password');};});}
+function render(){clearOverlays();if(S.page==='signup')renderSignup();else if(S.page==='otp')renderOtp();else if(S.page==='done')renderDone();else renderLogin();if(document.getElementById('tries')&&curG()!==G)drawTries();}
+
+/* ---------- scenarios ---------- */
+function later(f,ms){setTimeout(f,ms||250);}
+function typeInto(id,val){var el=document.getElementById(id);if(!el)return;el.focus();el.value=val;el.dispatchEvent(new Event('input'));}
+function fill(k){ACT++;clearOverlays();var s=S.su;
+ if(window.matchMedia&&matchMedia('(max-width:920px)').matches){try{phoneEl.scrollIntoView({behavior:'smooth',block:'start'});}catch(e){phoneEl.scrollIntoView();}}
+ if(k==='carry'){S.page='signup';s.tab='user';s.v={username:'fifi2048',password:'Design#26',phone:'13924685793',ref:'100003'};s.err={};s.refOpen=true;render();later(function(){phoneEl.querySelector('[data-tab="phone"]').click();},500);}
+ else if(k==='userBlur'){S.page='signup';s.tab='user';s.v.username='';s.err={};render();later(function(){typeInto('username','ab');later(function(){document.getElementById('username').blur();},900);});}
+ else if(k==='pwCheck'){S.page='signup';s.tab='user';s.v.password='';s.err={};render();later(function(){typeInto('password','design');});}
+ else if(k==='taken'){S.page='signup';s.tab='user';s.v={username:'demouser',password:'Design#26',phone:'13924685793',ref:''};s.err={};render();later(function(){document.getElementById('go').click();},400);}
+ else if(k==='dupPhone'){S.page='signup';s.tab='phone';s.v.phone=DUP_PHONE;s.v.ref='';s.err={};render();later(function(){document.getElementById('go').click();},400);}
+ else if(k==='loginLen'){if(S.page!=='login')enterLogin();S.li.tab='phone';S.li.phone.id='';S.li.err={};renderLogin();later(function(){typeInto('pid','123');later(function(){document.getElementById('pid').blur();},900);});}
+ else if(k==='wrong'){S.locked.demouser=false;S.fails.demouser=0;if(S.page!=='login')enterLogin();S.li.tab='user';S.li.user={id:'demouser',pw:'Demo1234',chk:false,pre:false};S.li.err={};renderLogin();later(function(){document.getElementById('go').click();},400);}
+ else if(k==='unverified'){S.locked.member77=false;S.fails.member77=0;if(S.page!=='login')enterLogin();S.li.tab='phone';S.li.phone={id:'13766667777',pw:PW,chk:false,pre:false};S.li.err={};renderLogin();later(function(){document.getElementById('go').click();},400);}
+ else if(k==='lock'){S.locked.demouser=false;S.fails.demouser=0;if(S.page!=='login')enterLogin();S.li.tab='user';S.li.user={id:'demouser',pw:'wrongpass',chk:false,pre:false};S.li.err={};renderLogin();
+  [0,1,2,3,4].forEach(function(i){later(function(){var g=document.getElementById('go');if(g&&S.page==='login')g.click();},400+i*1100);});}
+ else if(k==='remember'){S.locked.demouser=false;S.fails.demouser=0;S.stored=null;enterLogin();S.li.tab='phone';S.li.phone={id:'13812345678',pw:PW,chk:true,pre:false};renderLogin();later(function(){document.getElementById('go').click();later(function(){var o=document.getElementById('out');o&&o.click();},2000);},400);}
 }
-panel();render();
+panel();enterLogin();
 })();
 </script>
 </body>
