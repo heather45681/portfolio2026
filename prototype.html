@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prototype — Sign-up &amp; Login rules</title>
+<meta name="description" content="Interactive prototype of the sign-up and login rules from Fifi Lee's onboarding case study.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F3F0E8;--paper:#FBF9F4;--beige:#E9E3D6;--ink:#1F2427;--soft:#3B4246;--mute:#6E716D;--line:#D6D0C3;--acc:#A8482F;--err:#B3261E;--dark:#2C3236}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Noto Sans","Noto Sans TC",sans-serif;min-height:100vh}
+a{color:inherit}
+.top{display:flex;justify-content:space-between;align-items:center;max-width:1040px;margin:0 auto;padding:24px 24px 0;gap:16px}
+.back{font-family:"DM Mono",monospace;font-size:13px;letter-spacing:.08em;text-decoration:none;color:var(--soft)}
+.back:hover{color:var(--acc)}
+.lang{display:flex;border:1px solid var(--ink);border-radius:999px;overflow:hidden}
+.lang button{border:0;background:transparent;font-family:"DM Mono",monospace;font-size:12px;letter-spacing:.08em;padding:6px 14px;cursor:pointer;color:var(--ink)}
+.lang button.on{background:var(--ink);color:var(--paper)}
+.wrap{max-width:1040px;margin:0 auto;padding:24px 24px 64px;display:flex;gap:48px;align-items:flex-start;justify-content:center}
+/* phone */
+.phone{width:375px;height:780px;flex:none;background:var(--paper);border-radius:44px;overflow:hidden;position:relative;box-shadow:0 24px 60px rgba(31,36,39,.22);border:8px solid var(--dark)}
+.status{height:40px;display:flex;justify-content:space-between;align-items:center;padding:0 24px 0 28px;font-size:14px;font-weight:600;position:relative;z-index:2}
+.island{position:absolute;left:50%;top:8px;transform:translateX(-50%);width:104px;height:28px;border-radius:16px;background:#111;z-index:3}
+.hdr{position:absolute;left:0;right:0;top:0;height:200px;background:var(--beige);overflow:hidden}
+.hdr svg{position:absolute;top:30px}
+.brand{position:absolute;left:22px;top:104px;font-size:11px;font-weight:700;letter-spacing:.12em}
+.sheet{position:absolute;left:0;right:0;top:168px;bottom:0;background:var(--paper);border-radius:22px 22px 0 0;padding:18px 0 24px;overflow-y:auto}
+.title{font-size:21px;font-weight:700;text-align:center}
+.tabs{display:flex;margin:12px 22px 4px;border-bottom:1px solid #E3DED2}
+.tab{flex:1;text-align:center;padding:10px 0;font-size:14.5px;color:#8E938F;background:none;border:0;cursor:pointer;font-family:inherit}
+.tab.on{color:var(--ink);font-weight:600;border-bottom:2.5px solid var(--acc);margin-bottom:-1px}
+.fld{margin:12px 22px 0}
+.box{height:46px;border:1px solid var(--line);border-radius:10px;background:#fff;display:flex;align-items:center;gap:10px;padding:0 14px}
+.box svg{flex:none}
+.box input{border:0;outline:0;flex:1;font:inherit;font-size:15px;color:var(--ink);background:transparent;min-width:0}
+.box input::placeholder{color:#9A9E99}
+.box:focus-within{border-color:var(--ink)}
+.fld.bad .box{border-color:var(--err);border-width:1.5px}
+.msg{font-size:12.5px;color:var(--err);margin-top:5px;min-height:0}
+.eye{border:0;background:none;cursor:pointer;padding:0;display:flex}
+.reflab{margin:12px 22px -4px;font-size:12.5px;color:var(--mute);background:none;border:0;cursor:pointer;font-family:inherit;padding:0}
+.terms{margin:14px 22px 0;font-size:12px;color:var(--mute);line-height:1.55}.terms b{color:var(--acc);font-weight:500}
+.rem{margin:14px 22px 0;display:flex;justify-content:space-between;align-items:center;font-size:13.5px;color:var(--mute)}
+.rem label{display:flex;align-items:center;gap:8px;cursor:pointer}
+.rem input{width:16px;height:16px;accent-color:var(--ink)}
+.rem span.link{color:var(--acc)}
+.cta{margin:18px 22px 0;height:46px;width:calc(100% - 44px);border-radius:10px;border:0;font:inherit;font-size:16px;font-weight:600;cursor:pointer;background:var(--ink);color:var(--paper)}
+.alt{text-align:center;margin-top:16px;font-size:13.5px;color:var(--mute)}
+.alt button{background:none;border:0;color:var(--acc);font:inherit;font-weight:600;cursor:pointer;padding:0}
+.dim{position:absolute;inset:0;background:rgba(31,36,39,.45);z-index:4}
+.toast{position:absolute;left:18px;right:18px;top:52px;z-index:5;background:var(--paper);border-radius:12px;padding:13px 15px;display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.dlg{position:absolute;left:30px;right:30px;top:250px;z-index:5;background:var(--paper);border-radius:16px;padding:24px 20px 20px;text-align:center;box-shadow:0 12px 32px rgba(0,0,0,.25)}
+.dlg h4{font-size:17px}.warn{width:42px;height:42px;border-radius:21px;background:#E8B04A;font-weight:800;font-size:22px;display:flex;align-items:center;justify-content:center;margin:14px auto 12px}
+.dlg p{font-size:14px;line-height:1.55;color:#4A504D}
+.dlg .cta{margin:16px 0 0;width:100%}
+.done{position:absolute;left:0;right:0;top:168px;bottom:0;background:var(--paper);border-radius:22px 22px 0 0;padding:60px 28px;text-align:center}
+.done .ok{width:56px;height:56px;border-radius:28px;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:26px}
+.done h3{font-size:20px}.done p{font-size:14px;color:var(--mute);margin-top:8px;line-height:1.5}
+.done .cta{width:100%;margin:28px 0 0}
+.done .sec{background:transparent;color:var(--ink);border:1.5px solid var(--ink);margin-top:12px}
+/* panel */
+.panel{width:400px;flex:none;display:flex;flex-direction:column;gap:20px}
+.panel h1{font-family:"Noto Serif TC",serif;font-size:26px;line-height:1.35}
+.panel .lede{font-size:14.5px;line-height:1.7;color:var(--soft)}
+.card{background:var(--paper);border:1px solid #C9C3B4;border-radius:12px;padding:18px 18px}
+.card h2{font-family:"DM Mono",monospace;font-size:12px;letter-spacing:.14em;color:var(--acc);font-weight:500;margin-bottom:10px}
+.tries{display:flex;flex-direction:column;gap:8px}
+.try{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13.5px;line-height:1.45}
+.try code{font-family:"DM Mono",monospace;font-size:12px;background:var(--beige);padding:1px 5px;border-radius:4px}
+.try button{flex:none;border:1px solid var(--ink);background:transparent;border-radius:999px;font-family:"DM Mono",monospace;font-size:11px;letter-spacing:.06em;padding:4px 10px;cursor:pointer}
+.try button:hover{background:var(--ink);color:var(--paper)}
+.log{display:flex;flex-direction:column;gap:10px;max-height:300px;overflow-y:auto}
+.log .it{font-size:13.5px;line-height:1.6;color:var(--soft);padding-left:12px;border-left:2px solid var(--acc)}
+.log .it b{color:var(--ink)}
+.log .empty{font-size:13.5px;color:var(--mute)}
+.note{font-size:12px;color:var(--mute);line-height:1.6}
+@media (max-width:900px){.wrap{flex-direction:column;align-items:center;gap:28px}.panel{width:100%;max-width:420px}}
+@media (max-width:420px){.top{padding:16px 16px 0}.wrap{padding:16px 12px 48px}.phone{width:100%;max-width:375px}.panel{max-width:none}}
+html,body{overflow-x:hidden}
+</style>
+</head>
+<body>
+<div class="top">
+<a class="back" href="work01.html" id="back">← Fifi Lee</a>
+<div class="lang"><button id="lzh">中文</button><button id="len">EN</button></div>
+</div>
+<div class="wrap">
+<div class="phone" id="phone"></div>
+<aside class="panel">
+<h1 id="ph"></h1>
+<p class="lede" id="pl"></p>
+<div class="card"><h2 id="tt"></h2><div class="tries" id="tries"></div></div>
+<div class="card"><h2 id="lt"></h2><div class="log" id="log"></div></div>
+<p class="note" id="nt"></p>
+</aside>
+</div>
+<script>
+(function(){
+var L='zh';try{var q=new URLSearchParams(location.search).get('lang');if(q==='en'||q==='zh')localStorage.setItem('fifi-lang',q);if(localStorage.getItem('fifi-lang')==='en')L='en';}catch(e){}
+var T={
+zh:{h:'互動 prototype：註冊與登入的規則',l:'實際操作案例 01 的四條規則：驗證時機、tab 切換、錯誤訊息順序、記住我。畫面是英文，說明區會即時解釋剛才發生了什麼。',tt:'試試看',lt:'剛才發生了什麼',empty:'在左邊的畫面輸入或切換看看。',back:'← 回到案例 01',
+note:'依實際設計重建的示意 prototype，已去識別化。欄位長度等驗證數字為示意，不是正式規格。',
+tries:[['註冊：在 Username tab 填手機號，再切到 Mobile tab','signupCarry'],['註冊：手機號只輸入幾碼，然後點下一欄','blur'],['註冊：用已註冊的手機 <code>13800000000</code> 送出','dup'],['登入：手機號輸入 <code>123</code> 就按登入','format'],['登入：輸入沒註冊過的手機號','generic'],['登入：手機號未驗證的帳號','status'],['登入：<code>13800000000</code> / <code>Demo1234</code>','ok']],fill:'帶入',
+ev:{carry:['切換 tab，手機號和推薦碼保留下來','註冊的目標是盡快完成，共用欄位切換時不清空。'],keep:['登入的兩個 tab 各自保留內容','手機和帳號是兩組不同的憑證，切換不會互相覆蓋。'],blur:['離開欄位才顯示錯誤','打字時不打斷用戶；錯誤只在 onBlur 時出現。'],cap:['超過長度上限，直接靜默截斷','onChange 只做長度上限，不跳錯誤訊息。'],dup:['送出時才檢查是否重複','唯一性需要查資料庫，所以留到送出時才檢查。'],format:['格式錯誤在前端擋下','不送出 API，提示也最精準。'],generic:['統一顯示「手機號或密碼錯誤」','不論是沒註冊、號碼錯或密碼錯，訊息都一樣，避免被拿來試探哪些號碼註冊過。'],status:['帳密正確後，才處理帳號狀態','手機號未驗證時，給用戶下一步：改用帳號登入。'],ok:['登入成功',''],rememberOff:['取消「記住我」，記住的資料立即清除','不需要送出表單，符合用戶預期，也較安全。'],remembered:['已記住這組帳密','登出後回到登入頁，會自動帶入。'],signup:['註冊完成','']}},
+en:{h:'Interactive prototype: sign-up and login rules',l:'Try the four rules from case study 01: validation timing, tab switching, error order and Remember me. The panel explains what just happened.',tt:'Try this',lt:'What just happened',empty:'Type or switch tabs on the left.',back:'← Back to case 01',
+note:'A rebuilt, de-identified prototype of the shipped design. Field lengths and other numbers are illustrative, not the production spec.',
+tries:[['Sign-up: fill a mobile number on the Username tab, then switch to Mobile','signupCarry'],['Sign-up: type a few digits, then move to the next field','blur'],['Sign-up: submit with a registered number <code>13800000000</code>','dup'],['Log in: enter <code>123</code> as the number and tap Log in','format'],['Log in: use a number that isn’t registered','generic'],['Log in: an account with an unverified number','status'],['Log in: <code>13800000000</code> / <code>Demo1234</code>','ok']],fill:'Fill',
+ev:{carry:['Tab switched; mobile and referral code carried over','Sign-up is about finishing fast, so shared fields aren’t cleared.'],keep:['Each login tab keeps its own input','Mobile and username are different credentials, so switching never overwrites the other.'],blur:['Error shown when leaving the field','Typing isn’t interrupted; errors appear on blur.'],cap:['Input silently capped at the limit','On change we only enforce the length cap, with no error.'],dup:['Uniqueness checked on submit','It needs a server lookup, so it waits for submit.'],format:['Format error caught on the front end','No API call, and the most precise hint.'],generic:['One shared “incorrect mobile number or password”','Unknown number, wrong number or wrong password look the same, so no one can probe which numbers are registered.'],status:['Account status handled only after credentials pass','An unverified number gets a way forward: log in with the username.'],ok:['Logged in',''],rememberOff:['Remember me unchecked; saved credentials cleared now','No submit needed. It matches what users expect and is safer.'],remembered:['Credentials remembered','After logging out, the login page fills them in.'],signup:['Account created','']}}};
+var REG='13800000000',UNV='13900000000',PW='Demo1234';
+var S={page:'login',su:{tab:'user',username:'',password:'',mobile:'',ref:'',bad:{}},li:{tab:'mobile',mobile:{id:'',pw:''},user:{id:'',pw:''},bad:{},rem:{mobile:false,user:false}},saved:{mobile:null,user:null},toast:null,dialog:false,log:[],shownPw:false};
+var phone=document.getElementById('phone');
+function t(){return T[L];}
+function logEv(k){var e=t().ev[k];if(!e)return;S.log.unshift(k);if(S.log.length>12)S.log.pop();drawLog();}
+function drawLog(){var el=document.getElementById('log');if(!S.log.length){el.innerHTML='<p class="empty">'+t().empty+'</p>';return;}el.innerHTML=S.log.map(function(k){var e=t().ev[k];return '<div class="it"><b>'+e[0]+'</b>'+(e[1]?'<br>'+e[1]:'')+'</div>';}).join('');}
+function panel(){document.documentElement.lang=L==='en'?'en':'zh-Hant';document.getElementById('ph').textContent=t().h;document.getElementById('pl').textContent=t().l;document.getElementById('tt').textContent=t().tt;document.getElementById('lt').textContent=t().lt;document.getElementById('nt').textContent=t().note;document.getElementById('back').textContent=t().back;
+document.getElementById('lzh').className=L==='zh'?'on':'';document.getElementById('len').className=L==='en'?'on':'';
+document.getElementById('tries').innerHTML=t().tries.map(function(x){return '<div class="try"><span>'+x[0]+'</span><button data-k="'+x[1]+'">'+t().fill+'</button></div>';}).join('');
+document.querySelectorAll('.try button').forEach(function(b){b.onclick=function(){fill(b.getAttribute('data-k'));};});drawLog();}
+function setL(x){L=x;try{localStorage.setItem('fifi-lang',x);}catch(e){}panel();}
+document.getElementById('lzh').onclick=function(){setL('zh');};document.getElementById('len').onclick=function(){setL('en');};
+var ic={user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',phone:'<rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18h2"/>',ref:'<rect x="3" y="7" width="12" height="12" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2"/>'};
+function svg(k){return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8E938F" stroke-width="1.6">'+ic[k]+'</svg>';}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
+function field(id,icon,ph,val,opt){opt=opt||{};return '<div class="fld" id="f-'+id+'"><div class="box">'+svg(icon)+'<input id="'+id+'" placeholder="'+ph+'" value="'+esc(val)+'" '+(opt.type?'type="'+opt.type+'"':'')+' '+(opt.mode?'inputmode="'+opt.mode+'"':'')+' maxlength="'+(opt.max||40)+'" autocomplete="off">'+(opt.eye?'<button class="eye" type="button" data-eye="'+id+'" aria-label="Show password"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8E938F" stroke-width="1.6" stroke-linecap="round"><path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z"/><circle cx="12" cy="12" r="2.5"/></svg></button>':'')+'</div><div class="msg"></div></div>';}
+var status='<div class="island"></div><div class="status"><span>9:41</span><span style="display:flex;gap:5px;align-items:center"><i style="width:3px;height:6px;background:#1F2427;display:inline-block"></i><i style="width:3px;height:8px;background:#1F2427;display:inline-block"></i><i style="width:3px;height:10px;background:#1F2427;display:inline-block"></i><span style="width:22px;height:11px;border:1.5px solid #1F2427;border-radius:3px;margin-left:4px"></span></span></div>';
+var hdr='<div class="hdr"><svg width="375" height="170" viewBox="0 0 375 170"><circle cx="305" cy="85" r="66" fill="#A8482F" opacity=".9"/><rect x="225" y="100" width="116" height="100" rx="22" fill="#1F2427"/><circle cx="232" cy="48" r="19" fill="#FBF9F4"/></svg><span class="brand">BRAND A</span></div>';
+var RULES={username:{max:16,check:function(v){return /^[A-Za-z][A-Za-z0-9]{5,15}$/.test(v)?'':'Use 6–16 letters or numbers, starting with a letter';}},password:{max:20,check:function(v){return (v.length>=8&&/[A-Za-z]/.test(v)&&/\d/.test(v))?'':'Use 8–20 characters with letters and numbers';}},mobile:{max:11,check:function(v){return /^\d{11}$/.test(v)?'':'Enter a valid 11-digit mobile number';}},ref:{max:8,check:function(){return '';}}};
+function setErr(id,msg){var f=document.getElementById('f-'+id);if(!f)return;f.classList.toggle('bad',!!msg);f.querySelector('.msg').textContent=msg||'';}
+function render(){S.toast=null;S.dialog=false;
+if(S.page==='signup'){var s=S.su,u=s.tab==='user';
+phone.innerHTML=status+hdr+'<div class="sheet"><div class="title">Sign up</div><div class="tabs"><button class="tab'+(u?' on':'')+'" data-tab="user">Username</button><button class="tab'+(!u?' on':'')+'" data-tab="mobile">Mobile</button></div>'+
+(u?field('username','user','Username',s.username,{max:16})+field('password','lock','Password',s.password,{type:S.shownPw?'text':'password',max:20,eye:1}):'')+
+field('mobile','phone','Mobile number',s.mobile,{mode:'numeric',max:11})+'<button class="reflab" type="button">Referral code (optional)</button>'+field('ref','ref','Referral code',s.ref,{max:8})+
+'<p class="terms">By tapping Sign up, you confirm you meet the age requirement and accept our <b>Terms</b>.</p><button class="cta" id="go">Sign up</button><p class="alt">Have an account? <button data-page="login">Log in</button></p></div>';
+['username','password','mobile','ref'].forEach(function(k){var el=document.getElementById(k);if(!el)return;
+el.oninput=function(){var v=el.value;if(k==='mobile'){var d=v.replace(/\D/g,'');if(d!==v){el.value=d;v=d;}}if(v.length>=RULES[k].max&&s[k].length<RULES[k].max)logEv('cap');s[k]=v;if(s.bad[k]){var m=RULES[k].check(v);if(!m){s.bad[k]=false;setErr(k,'');}}};
+el.onblur=function(){if(!s[k])return;var m=RULES[k].check(s[k]);if(m){s.bad[k]=true;setErr(k,m);logEv('blur');}};
+if(s.bad[k])setErr(k,RULES[k].check(s[k])||s.badMsg&&s.badMsg[k]||'');});
+document.getElementById('go').onclick=function(){var need=u?['username','password','mobile']:['mobile'],first='';need.forEach(function(k){var m=s[k]?RULES[k].check(s[k]):'Required';if(m){s.bad[k]=true;setErr(k,m);}});
+if(need.some(function(k){return s.bad[k]||!s[k];}))return;
+if(s.mobile===REG||s.mobile===UNV){s.bad.mobile=true;setErr('mobile','This mobile number is already registered');logEv('dup');return;}
+if(u&&s.username.toLowerCase()==='demouser'){s.bad.username=true;setErr('username','This username is taken');logEv('dup');return;}
+logEv('signup');S.page='done';S.doneKind='signup';render();};
+}else if(S.page==='login'){var l=S.li,m=l.tab==='mobile',c=l[l.tab];
+phone.innerHTML=status+hdr+'<div class="sheet"><div class="title">Log in</div><div class="tabs"><button class="tab'+(!m?' on':'')+'" data-tab="user">Username</button><button class="tab'+(m?' on':'')+'" data-tab="mobile">Mobile</button></div>'+
+field('lid',m?'phone':'user',m?'Mobile number':'Username',c.id,{mode:m?'numeric':'',max:m?11:16})+field('lpw','lock','Password',c.pw,{type:S.shownPw?'text':'password',max:20,eye:1})+
+'<div class="rem"><label><input type="checkbox" id="rem" '+(l.rem[l.tab]?'checked':'')+'>Remember me</label><span class="link">Forgot login details?</span></div><button class="cta" id="go">Log in</button><p class="alt">No account yet? <button data-page="signup">Sign up</button></p></div>';
+var idEl=document.getElementById('lid'),pwEl=document.getElementById('lpw');
+idEl.oninput=function(){var v=idEl.value;if(m){var d=v.replace(/\D/g,'');if(d!==v){idEl.value=d;v=d;}}c.id=v;if(l.bad.lid){l.bad.lid=false;setErr('lid','');}};
+pwEl.oninput=function(){c.pw=pwEl.value;if(l.bad.lpw){l.bad.lpw=false;setErr('lpw','');}};
+idEl.onblur=function(){if(m&&c.id&&!/^\d{11}$/.test(c.id)){l.bad.lid=true;setErr('lid','Enter a valid 11-digit mobile number');logEv('blur');}};
+document.getElementById('rem').onchange=function(e){l.rem[l.tab]=e.target.checked;if(!e.target.checked&&S.saved[l.tab]){S.saved[l.tab]=null;c.id='';c.pw='';idEl.value='';pwEl.value='';logEv('rememberOff');}};
+document.getElementById('go').onclick=function(){var bad=false;
+if(!c.id){l.bad.lid=true;setErr('lid',m?'Enter your mobile number':'Enter your username');bad=true;}else if(m&&!/^\d{11}$/.test(c.id)){l.bad.lid=true;setErr('lid','Enter a valid 11-digit mobile number');bad=true;}
+if(!c.pw){l.bad.lpw=true;setErr('lpw','Enter your password');bad=true;}
+if(bad){logEv('format');return;}
+var okM=m&&c.id===REG&&c.pw===PW, okU=!m&&c.id.toLowerCase()==='demouser'&&c.pw===PW, unv=m&&c.id===UNV&&c.pw===PW;
+if(unv){showDialog();logEv('status');return;}
+if(okM||okU){if(l.rem[l.tab]){S.saved[l.tab]={id:c.id,pw:c.pw};logEv('remembered');}logEv('ok');S.page='done';S.doneKind='login';render();return;}
+showToast(m?'Incorrect mobile number or password. Please try again.':'Incorrect username or password. Please try again.');logEv('generic');};
+}else{phone.innerHTML=status+hdr+'<div class="done"><div class="ok">✓</div><h3>'+(S.doneKind==='signup'?'Account created':'You’re logged in')+'</h3><p>'+(S.doneKind==='signup'?'Welcome aboard. This is where onboarding would continue.':'Log out to try another scenario.')+'</p><button class="cta" id="out">'+(S.doneKind==='signup'?'Go to log in':'Log out')+'</button><button class="cta sec" id="reset">Start over</button></div>';
+document.getElementById('out').onclick=function(){var l=S.li;['mobile','user'].forEach(function(k){if(S.saved[k]){l[k].id=S.saved[k].id;l[k].pw=S.saved[k].pw;}else{l[k].pw='';}});S.page='login';render();};
+document.getElementById('reset').onclick=reset;}
+phone.querySelectorAll('[data-tab]').forEach(function(b){b.onclick=function(){var k=b.getAttribute('data-tab');if(S.page==='signup'){if(S.su.tab===k)return;S.su.tab=k;S.su.bad={};render();if(S.su.mobile||S.su.ref)logEv('carry');}else{if(S.li.tab===k)return;S.li.tab=k;S.li.bad={};render();if(S.li.mobile.id||S.li.user.id)logEv('keep');}};});
+phone.querySelectorAll('[data-page]').forEach(function(b){b.onclick=function(){S.page=b.getAttribute('data-page');render();};});
+phone.querySelectorAll('[data-eye]').forEach(function(b){b.onclick=function(){S.shownPw=!S.shownPw;var i=document.getElementById(b.getAttribute('data-eye'));i.type=S.shownPw?'text':'password';};});}
+function showToast(msg){clearOverlays();var d=document.createElement('div');d.className='toast';d.setAttribute('role','alert');d.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B3261E" stroke-width="2" style="flex:none"><circle cx="12" cy="12" r="9.5"/><path d="M9 9l6 6M15 9l-6 6" stroke-linecap="round"/></svg><span>'+msg+'</span>';phone.appendChild(d);setTimeout(function(){if(d.parentNode)d.remove();},2600);}
+function showDialog(){clearOverlays();var dim=document.createElement('div');dim.className='dim';var d=document.createElement('div');d.className='dlg';d.setAttribute('role','dialog');d.innerHTML='<h4>Can\'t log in with mobile number</h4><div class="warn">!</div><p>Your mobile number hasn\'t been verified yet. Please log in with your username for now.</p><button class="cta" id="touser">Log in with username</button>';phone.appendChild(dim);phone.appendChild(d);
+document.getElementById('touser').onclick=function(){S.li.tab='user';S.li.bad={};render();};dim.onclick=function(){dim.remove();d.remove();};}
+function clearOverlays(){phone.querySelectorAll('.toast,.dlg,.dim').forEach(function(n){n.remove();});}
+function reset(){var lg=S.log;S={page:'login',su:{tab:'user',username:'',password:'',mobile:'',ref:'',bad:{}},li:{tab:'mobile',mobile:{id:'',pw:''},user:{id:'',pw:''},bad:{},rem:{mobile:false,user:false}},saved:{mobile:null,user:null},log:lg,shownPw:false};render();}
+function fill(k){var s=S.su,l=S.li;
+if(k==='signupCarry'){S.page='signup';s.tab='user';s.username='fifi2048';s.password='Design2026';s.mobile='13712345678';s.ref='A1B2C3';s.bad={};render();setTimeout(function(){var b=phone.querySelector('[data-tab="mobile"]');b&&b.focus();},50);}
+else if(k==='blur'){S.page='signup';s.tab='mobile';s.mobile='1371';s.bad={};render();var e=document.getElementById('mobile');e.focus();setTimeout(function(){document.getElementById('ref').focus();},350);}
+else if(k==='dup'){S.page='signup';s.tab='mobile';s.mobile=REG;s.ref='';s.bad={};render();setTimeout(function(){document.getElementById('go').click();},300);}
+else if(k==='format'){S.page='login';l.tab='mobile';l.mobile={id:'123',pw:'Demo1234'};l.bad={};render();setTimeout(function(){document.getElementById('go').click();},300);}
+else if(k==='generic'){S.page='login';l.tab='mobile';l.mobile={id:'13755550000',pw:'Demo1234'};l.bad={};render();setTimeout(function(){document.getElementById('go').click();},300);}
+else if(k==='status'){S.page='login';l.tab='mobile';l.mobile={id:UNV,pw:PW};l.bad={};render();setTimeout(function(){document.getElementById('go').click();},300);}
+else if(k==='ok'){S.page='login';l.tab='mobile';l.mobile={id:REG,pw:PW};l.bad={};render();}
+}
+panel();render();
+})();
+</script>
+</body>
+</html>
