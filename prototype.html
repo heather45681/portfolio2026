@@ -111,6 +111,16 @@ button{font-family:inherit}
 .panel h1{order:1}.panel .lede{order:2}.c-try{order:3}.phone{order:4;margin:6px 0;scroll-margin-top:12px}.c-log{order:5}.c-acct{order:6}.note{order:7}}
 @media (max-width:420px){.top{padding:16px 16px 0}.wrap{padding:16px 12px 48px}.phone{width:100%;max-width:375px}.panel>*{max-width:none}}
 </style>
+<script>
+/* GoatCounter: only count visits on the live site, not previews */
+if (location.hostname === 'heather45681.github.io') {
+  var gc = document.createElement('script');
+  gc.async = true;
+  gc.src = 'https://gc.zgo.at/count.js';
+  gc.setAttribute('data-goatcounter', 'https://fifilee.goatcounter.com/count');
+  document.head.appendChild(gc);
+}
+</script>
 </head>
 <body>
 <div class="top">
@@ -171,8 +181,8 @@ generic:['帳密錯誤，一律同一句 toast','手機或用戶名不存在、�
 unverified:['以手機登入，手機需唯一且已驗證','否則擋下並引導改用用戶名登入。手機號＋密碼要先正確、確認是用戶本人，才會顯示手機未驗證的提示；密碼不正確時，只會顯示帳密錯誤的同一句 toast，不透露這支手機是否存在或已驗證。'],
 lock:['同一帳號連續失敗 5 次即鎖帳','依帳號計算，用戶名與手機登入合併計算；popup 引導到帳號找回流程解鎖。不存在的帳號不計次，只顯示帳密錯誤的 toast。'],
 lockedTry:['帳號鎖定中：不論密碼對錯都顯示鎖帳 popup','鎖定看的是帳號，重設密碼成功才解鎖。'],
-forgot:['導向帳號找回流程','完整流程見作品集案例 02。'],
-recover:['導向帳號找回流程','完整流程見作品集案例 02。這裡直接視為重設密碼成功、解除鎖定，以便繼續試玩。'],
+forgot:['導向帳號找回流程','完整流程見作品集案例 01。'],
+recover:['導向帳號找回流程','完整流程見作品集案例 01。這裡直接視為重設密碼成功、解除鎖定，以便繼續試玩。'],
 saved:['成功登入時，才寫入記住的帳密','只存一組，新的覆蓋舊的。'],
 restore:['回到登入頁：開在記住的那個 tab，帳密已帶入','另一個 tab 維持空白、未勾選。'],
 remOff:['在記住的 tab 取消勾選，立即清除已存的帳密','不需要送出或登入；撤銷即時、授予要等驗證成功。'],
@@ -216,8 +226,8 @@ generic:['Wrong credentials: always the same toast','Unknown phone, unknown user
 unverified:['Phone login needs a unique, verified number','Otherwise it’s blocked, with a way forward: log in with the username. The unverified-phone message appears only after phone number and password are both correct, so we know it’s the real user. With a wrong password, only the shared “incorrect” toast shows, revealing nothing about whether the number exists or is verified.'],
 lock:['Five failures in a row lock that account','Counted per account, with username and phone attempts combined; the popup leads to account recovery. Unknown accounts aren’t counted and only get the shared “incorrect” toast.'],
 lockedTry:['Account locked: the popup shows whether or not the password is right','The lock belongs to the account; only a successful password reset unlocks it.'],
-forgot:['Leads to account recovery','See case study 02 for that flow.'],
-recover:['Leads to account recovery','See case study 02 for that flow. Here it counts as a successful password reset, so the account unlocks and you can keep trying.'],
+forgot:['Leads to account recovery','See case study 01 for that flow.'],
+recover:['Leads to account recovery','See case study 01 for that flow. Here it counts as a successful password reset, so the account unlocks and you can keep trying.'],
 saved:['Credentials are stored only on a successful login','One set only; a new one replaces the old.'],
 restore:['Back on login: it opens the remembered tab, pre-filled','The other tab stays empty and unchecked.'],
 remOff:['Unchecked on the remembered tab: stored credentials cleared now','No submit or login needed. Revoke immediately; grant only after a verified login.'],

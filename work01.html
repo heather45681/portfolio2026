@@ -31,6 +31,16 @@ a{color:#1F2427}a:hover{color:#A8482F}
 @media (max-width:760px){.zm{display:block !important;padding:64px 0 48px !important}.zm-img{width:240% !important;max-width:none !important;border-radius:0 !important}.zm-hint{display:block !important}.meta{grid-template-columns:1fr !important}.meta>div{flex-direction:row !important;align-items:baseline;gap:16px !important;padding:14px 16px !important}.meta dt{flex:0 0 64px}.hd{display:grid !important;grid-template-columns:1fr auto;align-items:center;gap:20px 16px !important}.nv{display:contents !important}.lg{grid-row:1;grid-column:2}.lk{grid-column:1/-1;grid-row:2;gap:20px !important}.hero-title{font-size:34px !important}}
 </style>
 
+<script>
+/* GoatCounter: only count visits on the live site, not previews */
+if (location.hostname === 'heather45681.github.io') {
+  var gc = document.createElement('script');
+  gc.async = true;
+  gc.src = 'https://gc.zgo.at/count.js';
+  gc.setAttribute('data-goatcounter', 'https://fifilee.goatcounter.com/count');
+  document.head.appendChild(gc);
+}
+</script>
 </head>
 <body>
 <div id="app"></div>
@@ -55,13 +65,13 @@ a{color:#1F2427}a:hover{color:#A8482F}
 <section style="max-width: 1200px; margin: 0 auto; padding: 56px 24px 64px; display: flex; flex-direction: column; gap: 28px">
 <div style="display: flex; gap: 20px; align-items: baseline"><span style="font-family: 'Cormorant Garamond', serif; font-size: 72px; line-height: 1; color: #A8482F">01</span><span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #5E625F">2025.12 – 2026.09</span></div>
 <h1 class="hero-title" style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 52px; font-weight: 700; line-height: 1.4">跨三品牌 Onboarding 優化</h1>
-<p style="margin: 0; max-width: 760px; font-size: 18px; color: #3C403E">看似只是新增一條註冊路徑，但三個品牌、三個市場的欄位規則各不相同，還得同時移除 Email。我花了一年依序重新設計三個品牌的註冊與登入，最後把三套規則統一成一套。</p>
+<p style="margin: 0; max-width: 760px; font-size: 18px; color: #3C403E">看似只是新增一條註冊路徑，但三個品牌、三個市場的欄位規則各不相同，還得同時移除 Email。我花了一年依序重新設計三個品牌的註冊與登入，最後把三套規則統一成一套。移除 Email 後，也一併重做了品牌 A 的帳號找回流程。</p>
 <dl class="meta" style="margin: 8px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: #C9C3B4; border: 1px solid #C9C3B4">
 <div style="background: #F3F0E8; padding: 20px; display: flex; flex-direction: column; gap: 4px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">角色</dt><dd style="margin: 0; font-size: 14px">主要 UI/UX 設計師</dd></div>
 <div style="background: #F3F0E8; padding: 20px; display: flex; flex-direction: column; gap: 4px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">團隊</dt><dd style="margin: 0; font-size: 14px">PDM、PM、前端、後端</dd></div>
 <div style="background: #F3F0E8; padding: 20px; display: flex; flex-direction: column; gap: 4px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">範圍</dt><dd style="margin: 0; font-size: 14px">3 品牌・3 市場・Web／App</dd></div>
 <div style="background: #F3F0E8; padding: 20px; display: flex; flex-direction: column; gap: 4px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">產出</dt><dd style="margin: 0; font-size: 14px">全部 mockup・AC 審核・UAT 115 張單</dd></div>
-<div style="grid-column: 1 / -1; background: #FBF9F4; padding: 20px; display: flex; flex-direction: column; gap: 6px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">成果</dt><dd style="margin: 0; font-size: 16px; font-weight: 600; line-height: 1.6">註冊送出日均 +18.6%（對照品牌 +11.8%）・每人重複送出 −19%（對照品牌 +9%）</dd></div>
+<div style="grid-column: 1 / -1; background: #FBF9F4; padding: 20px; display: flex; flex-direction: column; gap: 6px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">成果</dt><dd style="margin: 0; font-size: 16px; font-weight: 600; line-height: 1.6">註冊送出日均 +18.6%（對照品牌 +11.8%）・每人重複送出 −19%（對照品牌 +9%）・帳號找回改為站內完成，三市場同步上線</dd></div>
 </dl>
 </section>
 
@@ -118,7 +128,7 @@ a{color:#1F2427}a:hover{color:#A8482F}
 <div style="flex: 1 1 240px; min-width: 0; background: #FBF9F4; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">註冊</span><p style="margin: 0; font-size: 14px">目標是盡快完成，共用欄位（手機、推薦碼）切換時連動、不清空。</p></div>
 <div style="flex: 1 1 240px; min-width: 0; background: #FBF9F4; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">登入</span><p style="margin: 0; font-size: 14px">兩種方式是不同憑證，各自記住、互不干擾。</p></div>
 </div>
-<p style="margin: 0; font-size: 15px; color: #3C403E">這次也一併修正了「記住我」：原本對外說明與實際行為衝突，決議統一記住帳號＋密碼，checkbox 文案也改成明確告知密碼會被記住。取消勾選時，原本記住的登入資料會立即清除、不需要送出表單，因為這符合用戶預期，也有資安上的考量。</p>
+<p style="margin: 0; font-size: 15px; color: #3C403E">這次也一併修正了「記住我」：原本對外說明與實際行為衝突，決議統一記住帳號＋密碼，checkbox 文案也跟著調整，不再用語意模糊的「記住我」。取消勾選時，原本記住的登入資料會立即清除、不需要送出表單，因為這符合用戶預期，也有資安上的考量。</p>
 </div>
 </article>
 
@@ -144,7 +154,21 @@ a{color:#1F2427}a:hover{color:#A8482F}
 </article>
 
 <article style="display: flex; flex-wrap: wrap; gap: 32px 48px; border-top: 1px solid #C9C3B4; padding-top: 32px">
-<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 44px; line-height: 1; color: #A8482F">5</span><h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 22px; line-height: 1.5">三個品牌，一路收斂</h3></div>
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 44px; line-height: 1; color: #A8482F">5</span><h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 22px; line-height: 1.5">帳號找回：卡住時都有下一步，但不洩漏誰註冊過</h3></div>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<p style="margin: 0">註冊移除 Email 後，新用戶很可能根本沒有 Email，舊的「收信點連結」找回方式對他們完全走不通。我負責品牌 A 找回流程的設計與上線，三個市場、App 與 Web 同步上線：</p>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px">
+<li><strong>拉回主站：</strong>原本要收信、點連結、在新分頁重設密碼，連結過期就得重來；改成同一頁輸入 OTP，手機和 Email 都能用，全程留在主站</li>
+<li><strong>不回答「有沒有註冊」：</strong>輸入未註冊的手機或 Email，一樣進到 OTP 頁、倒數照跑，只是不會寄出驗證碼，沒辦法用這個入口逐一試探</li>
+<li><strong>卡住時先給下一條路：</strong>手機對應不到唯一帳號時，主按鈕是「改用 Email 找回」；OTP 次數用完就換另一種方式，兩種都用完才擋下，客服是最後一步</li>
+<li><strong>和鎖帳接起來：</strong>登入失敗 5 次的鎖帳 popup 直接帶進找回流程，重設密碼成功即解鎖</li>
+</ul>
+</div>
+</article>
+
+
+<article style="display: flex; flex-wrap: wrap; gap: 32px 48px; border-top: 1px solid #C9C3B4; padding-top: 32px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 44px; line-height: 1; color: #A8482F">6</span><h3 style="margin: 0; font-family: 'Noto Serif TC', serif; font-size: 22px; line-height: 1.5">三個品牌，一路收斂</h3></div>
 <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
 <ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; border-left: 1px solid #1F2427">
 <li style="padding: 0 0 20px 24px; display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #5E625F">品牌 A｜2025.12 – 2026.04</span><span style="font-size: 15px">最先上線手機註冊與移除 Email，欄位驗證問題在這一輪浮現。</span></li>
@@ -191,13 +215,13 @@ a{color:#1F2427}a:hover{color:#A8482F}
 <section style="max-width: 1200px; margin: 0 auto; padding: 56px 24px 64px; display: flex; flex-direction: column; gap: 28px">
 <div style="display: flex; gap: 20px; align-items: baseline"><span style="font-family: 'Cormorant Garamond', serif; font-size: 72px; line-height: 1; color: #A8482F">01</span><span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #5E625F">2025.12 – 2026.09</span></div>
 <h1 class="hero-title" style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 60px; font-weight: 500; line-height: 1.15">Onboarding redesign across three brands</h1>
-<p style="margin: 0; max-width: 760px; font-size: 18px; color: #3C403E">It looked like just one more way to sign up, but field rules differed across three brands and three markets, and Email had to come off the sign-up form at the same time. Over one year I redesigned sign-up and login for each brand in turn and unified three sets of rules into one.</p>
+<p style="margin: 0; max-width: 760px; font-size: 18px; color: #3C403E">It looked like just one more way to sign up, but field rules differed across three brands and three markets, and Email had to come off the sign-up form at the same time. Over one year I redesigned sign-up and login for each brand in turn and unified three sets of rules into one. With Email gone, I also rebuilt Brand A’s account recovery.</p>
 <dl class="meta" style="margin: 8px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: #C9C3B4; border: 1px solid #C9C3B4">
 <div style="background: #F3F0E8; padding: 20px; display: flex; flex-direction: column; gap: 4px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">ROLE</dt><dd style="margin: 0; font-size: 14px">Lead UI/UX designer</dd></div>
 <div style="background: #F3F0E8; padding: 20px; display: flex; flex-direction: column; gap: 4px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">TEAM</dt><dd style="margin: 0; font-size: 14px">PDM, PM, front end, back end</dd></div>
 <div style="background: #F3F0E8; padding: 20px; display: flex; flex-direction: column; gap: 4px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">SCOPE</dt><dd style="margin: 0; font-size: 14px">3 brands, 3 markets, web &amp; app</dd></div>
 <div style="background: #F3F0E8; padding: 20px; display: flex; flex-direction: column; gap: 4px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">OUTPUT</dt><dd style="margin: 0; font-size: 14px">All mockups, AC review, 115 UAT tickets</dd></div>
-<div style="grid-column: 1 / -1; background: #FBF9F4; padding: 20px; display: flex; flex-direction: column; gap: 6px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">OUTCOME</dt><dd style="margin: 0; font-size: 16px; font-weight: 600; line-height: 1.6">Daily sign-up submits +18.6% (control +11.8%) · repeat submits per user −19% (control +9%)</dd></div>
+<div style="grid-column: 1 / -1; background: #FBF9F4; padding: 20px; display: flex; flex-direction: column; gap: 6px"><dt style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">OUTCOME</dt><dd style="margin: 0; font-size: 16px; font-weight: 600; line-height: 1.6">Daily sign-up submits +18.6% (control +11.8%) · repeat submits per user −19% (control +9%) · account recovery now stays on-site, live in three markets</dd></div>
 </dl>
 </section>
 
@@ -254,7 +278,7 @@ a{color:#1F2427}a:hover{color:#A8482F}
 <div style="flex: 1 1 240px; min-width: 0; background: #FBF9F4; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">SIGN-UP</span><p style="margin: 0; font-size: 14px">The goal is to finish fast, so shared fields (phone, referral code) carry over when switching tabs.</p></div>
 <div style="flex: 1 1 240px; min-width: 0; background: #FBF9F4; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #A8482F">LOGIN</span><p style="margin: 0; font-size: 14px">The two methods are different credentials, so each tab remembers its own and never overwrites the other.</p></div>
 </div>
-<p style="margin: 0; font-size: 15px; color: #3C403E">We also fixed "Remember me": public messaging contradicted actual behavior, so it now remembers username and password, and the checkbox copy says so plainly. Unchecking it clears the saved credentials immediately, with no need to submit the form, because that is what users expect and it is safer.</p>
+<p style="margin: 0; font-size: 15px; color: #3C403E">We also fixed "Remember me": public messaging contradicted actual behavior, so it now remembers username and password, and the label moved away from the vague "Remember me". Unchecking it clears the saved credentials immediately, with no need to submit the form, because that is what users expect and it is safer.</p>
 </div>
 </article>
 
@@ -280,7 +304,21 @@ a{color:#1F2427}a:hover{color:#A8482F}
 </article>
 
 <article style="display: flex; flex-wrap: wrap; gap: 32px 48px; border-top: 1px solid #C9C3B4; padding-top: 32px">
-<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 44px; line-height: 1; color: #A8482F">5</span><h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 500; line-height: 1.3">Three brands, converging</h3></div>
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 44px; line-height: 1; color: #A8482F">5</span><h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 500; line-height: 1.3">Account recovery: a next step at every dead end, without revealing who is registered</h3></div>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<p style="margin: 0">With Email gone from sign-up, many new users have no email at all, so the old email-link recovery simply didn’t work for them. I designed and shipped recovery for Brand A, live across three markets on app and web:</p>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px">
+<li><strong>Back on-site: </strong>instead of opening an email, clicking a link and resetting in a new tab (and starting over when the link expired), users enter an OTP on the same page, by phone or email</li>
+<li><strong>Never answering “is this registered?”: </strong>an unregistered phone or email still reaches the OTP page with the countdown running, but no code is sent, so the entry can’t be used to probe accounts</li>
+<li><strong>A way forward first: </strong>when a phone maps to more than one account, the primary button is “Recover with email”; when one OTP channel runs out, users switch to the other, and support is the last resort</li>
+<li><strong>Tied to lockout: </strong>the lockout popup after five failed logins leads straight into recovery, and a successful reset unlocks the account</li>
+</ul>
+</div>
+</article>
+
+
+<article style="display: flex; flex-wrap: wrap; gap: 32px 48px; border-top: 1px solid #C9C3B4; padding-top: 32px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Cormorant Garamond', serif; font-size: 44px; line-height: 1; color: #A8482F">6</span><h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 500; line-height: 1.3">Three brands, converging</h3></div>
 <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
 <ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; border-left: 1px solid #1F2427">
 <li style="padding: 0 0 20px 24px; display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #5E625F">Brand A — 2025.12 – 2026.04</span><span style="font-size: 15px">Shipped phone sign-up and Email removal first; the validation gaps surfaced here.</span></li>
@@ -352,8 +390,8 @@ var base = 'min-height: 32px; padding: 4px 14px; border: 0; cursor: pointer; fon
 var on = base + 'background: #1F2427; color: #F3F0E8;';
 var off = base + 'background: transparent; color: #1F2427;';
 var t = isZh
-? { pl: '返回', pt: '所有作品', nl: '下一個', nt: '02 帳號密碼找回流程', zoom: '放大檢視', close: '關閉', pan: '左右滑動查看完整圖片，點一下關閉', back: '← 作品', all: '← 所有作品', next: '下一個：02 帳號密碼找回流程 →' }
-: { pl: 'BACK', pt: 'All works', nl: 'NEXT', nt: '02 Password recovery', zoom: 'Enlarged image', close: 'Close', pan: 'Swipe to pan, tap to close', back: '← Works', all: '← All works', next: 'Next: 02 Password recovery →' };
+? { pl: '返回', pt: '所有作品', nl: '下一個', nt: '02 採購系統與 Design System', zoom: '放大檢視', close: '關閉', pan: '左右滑動查看完整圖片，點一下關閉', back: '← 作品', all: '← 所有作品', next: '下一個：02 帳號密碼找回流程 →' }
+: { pl: 'BACK', pt: 'All works', nl: 'NEXT', nt: '02 Design system', zoom: 'Enlarged image', close: 'Close', pan: 'Swipe to pan, tap to close', back: '← Works', all: '← All works', next: 'Next: 02 Design system →' };
 return {
 t: t,
 isZh: isZh,
