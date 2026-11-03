@@ -145,7 +145,21 @@ a:hover .ar-r{transform:translateX(5px)}a:hover .ar-ne{transform:translate(3px,-
   .c-lab{flex-basis:100%}
   .mq{font-size:20px}
 }
+/* language */
+.lang{display:inline-flex;border:1px solid var(--ink);border-radius:999px;overflow:hidden}
+.lang button{border:0;background:transparent;min-height:32px;padding:4px 14px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.08em;color:var(--ink);cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+html[data-lang="en"] .L-zh,html[data-lang="zh"] .L-en{display:none !important}
+.L-en .hero h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:68px;line-height:1.1;letter-spacing:.01em}
+.L-en h2.sec,.L-en .c-text h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:42px;line-height:1.2}
+.L-en .svc h3,.L-en .case h3,.L-en .earlier h3,.L-en .steps h3,.L-en .faq summary{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;line-height:1.3}
+.L-en .faq summary{font-size:22px}
+@media (max-width:760px){.L-en .hero h1{font-size:44px}.L-en .c-text h2{font-size:32px}}
 </style>
+<script>
+/* language: ?lang= first, then the choice shared with the portfolio pages */
+(function(){var l='zh';try{var q=new URLSearchParams(location.search).get('lang');if(q==='en'||q==='zh'){l=q;localStorage.setItem('fifi-lang',q);}else if(localStorage.getItem('fifi-lang')==='en'){l='en';}}catch(e){}document.documentElement.setAttribute('data-lang',l);if(l==='en')document.documentElement.lang='en';})();
+</script>
 <script>
 /* GoatCounter: only count visits on the live site, not previews */
 if (location.hostname === 'heather45681.github.io') {
@@ -165,15 +179,21 @@ if (location.hostname === 'heather45681.github.io') {
     <span class="mono" style="font-size:12px;color:var(--mute)">李芸澧</span>
   </a>
   <nav class="nav" aria-label="Main">
-    <a class="hide-sp" href="#services">服務</a>
-    <a class="hide-sp" href="#cases">案例</a>
-    <a class="hide-sp" href="#process">合作流程</a>
-    <a class="hide-sp" href="index.html">完整作品集</a>
-    <a class="pill ct" href="#contact">與我聯繫</a>
+    <a class="hide-sp L-zh" href="#services">服務</a>
+    <a class="hide-sp L-zh" href="#cases">案例</a>
+    <a class="hide-sp L-zh" href="#process">合作流程</a>
+    <a class="hide-sp L-zh" href="index.html?lang=zh">完整作品集</a>
+    <a class="pill ct L-zh" href="#contact">與我聯繫</a>
+    <a class="hide-sp L-en" href="#services-en">Services</a>
+    <a class="hide-sp L-en" href="#cases-en">Work</a>
+    <a class="hide-sp L-en" href="#process-en">Process</a>
+    <a class="hide-sp L-en" href="index.html?lang=en">Full portfolio</a>
+    <a class="pill ct L-en" href="#contact-en">Get in touch</a>
+    <span class="lang" role="group" aria-label="Language"><button type="button" data-set="zh">中文</button><button type="button" data-set="en">EN</button></span>
   </nav>
 </header>
 
-<main>
+<main class="L-zh" lang="zh-Hant">
 <section id="top" class="wrap hero">
   <div class="hero-main">
     <p class="eyebrow">接案合作｜台北｜<span style="white-space:nowrap">可遠端（GMT+8）</span></p>
@@ -284,13 +304,13 @@ if (location.hostname === 'heather45681.github.io') {
       </article>
 
       <article class="case">
-        <img src="img/e0343933aa3ca612701bed202f0016be.png" alt="帳號密碼找回流程的三個畫面：輸入、無法找回的提示、重設密碼">
-        <div class="top"><span>02</span><span>帳號找回流程</span></div>
-        <h3>讓卡住的用戶，每一步都有路走</h3>
+        <img src="img/b795d9a33d19e91f5e889d91ae6f3d65.png" alt="同一套採購系統套用三種品牌主題，以及 Figma 元件庫的按鈕、勾選、開關、Modal 與狀態標籤">
+        <div class="top"><span>02</span><span>Design system・前端開發</span></div>
+        <h3>一套系統、三家公司，各用自己的品牌</h3>
         <dl>
-          <dt>問題</dt><dd>只能用 Email 找回，收不到信或連結過期就只能找客服。</dd>
-          <dt>做法</dt><dd>改成手機或 Email 驗證、全程留在主站，每個卡關點都給下一步。</dd>
-          <dt>結果</dt><dd>App 與 Web 同步上線，客服變成最後一步。</dd>
+          <dt>問題</dt><dd>原本只給一家公司用的採購系統，要擴增給三家共用，各自需要自己的 logo 與企業色。</dd>
+          <dt>做法</dt><dd>以 Bootstrap 建立可換膚的 design system 與對應程式碼的 Figma 元件庫，並接手前端開發。</dd>
+          <dt>結果</dt><dd>三家公司都已上線使用，design system 交付公司與工程師。</dd>
         </dl>
         <a class="btn" href="work02.html">閱讀完整案例 <span class="ar ar-r">→</span></a>
       </article>
@@ -398,6 +418,234 @@ if (location.hostname === 'heather45681.github.io') {
 </section>
 </main>
 
+<main class="L-en" lang="en">
+<section id="top-en" class="wrap hero">
+  <div class="hero-main">
+    <p class="eyebrow">FREELANCE · TAIPEI · <span style="white-space:nowrap">OPEN TO REMOTE (GMT+8)</span></p>
+    <h1>From rules to screens,<br>I see products through to launch.</h1>
+    <p class="lead">Ten years in design and 30+ responsive websites shipped. Lately I focus on sign-up and login flows, and on quality checks before launch. If your team needs a design partner who thinks flows through and can talk shop with engineers, let's talk.</p>
+    <div class="tags">
+      <span>#Flow review</span><span>#UI QA before launch</span><span>#Web design &amp; front end</span><span>#Notion + AI rule library</span><span>#ZH · EN · JA</span>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:12px">
+      <a class="btn ct" href="#contact-en" style="color:var(--paper)">Tell me what you need <span class="ar ar-r">→</span></a>
+      <a class="btn" href="#services-en">See services</a>
+    </div>
+  </div>
+</section>
+
+<div class="mq" aria-hidden="true"><div class="mq-track"><span>UX review — 流程健檢 — UI QA before launch — 上線前把關 — Design &amp; front end — 設計・切版 — Notion × AI — 規則庫 — </span><span>UX review — 流程健檢 — UI QA before launch — 上線前把關 — Design &amp; front end — 設計・切版 — Notion × AI — 規則庫 — </span></div></div>
+
+<section id="services-en" class="wrap services">
+  <div class="sh">
+    <div style="display:flex;flex-direction:column;gap:4px">
+      <p class="eyebrow">Services|</p>
+      <h2 class="sec">What I can help with</h2>
+    </div>
+    <p class="note">Each service works on its own or combined with others. Not sure about the scope yet? We can talk it through and decide together.</p>
+  </div>
+
+  <div class="svc-grid">
+    <article class="svc">
+      <span class="num">01</span>
+      <h3>Sign-up &amp; login flow review</h3>
+      <p class="fit">For teams with weak sign-up conversion, or whose support keeps hearing “I can't log in” and “I never got the code.”</p>
+      <span class="lab">DELIVERABLES</span>
+      <ul>
+        <li>A walkthrough of your current flow, with a prioritized list of issues</li>
+        <li>An inventory of edge cases: duplicate sign-ups, error messages, locked accounts, failed recovery</li>
+        <li>Recommendations and mockups that balance usability and security</li>
+      </ul>
+      <p class="proof">Done before: a three-brand sign-up redesign, with daily sign-up submits up 18.6%　<a href="#cases-en">See the case →</a></p>
+    </article>
+
+    <article class="svc">
+      <span class="num">02</span>
+      <h3>UI QA before launch</h3>
+      <p class="fit">For teams about to launch without a dedicated designer to check the screens.</p>
+      <span class="lab">DELIVERABLES</span>
+      <ul>
+        <li>Page-by-page checks of copy, spacing, states and interactions against the designs</li>
+        <li>Checks across devices and platforms</li>
+        <li>Issue tickets engineers can act on, written in Chinese or English</li>
+      </ul>
+      <p class="proof">Done before: 115 issue tickets filed during one redesign's UAT　<a href="work01.html?lang=en">See the case →</a></p>
+    </article>
+
+    <article class="svc">
+      <span class="num">03</span>
+      <h3>Web design + front end</h3>
+      <p class="fit">For shops and small businesses that need a company site, a brand site, a campaign page or membership features.</p>
+      <span class="lab">DELIVERABLES</span>
+      <ul>
+        <li>Responsive designs for desktop, tablet and phone</li>
+        <li>Front-end build when needed</li>
+        <li>Component-based design, so later changes and redesigns take less effort</li>
+      </ul>
+      <p class="proof">Done before: 30+ responsive websites launched, including Mandarin Daily News and the Taiwan Internet Association　<a href="#earlier-en">See the work →</a></p>
+    </article>
+
+    <article class="svc">
+      <span class="num">04</span>
+      <h3>Notion + AI rule library</h3>
+      <p class="fit">For small teams whose specs are scattered across chats and documents, and who keep answering the same questions.</p>
+      <span class="lab">DELIVERABLES</span>
+      <ul>
+        <li>A Notion decision library structure: one rule per line, tagged with where it applies and where it came from</li>
+        <li>A way to bring your existing rules into it</li>
+        <li>A workflow for using AI to look up rules and compare specs</li>
+      </ul>
+      <p class="proof">Done before: built my own UI/UX decision library, so finding a rule went from digging through chat to one search　<a href="work03.html?lang=en">See the case →</a></p>
+    </article>
+  </div>
+</section>
+
+<section id="cases-en" class="dark cases">
+  <div class="wrap">
+    <div class="sh">
+      <div style="display:flex;flex-direction:column;gap:4px">
+        <p class="eyebrow">Selected work|</p>
+        <h2 class="sec">Case studies</h2>
+      </div>
+      <p class="note">All screens are de-identified. Each case has a full write-up if you want the details.</p>
+    </div>
+
+    <div class="case-grid">
+      <article class="case">
+        <img src="img/5a12622855edc63d02846815d123024b.png" alt="Sign-up page before and after: one long form before, separate username and phone sign-up after">
+        <div class="top"><span>01</span><span>Sign-up &amp; login redesign</span></div>
+        <h3>Three brands, three rule sets, converged into one</h3>
+        <dl>
+          <dt>PROBLEM</dt><dd>The old sign-up page asked for 5 fields at once, and the rules differed across brands.</dd>
+          <dt>APPROACH</dt><dd>Split sign-up into phone and username paths, and unified validation rules and error messages.</dd>
+          <dt>RESULT</dt><dd>Daily sign-up submits +18.6%, repeat submits per user −19%.</dd>
+        </dl>
+        <a class="btn" href="work01.html?lang=en">Read the full case <span class="ar ar-r">→</span></a>
+      </article>
+
+      <article class="case">
+        <img src="img/b795d9a33d19e91f5e889d91ae6f3d65.png" alt="The same procurement system in three brand themes, with Figma library buttons, checkboxes, switches, a modal and status badges">
+        <div class="top"><span>02</span><span>Design system · front end</span></div>
+        <h3>One system, three companies, each in its own brand</h3>
+        <dl>
+          <dt>PROBLEM</dt><dd>A procurement system built for one company had to serve three, each with its own logo and brand colors.</dd>
+          <dt>APPROACH</dt><dd>Built a themable design system on Bootstrap and a Figma library that maps to code, and took over front-end development.</dd>
+          <dt>RESULT</dt><dd>Live at all three companies; the design system was handed over to the company and its engineers.</dd>
+        </dl>
+        <a class="btn" href="work02.html?lang=en">Read the full case <span class="ar ar-r">→</span></a>
+      </article>
+
+      <article class="case">
+        <img src="img/ae63ed4d86440ceaf4572afe22014b19.png" alt="The UI/UX decision library table, tagged by brand, market, platform, module and status (de-identified redraw)">
+        <div class="top"><span>03</span><span>Notion + AI decision library</span></div>
+        <h3>Letting AI catch contradictions in specs before launch</h3>
+        <dl>
+          <dt>PROBLEM</dt><dd>Rules were scattered across mockups, Jira and chat, and the same rule was asked about again and again.</dd>
+          <dt>APPROACH</dt><dd>Organized them into a searchable Notion decision library, with AI helping compare specs.</dd>
+          <dt>RESULT</dt><dd>Rules and their sources are one search away, and it even caught copy an engineer had mistyped.</dd>
+        </dl>
+        <a class="btn" href="work03.html?lang=en">Read the full case <span class="ar ar-r">→</span></a>
+      </article>
+    </div>
+
+    <div id="earlier-en" class="earlier">
+      <div style="display:flex;flex-direction:column;gap:4px">
+        <p class="eyebrow">Client projects|</p>
+        <h3>Website &amp; app client projects</h3>
+      </div>
+      <div class="e-grid">
+        <div class="e-item">
+          <img src="img/403a1b5a878fa37ce48402b13b3dc2fe.png" alt="Mandarin Daily News shop on desktop, tablet and phone">
+          <span>2019｜RWD SITE・MEMBERSHIP</span>
+          <p>Mandarin Daily News subscription shop</p>
+        </div>
+        <div class="e-item">
+          <img src="img/1e5379076a3847fceb613e754d7bac29.png" alt="Taiwan Internet Association website key visual">
+          <span>2019｜WEBSITE REDESIGN</span>
+          <p>Taiwan Internet Association website</p>
+        </div>
+        <div class="e-item">
+          <img src="img/7f4288e47ab0e008b83c12693bea046e.png" alt="Saboten restaurant app redesign key visual" style="object-position:left center">
+          <span>2018｜APP DESIGN</span>
+          <p>Saboten restaurant app redesign</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process-en" class="wrap process">
+  <div class="head">
+    <p class="eyebrow">Process|</p>
+    <h2 class="sec">How we work together</h2>
+  </div>
+  <ol class="steps">
+    <li><span class="n">01</span><h3>Talk it through</h3><p>Message or email me with a short note on your product, the problem you want solved and your timeline. If it isn't clear yet, we can sort it out together.</p></li>
+    <li><span class="n">02</span><h3>Scope and quote</h3><p>Once we agree on deliverables, revision rounds and timeline, I send a quote, and we start when both sides are happy.</p></li>
+    <li><span class="n">03</span><h3>Check in stage by stage</h3><p>You see the work in stages and we adjust the direction as we go, instead of one big reveal at the end.</p></li>
+    <li><span class="n">04</span><h3>Handoff and launch support</h3><p>I hand over design files and specs that engineers can follow, and can help check the screens before launch.</p></li>
+  </ol>
+</section>
+
+<div class="faq-wrap">
+<section class="wrap faq">
+  <div class="head">
+    <p class="eyebrow">FAQ|</p>
+    <h2 class="sec">Common questions</h2>
+  </div>
+  <div class="faq-list">
+    <details>
+      <summary>How do you price a project?</summary>
+      <p>By scope. After reviewing your needs, I list the deliverables, revision rounds and timeline, so you know exactly what the fee covers.</p>
+    </details>
+    <details>
+      <summary>Can you take on just one small part?</summary>
+      <p>Yes. A one-off sign-up flow review, or only checking screens before launch, can each be booked on its own.</p>
+    </details>
+    <details>
+      <summary>Do we need to meet in person?</summary>
+      <p>Everything can be done online. If you're in Taipei, we can also meet in person.</p>
+    </details>
+    <details>
+      <summary>Can we work in English or Japanese?</summary>
+      <p>Yes. I'm used to writing specs and issue tickets in both Chinese and English, and my Japanese is JLPT N2.</p>
+    </details>
+  </div>
+</section>
+</div>
+
+<section id="contact-en" class="contact">
+  <div class="c-card">
+    <div class="c-in">
+      <div class="c-text">
+        <p class="eyebrow" style="color:var(--accent-l)">Contact|</p>
+        <h2>Let's get your product<br>launched smoothly.</h2>
+        <p class="sub">For freelance work, message or email me with a note on your product and the problem you want solved.</p>
+      </div>
+      <ul class="c-list">
+        <li><a class="c-row" href="mailto:heather45681@gmail.com?subject=Freelance%20inquiry">
+          <span class="c-lab"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3.5 6.5 8.5 6.5 8.5-6.5"></path></svg>EMAIL</span>
+          <span class="c-val">heather45681@gmail.com</span><span aria-hidden="true" class="ar ar-r mono">→</span></a></li>
+        <li><a class="c-row" href="https://www.linkedin.com/in/heather45681/" target="_blank" rel="noopener">
+          <span class="c-lab"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 10.5V17"></path><path d="M8 7.25v.01"></path><path d="M12 17v-6.5"></path><path d="M12 13.5c0-1.7 1.2-3 2.75-3S17 11.6 17 13.3V17"></path></svg>LINKEDIN</span>
+          <span class="c-val">linkedin.com/in/heather45681</span><span aria-hidden="true" class="ar ar-ne mono">↗</span></a></li>
+        <li><a class="c-row" href="index.html?lang=en">
+          <span class="c-lab"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 9h18"></path></svg>PORTFOLIO</span>
+          <span class="c-val">See the full portfolio</span><span aria-hidden="true" class="ar ar-r mono">→</span></a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+</main>
+
+
 <footer class="foot">© 2026 Fifi Lee · UX Designer · Taipei</footer>
+<script>
+(function(){var h=document.documentElement;
+function mark(){var l=h.getAttribute('data-lang');document.querySelectorAll('.lang button').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-set')===l?'true':'false');});
+document.title=l==='en'?'Fifi Lee | UX freelance':'Fifi Lee｜UX 接案合作';}
+document.querySelectorAll('.lang button').forEach(function(b){b.addEventListener('click',function(){var l=b.getAttribute('data-set');h.setAttribute('data-lang',l);h.lang=l==='en'?'en':'zh-Hant';try{localStorage.setItem('fifi-lang',l);}catch(e){}mark();});});
+mark();})();
+</script>
 </body>
 </html>
