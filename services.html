@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fifi Lee｜UX 接案合作</title>
+<meta name="description" content="Fifi Lee — 10 年經驗的 UX 設計師。註冊登入流程健檢、上線前 UI QA、網站設計與切版、Notion＋AI 規則庫建置。">
+<meta property="og:title" content="Fifi Lee｜UX 接案合作">
+<meta property="og:description" content="幫中小團隊把流程做順、上線不出錯。流程健檢・UI QA・網站設計與切版・Notion＋AI 規則庫。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://heather45681.github.io/portfolio2026/services.html">
+<meta property="og:image" content="https://heather45681.github.io/portfolio2026/img/5a12622855edc63d02846815d123024b.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&amp;family=Noto+Sans+TC:wght@400;500;700&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F3F0E8;--paper:#FBF9F4;--ink:#1F2427;--ink2:#3C403E;--mute:#5E625F;--line:#C9C3B4;--accent:#A8482F;--accent-d:#8A3A25;--accent-l:#E59A7F;--dline:#4A504D;--dmute:#B9BDB8;--dtext:#D6D3CA}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans TC',sans-serif;font-size:16px;line-height:1.9;letter-spacing:.04em}
+a{color:var(--ink)}a:hover{color:var(--accent)}
+img{display:block;max-width:100%}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+.mono{font-family:'DM Mono',monospace}
+.serif{font-family:'Noto Serif TC',serif}
+.eyebrow{margin:0;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.16em;color:var(--accent)}
+.dark .eyebrow{color:var(--accent-l)}
+h2.sec{margin:0;font-family:'Noto Serif TC',serif;font-size:34px;font-weight:700;line-height:1.5}
+.pill{display:inline-flex;align-items:center;height:34px;padding:0 16px;border:1px solid var(--ink);border-radius:999px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.08em;line-height:1;text-decoration:none}
+.ct{background:var(--accent);border-color:var(--accent);color:var(--paper) !important;font-weight:500;transition:background .2s}.ct:hover{background:var(--accent-d);border-color:var(--accent-d)}
+.btn{display:inline-block;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.12em;padding:10px 22px;border:1px solid currentColor;border-radius:999px;text-decoration:none}
+.ar{display:inline-block;transition:transform .25s ease}
+a:hover .ar-r{transform:translateX(5px)}a:hover .ar-ne{transform:translate(3px,-3px)}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mq-track{display:inline-flex;animation:mq 70s linear infinite}
+@media (prefers-reduced-motion: reduce){.mq-track{animation:none}.ar{transition:none}}
+.vt{writing-mode:vertical-rl;text-orientation:upright;font-family:'Noto Serif TC',serif;font-size:22px;letter-spacing:.4em}
+
+/* header */
+.hd{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding-top:28px;padding-bottom:28px}
+.brand{text-decoration:none;display:flex;align-items:baseline;gap:12px}
+.nav{display:flex;flex-wrap:wrap;align-items:center;gap:24px;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.12em}
+.nav a{text-decoration:none}
+
+/* hero */
+.hero{display:flex;flex-wrap:wrap;gap:64px;align-items:flex-start;justify-content:space-between;padding-top:72px;padding-bottom:96px}
+.hero-main{flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:32px}
+.hero h1{margin:0;font-family:'Noto Serif TC',serif;font-weight:700;font-size:64px;line-height:1.35;letter-spacing:.06em}
+.hero p.lead{margin:0;max-width:580px;font-size:17px;color:var(--ink2)}
+.tags{display:flex;flex-wrap:wrap;gap:10px;font-size:13px}
+.tags span{padding:4px 14px;border:1px solid var(--line);border-radius:999px}
+.hero-side{flex:0 0 auto;display:flex;gap:20px;align-items:flex-start;padding-top:8px}
+
+.mq{border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:14px 0;overflow:hidden;white-space:nowrap;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:26px;letter-spacing:.08em}
+
+/* section head */
+.sh{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px}
+.sh p.note{margin:0;font-size:14px;color:var(--mute);max-width:420px}
+.dark .sh p.note{color:var(--dmute)}
+
+/* services */
+.services{padding:112px 0;display:flex;flex-direction:column;gap:56px}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,500px),1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.svc{background:var(--bg);padding:40px 36px;display:flex;flex-direction:column;gap:16px}
+.svc .num{font-family:'Cormorant Garamond',serif;font-size:48px;line-height:1;color:var(--accent)}
+.svc h3{margin:0;font-family:'Noto Serif TC',serif;font-size:24px;line-height:1.5}
+.svc .fit{margin:0;font-size:15px;color:var(--ink2)}
+.svc .lab{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.12em;color:var(--mute)}
+.svc ul{margin:0;padding:0 0 0 1.1em;font-size:14px;color:var(--ink2)}
+.svc ul li{margin:2px 0}
+.svc .proof{margin-top:auto;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--mute)}
+.svc .proof a{color:var(--accent);text-decoration:none}
+
+/* cases */
+.dark{background:var(--ink);color:var(--bg)}
+.cases{padding:112px 0}
+.cases .wrap{display:flex;flex-direction:column;gap:56px}
+.case-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:48px 32px}
+.case{display:flex;flex-direction:column;gap:16px;border-top:1px solid var(--dline);padding-top:32px}
+.case img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:4px}
+.case .top{display:flex;gap:16px;align-items:baseline}
+.case .top span:first-child{font-family:'Cormorant Garamond',serif;font-size:44px;line-height:1;color:var(--accent-l)}
+.case .top span:last-child{font-size:13px;color:var(--dmute)}
+.case h3{margin:0;font-family:'Noto Serif TC',serif;font-size:21px;line-height:1.5}
+.case dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px}
+.case dt{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.1em;color:var(--accent-l);padding-top:3px}
+.case dd{margin:0;color:var(--dtext)}
+.case a.btn{align-self:flex-start;color:var(--bg);margin-top:4px}
+.case a.btn:hover{color:var(--accent-l)}
+
+.earlier{border-top:1px solid var(--dline);padding-top:40px;display:flex;flex-direction:column;gap:24px}
+.earlier h3{margin:0;font-family:'Noto Serif TC',serif;font-size:20px}
+.e-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:24px}
+.e-item{display:flex;flex-direction:column;gap:10px}
+.e-item img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:4px;background:var(--paper)}
+.e-item span{font-family:'DM Mono',monospace;font-size:12px;color:var(--accent-l)}
+.e-item p{margin:0;font-size:14px;color:var(--dtext)}
+
+/* process */
+.process{padding:112px 0;display:flex;flex-wrap:wrap;gap:48px}
+.process .head{flex:1 1 260px;display:flex;flex-direction:column;gap:4px;align-self:flex-start}
+.steps{flex:999 1 560px;min-width:0;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:40px 48px}
+.steps li{display:flex;flex-direction:column;gap:12px;padding-bottom:32px;border-bottom:1px solid var(--line)}
+.steps .n{width:44px;height:44px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:12px;color:var(--mute)}
+.steps h3{margin:8px 0 0;font-family:'Noto Serif TC',serif;font-size:20px}
+.steps p{margin:0;font-size:14px;color:var(--ink2)}
+
+/* faq */
+.faq-wrap{background:var(--paper)}
+.faq{padding:112px 0;display:flex;flex-wrap:wrap;gap:48px}
+.faq .head{flex:1 1 260px;display:flex;flex-direction:column;gap:4px;align-self:flex-start}
+.faq-list{flex:999 1 560px;min-width:0;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line);padding:20px 0}
+.faq summary{cursor:pointer;font-family:'Noto Serif TC',serif;font-size:18px;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';font-family:'DM Mono',monospace;font-weight:400;color:var(--accent)}
+.faq details[open] summary::after{content:'−'}
+.faq details p{margin:12px 0 0;font-size:15px;color:var(--ink2)}
+
+/* contact */
+.contact{background:var(--paper);padding:0 24px 24px}
+.c-card{max-width:1392px;margin:0 auto;background:var(--ink);color:var(--bg);border-radius:12px;padding:104px 72px}
+.c-in{max-width:1152px;margin:0 auto;display:flex;flex-wrap:wrap;gap:48px 64px;align-items:flex-end}
+.c-text{flex:1 1 360px;min-width:0;display:flex;flex-direction:column;gap:16px}
+.c-text h2{margin:0;font-family:'Noto Serif TC',serif;font-size:40px;font-weight:700;line-height:1.5}
+.c-text p.sub{margin:0;font-size:15px;color:var(--dmute)}
+.c-list{flex:1 1 420px;min-width:0;list-style:none;margin:0;padding:0;border-top:1px solid var(--dline)}
+.c-list li{border-bottom:1px solid var(--dline)}
+.c-row{display:flex;align-items:center;gap:24px;padding:22px 0;color:var(--bg) !important;text-decoration:none}
+.c-row:hover{color:var(--accent-l) !important}
+.c-lab{flex:0 0 120px;display:inline-flex;align-items:center;gap:10px;line-height:1;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.12em;color:var(--accent-l)}
+.c-val{flex:1 1 auto;min-width:0;font-size:18px;overflow-wrap:anywhere}
+.foot{text-align:center;padding:32px 24px;font-family:'DM Mono',monospace;font-size:12px;color:var(--mute);background:var(--paper)}
+
+@media (max-width:760px){
+  .nav .hide-sp{display:none}
+  .hero{padding-top:40px;padding-bottom:64px}
+  .hero h1{font-size:38px}
+  .hero-side{display:none}
+  .svc{padding:32px 22px}
+  .services,.cases,.process,.faq{padding-top:80px;padding-bottom:80px}
+  .c-card{padding:64px 24px;border-radius:10px}
+  .c-text h2{font-size:30px}
+  .c-row{flex-wrap:wrap;gap:4px 12px}
+  .c-lab{flex-basis:100%}
+  .mq{font-size:20px}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap hd">
+  <a class="brand" href="index.html">
+    <span style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:500;letter-spacing:.08em">Fifi Lee</span>
+    <span class="mono" style="font-size:12px;color:var(--mute)">李芸澧</span>
+  </a>
+  <nav class="nav" aria-label="Main">
+    <a class="hide-sp" href="#services">服務</a>
+    <a class="hide-sp" href="#cases">案例</a>
+    <a class="hide-sp" href="#process">合作流程</a>
+    <a class="hide-sp" href="index.html">完整作品集</a>
+    <a class="pill ct" href="#contact">與我聯繫</a>
+  </nav>
+</header>
+
+<main>
+<section id="top" class="wrap hero">
+  <div class="hero-main">
+    <p class="eyebrow">接案合作｜台北｜<span style="white-space:nowrap">可遠端（GMT+8）</span></p>
+    <h1>從規則到畫面，<br>陪產品走上線。</h1>
+    <p class="lead">10 年設計經驗，做過 30 多個 RWD 網站，近年專注在註冊、登入流程和上線前的品質把關。如果你的團隊需要一位能把流程想清楚、也能和工程師對得上話的設計夥伴，歡迎聊聊。</p>
+    <div class="tags">
+      <span>#流程健檢</span><span>#上線前 UI QA</span><span>#網站設計・切版</span><span>#Notion＋AI 規則庫</span><span>#中・英・日</span>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:12px">
+      <a class="btn ct" href="#contact" style="color:var(--paper)">聊聊你的需求 <span class="ar ar-r">→</span></a>
+      <a class="btn" href="#services">看服務項目</a>
+    </div>
+  </div>
+  <div class="hero-side" aria-hidden="true">
+    <span class="vt">流程做順</span>
+    <span class="vt" style="color:var(--accent);margin-top:48px">畫面做對</span>
+    <span class="vt" style="margin-top:96px">上線不出錯</span>
+  </div>
+</section>
+
+<div class="mq" aria-hidden="true"><div class="mq-track"><span>UX review — 流程健檢 — UI QA before launch — 上線前把關 — Design &amp; front end — 設計・切版 — Notion × AI — 規則庫 — </span><span>UX review — 流程健檢 — UI QA before launch — 上線前把關 — Design &amp; front end — 設計・切版 — Notion × AI — 規則庫 — </span></div></div>
+
+<section id="services" class="wrap services">
+  <div class="sh">
+    <div style="display:flex;flex-direction:column;gap:4px">
+      <p class="eyebrow">Services|</p>
+      <h2 class="sec">我可以幫你做什麼</h2>
+    </div>
+    <p class="note">每一項都可以單獨接，也可以組合。範圍不確定也沒關係，先聊再一起決定。</p>
+  </div>
+
+  <div class="svc-grid">
+    <article class="svc">
+      <span class="num">01</span>
+      <h3>註冊・登入流程健檢</h3>
+      <p class="fit">適合：註冊轉換不理想、客服常收到「登不進去」「收不到驗證碼」的團隊。</p>
+      <span class="lab">交付內容</span>
+      <ul>
+        <li>實際走一遍現有流程，整理問題清單與優先順序</li>
+        <li>例外情境盤點：重複註冊、錯誤訊息、帳號被鎖、找回失敗</li>
+        <li>改善建議與 mockup，兼顧好用與資安</li>
+      </ul>
+      <p class="proof">做過的事：三品牌註冊改版，註冊送出日均 +18.6%　<a href="#cases">看案例 →</a></p>
+    </article>
+
+    <article class="svc">
+      <span class="num">02</span>
+      <h3>上線前 UI QA</h3>
+      <p class="fit">適合：準備上線，但團隊裡沒有專職設計師幫忙驗收畫面的團隊。</p>
+      <span class="lab">交付內容</span>
+      <ul>
+        <li>依設計稿逐頁比對文案、間距、狀態與互動</li>
+        <li>跨裝置、跨平台檢查</li>
+        <li>工程師看得懂的問題單，可用中文或英文撰寫</li>
+      </ul>
+      <p class="proof">做過的事：一次改版的 UAT 開出 115 張問題單　<a href="work01.html">看案例 →</a></p>
+    </article>
+
+    <article class="svc">
+      <span class="num">03</span>
+      <h3>網站設計＋切版</h3>
+      <p class="fit">適合：需要官網、品牌網站、活動頁或會員功能的店家與中小企業。</p>
+      <span class="lab">交付內容</span>
+      <ul>
+        <li>RWD 設計稿（電腦、平板、手機）</li>
+        <li>需要時一併完成前端切版</li>
+        <li>元件化設計，之後擴充或改版更省力</li>
+      </ul>
+      <p class="proof">做過的事：30+ 個 RWD 網站上線，包含國語日報、台灣網際網路協會　<a href="#earlier">看作品 →</a></p>
+    </article>
+
+    <article class="svc">
+      <span class="num">04</span>
+      <h3>Notion＋AI 規則庫建置</h3>
+      <p class="fit">適合：規格散在聊天紀錄和文件裡，同一個問題一直被重複問的小團隊。</p>
+      <span class="lab">交付內容</span>
+      <ul>
+        <li>Notion 決策庫架構：一條規則一句話、標好適用範圍與出處</li>
+        <li>把既有規則整理進去的方式</li>
+        <li>搭配 AI 查規則、比對規格的使用流程</li>
+      </ul>
+      <p class="proof">做過的事：自建 UIUX 決策庫，找規則從翻聊天紀錄變成一搜就有　<a href="work03.html">看案例 →</a></p>
+    </article>
+  </div>
+</section>
+
+<section id="cases" class="dark cases">
+  <div class="wrap">
+    <div class="sh">
+      <div style="display:flex;flex-direction:column;gap:4px">
+        <p class="eyebrow">Selected work|</p>
+        <h2 class="sec">做過的案例</h2>
+      </div>
+      <p class="note">所有畫面皆已去識別化。每個案例都有完整版，想看細節可以點進去。</p>
+    </div>
+
+    <div class="case-grid">
+      <article class="case">
+        <img src="img/5a12622855edc63d02846815d123024b.png" alt="註冊頁改版前後對比：改版前一頁填完所有欄位，改版後分成帳號與手機號兩種註冊方式">
+        <div class="top"><span>01</span><span>註冊・登入流程改版</span></div>
+        <h3>三個品牌、三種規則，收斂成一套</h3>
+        <dl>
+          <dt>問題</dt><dd>舊註冊頁一次要填 5 個欄位，各品牌規則又不一致。</dd>
+          <dt>做法</dt><dd>拆成手機與帳號兩種註冊方式，統一驗證規則與錯誤訊息。</dd>
+          <dt>結果</dt><dd>註冊送出日均 +18.6%，每人重複送出 −19%。</dd>
+        </dl>
+        <a class="btn" href="work01.html">閱讀完整案例 <span class="ar ar-r">→</span></a>
+      </article>
+
+      <article class="case">
+        <img src="img/e0343933aa3ca612701bed202f0016be.png" alt="帳號密碼找回流程的三個畫面：輸入、無法找回的提示、重設密碼">
+        <div class="top"><span>02</span><span>帳號找回流程</span></div>
+        <h3>讓卡住的用戶，每一步都有路走</h3>
+        <dl>
+          <dt>問題</dt><dd>只能用 Email 找回，收不到信或連結過期就只能找客服。</dd>
+          <dt>做法</dt><dd>改成手機或 Email 驗證、全程留在主站，每個卡關點都給下一步。</dd>
+          <dt>結果</dt><dd>App 與 Web 同步上線，客服變成最後一步。</dd>
+        </dl>
+        <a class="btn" href="work02.html">閱讀完整案例 <span class="ar ar-r">→</span></a>
+      </article>
+
+      <article class="case">
+        <img src="img/ae63ed4d86440ceaf4572afe22014b19.png" alt="UIUX 決策庫的資料表畫面，標註品牌、市場、平台、模組與狀態（去識別化重繪）">
+        <div class="top"><span>03</span><span>Notion＋AI 決策庫</span></div>
+        <h3>讓 AI 在上線前，先抓出規格裡的矛盾</h3>
+        <dl>
+          <dt>問題</dt><dd>規則散在 mockup、Jira 和聊天紀錄裡，同一條規則被問好幾次。</dd>
+          <dt>做法</dt><dd>用 Notion 整理成可查詢的決策庫，再讓 AI 協助比對規格。</dd>
+          <dt>結果</dt><dd>一搜就找到規則和出處，還抓到工程師打錯的文案。</dd>
+        </dl>
+        <a class="btn" href="work03.html">閱讀完整案例 <span class="ar ar-r">→</span></a>
+      </article>
+    </div>
+
+    <div id="earlier" class="earlier">
+      <div style="display:flex;flex-direction:column;gap:4px">
+        <p class="eyebrow">Client projects|</p>
+        <h3>網站與 App 客戶專案</h3>
+      </div>
+      <div class="e-grid">
+        <div class="e-item">
+          <img src="img/403a1b5a878fa37ce48402b13b3dc2fe.png" alt="國語小舖網站在電腦、平板、手機上的畫面">
+          <span>2019｜RWD 網站・會員系統</span>
+          <p>國語日報・國語小舖 訂閱網站</p>
+        </div>
+        <div class="e-item">
+          <img src="img/1e5379076a3847fceb613e754d7bac29.png" alt="台灣網際網路協會官網主視覺">
+          <span>2019｜RWD 網站改版</span>
+          <p>台灣網際網路協會 官網改版</p>
+        </div>
+        <div class="e-item">
+          <img src="img/7f4288e47ab0e008b83c12693bea046e.png" alt="勝博殿餐飲 App 改版主視覺" style="object-position:left center">
+          <span>2018｜App 設計</span>
+          <p>勝博殿 Saboten 餐飲 App 改版</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process" class="wrap process">
+  <div class="head">
+    <p class="eyebrow">Process|</p>
+    <h2 class="sec">合作流程</h2>
+  </div>
+  <ol class="steps">
+    <li><span class="n">01</span><h3>聊需求</h3><p>私訊或來信，簡單說明產品、想解決的問題和預計時程。還沒想清楚也沒關係，我們可以一起整理。</p></li>
+    <li><span class="n">02</span><h3>確認範圍與報價</h3><p>確認交付內容、修改次數和時程後提供報價，雙方同意再開始。</p></li>
+    <li><span class="n">03</span><h3>分階段確認</h3><p>過程中分段給你看、隨時調整方向，不會等到最後才一次交出來。</p></li>
+    <li><span class="n">04</span><h3>交付與上線支援</h3><p>交付設計檔與規格說明，讓工程師看得懂。上線前也可以協助確認畫面。</p></li>
+  </ol>
+</section>
+
+<div class="faq-wrap">
+<section class="wrap faq">
+  <div class="head">
+    <p class="eyebrow">FAQ|</p>
+    <h2 class="sec">常見問題</h2>
+  </div>
+  <div class="faq-list">
+    <details>
+      <summary>報價怎麼算？</summary>
+      <p>依案子範圍報價。看過需求後，我會列出交付內容、修改次數和時程，讓你清楚知道費用包含哪些項目。</p>
+    </details>
+    <details>
+      <summary>可以只做其中一小部分嗎？</summary>
+      <p>可以。例如只做一次註冊流程健檢，或只在上線前幫忙驗收畫面，都可以單獨接。</p>
+    </details>
+    <details>
+      <summary>需要見面嗎？</summary>
+      <p>線上合作就可以完成，人在台北的話也可以約面談。</p>
+    </details>
+    <details>
+      <summary>可以用英文或日文溝通嗎？</summary>
+      <p>可以。我習慣中英雙語寫規格和問題單，日文為 JLPT N2。</p>
+    </details>
+  </div>
+</section>
+</div>
+
+<section id="contact" class="contact">
+  <div class="c-card">
+    <div class="c-in">
+      <div class="c-text">
+        <p class="eyebrow" style="color:var(--accent-l)">Contact|</p>
+        <h2>一起讓你的產品<br>順利上線吧。</h2>
+        <p class="sub"><span style="display:inline-block">接案合作歡迎私訊或來信，</span><span style="display:inline-block">說明產品和想解決的問題就可以。</span></p>
+      </div>
+      <ul class="c-list">
+        <li><a class="c-row" href="mailto:heather45681@gmail.com?subject=%E6%8E%A5%E6%A1%88%E5%90%88%E4%BD%9C%E8%A9%A2%E5%95%8F">
+          <span class="c-lab"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3.5 6.5 8.5 6.5 8.5-6.5"></path></svg>EMAIL</span>
+          <span class="c-val">heather45681@gmail.com</span><span aria-hidden="true" class="ar ar-r mono">→</span></a></li>
+        <li><a class="c-row" href="https://www.linkedin.com/in/heather45681/" target="_blank" rel="noopener">
+          <span class="c-lab"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 10.5V17"></path><path d="M8 7.25v.01"></path><path d="M12 17v-6.5"></path><path d="M12 13.5c0-1.7 1.2-3 2.75-3S17 11.6 17 13.3V17"></path></svg>LINKEDIN</span>
+          <span class="c-val">linkedin.com/in/heather45681</span><span aria-hidden="true" class="ar ar-ne mono">↗</span></a></li>
+        <li><a class="c-row" href="index.html">
+          <span class="c-lab"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 9h18"></path></svg>PORTFOLIO</span>
+          <span class="c-val">看完整作品集</span><span aria-hidden="true" class="ar ar-r mono">→</span></a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">© 2026 Fifi Lee · UX Designer · Taipei</footer>
+</body>
+</html>
