@@ -47,6 +47,7 @@ async function handleCheck(request, env, ctx) {
 
   // 1. bot check
   const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+  const ipBucket = ip.includes(':') ? ip.split(':').slice(0, 4).join(':') + '::/64' : ip; // IPv6: one /64 = one visitor
   const human = await verifyTurnstile(env, body.token, ip);
   if (!human) return json({ error: 'turnstile' }, 403);
 
@@ -59,7 +60,7 @@ async function handleCheck(request, env, ctx) {
   const day = new Date().toISOString().slice(0, 10);
   const busyUntil = parseInt((await env.KV.get('busy')) || '0', 10);
   if (busyUntil > Date.now()) return busy(busyUntil);
-  const ipKey = `ip:${day}:${ip}`;
+  const ipKey = `ip:${day}:${ipBucket}`;
   const gKey = `g:${day}`;
   const [ipCount, gCount] = await Promise.all([
     env.KV.get(ipKey).then(n => parseInt(n || '0', 10)),
@@ -84,9 +85,11 @@ async function handleCheck(request, env, ctx) {
   try {
     advice = await askClaude(env, lang, target, page, speed);
   } catch (e) {
-    // give the visitor their try back, since they got nothing for it
-    ctx.waitUntil(env.KV.put(ipKey, String(ipCount), { expirationTtl: 60 * 60 * 26 }));
     if (e.busy) {
+      // the API refused the call, so nothing was billed: give the visitor their try back.
+      // (Other failures, such as a bad answer, did use tokens, so they still count. Otherwise a page
+      // built to break the output could be re-checked without limit.)
+      ctx.waitUntil(env.KV.put(ipKey, String(ipCount), { expirationTtl: 60 * 60 * 26 }));
       // out of credit: pause until the next reset; overloaded or rate limited: pause 10 minutes
       const until = e.busy === 'credit' ? nextResetMs() : Date.now() + 10 * 60 * 1000;
       ctx.waitUntil(env.KV.put('busy', String(until), { expirationTtl: Math.max(60, Math.ceil((until - Date.now()) / 1000)) }));
@@ -158,7 +161,7 @@ async function verifyTurnstile(env, token, ip) {
   form.append('remoteip', ip);
   const r = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', { method: 'POST', body: form });
   const d = await r.json().catch(() => ({}));
-  return d.success === true;
+  return d.success === true && ['fifilee-design.com', 'www.fifilee-design.com'].includes(d.hostname);
 }
 
 // ---------- page reading ----------
