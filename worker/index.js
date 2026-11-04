@@ -311,6 +311,7 @@ async function askClaude(env, lang, target, page, speed) {
     body: JSON.stringify({
       model: MODEL,
       max_tokens: MAX_OUTPUT_TOKENS,
+      thinking: { type: 'disabled' }, // Haiku 5.5 thinks by default; that eats the token budget and adds cost
       system: VOICE[lang] + '\n\n' + RULES[lang],
       messages: [{ role: 'user', content: `<page_data>\n${payload}\n</page_data>` }],
     }),
