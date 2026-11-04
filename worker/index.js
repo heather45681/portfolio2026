@@ -93,7 +93,7 @@ async function handleCheck(request, env, ctx) {
       return busy(until);
     }
     console.log('ai_failed', e.code || '', e.message);
-    return json({ error: 'ai_failed', code: e.code || 'ai_other' }, 502);
+    return json({ error: 'ai_failed', code: e.code || 'ai_other', detail: e.detail || '', colo: (request.cf && request.cf.colo) || '' }, 502);
   }
 
   const result = { url: target.href, lang, scores: speed, advice, checkedAt: new Date().toISOString() };
@@ -320,6 +320,7 @@ async function askClaude(env, lang, target, page, speed) {
     const err = new Error('ai ' + r.status);
     const body = await r.text().catch(() => '');
     err.code = 'ai_' + r.status;
+    try { const m = JSON.parse(body).error; err.detail = String(m.type + ': ' + m.message).replace(/[<>]/g, '').slice(0, 140); } catch { err.detail = body.replace(/<[^>]*>/g, '').trim().slice(0, 140); }
     console.log('anthropic error', r.status, body.slice(0, 300));
     if (/credit balance|billing|spend limit|usage limit/i.test(body)) err.busy = 'credit';
     else if (r.status === 429 || r.status === 529 || r.status === 503) err.busy = 'overload';
