@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>健檢紀錄｜Fifi Lee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F3F0E8;--paper:#FBF9F4;--ink:#1F2427;--ink2:#3C403E;--mute:#5E625F;--line:#C9C3B4;--accent:#A8482F;--accent-d:#8A3A25}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans TC',sans-serif;font-size:15px;line-height:1.8}
+.wrap{max-width:960px;margin:0 auto;padding:40px 20px 80px}
+h1{margin:0 0 4px;font-family:'Noto Serif TC',serif;font-size:28px}
+.sub{margin:0 0 24px;color:var(--mute);font-size:14px}
+form{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+input{flex:1 1 260px;min-width:0;padding:10px 14px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff}
+button{border:0;border-radius:10px;background:var(--accent);color:#fff;font:inherit;padding:10px 18px;cursor:pointer}
+button:hover{background:var(--accent-d)}
+button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.msg{color:var(--accent);margin:0 0 16px}
+.count{color:var(--mute);font-size:13px;margin:0 0 8px}
+ul.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.list>li{border-bottom:1px solid var(--line)}
+.row{width:100%;display:flex;gap:16px;align-items:baseline;padding:14px 4px;background:none;color:var(--ink);border-radius:0;text-align:left}
+.row:hover{background:var(--paper)}
+.row time{flex:0 0 150px;font-size:13px;color:var(--mute)}
+.row .u{flex:1 1 auto;min-width:0;overflow-wrap:anywhere;font-weight:500}
+.row .l{flex:none;font-size:12px;color:var(--mute);border:1px solid var(--line);border-radius:99px;padding:0 8px}
+.detail{padding:4px 4px 24px}
+.detail h3{margin:18px 0 6px;font-size:15px;color:var(--accent)}
+.detail p{margin:4px 0}
+.detail ol,.detail ul{margin:4px 0;padding-left:20px}
+.detail li{margin:6px 0}
+.lab{display:inline-block;min-width:42px;font-size:12px;color:var(--mute)}
+.scores{display:flex;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--ink2)}
+.more{margin-top:16px}
+@media (max-width:600px){.row{flex-wrap:wrap;gap:2px 12px}.row time{flex-basis:100%}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <h1>健檢紀錄</h1>
+  <p class="sub">最近 90 天的網站健檢結果，最新的在最上面。只有你知道密碼才能看。</p>
+
+  <form id="auth">
+    <input id="tok" type="password" autocomplete="current-password" placeholder="管理密碼（Cloudflare 裡的 ADMIN_TOKEN）" aria-label="管理密碼">
+    <button type="submit">查看紀錄</button>
+    <button type="button" class="ghost" id="out" hidden>登出</button>
+  </form>
+  <p class="msg" id="msg" role="alert" hidden></p>
+  <p class="count" id="count" hidden></p>
+  <ul class="list" id="list"></ul>
+  <button type="button" class="ghost more" id="more" hidden>載入更多</button>
+</main>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var token = '', cursor = null, shown = 0;
+  try { token = sessionStorage.getItem('fifi-logs') || ''; } catch (e) {}
+
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined && text !== null) e.textContent = text; return e; }
+  function say(t) { $('msg').textContent = t; $('msg').hidden = !t; }
+  function api(q) {
+    return fetch('/api/logs' + q, { headers: { 'x-admin-token': token } }).then(function (r) {
+      if (r.status === 401) throw new Error('auth');
+      if (r.status === 404) throw new Error('off');
+      return r.json();
+    });
+  }
+  function fail(e) {
+    if (e.message === 'auth') { say('密碼不對，請再試一次。'); logout(true); }
+    else if (e.message === 'off') say('紀錄功能還沒開啟：請先在 Cloudflare 新增 ADMIN_TOKEN 這個 Secret（至少 24 個字元）。');
+    else say('讀取失敗，請稍後再試。');
+  }
+  function logout(keepMsg) {
+    token = ''; try { sessionStorage.removeItem('fifi-logs'); } catch (e) {}
+    $('list').textContent = ''; $('more').hidden = true; $('count').hidden = true; $('out').hidden = true;
+    if (!keepMsg) say('');
+  }
+
+  function load(first) {
+    api(cursor ? '?cursor=' + encodeURIComponent(cursor) : '').then(function (d) {
+      if (first) { $('list').textContent = ''; shown = 0; }
+      say(''); $('out').hidden = false;
+      d.items.forEach(addRow); shown += d.items.length;
+      cursor = d.cursor; $('more').hidden = !cursor;
+      $('count').textContent = shown ? '已載入 ' + shown + ' 筆' : '目前還沒有人健檢過。';
+      $('count').hidden = false;
+    }).catch(fail);
+  }
+
+  function addRow(it) {
+    var li = el('li');
+    var b = el('button', 'row'); b.type = 'button'; b.setAttribute('aria-expanded', 'false');
+    var t = el('time', '', it.at ? new Date(it.at).toLocaleString('zh-TW', { hour12: false }) : '');
+    b.appendChild(t); b.appendChild(el('span', 'u', it.url || '')); b.appendChild(el('span', 'l', it.lang === 'en' ? 'EN' : '中'));
+    var box = el('div', 'detail'); box.hidden = true;
+    b.addEventListener('click', function () {
+      var open = box.hidden;
+      box.hidden = !open; b.setAttribute('aria-expanded', String(open));
+      if (open && !box.dataset.done) {
+        box.textContent = '讀取中…';
+        api('?id=' + encodeURIComponent(it.id)).then(function (r) { box.dataset.done = '1'; render(box, r); }).catch(function (e) { box.textContent = ''; fail(e); });
+      }
+    });
+    li.appendChild(b); li.appendChild(box); $('list').appendChild(li);
+  }
+
+  function render(box, r) {
+    box.textContent = '';
+    var a = r.advice || {};
+    var s = r.scores;
+    var sc = el('div', 'scores');
+    if (s) [['效能', s.performance], ['無障礙', s.accessibility], ['最佳做法', s.bestPractices], ['SEO', s.seo], ['LCP', s.lcp]].forEach(function (x) { if (x[1] !== null && x[1] !== undefined) sc.appendChild(el('span', '', x[0] + ' ' + x[1])); });
+    else sc.appendChild(el('span', '', '這次沒有 PageSpeed 分數'));
+    box.appendChild(sc);
+    if (a.summary) { box.appendChild(el('h3', '', '總評')); box.appendChild(el('p', '', a.summary)); }
+    if (a.journey) { box.appendChild(el('h3', '', '新訪客路徑')); box.appendChild(el('p', '', a.journey)); }
+    if (a.findings && a.findings.length) {
+      box.appendChild(el('h3', '', '建議'));
+      var ol = el('ol');
+      a.findings.forEach(function (f) {
+        var li = el('li');
+        li.appendChild(el('strong', '', f.title + (f.severity ? '（' + ({ high: '高', medium: '中', low: '低' }[f.severity] || '') + '）' : '') + (f.where ? '｜' + f.where : '')));
+        [['現況', f.current], ['預期', f.expected], ['建議', f.fix]].forEach(function (x) { if (!x[1]) return; var p = el('p'); p.appendChild(el('span', 'lab', x[0])); p.appendChild(document.createTextNode(x[1])); li.appendChild(p); });
+        ol.appendChild(li);
+      });
+      box.appendChild(ol);
+    }
+    if (a.tells && a.tells.length) {
+      box.appendChild(el('h3', '', '模板常見破綻'));
+      var ul = el('ul');
+      a.tells.forEach(function (n) { var li = el('li'); li.appendChild(el('strong', '', n.issue)); if (n.evidence) li.appendChild(el('p', '', '線索：' + n.evidence)); if (n.fix) li.appendChild(el('p', '', '建議：' + n.fix)); ul.appendChild(li); });
+      box.appendChild(ul);
+    }
+    if (a.nitpicks && a.nitpicks.length) {
+      box.appendChild(el('h3', '', '細節雷達'));
+      var ul2 = el('ul');
+      a.nitpicks.forEach(function (n) { var li = el('li'); li.appendChild(el('strong', '', '「' + n.quote + '」')); li.appendChild(el('p', '', n.note)); ul2.appendChild(li); });
+      box.appendChild(ul2);
+    }
+    if (a.closing) { box.appendChild(el('h3', '', '結尾')); box.appendChild(el('p', '', a.closing)); }
+  }
+
+  $('auth').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var v = $('tok').value.trim(); if (!v) return;
+    token = v; $('tok').value = '';
+    try { sessionStorage.setItem('fifi-logs', token); } catch (e) {}
+    cursor = null; load(true);
+  });
+  $('more').addEventListener('click', function () { load(false); });
+  $('out').addEventListener('click', function () { logout(false); });
+  if (token) load(true);
+})();
+</script>
+</body>
+</html>

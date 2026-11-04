@@ -5,6 +5,7 @@
 //   ANTHROPIC_API_KEY   Claude API key
 //   TURNSTILE_SECRET    Turnstile secret key
 //   PAGESPEED_KEY       Google PageSpeed Insights key (optional)
+//   ADMIN_TOKEN         long random password for the log page (logs.html); without it /api/logs is off
 // Bindings (wrangler.jsonc): ASSETS, KV
 
 const MODEL = 'claude-haiku-5-5';
@@ -16,12 +17,14 @@ const PAGE_BYTES_MAX = 1_500_000;
 const PAGE_TIMEOUT_MS = 8000;
 const PAGESPEED_TIMEOUT_MS = 45000; // a mobile Lighthouse run often takes 20–40 s
 const AI_TIMEOUT_MS = 30000;
+const LOG_TTL = 60 * 60 * 24 * 90; // keep check records for 90 days
 const ALLOWED_ORIGINS = ['https://fifilee-design.com', 'https://www.fifilee-design.com'];
 
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (url.pathname === '/api/check') return handleCheck(request, env, ctx);
+    if (url.pathname === '/api/logs') return handleLogs(request, env, url);
     return env.ASSETS.fetch(request);
   },
 };
@@ -101,7 +104,42 @@ async function handleCheck(request, env, ctx) {
 
   const result = { url: target.href, lang, scores: speed, advice, checkedAt: new Date().toISOString() };
   ctx.waitUntil(env.KV.put(cacheKey, JSON.stringify(result), { expirationTtl: CACHE_TTL }));
+  // record for Fifi's log page: newest first (inverted timestamp), no IP or visitor details
+  const logKey = `log:${String(9e15 - Date.now()).padStart(16, '0')}:${crypto.randomUUID().slice(0, 8)}`;
+  ctx.waitUntil(env.KV.put(logKey, JSON.stringify(result), { expirationTtl: LOG_TTL, metadata: { url: target.href.slice(0, 200), lang, at: result.checkedAt } }));
   return json(result);
+}
+
+// ---------- log page API (Fifi only) ----------
+// GET /api/logs            -> list of recent checks (20 per page)
+// GET /api/logs?id=<key>   -> one full record
+// Needs the x-admin-token header to match the ADMIN_TOKEN secret. Without that secret the endpoint doesn't exist.
+
+async function handleLogs(request, env, url) {
+  if (!env.ADMIN_TOKEN || env.ADMIN_TOKEN.length < 24) return new Response('Not found', { status: 404 });
+  if (request.method !== 'GET') return json({ error: 'method' }, 405);
+  const given = request.headers.get('x-admin-token') || '';
+  if (!(await sameSecret(given, env.ADMIN_TOKEN))) return json({ error: 'auth' }, 401);
+
+  const id = url.searchParams.get('id');
+  if (id) {
+    if (!/^log:\d{16}:[0-9a-f]{8}$/.test(id)) return json({ error: 'bad_request' }, 400);
+    const rec = await env.KV.get(id, 'json');
+    return rec ? json(rec) : json({ error: 'not_found' }, 404);
+  }
+  const cursor = url.searchParams.get('cursor') || undefined;
+  const page = await env.KV.list({ prefix: 'log:', limit: 20, cursor });
+  return json({
+    items: page.keys.map(k => ({ id: k.name, ...(k.metadata || {}) })),
+    cursor: page.list_complete ? null : page.cursor,
+  });
+}
+
+// compare secrets without leaking how many characters matched
+async function sameSecret(a, b) {
+  const enc = new TextEncoder();
+  const [ha, hb] = await Promise.all([crypto.subtle.digest('SHA-256', enc.encode(a)), crypto.subtle.digest('SHA-256', enc.encode(b))]);
+  return crypto.subtle.timingSafeEqual(ha, hb);
 }
 
 function nextResetMs() {
