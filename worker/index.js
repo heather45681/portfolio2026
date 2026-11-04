@@ -74,7 +74,7 @@ async function handleCheck(request, env, ctx) {
 
   // 4. gather facts about the page
   const [page, speed] = await Promise.all([
-    readPage(target).catch(() => null),
+    readPage(target, env).catch(() => null),
     readPageSpeed(env, target).catch(() => null),
   ]);
   if (!page) return json({ error: 'fetch_failed' }, 422);
@@ -136,9 +136,16 @@ function normalizeTarget(input) {
   const host = u.hostname.toLowerCase();
   if (!host.includes('.') || host.endsWith('.local') || host.endsWith('.internal') || host === 'localhost') return null;
   if (/^[\d.]+$/.test(host) || host.includes(':') || host.startsWith('[')) return null; // no raw IP addresses
-  if (host === 'fifilee-design.com' || host.endsWith('.fifilee-design.com')) return null; // no checking itself
+  if (host.endsWith('.fifilee-design.com') && host !== 'www.fifilee-design.com') return null;
+  if (isOwnSite(u) && u.pathname.startsWith('/api/')) return null; // never call the API through itself
   u.hash = '';
   return u;
+}
+
+// this site itself is read straight from the bundled files, not over the network
+function isOwnSite(u) {
+  const h = u.hostname.toLowerCase();
+  return h === 'fifilee-design.com' || h === 'www.fifilee-design.com';
 }
 
 // ---------- Turnstile ----------
@@ -156,8 +163,10 @@ async function verifyTurnstile(env, token, ip) {
 
 // ---------- page reading ----------
 
-async function readPage(target) {
-  const res = await fetch(target.href, {
+async function readPage(target, env) {
+  const res = isOwnSite(target) && env && env.ASSETS
+    ? await env.ASSETS.fetch(new Request('https://fifilee-design.com' + target.pathname + target.search))
+    : await fetch(target.href, {
     headers: { 'user-agent': 'Mozilla/5.0 (compatible; FifiLeeSiteCheck/1.0; +https://fifilee-design.com/check.html)' },
     redirect: 'follow',
     signal: AbortSignal.timeout(PAGE_TIMEOUT_MS),
@@ -167,8 +176,8 @@ async function readPage(target) {
 
   const facts = {
     status: res.status,
-    finalUrl: res.url,
-    https: res.url.startsWith('https://'),
+    finalUrl: res.url || target.href,
+    https: (res.url || target.href).startsWith('https://'),
     lang: '', title: '', description: '', viewport: '',
     headings: [], buttons: [], links: [], fields: [], labels: [], text: [],
     forms: 0, images: 0, imagesNoAlt: 0,
