@@ -68,6 +68,12 @@ input[type=url]:focus{outline:2px solid var(--accent);outline-offset:1px;border-
 .finds .n{font-family:'Cormorant Garamond',serif;font-size:34px;line-height:1;color:var(--accent);grid-row:span 3}
 .finds h3{margin:0;font-family:'Noto Serif TC',serif;font-size:19px;line-height:1.5}
 .finds p{margin:0;font-size:15px;color:var(--ink2)}
+.radar{margin:28px 0 0;padding:20px 22px;border:1px dashed var(--line);border-radius:14px}
+.radar h3{margin:0 0 4px;font-family:'Noto Serif TC',serif;font-size:17px}
+.radar .sub{margin:0 0 12px;font-size:13px;color:var(--mute)}
+.radar ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.radar q{display:block;font-family:'DM Mono',monospace;font-size:13px;color:var(--ink);quotes:'「' '」'}
+.radar li p{margin:2px 0 0;font-size:14px;color:var(--ink2)}
 .finds .lab{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--mute);margin-right:8px}
 .close{background:var(--ink);color:var(--bg);border-radius:12px;padding:32px;display:flex;flex-direction:column;gap:16px}
 .close p{margin:0;font-size:16px;color:#D6D3CA}
@@ -137,6 +143,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
   </div>
   <p class="summary" id="sum"></p>
   <ol class="finds" id="finds"></ol>
+  <div class="radar" id="radar" hidden><h3 id="radarT"></h3><p class="sub" id="radarS"></p><ul id="radarL"></ul></div>
   <div class="close">
     <p class="eyebrow" style="color:var(--accent-l)" data-t="closeEyebrow"></p>
     <p id="closing"></p>
@@ -166,7 +173,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       s1: '讀取網頁內容', s2: '檢查速度與無障礙（Google PageSpeed）', s3: '整理建議',
       resEyebrow: '健檢結果', psTitle: 'Google PageSpeed 分數（手機版）',
       perf: '效能', a11y: '無障礙', bp: '最佳做法', seo: 'SEO', lcp: '最大內容繪製',
-      why: '為什麼', fix: '建議',
+      why: '為什麼', fix: '建議', radarT: '細節雷達', radarS: '不影響使用，但我就是會注意到的小地方。',
       closeEyebrow: '想看得更完整？', ctaContact: '聊聊完整健檢 →', ctaSvc: '看服務項目',
       disclaimer: '這份結果由 AI 根據公開頁面內容自動產生，僅供參考，不代表完整的專業評估。',
       cached: '這個網址 24 小時內檢查過，以下是當時的結果。', checked: '檢查時間：',
@@ -181,7 +188,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       s1: 'Reading the page', s2: 'Checking speed and accessibility (Google PageSpeed)', s3: 'Writing up suggestions',
       resEyebrow: 'RESULTS', psTitle: 'Google PageSpeed scores (mobile)',
       perf: 'Performance', a11y: 'Accessibility', bp: 'Best practices', seo: 'SEO', lcp: 'Largest paint',
-      why: 'WHY', fix: 'FIX',
+      why: 'WHY', fix: 'FIX', radarT: 'Detail radar', radarS: "Small things that don't break anything. I just can't not notice them.",
       closeEyebrow: 'WANT THE FULL PICTURE?', ctaContact: 'Talk about a full review →', ctaSvc: 'See services',
       disclaimer: 'These results are generated automatically by AI from the public page. They are a starting point, not a full professional review.',
       cached: 'This URL was checked in the last 24 hours; here is that result.', checked: 'Checked: ',
@@ -294,6 +301,10 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       var p2 = el('p'); p2.appendChild(el('span', 'lab', t.fix)); p2.appendChild(document.createTextNode(f.fix)); li.appendChild(p2);
       ol.appendChild(li);
     });
+    var np = d.advice.nitpicks || [], rl = $('radarL'); rl.textContent = '';
+    $('radar').hidden = !np.length;
+    $('radarT').textContent = t.radarT; $('radarS').textContent = t.radarS;
+    np.forEach(function (n) { var li = el('li'); var q = el('q', '', n.quote); if (L === 'en') q.style.quotes = '"\u201C" "\u201D"'; li.appendChild(q); li.appendChild(el('p', '', n.note)); rl.appendChild(li); });
     $('closing').textContent = d.advice.closing;
   }
 
