@@ -1,6 +1,12 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
+<script>
+/* moved to fifilee-design.com: send old github.io links to the same page there */
+if (location.hostname === 'heather45681.github.io') {
+  location.replace('https://fifilee-design.com' + location.pathname.replace(/^\/portfolio2026/, '') + location.search + location.hash);
+}
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>02 採購系統與 Design System</title>
@@ -9,8 +15,8 @@
 <meta property="og:title" content="02 採購系統與 Design System">
 <meta property="og:description" content="02 採購系統與 Design System">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://heather45681.github.io/portfolio2026/work02.html">
-<meta property="og:image" content="https://heather45681.github.io/portfolio2026/img/5a12622855edc63d02846815d123024b.png">
+<meta property="og:url" content="https://fifilee-design.com/work02.html">
+<meta property="og:image" content="https://fifilee-design.com/img/5a12622855edc63d02846815d123024b.png">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,7 +39,7 @@ a{color:#1F2427}a:hover{color:#A8482F}
 
 <script>
 /* GoatCounter: only count visits on the live site, not previews */
-if (location.hostname === 'heather45681.github.io') {
+if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
   var gc = document.createElement('script');
   gc.async = true;
   gc.src = 'https://gc.zgo.at/count.js';

@@ -1,6 +1,12 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
+<script>
+/* moved to fifilee-design.com: send old github.io links to the same page there */
+if (location.hostname === 'heather45681.github.io') {
+  location.replace('https://fifilee-design.com' + location.pathname.replace(/^\/portfolio2026/, '') + location.search + location.hash);
+}
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Prototype — Sign-up &amp; Login rules</title>
@@ -113,7 +119,7 @@ button{font-family:inherit}
 </style>
 <script>
 /* GoatCounter: only count visits on the live site, not previews */
-if (location.hostname === 'heather45681.github.io') {
+if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
   var gc = document.createElement('script');
   gc.async = true;
   gc.src = 'https://gc.zgo.at/count.js';
@@ -257,7 +263,7 @@ function logEv(k){if(!t().ev[k])return;if(LACT!==ACT){S.log=[];LACT=ACT;}if(S.lo
 function drawLog(){var el=document.getElementById('log');if(!S.log.length){el.innerHTML='<p class="empty">'+t().empty+'</p>';return;}el.innerHTML=S.log.map(function(k){var e=t().ev[k];return '<div class="it"><b>'+e[0]+'</b>'+(e[1]?'<br>'+e[1]:'')+'</div>';}).join('');}
 function panel(){document.documentElement.lang=L==='en'?'en':'zh-Hant';
 ['ph','pl','tt','lt','at','nt'].forEach(function(id){});
-document.getElementById('ph').textContent=t().h;document.getElementById('pl').textContent=t().l;document.getElementById('tt').textContent=t().tt;document.getElementById('lt').textContent=t().lt;document.getElementById('at').textContent=t().at;document.getElementById('acct').innerHTML=t().acct;document.getElementById('nt').textContent=t().note;var bk=document.getElementById('back');bk.textContent=t().back;bk.href='https://heather45681.github.io/portfolio2026/work01.html?lang='+L;if(!/github\.io$/.test(location.hostname))bk.target='_blank';
+document.getElementById('ph').textContent=t().h;document.getElementById('pl').textContent=t().l;document.getElementById('tt').textContent=t().tt;document.getElementById('lt').textContent=t().lt;document.getElementById('at').textContent=t().at;document.getElementById('acct').innerHTML=t().acct;document.getElementById('nt').textContent=t().note;var bk=document.getElementById('back');bk.textContent=t().back;bk.href='https://fifilee-design.com/work01.html?lang='+L;if(!/fifilee-design\.com$/.test(location.hostname))bk.target='_blank';
 document.getElementById('lzh').className=L==='zh'?'on':'';document.getElementById('len').className=L==='en'?'on':'';
 drawTries();drawLog();}
 var G='li';
