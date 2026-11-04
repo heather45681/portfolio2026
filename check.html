@@ -92,6 +92,13 @@ input[type=url]:focus{outline:2px solid var(--accent);outline-offset:1px;border-
 .radar q{display:inline-block;padding:3px 10px;background:var(--bg);border-radius:6px;font-family:'DM Mono',monospace;font-size:14px;color:var(--ink);quotes:'「' '」'}
 .radar li p{margin:8px 0 0;font-size:15px;line-height:1.8;color:var(--ink2)}
 @media (max-width:520px){.radar{padding:22px 18px}}
+/* phones: label on its own line above each 現況／預期／建議 text */
+@media (max-width:600px){
+  .finds li{grid-template-columns:1fr;gap:6px}
+  .finds .n{grid-row:auto;font-size:28px}
+  .finds p{margin-top:6px}
+  .finds .lab,.tells .lab{display:block;margin:0 0 2px;color:var(--accent)}
+}
 .finds .lab{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--mute);margin-right:8px}
 .close{background:var(--ink);color:var(--bg);border-radius:12px;padding:32px;display:flex;flex-direction:column;gap:16px}
 .close p{margin:0;font-size:16px;color:#D6D3CA}
