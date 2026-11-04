@@ -239,11 +239,14 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     b.addEventListener('click', function () { L = b.getAttribute('data-set'); try { localStorage.setItem('fifi-lang', L); } catch (e) {} apply(); });
   });
 
+  // a URL handed over from the services page: fill it in and run once the human check passes
+  var autoRun = false;
+  try { var pre = new URLSearchParams(location.search).get('url'); if (pre) { $('u').value = pre.slice(0, 300); autoRun = true; } } catch (e) {}
   function mountTurnstile() {
     if (!window.turnstile) { setTimeout(mountTurnstile, 200); return; }
     widget = window.turnstile.render('#ts', {
       sitekey: SITE_KEY, language: L === 'en' ? 'en' : 'zh-tw',
-      callback: function (t) { token = t; }, 'expired-callback': function () { token = ''; }, 'error-callback': function () { token = ''; }
+      callback: function (t) { token = t; if (autoRun) { autoRun = false; $('f').requestSubmit(); } }, 'expired-callback': function () { token = ''; }, 'error-callback': function () { token = ''; }
     });
   }
   mountTurnstile();

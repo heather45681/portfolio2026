@@ -77,14 +77,18 @@ a:hover .ar-r{transform:translateX(5px)}a:hover .ar-ne{transform:translate(3px,-
 .svc .proof{margin-top:auto;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--mute)}
 .svc .proof a{color:var(--accent);text-decoration:none}
 
-/* free check in the hero */
-.qc{display:flex;align-items:center;gap:14px 24px;flex-wrap:wrap;max-width:640px;padding:18px 22px;background:var(--paper);border:1px dashed var(--line);border-radius:16px;text-decoration:none;color:var(--ink);transition:border-color .2s}
-.qc:hover{border-color:var(--accent);color:var(--ink)}
-.qc .qc-t{flex:1 1 280px;display:flex;flex-direction:column;gap:2px}
-.qc b{font-family:'Noto Serif TC',serif;font-size:17px;line-height:1.5}
-.qc small{font-size:13px;line-height:1.7;color:var(--mute)}
-.qc .go{flex:none;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.1em;color:var(--accent)}
-.qc .tag{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--accent)}
+/* free check in the hero: a working URL bar that hands off to check.html */
+.qc{max-width:640px;margin:8px 0 0;padding:26px 28px 22px;background:var(--ink);color:var(--bg);border-radius:20px;display:flex;flex-direction:column;gap:14px}
+.qc-h{font-family:'Noto Serif TC',serif;font-size:19px;font-weight:700;line-height:1.5}
+.qc-bar{display:flex;align-items:stretch;background:var(--paper);border-radius:999px;padding:5px;gap:6px}
+.qc-bar input{flex:1 1 auto;min-width:0;border:0;background:transparent;padding:0 18px;font:inherit;font-size:15px;color:var(--ink);outline:none}
+.qc-bar input::placeholder{color:var(--mute)}
+.qc-bar:focus-within{box-shadow:0 0 0 3px var(--accent-l)}
+.qc-bar button{flex:none;border:0;border-radius:999px;background:var(--accent);color:var(--paper);font:inherit;font-size:15px;font-weight:500;letter-spacing:.06em;padding:12px 24px;cursor:pointer;transition:background .2s}
+.qc-bar button:hover{background:var(--accent-d)}
+.qc-bar button:focus-visible{outline:2px solid var(--paper);outline-offset:2px}
+.qc-note{margin:0;font-size:13px;line-height:1.8;color:var(--dmute)}
+@media (max-width:520px){.qc{padding:22px 18px 18px}.qc-bar{flex-direction:column;border-radius:16px}.qc-bar input{padding:12px 14px}.qc-bar button{border-radius:12px}}
 
 /* cases */
 .dark{background:var(--ink);color:var(--bg)}
@@ -93,13 +97,18 @@ a:hover .ar-r{transform:translateX(5px)}a:hover .ar-ne{transform:translate(3px,-
 .case-grid{display:flex;flex-direction:column;gap:72px}
 .case{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);column-gap:64px;row-gap:18px;align-content:start;border-top:1px solid var(--dline);padding-top:48px}
 .case>*{grid-column:2}
-.case img{grid-column:1;grid-row:1 / span 6;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px}
+.case img{grid-column:1;grid-row:1 / span 6;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px}
+.case:nth-child(even){grid-template-columns:minmax(0,1fr) minmax(0,1.1fr)}
+.case:nth-child(even)>*{grid-column:1}
+.case:nth-child(even) img{grid-column:2}
+.case .out{margin:0 0 6px;padding-left:14px;border-left:2px solid var(--accent-l);font-size:17px;font-weight:500;line-height:1.7;color:var(--accent-l)}
+.L-en .case h3{font-size:32px}
 .case dl{gap:10px 16px}
-@media (max-width:900px){.case{grid-template-columns:minmax(0,1fr)}.case>*,.case img{grid-column:1;grid-row:auto}.case-grid{gap:56px}.case{padding-top:32px}}
+@media (max-width:900px){.case,.case:nth-child(even){grid-template-columns:minmax(0,1fr)}.case>*,.case img,.case:nth-child(even)>*,.case:nth-child(even) img{grid-column:1;grid-row:auto}.case-grid{gap:56px}.case{padding-top:32px}}
 .case .top{display:flex;gap:16px;align-items:baseline}
 .case .top span:first-child{font-family:'Cormorant Garamond',serif;font-size:44px;line-height:1;color:var(--accent-l)}
 .case .top span:last-child{font-size:13px;color:var(--dmute)}
-.case h3{margin:0;font-family:'Noto Serif TC',serif;font-size:21px;line-height:1.5}
+.case h3{margin:0;font-family:'Noto Serif TC',serif;font-size:28px;line-height:1.45}
 .case dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:10px 16px;font-size:15px;line-height:1.8}
 .case dt{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.1em;color:var(--accent-l);padding-top:3px}
 .case dd{margin:0;color:var(--dtext)}
@@ -170,7 +179,7 @@ a:hover .ar-r{transform:translateX(5px)}a:hover .ar-ne{transform:translate(3px,-
 html[data-lang="en"] .L-zh,html[data-lang="zh"] .L-en{display:none !important}
 .L-en .hero h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:68px;line-height:1.1;letter-spacing:.01em}
 .L-en h2.sec,.L-en .c-text h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:42px;line-height:1.2}
-.L-en .qc b{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:22px;line-height:1.3}
+.L-en .qc-h{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:22px;line-height:1.3}
 .L-en .svc h3,.L-en .case h3,.L-en .earlier h3,.L-en .steps h3,.L-en .faq summary{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;line-height:1.3}
 .L-en .faq summary{font-size:22px}
 @media (max-width:760px){.L-en .hero h1{font-size:44px}.L-en .c-text h2{font-size:32px}}
@@ -225,10 +234,14 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       <a class="btn ct" href="#contact" style="color:var(--paper)">聊聊你的需求 <span class="ar ar-r">→</span></a>
       <a class="btn" href="#services">看服務項目</a>
     </div>
-    <a class="qc" href="check.html">
-      <span class="qc-t"><span class="tag">FREE QUICK CHECK</span><b>不確定需要哪一項？先免費健檢看看</b><small>貼上網址，大約 30 秒，我會從速度、無障礙、文案和表單細節，整理出幾點具體建議。</small></span>
-      <span class="go">開始健檢 →</span>
-    </a>
+    <form class="qc" action="check.html" method="get">
+      <label class="qc-h" for="qc-u">不確定需要哪一項？先讓我免費看一下你的網站</label>
+      <div class="qc-bar">
+        <input id="qc-u" name="url" type="text" inputmode="url" autocomplete="url" maxlength="300" placeholder="貼上你的網址，例如 your-site.com" required>
+        <button type="submit">免費健檢</button>
+      </div>
+      <p class="qc-note">約 30 秒，看速度、無障礙、文案和表單細節，還有模板網站常見的破綻。不用登入，每人每天 3 次。</p>
+    </form>
   </div>
   <div class="hero-side" aria-hidden="true">
     <span class="vt">流程做順</span>
@@ -318,10 +331,10 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
         <img src="img/5a12622855edc63d02846815d123024b.png" alt="註冊頁改版前後對比：改版前一頁填完所有欄位，改版後分成帳號與手機號兩種註冊方式">
         <div class="top"><span>01</span><span>註冊・登入流程改版</span></div>
         <h3>三個品牌、三種規則，收斂成一套</h3>
+        <p class="out">註冊送出日均 +18.6%，每人重複送出 −19%。</p>
         <dl>
           <dt>問題</dt><dd>舊註冊頁一次要填 5 個欄位，各品牌規則又不一致。</dd>
           <dt>做法</dt><dd>拆成手機與帳號兩種註冊方式，統一驗證規則與錯誤訊息。</dd>
-          <dt>結果</dt><dd>註冊送出日均 +18.6%，每人重複送出 −19%。</dd>
         </dl>
         <a class="btn" href="work01.html">閱讀完整案例 <span class="ar ar-r">→</span></a>
       </article>
@@ -330,10 +343,10 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
         <img src="img/95342b3393697c6834d4032bd18d7de5.png" alt="同一套採購系統套用三種品牌主題，以及 Figma 元件庫的按鈕、勾選、開關、Modal 與狀態標籤">
         <div class="top"><span>02</span><span>Design system・前端開發</span></div>
         <h3>一套系統、三家公司，各用自己的品牌</h3>
+        <p class="out">三家公司都已上線使用，design system 交付公司與工程師。</p>
         <dl>
           <dt>問題</dt><dd>原本只給一家公司用的採購系統，要擴增給三家共用，各自需要自己的 logo 與企業色。</dd>
           <dt>做法</dt><dd>以 Bootstrap 建立可換膚的 design system 與對應程式碼的 Figma 元件庫，並接手前端開發。</dd>
-          <dt>結果</dt><dd>三家公司都已上線使用，design system 交付公司與工程師。</dd>
         </dl>
         <a class="btn" href="work02.html">閱讀完整案例 <span class="ar ar-r">→</span></a>
       </article>
@@ -342,10 +355,10 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
         <img src="img/ae63ed4d86440ceaf4572afe22014b19.png" alt="UIUX 決策庫的資料表畫面，標註品牌、市場、平台、模組與狀態（去識別化重繪）">
         <div class="top"><span>03</span><span>Notion＋AI 決策庫</span></div>
         <h3>讓 AI 在上線前，先抓出規格裡的矛盾</h3>
+        <p class="out">一搜就找到規則和出處，還抓到工程師打錯的文案。</p>
         <dl>
           <dt>問題</dt><dd>規則散在 mockup、Jira 和聊天紀錄裡，同一條規則被問好幾次。</dd>
           <dt>做法</dt><dd>用 Notion 整理成可查詢的決策庫，再讓 AI 協助比對規格。</dd>
-          <dt>結果</dt><dd>一搜就找到規則和出處，還抓到工程師打錯的文案。</dd>
         </dl>
         <a class="btn" href="work03.html">閱讀完整案例 <span class="ar ar-r">→</span></a>
       </article>
@@ -454,10 +467,15 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       <a class="btn ct" href="#contact-en" style="color:var(--paper)">Tell me what you need <span class="ar ar-r">→</span></a>
       <a class="btn" href="#services-en">See services</a>
     </div>
-    <a class="qc" href="check.html?lang=en">
-      <span class="qc-t"><span class="tag">FREE QUICK CHECK</span><b>Not sure which one you need? Start with a free check</b><small>Paste a URL. In about 30 seconds you get a few concrete suggestions on speed, accessibility, copy and form details.</small></span>
-      <span class="go">Run a check →</span>
-    </a>
+    <form class="qc" action="check.html" method="get">
+      <input type="hidden" name="lang" value="en">
+      <label class="qc-h" for="qc-u-en">Not sure which one you need? Let me take a free look at your site first</label>
+      <div class="qc-bar">
+        <input id="qc-u-en" name="url" type="text" inputmode="url" autocomplete="url" maxlength="300" placeholder="Paste your URL, e.g. your-site.com" required>
+        <button type="submit">Check my site</button>
+      </div>
+      <p class="qc-note">About 30 seconds. Covers speed, accessibility, copy and form details, plus the usual slips of template-built sites. No login, 3 checks a day.</p>
+    </form>
   </div>
 </section>
 
@@ -542,10 +560,10 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
         <img src="img/5a12622855edc63d02846815d123024b.png" alt="Sign-up page before and after: one long form before, separate username and phone sign-up after">
         <div class="top"><span>01</span><span>Sign-up &amp; login redesign</span></div>
         <h3>Three brands, three rule sets, converged into one</h3>
+        <p class="out">Daily sign-up submits +18.6%, repeat submits per user −19%.</p>
         <dl>
           <dt>PROBLEM</dt><dd>The old sign-up page asked for 5 fields at once, and the rules differed across brands.</dd>
           <dt>APPROACH</dt><dd>Split sign-up into phone and username paths, and unified validation rules and error messages.</dd>
-          <dt>RESULT</dt><dd>Daily sign-up submits +18.6%, repeat submits per user −19%.</dd>
         </dl>
         <a class="btn" href="work01.html?lang=en">Read the full case <span class="ar ar-r">→</span></a>
       </article>
@@ -554,10 +572,10 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
         <img src="img/95342b3393697c6834d4032bd18d7de5.png" alt="The same procurement system in three brand themes, with Figma library buttons, checkboxes, switches, a modal and status badges">
         <div class="top"><span>02</span><span>Design system · front end</span></div>
         <h3>One system, three companies, each in its own brand</h3>
+        <p class="out">Live at all three companies; the design system was handed over to the company and its engineers.</p>
         <dl>
           <dt>PROBLEM</dt><dd>A procurement system built for one company had to serve three, each with its own logo and brand colors.</dd>
           <dt>APPROACH</dt><dd>Built a themable design system on Bootstrap and a Figma library that maps to code, and took over front-end development.</dd>
-          <dt>RESULT</dt><dd>Live at all three companies; the design system was handed over to the company and its engineers.</dd>
         </dl>
         <a class="btn" href="work02.html?lang=en">Read the full case <span class="ar ar-r">→</span></a>
       </article>
@@ -566,10 +584,10 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
         <img src="img/ae63ed4d86440ceaf4572afe22014b19.png" alt="The UI/UX decision library table, tagged by brand, market, platform, module and status (de-identified redraw)">
         <div class="top"><span>03</span><span>Notion + AI decision library</span></div>
         <h3>Letting AI catch contradictions in specs before launch</h3>
+        <p class="out">Rules and their sources are one search away, and it even caught copy an engineer had mistyped.</p>
         <dl>
           <dt>PROBLEM</dt><dd>Rules were scattered across mockups, Jira and chat, and the same rule was asked about again and again.</dd>
           <dt>APPROACH</dt><dd>Organized them into a searchable Notion decision library, with AI helping compare specs.</dd>
-          <dt>RESULT</dt><dd>Rules and their sources are one search away, and it even caught copy an engineer had mistyped.</dd>
         </dl>
         <a class="btn" href="work03.html?lang=en">Read the full case <span class="ar ar-r">→</span></a>
       </article>
