@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<script>
+/* moved to fifilee-design.com: send old github.io links to the same page there */
+if (location.hostname === 'heather45681.github.io') {
+  location.replace('https://fifilee-design.com' + location.pathname.replace(/^\/portfolio2026/, '') + location.search + location.hash);
+}
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>網站快速健檢｜Fifi Lee</title>
+<meta name="description" content="貼上網址，免費取得一份網站快速健檢：速度、無障礙與 UX 建議，由 10 年經驗的產品設計師 Fifi Lee 設計。">
+<meta property="og:title" content="網站快速健檢｜Fifi Lee">
+<meta property="og:description" content="貼上網址，免費取得網站速度、無障礙與 UX 的快速建議。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fifilee-design.com/check.html">
+<meta property="og:image" content="https://fifilee-design.com/img/5a12622855edc63d02846815d123024b.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&amp;family=Noto+Sans+TC:wght@400;500;700&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+<style>
+:root{--bg:#F3F0E8;--paper:#FBF9F4;--ink:#1F2427;--ink2:#3C403E;--mute:#5E625F;--line:#C9C3B4;--accent:#A8482F;--accent-d:#8A3A25;--accent-l:#E59A7F;--good:#2E7D4F;--mid:#B07A12;--bad:#B3261E}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans TC',sans-serif;font-size:16px;line-height:1.9;letter-spacing:.04em}
+a{color:var(--ink)}a:hover{color:var(--accent)}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+.eyebrow{margin:0;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.16em;color:var(--accent)}
+.hd{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding-top:28px;padding-bottom:28px;max-width:1200px}
+.brand{text-decoration:none;display:flex;align-items:baseline;gap:12px}
+.nav{display:flex;flex-wrap:wrap;align-items:center;gap:20px;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.12em}
+.nav a{text-decoration:none}
+.lang{display:inline-flex;border:1px solid var(--ink);border-radius:999px;overflow:hidden}
+.lang button{border:0;background:transparent;min-height:32px;padding:4px 14px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.08em;color:var(--ink);cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+h1{margin:0;font-family:'Noto Serif TC',serif;font-weight:700;font-size:46px;line-height:1.4;letter-spacing:.04em}
+html[lang="en"] h1,html[lang="en"] h2{font-family:'Cormorant Garamond',serif;font-weight:500;letter-spacing:.01em}
+html[lang="en"] h1{font-size:54px;line-height:1.15}
+.hero{padding-top:48px;padding-bottom:40px;display:flex;flex-direction:column;gap:20px}
+.lead{margin:0;max-width:680px;font-size:17px;color:var(--ink2)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:28px}
+form{display:flex;flex-direction:column;gap:16px}
+.row{display:flex;flex-wrap:wrap;gap:12px}
+input[type=url]{flex:1 1 320px;min-width:0;height:52px;padding:0 18px;border:1px solid var(--line);border-radius:999px;background:#fff;font:inherit;font-size:16px;color:var(--ink)}
+input[type=url]:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+.go{height:52px;padding:0 28px;border:0;border-radius:999px;background:var(--accent);color:var(--paper);font-family:'DM Mono',monospace;font-size:14px;letter-spacing:.12em;cursor:pointer}
+.go:hover{background:var(--accent-d)}.go:disabled{background:#C9C3B4;cursor:not-allowed}
+.hint{margin:0;font-size:13px;color:var(--mute)}
+.err{margin:0;font-size:14px;color:var(--bad)}
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:15px;color:var(--mute)}
+.steps li{display:flex;gap:10px;align-items:center}
+.steps li::before{content:'';width:10px;height:10px;border-radius:50%;border:1px solid var(--line)}
+.steps li.on{color:var(--ink)}.steps li.on::before{background:var(--accent);border-color:var(--accent);animation:pulse 1s ease-in-out infinite}
+.steps li.done::before{background:var(--good);border-color:var(--good);animation:none}
+@keyframes pulse{50%{opacity:.35}}
+@media (prefers-reduced-motion: reduce){.steps li.on::before{animation:none}}
+.res{display:flex;flex-direction:column;gap:28px;padding-bottom:80px}
+.res h2{margin:0;font-family:'Noto Serif TC',serif;font-size:28px;line-height:1.5}
+.scores{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.sc{background:var(--paper);padding:18px 20px;display:flex;flex-direction:column;gap:2px}
+.sc b{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:500;line-height:1.1}
+.sc span{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.08em;color:var(--mute)}
+.g{color:var(--good)}.m{color:var(--mid)}.b{color:var(--bad)}
+.summary{margin:0;font-size:19px;font-weight:700;line-height:1.7}
+.finds{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.finds li{display:grid;grid-template-columns:44px 1fr;gap:4px 16px;padding:22px 0;border-bottom:1px solid var(--line)}
+.finds .n{font-family:'Cormorant Garamond',serif;font-size:34px;line-height:1;color:var(--accent);grid-row:span 3}
+.finds h3{margin:0;font-family:'Noto Serif TC',serif;font-size:19px;line-height:1.5}
+.finds p{margin:0;font-size:15px;color:var(--ink2)}
+.finds .lab{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--mute);margin-right:8px}
+.close{background:var(--ink);color:var(--bg);border-radius:12px;padding:32px;display:flex;flex-direction:column;gap:16px}
+.close p{margin:0;font-size:16px;color:#D6D3CA}
+.close .btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.12em;padding:10px 22px;border:1px solid currentColor;border-radius:999px;text-decoration:none}
+.close .btn{color:var(--bg)}.close .btn.pri{background:var(--accent);border-color:var(--accent)}
+.meta{font-size:12px;color:var(--mute);margin:0}
+.foot{text-align:center;padding:32px 24px;font-family:'DM Mono',monospace;font-size:12px;color:var(--mute)}
+[hidden]{display:none !important}
+@media (max-width:760px){h1{font-size:32px}html[lang="en"] h1{font-size:38px}.card{padding:22px}.go{width:100%}.nav .hide-sp{display:none}}
+</style>
+<script>
+/* GoatCounter: only count visits on the live site, not previews */
+if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
+  var gc = document.createElement('script');
+  gc.async = true;
+  gc.src = 'https://gc.zgo.at/count.js';
+  gc.setAttribute('data-goatcounter', 'https://fifilee.goatcounter.com/count');
+  document.head.appendChild(gc);
+}
+</script>
+</head>
+<body>
+<header class="wrap hd">
+  <a class="brand" href="index.html">
+    <span style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:500;letter-spacing:.08em">Fifi Lee</span>
+    <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--mute)">李芸澧</span>
+  </a>
+  <nav class="nav" aria-label="Main">
+    <a class="hide-sp" href="index.html" data-t="navWork" data-href-lang></a>
+    <a href="services.html" data-t="navSvc" data-href-lang></a>
+    <span class="lang" role="group" aria-label="Language"><button type="button" data-set="zh">中文</button><button type="button" data-set="en">EN</button></span>
+  </nav>
+</header>
+
+<main>
+<section class="wrap hero">
+  <p class="eyebrow" data-t="eyebrow"></p>
+  <h1 data-t="h1"></h1>
+  <p class="lead" data-t="lead"></p>
+  <div class="card">
+    <form id="f" novalidate>
+      <label for="u" class="hint" data-t="label"></label>
+      <div class="row">
+        <input id="u" type="url" inputmode="url" autocomplete="url" maxlength="300" placeholder="example.com" required>
+        <button class="go" id="go" type="submit" data-t="go"></button>
+      </div>
+      <div id="ts"></div>
+      <p class="err" id="err" role="alert" hidden></p>
+      <p class="hint" data-t="limit"></p>
+    </form>
+    <ol class="steps" id="steps" hidden aria-live="polite">
+      <li data-t="s1"></li><li data-t="s2"></li><li data-t="s3"></li>
+    </ol>
+  </div>
+</section>
+
+<section class="wrap res" id="res" hidden aria-live="polite">
+  <div style="display:flex;flex-direction:column;gap:6px">
+    <p class="eyebrow" data-t="resEyebrow"></p>
+    <h2 id="resUrl"></h2>
+    <p class="meta" id="resMeta"></p>
+  </div>
+  <div>
+    <p class="hint" style="margin-bottom:10px" data-t="psTitle"></p>
+    <div class="scores" id="scores"></div>
+  </div>
+  <p class="summary" id="sum"></p>
+  <ol class="finds" id="finds"></ol>
+  <div class="close">
+    <p class="eyebrow" style="color:var(--accent-l)" data-t="closeEyebrow"></p>
+    <p id="closing"></p>
+    <div class="btns">
+      <a class="btn pri" id="ctaContact" href="services.html#contact" data-t="ctaContact"></a>
+      <a class="btn" id="ctaSvc" href="services.html" data-t="ctaSvc"></a>
+    </div>
+  </div>
+  <p class="meta" data-t="disclaimer"></p>
+</section>
+</main>
+
+<footer class="foot">© 2026 Fifi Lee · UX Designer · Taipei</footer>
+
+<script>
+(function () {
+  // Turnstile site key (public, safe to show)
+  var SITE_KEY = 'TURNSTILE_SITE_KEY';
+
+  var T = {
+    zh: {
+      title: '網站快速健檢｜Fifi Lee', navWork: '作品集', navSvc: '接案服務',
+      eyebrow: '網站快速健檢｜免費', h1: '貼上網址，看看你的網站哪裡可以更好',
+      lead: '我把自己看網站時會先檢查的重點，做成這個自動健檢：速度、無障礙、行動版，以及文案、按鈕、表單這些第一眼就會影響使用者的地方。大約 30 秒，結果會用我的口吻整理成幾點具體建議。',
+      label: '要健檢的網址', go: '開始健檢',
+      limit: '每人每天可以健檢 3 次。只會讀取公開的首頁內容，不需要登入，也不會保存你的資料。',
+      s1: '讀取網頁內容', s2: '檢查速度與無障礙（Google PageSpeed）', s3: '整理建議',
+      resEyebrow: '健檢結果', psTitle: 'Google PageSpeed 分數（手機版）',
+      perf: '效能', a11y: '無障礙', bp: '最佳做法', seo: 'SEO', lcp: '最大內容繪製',
+      why: '為什麼', fix: '建議',
+      closeEyebrow: '想看得更完整？', ctaContact: '聊聊完整健檢 →', ctaSvc: '看服務項目',
+      disclaimer: '這份結果由 AI 根據公開頁面內容自動產生，僅供參考，不代表完整的專業評估。',
+      cached: '這個網址 24 小時內檢查過，以下是當時的結果。', checked: '檢查時間：',
+      e: { bad_url: '網址格式看起來不太對，請輸入像 example.com 這樣的網址。', turnstile: '人機驗證沒有通過，請重新整理頁面再試一次。', quota_ip: '今天的 3 次已經用完了，明天再來試試。', busy: '目前服務人數過多！請在 {t}後再來試試。', fetch_failed: '讀不到這個網址的內容，可能網站擋掉了自動讀取，或網址需要登入。', ai_failed: '整理建議時出了點問題，請稍後再試。', origin: '請從 fifilee-design.com 使用這個工具。', net: '連線失敗，請稍後再試。', empty: '請先輸入網址。', wait: '請先完成人機驗證。' }
+    },
+    en: {
+      title: 'Website quick check | Fifi Lee', navWork: 'Portfolio', navSvc: 'Services',
+      eyebrow: 'WEBSITE QUICK CHECK · FREE', h1: 'Paste a URL and see where your site could do better',
+      lead: 'This automates the first things I look at on any website: speed, accessibility, mobile, and the copy, buttons and forms people notice at first glance. In about 30 seconds you get a few concrete suggestions, written the way I would explain them.',
+      label: 'Website to check', go: 'Check it',
+      limit: 'Three checks per person per day. It only reads the public home page, needs no login, and stores none of your data.',
+      s1: 'Reading the page', s2: 'Checking speed and accessibility (Google PageSpeed)', s3: 'Writing up suggestions',
+      resEyebrow: 'RESULTS', psTitle: 'Google PageSpeed scores (mobile)',
+      perf: 'Performance', a11y: 'Accessibility', bp: 'Best practices', seo: 'SEO', lcp: 'Largest paint',
+      why: 'WHY', fix: 'FIX',
+      closeEyebrow: 'WANT THE FULL PICTURE?', ctaContact: 'Talk about a full review →', ctaSvc: 'See services',
+      disclaimer: 'These results are generated automatically by AI from the public page. They are a starting point, not a full professional review.',
+      cached: 'This URL was checked in the last 24 hours; here is that result.', checked: 'Checked: ',
+      e: { bad_url: "That doesn't look like a valid URL. Try something like example.com.", turnstile: "The human check didn't pass. Please reload the page and try again.", quota_ip: "You've used today's 3 checks. Please try again tomorrow.", busy: 'Too many people are using this right now! Please come back in {t}.', fetch_failed: "I couldn't read that page. The site may block automated visits, or it needs a login.", ai_failed: 'Something went wrong while writing the suggestions. Please try again later.', origin: 'Please use this tool on fifilee-design.com.', net: 'Connection failed. Please try again later.', empty: 'Please enter a URL first.', wait: 'Please finish the human check first.' }
+    }
+  };
+
+  var L = 'zh';
+  try {
+    var q = new URLSearchParams(location.search).get('lang');
+    if (q === 'en' || q === 'zh') { L = q; localStorage.setItem('fifi-lang', q); }
+    else if (localStorage.getItem('fifi-lang') === 'en') L = 'en';
+  } catch (e) {}
+
+  var $ = function (id) { return document.getElementById(id); };
+  var token = '', widget = null, last = null;
+
+  function apply() {
+    var t = T[L];
+    document.documentElement.lang = L === 'en' ? 'en' : 'zh-Hant';
+    document.title = t.title;
+    document.querySelectorAll('[data-t]').forEach(function (el) { el.textContent = t[el.getAttribute('data-t')]; });
+    document.querySelectorAll('[data-href-lang]').forEach(function (a) { a.href = a.getAttribute('href').split('?')[0] + '?lang=' + L; });
+    $('ctaContact').href = 'services.html?lang=' + L + (L === 'en' ? '#contact-en' : '#contact');
+    $('ctaSvc').href = 'services.html?lang=' + L;
+    document.querySelectorAll('.lang button').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-set') === L ? 'true' : 'false'); });
+    if (last) render(last);
+  }
+  document.querySelectorAll('.lang button').forEach(function (b) {
+    b.addEventListener('click', function () { L = b.getAttribute('data-set'); try { localStorage.setItem('fifi-lang', L); } catch (e) {} apply(); });
+  });
+
+  function mountTurnstile() {
+    if (!window.turnstile) { setTimeout(mountTurnstile, 200); return; }
+    widget = window.turnstile.render('#ts', {
+      sitekey: SITE_KEY, language: L === 'en' ? 'en' : 'zh-tw',
+      callback: function (t) { token = t; }, 'expired-callback': function () { token = ''; }, 'error-callback': function () { token = ''; }
+    });
+  }
+  mountTurnstile();
+
+  function wait(min) {
+    var h = Math.floor(min / 60), m = min % 60;
+    if (L === 'zh') return h ? h + ' 小時' + (m ? ' ' + m + ' 分鐘' : '') : m + ' 分鐘';
+    return h ? h + (h > 1 ? ' hours' : ' hour') + (m ? ' ' + m + ' min' : '') : m + ' minutes';
+  }
+  function showErr(code, d) {
+    var t = T[L].e, msg = t[code] || t.net;
+    if (code === 'busy') msg = msg.replace('{t}', wait(Math.max(1, (d && d.retryMin) || 60)));
+    $('err').textContent = msg; $('err').hidden = false;
+  }
+  var timers = [];
+  function steps(on) {
+    timers.forEach(clearTimeout); timers = [];
+    var li = document.querySelectorAll('#steps li');
+    $('steps').hidden = !on;
+    li.forEach(function (x) { x.className = ''; });
+    if (!on) return;
+    li[0].className = 'on';
+    timers.push(setTimeout(function () { li[0].className = 'done'; li[1].className = 'on'; }, 3000));
+    timers.push(setTimeout(function () { li[1].className = 'done'; li[2].className = 'on'; }, 14000));
+  }
+
+  $('f').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    $('err').hidden = true;
+    var url = $('u').value.trim();
+    if (!url) { showErr('empty'); return; }
+    if (!token) { showErr('wait'); return; }
+    $('go').disabled = true; $('res').hidden = true; steps(true);
+    fetch('/api/check', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ url: url, token: token, lang: L }) })
+      .then(function (r) { return r.json().catch(function () { return { error: 'net' }; }); })
+      .then(function (d) {
+        steps(false);
+        if (d.error) { showErr(d.error, d); return; }
+        last = d; render(d);
+        $('res').hidden = false; $('res').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      })
+      .catch(function () { steps(false); showErr('net'); })
+      .finally(function () {
+        $('go').disabled = false; token = '';
+        if (window.turnstile && widget !== null) window.turnstile.reset(widget);
+      });
+  });
+
+  function tone(n) { return n === null || n === undefined ? '' : n >= 90 ? 'g' : n >= 50 ? 'm' : 'b'; }
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; }
+
+  // everything from the API is inserted as text, never as HTML
+  function render(d) {
+    var t = T[L];
+    $('resUrl').textContent = d.url;
+    $('resMeta').textContent = (d.cached ? t.cached + ' ' : '') + t.checked + new Date(d.checkedAt).toLocaleString(L === 'en' ? 'en' : 'zh-TW');
+    var sc = $('scores'); sc.textContent = '';
+    var s = d.scores;
+    sc.parentNode.hidden = !s;
+    if (s) [['perf', s.performance], ['a11y', s.accessibility], ['bp', s.bestPractices], ['seo', s.seo], ['lcp', s.lcp]].forEach(function (x) {
+      if (x[1] === null || x[1] === undefined) return;
+      var c = el('div', 'sc'); var b = el('b', x[0] === 'lcp' ? '' : tone(x[1]), String(x[1]));
+      c.appendChild(b); c.appendChild(el('span', '', t[x[0]])); sc.appendChild(c);
+    });
+    $('sum').textContent = d.advice.summary;
+    var ol = $('finds'); ol.textContent = '';
+    d.advice.findings.forEach(function (f, i) {
+      var li = el('li');
+      li.appendChild(el('span', 'n', String(i + 1).padStart(2, '0')));
+      li.appendChild(el('h3', '', f.title));
+      var p1 = el('p'); p1.appendChild(el('span', 'lab', t.why)); p1.appendChild(document.createTextNode(f.why)); li.appendChild(p1);
+      var p2 = el('p'); p2.appendChild(el('span', 'lab', t.fix)); p2.appendChild(document.createTextNode(f.fix)); li.appendChild(p2);
+      ol.appendChild(li);
+    });
+    $('closing').textContent = d.advice.closing;
+  }
+
+  apply();
+})();
+</script>
+</body>
+</html>

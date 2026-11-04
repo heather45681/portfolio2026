@@ -1,11 +1,18 @@
 {
-  // Cloudflare Worker that serves the portfolio as static files.
+  // Cloudflare Worker for fifilee-design.com
+  // - serves the site from ./dist (the dashboard build command copies the site there:
+  //     mkdir -p dist && cp -r *.html dc.js img dist/ )
+  // - runs worker/index.js for /api/* (the website quick check)
   // The name must match the project name in the Cloudflare dashboard.
-  // Build command in the dashboard copies the site into ./dist:
-  //   mkdir -p dist && cp -r *.html dc.js img dist/
   "name": "fifilee-design",
   "compatibility_date": "2026-10-01",
+  "main": "worker/index.js",
   "assets": {
-    "directory": "./dist"
-  }
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  "kv_namespaces": [
+    { "binding": "KV", "id": "KV_NAMESPACE_ID" }
+  ]
 }
