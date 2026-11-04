@@ -200,7 +200,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       s1: '讀取網頁內容', s2: '檢查速度與無障礙（Google PageSpeed）', s3: '整理建議',
       resEyebrow: '健檢結果', psTitle: 'Google PageSpeed 分數（手機版）', noScores: '這次沒拿到 Google 的分數（Google 那邊忙碌或逾時），下面的建議不受影響。',
       perf: '效能', a11y: '無障礙', bp: '最佳做法', seo: 'SEO', lcp: '最大內容繪製',
-      why: '為什麼', fix: '建議', cur: '現況', exp: '預期', sev: { high: '嚴重度 高', medium: '嚴重度 中', low: '嚴重度 低' }, journeyT: '新訪客路徑', tellsT: '模板與快速生成網站的常見破綻', tellsS: '用模板或 AI 工具做的網站很方便，但這幾個地方最容易露餡。', evid: '線索', radarT: '細節雷達', radarS: '不影響使用，但我就是會注意到的小地方。',
+      why: '為什麼', fix: '建議', cur: '現況', exp: '預期', sev: { high: '嚴重度 高', medium: '嚴重度 中', low: '嚴重度 低' }, journeyT: '新訪客路徑', tellsNone: '這次沒有發現模板網站常見的破綻：icon、按鈕圓角、連結和範例文字都沒有明顯問題。', tellsT: '模板與快速生成網站的常見破綻', tellsS: '用模板或 AI 工具做的網站很方便，但這幾個地方最容易露餡。', evid: '線索', radarT: '細節雷達', radarS: '不影響使用，但我就是會注意到的小地方。',
       closeEyebrow: '想看得更完整？', ctaContact: '聊聊完整健檢 →', ctaSvc: '看服務項目',
       disclaimer: '這份結果由 AI 根據公開頁面內容自動產生，僅供參考，不代表完整的專業評估。',
       cached: '這個網址 24 小時內檢查過，以下是當時的結果。', checked: '檢查時間：',
@@ -215,7 +215,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       s1: 'Reading the page', s2: 'Checking speed and accessibility (Google PageSpeed)', s3: 'Writing up suggestions',
       resEyebrow: 'RESULTS', psTitle: 'Google PageSpeed scores (mobile)', noScores: "Google's scores didn't come back this time (busy or timed out). The suggestions below aren't affected.",
       perf: 'Performance', a11y: 'Accessibility', bp: 'Best practices', seo: 'SEO', lcp: 'Largest paint',
-      why: 'WHY', fix: 'FIX', cur: 'NOW', exp: 'EXPECTED', sev: { high: 'HIGH', medium: 'MEDIUM', low: 'LOW' }, journeyT: 'FIRST-VISIT PATH', tellsT: 'Common slips in template-built sites', tellsS: 'Templates and AI builders are fast, but these are the spots that usually give them away.', evid: 'CLUE', radarT: 'Detail radar', radarS: "Small things that don't break anything. I just can't not notice them.",
+      why: 'WHY', fix: 'FIX', cur: 'NOW', exp: 'EXPECTED', sev: { high: 'HIGH', medium: 'MEDIUM', low: 'LOW' }, journeyT: 'FIRST-VISIT PATH', tellsNone: 'No common template slips found this time: icons, button corners, links and sample text all look fine.', tellsT: 'Common slips in template-built sites', tellsS: 'Templates and AI builders are fast, but these are the spots that usually give them away.', evid: 'CLUE', radarT: 'Detail radar', radarS: "Small things that don't break anything. I just can't not notice them.",
       closeEyebrow: 'WANT THE FULL PICTURE?', ctaContact: 'Talk about a full review →', ctaSvc: 'See services',
       disclaimer: 'These results are generated automatically by AI from the public page. They are a starting point, not a full professional review.',
       cached: 'This URL was checked in the last 24 hours; here is that result.', checked: 'Checked: ',
@@ -342,7 +342,9 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     $('journey').hidden = !d.advice.journey;
     $('journeyT').textContent = t.journeyT; $('journeyP').textContent = d.advice.journey || '';
     var tl = d.advice.tells || [], tu = $('tellsL'); tu.textContent = '';
-    $('tells').hidden = !tl.length; $('tellsT').textContent = t.tellsT; $('tellsS').textContent = t.tellsS;
+    // show the section whenever the result has this check; an empty list means nothing was found
+    $('tells').hidden = !Array.isArray(d.advice.tells); $('tellsT').textContent = t.tellsT;
+    $('tellsS').textContent = tl.length ? t.tellsS : t.tellsNone;
     tl.forEach(function (n) {
       var li = el('li'); li.appendChild(el('b', '', n.issue));
       [[t.evid, n.evidence], [t.fix, n.fix]].forEach(function (r) { if (!r[1]) return; var p = el('p'); p.appendChild(el('span', 'lab', r[0])); p.appendChild(document.createTextNode(r[1])); li.appendChild(p); });
