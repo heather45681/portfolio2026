@@ -78,7 +78,7 @@ a:hover .ar-r{transform:translateX(5px)}a:hover .ar-ne{transform:translate(3px,-
 .svc .proof a{color:var(--accent);text-decoration:none}
 
 /* free check in the hero: a working URL bar that hands off to check.html */
-.qc{max-width:640px;margin:8px 0 0;padding:26px 28px 22px;background:var(--ink);color:var(--bg);border-radius:20px;display:flex;flex-direction:column;gap:14px}
+.qc{max-width:640px;margin:0;padding:26px 28px 22px;background:var(--ink);color:var(--bg);border-radius:20px;display:flex;flex-direction:column;gap:14px}
 .qc-h{font-family:'Noto Serif TC',serif;font-size:19px;font-weight:700;line-height:1.5}
 .qc-bar{display:flex;align-items:stretch;background:var(--paper);border-radius:999px;padding:5px;gap:6px}
 .qc-bar input{flex:1 1 auto;min-width:0;border:0;background:transparent;padding:0 18px;font:inherit;font-size:15px;color:var(--ink);outline:none}
@@ -227,13 +227,6 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     <p class="eyebrow">接案合作｜台北｜<span style="white-space:nowrap">可遠端（GMT+8）</span></p>
     <h1>從規則到畫面，<br>陪產品走上線。</h1>
     <p class="lead">10 年設計經驗，做過 30 多個 RWD 網站，近年專注在註冊、登入流程和上線前的品質把關。如果你的團隊需要一位能把流程想清楚、也能和工程師對得上話的設計夥伴，歡迎聊聊。</p>
-    <div class="tags">
-      <span>#流程健檢</span><span>#上線前 UI QA</span><span>#網站設計・切版</span><span>#Notion＋AI 規則庫</span><span>#中・英・日</span>
-    </div>
-    <div style="display:flex;flex-wrap:wrap;gap:12px">
-      <a class="btn ct" href="#contact" style="color:var(--paper)">聊聊你的需求 <span class="ar ar-r">→</span></a>
-      <a class="btn" href="#services">看服務項目</a>
-    </div>
     <form class="qc" action="check.html" method="get">
       <label class="qc-h" for="qc-u">不確定需要哪一項？先讓我免費看一下你的網站</label>
       <div class="qc-bar">
@@ -242,6 +235,9 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       </div>
       <p class="qc-note">約 30 秒，看速度、無障礙、文案和表單細節，還有模板網站常見的破綻。不用登入，每人每天 3 次。</p>
     </form>
+    <div class="tags">
+      <span>#流程健檢</span><span>#上線前 UI QA</span><span>#網站設計・切版</span><span>#Notion＋AI 規則庫</span><span>#中・英・日</span>
+    </div>
   </div>
   <div class="hero-side" aria-hidden="true">
     <span class="vt">流程做順</span>
@@ -460,13 +456,6 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     <p class="eyebrow">FREELANCE · TAIPEI · <span style="white-space:nowrap">OPEN TO REMOTE (GMT+8)</span></p>
     <h1>From rules to screens,<br>I see products through to launch.</h1>
     <p class="lead">Ten years in design and 30+ responsive websites shipped. Lately I focus on sign-up and login flows, and on quality checks before launch. If your team needs a design partner who thinks flows through and can talk shop with engineers, let's talk.</p>
-    <div class="tags">
-      <span>#Flow review</span><span>#UI QA before launch</span><span>#Web design &amp; front end</span><span>#Notion + AI rule library</span><span>#ZH · EN · JA</span>
-    </div>
-    <div style="display:flex;flex-wrap:wrap;gap:12px">
-      <a class="btn ct" href="#contact-en" style="color:var(--paper)">Tell me what you need <span class="ar ar-r">→</span></a>
-      <a class="btn" href="#services-en">See services</a>
-    </div>
     <form class="qc" action="check.html" method="get">
       <input type="hidden" name="lang" value="en">
       <label class="qc-h" for="qc-u-en">Not sure which one you need? Let me take a free look at your site first</label>
@@ -476,6 +465,9 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       </div>
       <p class="qc-note">About 30 seconds. Covers speed, accessibility, copy and form details, plus the usual slips of template-built sites. No login, 3 checks a day.</p>
     </form>
+    <div class="tags">
+      <span>#Flow review</span><span>#UI QA before launch</span><span>#Web design &amp; front end</span><span>#Notion + AI rule library</span><span>#ZH · EN · JA</span>
+    </div>
   </div>
 </section>
 
