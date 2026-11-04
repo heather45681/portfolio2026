@@ -76,6 +76,11 @@ a:hover .ar-r{transform:translateX(5px)}a:hover .ar-ne{transform:translate(3px,-
 .svc ul li{margin:2px 0}
 .svc .proof{margin-top:auto;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--mute)}
 .svc .proof a{color:var(--accent);text-decoration:none}
+.qc{margin-top:28px;display:flex;align-items:center;justify-content:space-between;gap:20px 32px;flex-wrap:wrap;padding:28px 32px;background:var(--paper);border:1px dashed var(--line);border-radius:18px}
+.qc h3{margin:0 0 4px;font-family:'Noto Serif TC',serif;font-size:20px;line-height:1.5}
+.qc p{margin:0;font-size:14px;color:var(--mute);max-width:560px}
+.qc .pill{flex:none}
+@media (max-width:640px){.qc{padding:22px 20px}.qc .pill{width:100%;justify-content:center}}
 
 /* cases */
 .dark{background:var(--ink);color:var(--bg)}
@@ -283,6 +288,14 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       </ul>
       <p class="proof">做過的事：自建 UIUX 決策庫，找規則從翻聊天紀錄變成一搜就有　<a href="work03.html">看案例 →</a></p>
     </article>
+  </div>
+  <div class="qc">
+    <div>
+      <p class="eyebrow">Free quick check|</p>
+      <h3>不確定需要哪一項？先免費健檢看看</h3>
+      <p>貼上網址，大約 30 秒，我會從速度、無障礙、文案和表單細節，整理出幾點具體建議。</p>
+    </div>
+    <a class="pill ct" href="check.html">開始免費健檢 →</a>
   </div>
 </section>
 
@@ -503,6 +516,14 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       </ul>
       <p class="proof">Done before: built my own UI/UX decision library, so finding a rule went from digging through chat to one search　<a href="work03.html?lang=en">See the case →</a></p>
     </article>
+  </div>
+  <div class="qc">
+    <div>
+      <p class="eyebrow">Free quick check|</p>
+      <h3>Not sure which one you need? Start with a free check</h3>
+      <p>Paste a URL. In about 30 seconds you get a few concrete suggestions on speed, accessibility, copy and form details.</p>
+    </div>
+    <a class="pill ct" href="check.html?lang=en">Run a free check →</a>
   </div>
 </section>
 

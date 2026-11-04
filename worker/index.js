@@ -92,8 +92,8 @@ async function handleCheck(request, env, ctx) {
       ctx.waitUntil(env.KV.put('busy', String(until), { expirationTtl: Math.max(60, Math.ceil((until - Date.now()) / 1000)) }));
       return busy(until);
     }
-    console.log('ai_failed', e.code || '', e.message);
-    return json({ error: 'ai_failed', code: e.code || 'ai_other', detail: e.detail || '', colo: (request.cf && request.cf.colo) || '' }, 502);
+    console.log('ai_failed', e.code || '', e.message, e.detail || '');
+    return json({ error: 'ai_failed', code: e.code || 'ai_other' }, 502);
   }
 
   const result = { url: target.href, lang, scores: speed, advice, checkedAt: new Date().toISOString() };
