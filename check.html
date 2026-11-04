@@ -231,6 +231,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
   function showErr(code, d) {
     var t = T[L].e, msg = t[code] || t.net;
     if (code === 'busy') msg = msg.replace('{t}', wait(Math.max(1, (d && d.retryMin) || 60)));
+    if (d && d.code) msg += (L === 'zh' ? '（錯誤代碼：' : ' (Error code: ') + String(d.code).slice(0, 20) + (L === 'zh' ? '）' : ')');
     $('err').textContent = msg; $('err').hidden = false;
   }
   var timers = [];

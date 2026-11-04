@@ -8,7 +8,7 @@
 // Bindings (wrangler.jsonc): ASSETS, KV
 
 const MODEL = 'claude-haiku-5-5';
-const MAX_OUTPUT_TOKENS = 900;
+const MAX_OUTPUT_TOKENS = 1500;
 const DAILY_LIMIT_IP = 3;       // checks per visitor per day
 const DAILY_LIMIT_GLOBAL = 50;  // checks for the whole site per day
 const CACHE_TTL = 60 * 60 * 24; // same URL reuses its result for 24 hours
@@ -92,7 +92,8 @@ async function handleCheck(request, env, ctx) {
       ctx.waitUntil(env.KV.put('busy', String(until), { expirationTtl: Math.max(60, Math.ceil((until - Date.now()) / 1000)) }));
       return busy(until);
     }
-    return json({ error: 'ai_failed' }, 502);
+    console.log('ai_failed', e.code || '', e.message);
+    return json({ error: 'ai_failed', code: e.code || 'ai_other' }, 502);
   }
 
   const result = { url: target.href, lang, scores: speed, advice, checkedAt: new Date().toISOString() };
@@ -318,13 +319,24 @@ async function askClaude(env, lang, target, page, speed) {
   if (!r.ok) {
     const err = new Error('ai ' + r.status);
     const body = await r.text().catch(() => '');
+    err.code = 'ai_' + r.status;
+    console.log('anthropic error', r.status, body.slice(0, 300));
     if (/credit balance|billing|spend limit|usage limit/i.test(body)) err.busy = 'credit';
     else if (r.status === 429 || r.status === 529 || r.status === 503) err.busy = 'overload';
     throw err;
   }
   const d = await r.json();
   const text = (d.content || []).filter(c => c.type === 'text').map(c => c.text).join('');
-  return cleanAdvice(JSON.parse(text.slice(text.indexOf('{'), text.lastIndexOf('}') + 1)));
+  let parsed;
+  try {
+    parsed = JSON.parse(text.slice(text.indexOf('{'), text.lastIndexOf('}') + 1));
+  } catch {
+    const err = new Error('bad json');
+    err.code = d.stop_reason === 'max_tokens' ? 'ai_cut' : 'ai_json';
+    console.log('ai output not json', d.stop_reason, text.slice(0, 300));
+    throw err;
+  }
+  try { return cleanAdvice(parsed); } catch { const err = new Error('empty'); err.code = 'ai_empty'; throw err; }
 }
 
 // keep only the expected fields, as plain short strings
