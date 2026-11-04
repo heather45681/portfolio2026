@@ -96,7 +96,7 @@ ul.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
     var li = el('li');
     var b = el('button', 'row'); b.type = 'button'; b.setAttribute('aria-expanded', 'false');
     var t = el('time', '', it.at ? new Date(it.at).toLocaleString('zh-TW', { hour12: false }) : '');
-    b.appendChild(t); b.appendChild(el('span', 'u', it.url || '')); b.appendChild(el('span', 'l', it.lang === 'en' ? 'EN' : '中'));
+    b.appendChild(t); b.appendChild(el('span', 'u', it.url || '')); b.appendChild(el('span', 'l', it.lang === 'en' ? '英文' : '中文'));
     var box = el('div', 'detail'); box.hidden = true;
     b.addEventListener('click', function () {
       var open = box.hidden;
