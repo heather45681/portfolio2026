@@ -52,11 +52,9 @@ a:hover .ar-r{transform:translateX(5px)}a:hover .ar-ne{transform:translate(3px,-
 .hero{position:relative;display:flex;justify-content:center;text-align:center;padding-top:72px;padding-bottom:104px}
 .hero-main{width:100%;max-width:880px;min-width:0;display:flex;flex-direction:column;align-items:center;gap:28px}
 .hero h1{margin:0;font-family:'Noto Serif TC',serif;font-weight:700;font-size:64px;line-height:1.35;letter-spacing:.06em}
-.hero p.lead{margin:0 auto;max-width:620px;font-size:17px;color:var(--ink2)}
+.hero p.lead{margin:0 auto;max-width:760px;font-size:17px;color:var(--ink2)}
 .tags{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;font-size:13px}
 .tags span{padding:4px 14px;border:1px solid var(--line);border-radius:999px}
-.hero-side{position:absolute;top:80px;right:24px;display:flex;gap:20px;align-items:flex-start}
-@media (max-width:1280px){.hero-side{display:none}}
 
 .mq{border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:14px 0;overflow:hidden;white-space:nowrap;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:26px;letter-spacing:.08em}
 
@@ -165,7 +163,7 @@ a:hover .ar-r{transform:translateX(5px)}a:hover .ar-ne{transform:translate(3px,-
   .nav .hide-sp{display:none}
   .hero{padding-top:40px;padding-bottom:64px}
   .hero h1{font-size:38px}
-  .hero-side{display:none}
+  .hero p.lead br{display:none}
   .svc{padding:32px 22px}
   .services,.cases,.process,.faq{padding-top:80px;padding-bottom:80px}
   .c-card{padding:64px 24px;border-radius:10px}
@@ -228,7 +226,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
   <div class="hero-main">
     <p class="eyebrow">接案合作｜台北｜<span style="white-space:nowrap">可遠端（GMT+8）</span></p>
     <h1>從規則到畫面，<br>陪產品走上線。</h1>
-    <p class="lead">10 年設計經驗，做過 30 多個 RWD 網站，近年專注在註冊、登入流程和上線前的品質把關。如果你的團隊需要一位能把流程想清楚、也能和工程師對得上話的設計夥伴，歡迎聊聊。</p>
+    <p class="lead">10 年設計經驗、30+ 個 RWD 網站上線，近年專注註冊登入流程與上線前把關。<br>需要能把流程想清楚、也能和工程師對上話的設計夥伴，歡迎聊聊。</p>
     <form class="qc" action="check.html" method="get">
       <p class="qc-h">不確定需要哪一項？先讓我免費看一下你的網站</p>
       <label class="qc-l" for="qc-u">你的網址</label>
@@ -241,11 +239,6 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     <div class="tags">
       <span>#流程健檢</span><span>#上線前 UI QA</span><span>#網站設計・切版</span><span>#Notion＋AI 規則庫</span><span>#中・英・日</span>
     </div>
-  </div>
-  <div class="hero-side" aria-hidden="true">
-    <span class="vt">替用戶找卡點</span>
-    <span class="vt" style="color:var(--accent);margin-top:48px">替工程師寫清楚</span>
-    <span class="vt" style="margin-top:96px">替上線把關</span>
   </div>
 </section>
 
@@ -458,7 +451,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
   <div class="hero-main">
     <p class="eyebrow">FREELANCE · TAIPEI · <span style="white-space:nowrap">OPEN TO REMOTE (GMT+8)</span></p>
     <h1>From rules to screens,<br>I see products through to launch.</h1>
-    <p class="lead">Ten years in design and 30+ responsive websites shipped. Lately I focus on sign-up and login flows, and on quality checks before launch. If your team needs a design partner who thinks flows through and can talk shop with engineers, let's talk.</p>
+    <p class="lead">Ten years in design and 30+ responsive sites shipped, lately focused on sign-up, login and pre-launch QA. A design partner who thinks flows through and talks shop with engineers.</p>
     <form class="qc" action="check.html" method="get">
       <input type="hidden" name="lang" value="en">
       <p class="qc-h">Not sure which one you need? Let me take a free look at your site first</p>
