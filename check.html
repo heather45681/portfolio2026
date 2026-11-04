@@ -187,11 +187,11 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     zh: {
       title: '網站快速健檢｜Fifi Lee', navWork: '作品集', navSvc: '接案服務',
       eyebrow: '網站快速健檢｜免費', h1: '貼上網址，看看你的網站哪裡可以更好',
-      lead: '我把自己看網站時會先檢查的重點，做成這個自動健檢：速度、無障礙、行動版，以及文案、按鈕、表單這些第一眼就會影響使用者的地方。大約 30 秒，結果會用我的口吻整理成幾點具體建議。',
+      lead: '我把自己看網站時會先檢查的重點，做成這個自動健檢：速度、無障礙、行動版，以及文案、按鈕、表單這些第一眼就會影響使用者的地方。大約 1 分鐘，結果會用我的口吻整理成幾點具體建議。',
       label: '要健檢的網址', go: '開始健檢',
       limit: '每人每天可以健檢 3 次。只會讀取公開的首頁內容，不需要登入，也不會保存你的資料。',
       s1: '讀取網頁內容', s2: '檢查速度與無障礙（Google PageSpeed）', s3: '整理建議',
-      resEyebrow: '健檢結果', psTitle: 'Google PageSpeed 分數（手機版）',
+      resEyebrow: '健檢結果', psTitle: 'Google PageSpeed 分數（手機版）', noScores: '這次沒拿到 Google 的分數（Google 那邊忙碌或逾時），下面的建議不受影響。',
       perf: '效能', a11y: '無障礙', bp: '最佳做法', seo: 'SEO', lcp: '最大內容繪製',
       why: '為什麼', fix: '建議', cur: '現況', exp: '預期', sev: { high: '嚴重度 高', medium: '嚴重度 中', low: '嚴重度 低' }, journeyT: '新訪客路徑', tellsT: '模板與快速生成網站的常見破綻', tellsS: '用模板或 AI 工具做的網站很方便，但這幾個地方最容易露餡。', evid: '線索', radarT: '細節雷達', radarS: '不影響使用，但我就是會注意到的小地方。',
       closeEyebrow: '想看得更完整？', ctaContact: '聊聊完整健檢 →', ctaSvc: '看服務項目',
@@ -202,11 +202,11 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     en: {
       title: 'Website quick check | Fifi Lee', navWork: 'Portfolio', navSvc: 'Services',
       eyebrow: 'WEBSITE QUICK CHECK · FREE', h1: 'Paste a URL and see where your site could do better',
-      lead: 'This automates the first things I look at on any website: speed, accessibility, mobile, and the copy, buttons and forms people notice at first glance. In about 30 seconds you get a few concrete suggestions, written the way I would explain them.',
+      lead: 'This automates the first things I look at on any website: speed, accessibility, mobile, and the copy, buttons and forms people notice at first glance. In about a minute you get a few concrete suggestions, written the way I would explain them.',
       label: 'Website to check', go: 'Check it',
       limit: 'Three checks per person per day. It only reads the public home page, needs no login, and stores none of your data.',
       s1: 'Reading the page', s2: 'Checking speed and accessibility (Google PageSpeed)', s3: 'Writing up suggestions',
-      resEyebrow: 'RESULTS', psTitle: 'Google PageSpeed scores (mobile)',
+      resEyebrow: 'RESULTS', psTitle: 'Google PageSpeed scores (mobile)', noScores: "Google's scores didn't come back this time (busy or timed out). The suggestions below aren't affected.",
       perf: 'Performance', a11y: 'Accessibility', bp: 'Best practices', seo: 'SEO', lcp: 'Largest paint',
       why: 'WHY', fix: 'FIX', cur: 'NOW', exp: 'EXPECTED', sev: { high: 'HIGH', medium: 'MEDIUM', low: 'LOW' }, journeyT: 'FIRST-VISIT PATH', tellsT: 'Common slips in template-built sites', tellsS: 'Templates and AI builders are fast, but these are the spots that usually give them away.', evid: 'CLUE', radarT: 'Detail radar', radarS: "Small things that don't break anything. I just can't not notice them.",
       closeEyebrow: 'WANT THE FULL PICTURE?', ctaContact: 'Talk about a full review →', ctaSvc: 'See services',
@@ -273,7 +273,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     if (!on) return;
     li[0].className = 'on';
     timers.push(setTimeout(function () { li[0].className = 'done'; li[1].className = 'on'; }, 3000));
-    timers.push(setTimeout(function () { li[1].className = 'done'; li[2].className = 'on'; }, 14000));
+    timers.push(setTimeout(function () { li[1].className = 'done'; li[2].className = 'on'; }, 25000));
   }
 
   $('f').addEventListener('submit', function (ev) {
@@ -308,7 +308,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     $('resMeta').textContent = (d.cached ? t.cached + ' ' : '') + t.checked + new Date(d.checkedAt).toLocaleString(L === 'en' ? 'en' : 'zh-TW');
     var sc = $('scores'); sc.textContent = '';
     var s = d.scores;
-    sc.parentNode.hidden = !s;
+    if (!s) sc.appendChild(el('p', 'hint', t.noScores));
     if (s) [['perf', s.performance], ['a11y', s.accessibility], ['bp', s.bestPractices], ['seo', s.seo], ['lcp', s.lcp]].forEach(function (x) {
       if (x[1] === null || x[1] === undefined) return;
       var c = el('div', 'sc'); var b = el('b', x[0] === 'lcp' ? '' : tone(x[1]), String(x[1]));

@@ -14,7 +14,7 @@ const DAILY_LIMIT_GLOBAL = 50;  // checks for the whole site per day
 const CACHE_TTL = 60 * 60 * 24; // same URL reuses its result for 24 hours
 const PAGE_BYTES_MAX = 1_500_000;
 const PAGE_TIMEOUT_MS = 8000;
-const PAGESPEED_TIMEOUT_MS = 25000;
+const PAGESPEED_TIMEOUT_MS = 45000; // a mobile Lighthouse run often takes 20–40 s
 const AI_TIMEOUT_MS = 30000;
 const ALLOWED_ORIGINS = ['https://fifilee-design.com', 'https://www.fifilee-design.com'];
 
@@ -76,7 +76,7 @@ async function handleCheck(request, env, ctx) {
   // 4. gather facts about the page
   const [page, speed] = await Promise.all([
     readPage(target, env).catch(() => null),
-    readPageSpeed(env, target).catch(() => null),
+    readPageSpeed(env, target).catch(e => { console.log('pagespeed failed', e && e.name); return null; }),
   ]);
   if (!page) return json({ error: 'fetch_failed' }, 422);
 
@@ -285,7 +285,7 @@ async function readPageSpeed(env, target) {
   ['performance', 'accessibility', 'best-practices', 'seo'].forEach(c => q.append('category', c));
   if (env.PAGESPEED_KEY) q.set('key', env.PAGESPEED_KEY);
   const r = await fetch('https://www.googleapis.com/pagespeedonline/v5/runPagespeed?' + q, { signal: AbortSignal.timeout(PAGESPEED_TIMEOUT_MS) });
-  if (!r.ok) return null;
+  if (!r.ok) { console.log('pagespeed', r.status, (await r.text().catch(() => '')).slice(0, 200)); return null; }
   const d = await r.json();
   const cats = d.lighthouseResult && d.lighthouseResult.categories;
   if (!cats) return null;
