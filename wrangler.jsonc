@@ -1,9 +1,11 @@
 {
   // Cloudflare Worker that serves the portfolio as static files.
   // The name must match the project name in the Cloudflare dashboard.
+  // Build command in the dashboard copies the site into ./dist:
+  //   mkdir -p dist && cp -r *.html dc.js img dist/
   "name": "fifilee-design",
   "compatibility_date": "2026-10-01",
   "assets": {
-    "directory": "./"
+    "directory": "./dist"
   }
 }
