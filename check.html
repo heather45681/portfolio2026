@@ -48,6 +48,10 @@ input[type=url]:focus{outline:2px solid var(--accent);outline-offset:1px;border-
 .go:hover{background:var(--accent-d)}.go:disabled{background:#C9C3B4;cursor:not-allowed}
 .hint{margin:0;font-size:13px;color:var(--mute)}
 .err{margin:0;font-size:14px;color:var(--bad)}
+.pending{margin:0;display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--ink2)}
+.pending::before{content:'';flex:none;margin-top:5px;width:14px;height:14px;border-radius:50%;border:2px solid var(--line);border-top-color:var(--accent);animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion: reduce){.pending::before{animation:none}}
 .steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:15px;color:var(--mute)}
 .steps li{display:flex;gap:10px;align-items:center}
 .steps li::before{content:'';width:10px;height:10px;border-radius:50%;border:1px solid var(--line)}
@@ -147,6 +151,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
         <button class="go" id="go" type="submit" data-t="go"></button>
       </div>
       <div id="ts"></div>
+      <p class="pending" id="pending" role="status" hidden></p>
       <p class="err" id="err" role="alert" hidden></p>
       <p class="hint" data-t="limit"></p>
     </form>
@@ -195,7 +200,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       title: '網站快速健檢｜Fifi Lee', navWork: '作品集', navSvc: '接案服務',
       eyebrow: '網站快速健檢｜免費', h1: '貼上網址，看看你的網站哪裡可以更好',
       lead: '我把自己看網站時會先檢查的重點，做成這個自動健檢：速度、無障礙、行動版，以及文案、按鈕、表單這些第一眼就會影響使用者的地方。大約 1 分鐘，結果會用我的口吻整理成幾點具體建議。',
-      label: '要健檢的網址', go: '開始健檢',
+      label: '要健檢的網址', go: '開始健檢', going: '健檢中…', waiting: '驗證中…', pending: '已收到你的網址，人機驗證通過後會自動開始健檢。如果下方出現驗證方塊，請點一下。',
       limit: '每人每天可以健檢 3 次。只會讀取公開的首頁內容，不需要登入。健檢的網址和結果會保留 90 天，讓我改善建議品質；不會記錄你是誰。',
       s1: '讀取網頁內容', s2: '檢查速度與無障礙（Google PageSpeed）', s3: '整理建議',
       resEyebrow: '健檢結果', psTitle: 'Google PageSpeed 分數（手機版）', noScores: '這次沒拿到 Google 的分數（Google 那邊忙碌或逾時），下面的建議不受影響。',
@@ -210,7 +215,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       title: 'Website quick check | Fifi Lee', navWork: 'Portfolio', navSvc: 'Services',
       eyebrow: 'WEBSITE QUICK CHECK · FREE', h1: 'Paste a URL and see where your site could do better',
       lead: 'This automates the first things I look at on any website: speed, accessibility, mobile, and the copy, buttons and forms people notice at first glance. In about a minute you get a few concrete suggestions, written the way I would explain them.',
-      label: 'Website to check', go: 'Check it',
+      label: 'Website to check', go: 'Check it', going: 'Checking…', waiting: 'Verifying…', pending: 'Got your URL. The check starts automatically once the human check passes; if a box appears below, tap it.',
       limit: "Three checks per person per day. It only reads the public home page and needs no login. The URL and results are kept for 90 days so I can improve the suggestions; nothing about who you are is recorded.",
       s1: 'Reading the page', s2: 'Checking speed and accessibility (Google PageSpeed)', s3: 'Writing up suggestions',
       resEyebrow: 'RESULTS', psTitle: 'Google PageSpeed scores (mobile)', noScores: "Google's scores didn't come back this time (busy or timed out). The suggestions below aren't affected.",
@@ -243,6 +248,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     $('ctaSvc').href = 'services.html?lang=' + L;
     document.querySelectorAll('.lang button').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-set') === L ? 'true' : 'false'); });
     if (last) render(last);
+    showPending();
   }
   document.querySelectorAll('.lang button').forEach(function (b) {
     b.addEventListener('click', function () { L = b.getAttribute('data-set'); try { localStorage.setItem('fifi-lang', L); } catch (e) {} apply(); });
@@ -251,10 +257,16 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
   // a URL handed over from the services page: fill it in and run once the human check passes
   var autoRun = false;
   try { var pre = new URLSearchParams(location.search).get('url'); if (pre) { $('u').value = pre.slice(0, 300); autoRun = true; } } catch (e) {}
+  function showPending() {
+    // tell the visitor the check will start by itself
+    if (!autoRun) return;
+    $('go').disabled = true; $('go').textContent = T[L].waiting;
+    $('pending').textContent = T[L].pending; $('pending').hidden = false;
+  }
   function mountTurnstile() {
     if (!window.turnstile) { setTimeout(mountTurnstile, 200); return; }
     widget = window.turnstile.render('#ts', {
-      sitekey: SITE_KEY, language: L === 'en' ? 'en' : 'zh-tw',
+      sitekey: SITE_KEY, theme: 'light', language: L === 'en' ? 'en' : 'zh-tw',
       callback: function (t) { token = t; if (autoRun) { autoRun = false; $('f').requestSubmit(); } }, 'expired-callback': function () { token = ''; }, 'error-callback': function () { token = ''; }
     });
   }
@@ -289,7 +301,8 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     var url = $('u').value.trim();
     if (!url) { showErr('empty'); return; }
     if (!token) { showErr('wait'); return; }
-    $('go').disabled = true; $('res').hidden = true; steps(true);
+    $('pending').hidden = true;
+    $('go').disabled = true; $('go').textContent = T[L].going; $('res').hidden = true; steps(true);
     fetch('/api/check', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ url: url, token: token, lang: L }) })
       .then(function (r) { return r.json().catch(function () { return { error: 'net' }; }); })
       .then(function (d) {
@@ -300,7 +313,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       })
       .catch(function () { steps(false); showErr('net'); })
       .finally(function () {
-        $('go').disabled = false; token = '';
+        $('go').disabled = false; $('go').textContent = T[L].go; token = '';
         if (window.turnstile && widget !== null) window.turnstile.reset(widget);
       });
   });

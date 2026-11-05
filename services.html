@@ -805,7 +805,7 @@ mark();})();
     if(q.topic==='check'&&q.site){var m=f.elements.message;m.value=(L==='en'?'I ran the free check on '+q.site+' and would like to talk about a full review.':'我用網站健檢看了 '+q.site+'，想聊聊完整健檢。');f.elements.service.value='flow';}
     function say(x,cls){out.textContent=x||'';out.className='cf-msg'+(cls?' '+cls:'');}
     function mount(){if(wid!==null)return;if(!window.turnstile){setTimeout(mount,200);return;}
-      wid=window.turnstile.render(box,{sitekey:SITE_KEY,language:L==='en'?'en':'zh-tw',callback:function(v){token=v;},'expired-callback':function(){token='';},'error-callback':function(){token='';}});}
+      wid=window.turnstile.render(box,{sitekey:SITE_KEY,theme:'light',language:L==='en'?'en':'zh-tw',callback:function(v){token=v;},'expired-callback':function(){token='';},'error-callback':function(){token='';}});}
     f.addEventListener('focusin',mount);
     f.addEventListener('submit',function(ev){
       ev.preventDefault();mount();
