@@ -6,6 +6,10 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
   Strict-Transport-Security: max-age=31536000
 
+/logs
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
+
 /logs.html
   X-Robots-Tag: noindex, nofollow
   Cache-Control: no-store
