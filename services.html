@@ -251,6 +251,8 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
   gc.src = 'https://gc.zgo.at/count.js';
   gc.setAttribute('data-goatcounter', 'https://fifilee.goatcounter.com/count');
   document.head.appendChild(gc);
+  /* Microsoft Clarity: session recordings and heatmaps (form fields are masked) */
+  (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","z8wub60myh");
 }
 </script>
 </head>
@@ -287,7 +289,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     <p class="eyebrow">接案合作｜台北｜<span style="white-space:nowrap">可遠端（GMT+8）</span></p>
     <h1>從規則到畫面<br>陪產品走上線</h1>
     <p class="lead">10 年設計經驗、30+ 個 RWD 網站上線，近年專注註冊登入流程與上線前把關。<br>需要能把流程想清楚、也能和工程師對上話的設計夥伴，歡迎聊聊。</p>
-    <form class="qc" action="check.html" method="get">
+    <form class="qc" action="check.html" method="get" data-clarity-mask="true">
       <p class="qc-h">不確定需要哪一項？先讓我免費看一下你的網站</p>
       <label class="qc-l" for="qc-u">你的網址</label>
       <div class="qc-bar">
@@ -500,7 +502,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
             <span class="c-val">看完整作品集</span><span aria-hidden="true" class="ar ar-r mono">→</span></a></li>
         </ul>
       </div>
-      <form class="cf" data-lang="zh" novalidate>
+      <form class="cf" data-lang="zh" novalidate data-clarity-mask="true">
         <p class="cf-h">告訴我你的需求</p>
         <div class="cf-grid">
           <label class="cf-f"><span>你的名字 <i>必填</i></span><input name="name" autocomplete="name" maxlength="60" required></label>
@@ -514,7 +516,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
         <div class="cf-ts"></div>
         <button type="submit" class="cf-go">送出需求</button>
         <p class="cf-msg" role="status"></p>
-        <p class="cf-note">資料只用來回覆你的詢問。</p>
+        <p class="cf-note">資料只用來回覆你的詢問。本站使用 GoatCounter 與 Microsoft Clarity 了解網站的使用情況，表單內容不會被記錄。</p>
       </form>
     </div>
   </div>
@@ -527,7 +529,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     <p class="eyebrow">FREELANCE · TAIPEI · <span style="white-space:nowrap">OPEN TO REMOTE (GMT+8)</span></p>
     <h1>From rules to screens,<br>I see products through to launch.</h1>
     <p class="lead">Ten years in design and 30+ responsive sites shipped, lately focused on sign-up, login and pre-launch QA. A design partner who thinks flows through and talks shop with engineers.</p>
-    <form class="qc" action="check.html" method="get">
+    <form class="qc" action="check.html" method="get" data-clarity-mask="true">
       <input type="hidden" name="lang" value="en">
       <p class="qc-h">Not sure which one you need? Let me take a free look at your site first</p>
       <label class="qc-l" for="qc-u-en">Your website</label>
@@ -741,7 +743,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
             <span class="c-val">See the full portfolio</span><span aria-hidden="true" class="ar ar-r mono">→</span></a></li>
         </ul>
       </div>
-      <form class="cf" data-lang="en" novalidate>
+      <form class="cf" data-lang="en" novalidate data-clarity-mask="true">
         <p class="cf-h">Tell me what you need</p>
         <div class="cf-grid">
           <label class="cf-f"><span>Your name <i>required</i></span><input name="name" autocomplete="name" maxlength="60" required></label>
@@ -755,7 +757,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
         <div class="cf-ts"></div>
         <button type="submit" class="cf-go">Send</button>
         <p class="cf-msg" role="status"></p>
-        <p class="cf-note">Your details are only used to reply to you.</p>
+        <p class="cf-note">Your details are only used to reply to you. This site uses GoatCounter and Microsoft Clarity to understand how it's used; nothing you type in forms is recorded.</p>
       </form>
     </div>
   </div>
