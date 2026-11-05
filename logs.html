@@ -81,9 +81,9 @@ ul.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
     });
   }
   function fail(e) {
-    if (e.message === 'auth') { say('密碼不對，請再試一次。'); logout(true); }
-    else if (e.message === 'off') say('紀錄功能還沒開啟：請先在 Cloudflare 新增 ADMIN_TOKEN 這個 Secret（至少 24 個字元）。');
-    else say('讀取失敗，請稍後再試。');
+    if (e.message === 'auth') { say('密碼不對，請再試一次'); logout(true); }
+    else if (e.message === 'off') say('紀錄功能還沒開啟：請先在 Cloudflare 新增 ADMIN_TOKEN 這個 Secret（至少 24 個字元）');
+    else say('讀取失敗，請稍後再試');
   }
   function logout(keepMsg) {
     token = ''; try { sessionStorage.removeItem('fifi-logs'); } catch (e) {}

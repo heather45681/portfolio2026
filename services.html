@@ -161,56 +161,58 @@ a:hover .ar-r{transform:translateX(5px)}a:hover .ar-ne{transform:translate(3px,-
 
 /* contact */
 .contact{background:var(--paper);padding:0 24px 24px}
-.c-card{max-width:1392px;margin:0 auto;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:96px 72px}
-.c-in{max-width:1152px;margin:0 auto;display:flex;flex-wrap:wrap;gap:48px 64px;align-items:flex-end}
+.c-card{max-width:1392px;margin:0 auto;background:var(--ink);color:var(--bg);border-radius:12px;padding:96px 72px}
+.c-in{max-width:1152px;margin:0 auto;display:flex;flex-wrap:wrap;gap:48px 64px;align-items:flex-start}
 .c-text{flex:1 1 360px;min-width:0;display:flex;flex-direction:column;gap:16px}
 .c-text h2{margin:0;font-family:'Noto Serif TC',serif;font-size:40px;font-weight:700;line-height:1.5}
-.c-text p.sub{margin:0;font-size:15px;color:var(--ink2)}
-.c-list{flex:1 1 420px;min-width:0;list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-.c-list li{border-bottom:1px solid var(--line)}
-/* contact form */
-.c-in{align-items:flex-start}
-.c-text .c-list{margin-top:24px;flex:none}
-.cf{flex:1 1 440px;min-width:0;background:#fff;color:var(--ink);border-radius:16px;padding:32px;box-shadow:0 18px 40px -28px rgba(31,36,39,.35);display:flex;flex-direction:column;gap:16px}
+.c-text p.sub{margin:0;font-size:15px;color:var(--dmute)}
+.c-list{list-style:none;margin:24px 0 0;padding:0;border-top:1px solid var(--dline)}
+.c-list li{border-bottom:1px solid var(--dline)}
+.c-row{display:flex;align-items:center;gap:24px;padding:20px 0;color:var(--bg) !important;text-decoration:none}
+.c-row:hover{color:var(--accent-l) !important}
+.c-lab{flex:0 0 120px;display:inline-flex;align-items:center;gap:10px;line-height:1;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.12em;color:var(--accent-l)}
+.c-val{flex:1 1 auto;min-width:0;font-size:16px;overflow-wrap:anywhere}
+/* contact form, on the dark card: a slightly lighter panel, fields one step lighter again */
+.cf{flex:1 1 440px;min-width:0;background:#2A3033;color:var(--bg);border:1px solid var(--dline);border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:16px}
 .cf-h{margin:0;font-family:'Noto Serif TC',serif;font-size:22px;font-weight:700}
 .L-en .cf-h{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:28px}
 .cf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px 16px}
-.cf-f{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--ink2)}
-.cf-f i{font-style:normal;font-size:11px;color:var(--accent);margin-left:4px}
-.cf-f input,.cf-f select,.cf-f textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:11px 13px;font:inherit;font-size:16px;color:var(--ink)}
+.cf-f{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--dtext)}
+.cf-f i{font-style:normal;font-size:11px;color:var(--accent-l);margin-left:4px}
+.cf-f input,.cf-f select,.cf-f textarea{width:100%;box-sizing:border-box;border:1px solid #4F5653;border-radius:10px;background:#353C3F;padding:11px 13px;font:inherit;font-size:16px;color:var(--bg)}
 .cf-f input,.cf-f select{height:48px;line-height:1.4;padding-top:0;padding-bottom:0}
-.cf-f select{appearance:none;-webkit-appearance:none;padding-right:38px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%235E625F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.cf-f select{appearance:none;-webkit-appearance:none;padding-right:38px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%23B9BDB8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.cf-f select option{color:var(--ink);background:#fff}
+.cf-f input::placeholder,.cf-f textarea::placeholder{color:#8E938F}
 .cf-f textarea{resize:vertical;min-height:120px;line-height:1.7}
-.cf-f input:focus,.cf-f select:focus,.cf-f textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(168,72,47,.15)}
-.cf-f [aria-invalid="true"]{border-color:#b2452d}
+.cf-f input:focus,.cf-f select:focus,.cf-f textarea:focus{outline:none;border-color:var(--accent-l);box-shadow:0 0 0 3px rgba(229,154,127,.2)}
+.cf-f [aria-invalid="true"]{border-color:var(--accent-l)}
 .cf-hp{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
 .cf-go{align-self:flex-start;height:48px;border:0;border-radius:999px;background:var(--accent);color:var(--paper);font:inherit;font-size:15px;font-weight:500;letter-spacing:.06em;line-height:1;padding:0 30px;cursor:pointer}
 .cf-go:hover{background:var(--accent-d)}
 .cf-go:disabled{opacity:.6;cursor:wait}
-.cf-go:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.cf-go:focus-visible{outline:2px solid var(--accent-l);outline-offset:3px}
 .f-err{margin:6px 0 0 4px;font-size:13px;line-height:1.6;color:#b2452d}
 .f-err::before{content:'!';display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;margin-right:6px;border-radius:50%;background:#b2452d;color:#fff;font-size:10px;font-weight:700;vertical-align:1px}
+.cf .f-err{color:var(--accent-l)}
+.cf .f-err::before{background:var(--accent-l);color:var(--ink)}
 .qc .f-err{margin:-6px 0 0 20px}
 .qc-bar:has(input[aria-invalid="true"]){border-color:#b2452d}
 .cf-msg{margin:0;font-size:14px;min-height:1px}
-.cf-msg.err{color:#b2452d}
-.cf-msg.ok{color:#2f6b45;font-weight:500}
-.cf-note{margin:-6px 0 0;font-size:12px;color:var(--mute)}
+.cf-msg.err{color:var(--accent-l)}
+.cf-msg.ok{color:#9FD3AE;font-weight:500}
+.cf-note{margin:-6px 0 0;font-size:12px;color:var(--dmute)}
 @media (max-width:760px){
-  /* phones: drop the outer card so the form gets the full width */
+  /* phones: the dark card runs edge to edge so the form gets the full width */
   .contact{padding:0}
-  .c-card{border:0;border-radius:0;padding:56px 16px 40px !important}
+  .c-card{border-radius:0;padding:56px 16px 40px !important}
   .c-in{gap:36px}
-  .cf{flex-basis:100%;padding:24px 18px;border-radius:14px;gap:14px;box-shadow:0 10px 30px -22px rgba(31,36,39,.35)}
+  .cf{flex-basis:100%;padding:24px 18px;border-radius:14px;gap:14px}
   .cf-grid{grid-template-columns:1fr;gap:12px}
   .cf-f{gap:4px}
   .cf-f textarea{min-height:110px}
   .cf-go{width:100%}
 }
-.c-row{display:flex;align-items:center;gap:24px;padding:20px 0;color:var(--ink) !important;text-decoration:none}
-.c-row:hover{color:var(--accent) !important}
-.c-lab{flex:0 0 120px;display:inline-flex;align-items:center;gap:10px;line-height:1;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.12em;color:var(--accent)}
-.c-val{flex:1 1 auto;min-width:0;font-size:16px;overflow-wrap:anywhere}
 .foot{text-align:center;padding:32px 24px;font-family:'DM Mono',monospace;font-size:12px;color:var(--mute);background:var(--paper)}
 
 @media (max-width:760px){
@@ -483,7 +485,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
   <div class="c-card">
     <div class="c-in">
       <div class="c-text">
-        <p class="eyebrow">Contact|</p>
+        <p class="eyebrow" style="color:var(--accent-l)">Contact|</p>
         <h2>一起讓你的產品<br>順利上線吧。</h2>
         <p class="sub">填下面的表單，或直接來信都可以。說明產品和想解決的問題就好，我會用 Email 回覆你。</p>
           <ul class="c-list">
@@ -724,7 +726,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
   <div class="c-card">
     <div class="c-in">
       <div class="c-text">
-        <p class="eyebrow">Contact|</p>
+        <p class="eyebrow" style="color:var(--accent-l)">Contact|</p>
         <h2>Let's get your product<br>launched smoothly.</h2>
         <p class="sub">Use the form below or email me directly. A note on your product and the problem you want solved is enough, and I'll reply by email.</p>
           <ul class="c-list">
@@ -777,7 +779,7 @@ mark();})();
 document.addEventListener('DOMContentLoaded',function(){
   document.querySelectorAll('form.qc').forEach(function(f){
     var en=!!f.querySelector('input[name=lang]'),u=f.elements.url;f.setAttribute('novalidate','');u.removeAttribute('required');
-    var r=fieldCheck(u,f.querySelector('.qc-bar'),function(v){if(!v)return en?'Please paste a URL first.':'請先貼上網址。';return /^(https?:\/\/)?[^\s\/]+\.[^\s\/]{2,}(\/\S*)?$/i.test(v)?'':(en?"That doesn't look like a URL. Try something like your-site.com.":'網址格式看起來不太對，請輸入像 your-site.com 這樣的網址。');},true);
+    var r=fieldCheck(u,f.querySelector('.qc-bar'),function(v){if(!v)return en?'Please paste a URL first.':'請先貼上網址';return /^(https?:\/\/)?[^\s\/]+\.[^\s\/]{2,}(\/\S*)?$/i.test(v)?'':(en?"That doesn't look like a URL. Try something like your-site.com.":'網址格式看起來不太對，請輸入像 your-site.com 這樣的網址');},true);
     f.addEventListener('submit',function(ev){if(!r.check()){ev.preventDefault();u.focus();}});
   });
 });
@@ -787,15 +789,16 @@ window.fieldCheck=function(input,anchor,rule,lazyRequired){
   anchor.insertAdjacentElement('afterend',err);
   input.setAttribute('aria-describedby',err.id);
   var shown=false;
-  function run(force){var m=rule(input.value.trim());if(m&&(force||shown||input.value.trim()||input.dataset.touched)){err.textContent=m;err.hidden=false;input.setAttribute('aria-invalid','true');shown=true;}else if(!m){err.hidden=true;input.setAttribute('aria-invalid','false');shown=false;}return !m;}
-  input.addEventListener('input',function(){input.dataset.touched='1';if(shown)run();});
-  input.addEventListener('blur',function(){if(lazyRequired&&!input.value.trim()){err.hidden=true;input.removeAttribute('aria-invalid');shown=false;return;}run(true);});
+  function run(force){var m=rule(input.value.trim());if(m&&(force||shown)){err.textContent=m;err.hidden=false;input.setAttribute('aria-invalid','true');shown=true;}else if(!m){err.hidden=true;input.setAttribute('aria-invalid','false');shown=false;}return !m;}
+  input.addEventListener('input',function(){if(!input.value.trim()){reset();return;}if(shown)run();});
+  function reset(){err.hidden=true;input.removeAttribute('aria-invalid');shown=false;}
+  input.addEventListener('blur',function(){if(!input.value.trim()){reset();return;}run(true);});
   return {check:function(){return run(true);},show:function(m){err.textContent=m;err.hidden=false;input.setAttribute('aria-invalid','true');shown=true;}};
 };
 (function(){
   var SITE_KEY='0x4AAAAAAFzC6bj4fMRM9qdd';
-  var MSG={zh:{name:'請填寫你的名字。',email:'Email 格式看起來不太對。',message:'請多寫一點想解決的問題（至少 10 個字）。',turnstile:'人機驗證沒有通過，請稍後再試。',wait:'請先完成下方的人機驗證。',quota:'今天送出太多次了，請直接來信 heather45681@gmail.com。',net:'送出失敗，請稍後再試，或直接來信。',ok:'收到了！我會盡快用 Email 回覆你。',sending:'送出中…'},
-           en:{name:'Please add your name.',email:"That email doesn't look right.",message:'Please tell me a bit more about the problem (at least 10 characters).',turnstile:"The human check didn't pass. Please try again shortly.",wait:'Please finish the human check below first.',quota:'Too many messages today. Please email heather45681@gmail.com directly.',net:"Couldn't send. Please try again later or email me directly.",ok:"Got it! I'll reply by email soon.",sending:'Sending…'}};
+  var MSG={zh:{name:'請填寫你的名字',emailEmpty:'請填寫 Email',email:'Email 格式看起來不太對',message:'請多寫一點想解決的問題（至少 10 個字）',turnstile:'人機驗證沒有通過，請稍後再試',wait:'請先完成下方的人機驗證',quota:'今天送出太多次了，請直接來信 heather45681@gmail.com',net:'送出失敗，請稍後再試，或直接來信',ok:'收到了！我會盡快用 Email 回覆你。',sending:'送出中…'},
+           en:{name:'Please add your name.',emailEmpty:'Please add your email.',email:"That email doesn't look right.",message:'Please tell me a bit more about the problem (at least 10 characters).',turnstile:"The human check didn't pass. Please try again shortly.",wait:'Please finish the human check below first.',quota:'Too many messages today. Please email heather45681@gmail.com directly.',net:"Couldn't send. Please try again later or email me directly.",ok:"Got it! I'll reply by email soon.",sending:'Sending…'}};
   // arriving from the website check: prefill the message
   var q={};try{q=Object.fromEntries(new URLSearchParams(location.search));}catch(e){}
   document.querySelectorAll('form.cf').forEach(function(f){
@@ -804,11 +807,11 @@ window.fieldCheck=function(input,anchor,rule,lazyRequired){
     function say(x,cls){out.textContent=x||'';out.className='cf-msg'+(cls?' '+cls:'');}
     var E=f.elements,rules={
       name:fieldCheck(E.name,E.name,function(v){return v?'':t.name;}),
-      email:fieldCheck(E.email,E.email,function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)?'':t.email;}),
+      email:fieldCheck(E.email,E.email,function(v){return !v?t.emailEmpty:/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)?'':t.email;}),
       message:fieldCheck(E.message,E.message,function(v){return v.length>=10?'':t.message;})
     };
     function mount(){if(wid!==null)return;if(!window.turnstile){setTimeout(mount,200);return;}
-      wid=window.turnstile.render(box,{sitekey:SITE_KEY,action:'contact',theme:'light',language:L==='en'?'en':'zh-tw',callback:function(v){token=v;},'expired-callback':function(){token='';},'error-callback':function(){token='';}});}
+      wid=window.turnstile.render(box,{sitekey:SITE_KEY,action:'contact',theme:'dark',language:L==='en'?'en':'zh-tw',callback:function(v){token=v;},'expired-callback':function(){token='';},'error-callback':function(){token='';}});}
     f.addEventListener('focusin',mount);
     f.addEventListener('submit',function(ev){
       ev.preventDefault();mount();
