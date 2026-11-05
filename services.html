@@ -161,23 +161,23 @@ a:hover .ar-r{transform:translateX(5px)}a:hover .ar-ne{transform:translate(3px,-
 
 /* contact */
 .contact{background:var(--paper);padding:0 24px 24px}
-.c-card{max-width:1392px;margin:0 auto;background:var(--ink);color:var(--bg);border-radius:12px;padding:104px 72px}
+.c-card{max-width:1392px;margin:0 auto;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:96px 72px}
 .c-in{max-width:1152px;margin:0 auto;display:flex;flex-wrap:wrap;gap:48px 64px;align-items:flex-end}
 .c-text{flex:1 1 360px;min-width:0;display:flex;flex-direction:column;gap:16px}
 .c-text h2{margin:0;font-family:'Noto Serif TC',serif;font-size:40px;font-weight:700;line-height:1.5}
-.c-text p.sub{margin:0;font-size:15px;color:var(--dmute)}
-.c-list{flex:1 1 420px;min-width:0;list-style:none;margin:0;padding:0;border-top:1px solid var(--dline)}
-.c-list li{border-bottom:1px solid var(--dline)}
+.c-text p.sub{margin:0;font-size:15px;color:var(--ink2)}
+.c-list{flex:1 1 420px;min-width:0;list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.c-list li{border-bottom:1px solid var(--line)}
 /* contact form */
 .c-in{align-items:flex-start}
 .c-text .c-list{margin-top:24px;flex:none}
-.cf{flex:1 1 440px;min-width:0;background:var(--paper);color:var(--ink);border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:16px}
+.cf{flex:1 1 440px;min-width:0;background:#fff;color:var(--ink);border-radius:16px;padding:32px;box-shadow:0 18px 40px -28px rgba(31,36,39,.35);display:flex;flex-direction:column;gap:16px}
 .cf-h{margin:0;font-family:'Noto Serif TC',serif;font-size:22px;font-weight:700}
 .L-en .cf-h{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:28px}
 .cf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px 16px}
 .cf-f{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--ink2)}
 .cf-f i{font-style:normal;font-size:11px;color:var(--accent);margin-left:4px}
-.cf-f input,.cf-f select,.cf-f textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:10px;background:#fff;padding:11px 13px;font:inherit;font-size:15px;color:var(--ink)}
+.cf-f input,.cf-f select,.cf-f textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:11px 13px;font:inherit;font-size:15px;color:var(--ink)}
 .cf-f textarea{resize:vertical;min-height:120px;line-height:1.7}
 .cf-f input:focus,.cf-f select:focus,.cf-f textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(168,72,47,.15)}
 .cf-f [aria-invalid="true"]{border-color:#b2452d}
@@ -191,10 +191,10 @@ a:hover .ar-r{transform:translateX(5px)}a:hover .ar-ne{transform:translate(3px,-
 .cf-msg.ok{color:#2f6b45;font-weight:500}
 .cf-note{margin:-6px 0 0;font-size:12px;color:var(--mute)}
 @media (max-width:520px){.cf{padding:22px 18px}.cf-go{width:100%}}
-.c-row{display:flex;align-items:center;gap:24px;padding:22px 0;color:var(--bg) !important;text-decoration:none}
-.c-row:hover{color:var(--accent-l) !important}
-.c-lab{flex:0 0 120px;display:inline-flex;align-items:center;gap:10px;line-height:1;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.12em;color:var(--accent-l)}
-.c-val{flex:1 1 auto;min-width:0;font-size:18px;overflow-wrap:anywhere}
+.c-row{display:flex;align-items:center;gap:24px;padding:20px 0;color:var(--ink) !important;text-decoration:none}
+.c-row:hover{color:var(--accent) !important}
+.c-lab{flex:0 0 120px;display:inline-flex;align-items:center;gap:10px;line-height:1;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.12em;color:var(--accent)}
+.c-val{flex:1 1 auto;min-width:0;font-size:16px;overflow-wrap:anywhere}
 .foot{text-align:center;padding:32px 24px;font-family:'DM Mono',monospace;font-size:12px;color:var(--mute);background:var(--paper)}
 
 @media (max-width:760px){
@@ -480,7 +480,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
   <div class="c-card">
     <div class="c-in">
       <div class="c-text">
-        <p class="eyebrow" style="color:var(--accent-l)">Contact|</p>
+        <p class="eyebrow">Contact|</p>
         <h2>一起讓你的產品<br>順利上線吧。</h2>
         <p class="sub">填下面的表單，或直接來信都可以。說明產品和想解決的問題就好，我會用 Email 回覆你。</p>
           <ul class="c-list">
@@ -734,7 +734,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
   <div class="c-card">
     <div class="c-in">
       <div class="c-text">
-        <p class="eyebrow" style="color:var(--accent-l)">Contact|</p>
+        <p class="eyebrow">Contact|</p>
         <h2>Let's get your product<br>launched smoothly.</h2>
         <p class="sub">Use the form below or email me directly. A note on your product and the problem you want solved is enough, and I'll reply by email.</p>
           <ul class="c-list">
