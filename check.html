@@ -270,7 +270,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
   function mountTurnstile() {
     if (!window.turnstile) { setTimeout(mountTurnstile, 200); return; }
     widget = window.turnstile.render('#ts', {
-      sitekey: SITE_KEY, theme: 'light', language: L === 'en' ? 'en' : 'zh-tw',
+      sitekey: SITE_KEY, action: 'check', theme: 'light', language: L === 'en' ? 'en' : 'zh-tw',
       callback: function (t) { token = t; if (autoRun) { autoRun = false; $('f').requestSubmit(); } }, 'expired-callback': function () { token = ''; }, 'error-callback': function () { token = ''; }
     });
   }

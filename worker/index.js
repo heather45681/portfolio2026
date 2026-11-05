@@ -55,7 +55,7 @@ async function handleCheck(request, env, ctx) {
   // 1. bot check
   const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
   const ipBucket = ip.includes(':') ? ip.split(':').slice(0, 4).join(':') + '::/64' : ip; // IPv6: one /64 = one visitor
-  const human = await verifyTurnstile(env, body.token, ip);
+  const human = await verifyTurnstile(env, body.token, ip, 'check');
   if (!human) return json({ error: 'turnstile' }, 403);
 
   // 2. cached result for this URL: free, does not use quota
@@ -172,11 +172,11 @@ async function handleContact(request, env, ctx) {
   const message = typeof b.message === 'string' ? b.message.replace(/[<>]/g, '').replace(/\r\n?/g, '\n').trim().slice(0, 2000) : '';
   const lang = b.lang === 'en' ? 'en' : 'zh';
   if (!name) return json({ error: 'name' }, 400);
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return json({ error: 'email' }, 400);
+  if (!/^[^\s@,;:"'()<>\[\]\\]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email)) return json({ error: 'email' }, 400);
   if (message.length < 10) return json({ error: 'message' }, 400);
 
   const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
-  if (!(await verifyTurnstile(env, b.token, ip))) return json({ error: 'turnstile' }, 403);
+  if (!(await verifyTurnstile(env, b.token, ip, 'contact'))) return json({ error: 'turnstile' }, 403);
 
   const day = new Date().toISOString().slice(0, 10);
   const bucket = ip.includes(':') ? ip.split(':').slice(0, 4).join(':') + '::/64' : ip;
@@ -291,7 +291,7 @@ function isOwnSite(u) {
 
 // ---------- Turnstile ----------
 
-async function verifyTurnstile(env, token, ip) {
+async function verifyTurnstile(env, token, ip, action) {
   if (typeof token !== 'string' || !token || token.length > 2048) return false;
   const form = new FormData();
   form.append('secret', env.TURNSTILE_SECRET);
@@ -299,7 +299,8 @@ async function verifyTurnstile(env, token, ip) {
   form.append('remoteip', ip);
   const r = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', { method: 'POST', body: form });
   const d = await r.json().catch(() => ({}));
-  return d.success === true && ['fifilee-design.com', 'www.fifilee-design.com'].includes(d.hostname);
+  // token must come from our own pages, and from the widget meant for this endpoint
+  return d.success === true && ['fifilee-design.com', 'www.fifilee-design.com'].includes(d.hostname) && (!action || d.action === action);
 }
 
 // ---------- page reading ----------
