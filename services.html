@@ -178,11 +178,13 @@ a:hover .ar-r{transform:translateX(5px)}a:hover .ar-ne{transform:translate(3px,-
 .cf-f{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--ink2)}
 .cf-f i{font-style:normal;font-size:11px;color:var(--accent);margin-left:4px}
 .cf-f input,.cf-f select,.cf-f textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:11px 13px;font:inherit;font-size:16px;color:var(--ink)}
+.cf-f input,.cf-f select{height:48px;line-height:1.4;padding-top:0;padding-bottom:0}
+.cf-f select{appearance:none;-webkit-appearance:none;padding-right:38px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%235E625F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
 .cf-f textarea{resize:vertical;min-height:120px;line-height:1.7}
 .cf-f input:focus,.cf-f select:focus,.cf-f textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(168,72,47,.15)}
 .cf-f [aria-invalid="true"]{border-color:#b2452d}
 .cf-hp{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
-.cf-go{align-self:flex-start;border:0;border-radius:999px;background:var(--accent);color:var(--paper);font:inherit;font-size:15px;font-weight:500;letter-spacing:.06em;padding:13px 30px;cursor:pointer}
+.cf-go{align-self:flex-start;height:48px;border:0;border-radius:999px;background:var(--accent);color:var(--paper);font:inherit;font-size:15px;font-weight:500;letter-spacing:.06em;line-height:1;padding:0 30px;cursor:pointer}
 .cf-go:hover{background:var(--accent-d)}
 .cf-go:disabled{opacity:.6;cursor:wait}
 .cf-go:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
@@ -198,9 +200,8 @@ a:hover .ar-r{transform:translateX(5px)}a:hover .ar-ne{transform:translate(3px,-
   .cf{flex-basis:100%;padding:24px 18px;border-radius:14px;gap:14px;box-shadow:0 10px 30px -22px rgba(31,36,39,.35)}
   .cf-grid{grid-template-columns:1fr;gap:12px}
   .cf-f{gap:4px}
-  .cf-f input,.cf-f select{padding:10px 12px}
   .cf-f textarea{min-height:110px}
-  .cf-go{width:100%;padding:14px}
+  .cf-go{width:100%}
 }
 .c-row{display:flex;align-items:center;gap:24px;padding:20px 0;color:var(--ink) !important;text-decoration:none}
 .c-row:hover{color:var(--accent) !important}
