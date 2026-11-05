@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>健檢紀錄｜Fifi Lee</title>
+<title>後台紀錄｜Fifi Lee</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700&display=swap" rel="stylesheet">
 <style>
@@ -36,19 +36,28 @@ ul.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
 .lab{display:inline-block;min-width:42px;font-size:12px;color:var(--mute)}
 .scores{display:flex;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--ink2)}
 .more{margin-top:16px}
+.tabs{display:flex;gap:6px;margin:0 0 16px}
+.tabs button{background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:6px 16px}
+.tabs button[aria-selected="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.detail pre{white-space:pre-wrap;font:inherit;margin:8px 0 0;padding:14px 16px;background:#fff;border:1px solid var(--line);border-radius:10px}
+.detail a{color:var(--accent)}
 @media (max-width:600px){.row{flex-wrap:wrap;gap:2px 12px}.row time{flex-basis:100%}}
 </style>
 </head>
 <body>
 <main class="wrap">
-  <h1>健檢紀錄</h1>
-  <p class="sub">最近 90 天的網站健檢結果，最新的在最上面。只有你知道密碼才能看。</p>
+  <h1>後台紀錄</h1>
+  <p class="sub">網站健檢結果保留 90 天，聯絡表單保留 1 年，最新的在最上面。只有你知道密碼才能看。</p>
 
   <form id="auth">
     <input id="tok" type="password" autocomplete="current-password" placeholder="管理密碼（Cloudflare 裡的 ADMIN_TOKEN）" aria-label="管理密碼">
     <button type="submit">查看紀錄</button>
     <button type="button" class="ghost" id="out" hidden>登出</button>
   </form>
+  <div class="tabs" role="tablist" id="tabs" hidden>
+    <button type="button" role="tab" data-type="log" aria-selected="true">健檢紀錄</button>
+    <button type="button" role="tab" data-type="msg" aria-selected="false">聯絡表單</button>
+  </div>
   <p class="msg" id="msg" role="alert" hidden></p>
   <p class="count" id="count" hidden></p>
   <ul class="list" id="list"></ul>
@@ -58,7 +67,7 @@ ul.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
 <script>
 (function () {
   var $ = function (id) { return document.getElementById(id); };
-  var token = '', cursor = null, shown = 0;
+  var token = '', cursor = null, shown = 0, type = 'log';
   try { token = sessionStorage.getItem('fifi-logs') || ''; } catch (e) {}
 
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined && text !== null) e.textContent = text; return e; }
@@ -77,17 +86,17 @@ ul.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
   }
   function logout(keepMsg) {
     token = ''; try { sessionStorage.removeItem('fifi-logs'); } catch (e) {}
-    $('list').textContent = ''; $('more').hidden = true; $('count').hidden = true; $('out').hidden = true;
+    $('list').textContent = ''; $('more').hidden = true; $('count').hidden = true; $('out').hidden = true; $('tabs').hidden = true;
     if (!keepMsg) say('');
   }
 
   function load(first) {
-    api(cursor ? '?cursor=' + encodeURIComponent(cursor) : '').then(function (d) {
+    api('?type=' + type + (cursor ? '&cursor=' + encodeURIComponent(cursor) : '')).then(function (d) {
       if (first) { $('list').textContent = ''; shown = 0; }
-      say(''); $('out').hidden = false;
+      say(''); $('out').hidden = false; $('tabs').hidden = false;
       d.items.forEach(addRow); shown += d.items.length;
       cursor = d.cursor; $('more').hidden = !cursor;
-      $('count').textContent = shown ? '已載入 ' + shown + ' 筆' : '目前還沒有人健檢過。';
+      $('count').textContent = shown ? '已載入 ' + shown + ' 筆' : (type === 'msg' ? '目前還沒有人填表單。' : '目前還沒有人健檢過。');
       $('count').hidden = false;
     }).catch(fail);
   }
@@ -111,6 +120,16 @@ ul.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
 
   function render(box, r) {
     box.textContent = '';
+    if (r.kind === 'contact') {
+      [['名字', r.name], ['Email', r.email], ['公司／品牌', r.company], ['想談', r.service], ['時程', r.timeline], ['語言', r.lang === 'en' ? '英文' : '中文']].forEach(function (x) {
+        if (!x[1]) return;
+        var p = el('p'); p.appendChild(el('span', 'lab', x[0]));
+        if (x[0] === 'Email') { var a = el('a', '', x[1]); a.href = 'mailto:' + x[1]; p.appendChild(a); } else p.appendChild(document.createTextNode(x[1]));
+        box.appendChild(p);
+      });
+      box.appendChild(el('pre', '', r.message));
+      return;
+    }
     var a = r.advice || {};
     var s = r.scores;
     var sc = el('div', 'scores');
@@ -153,6 +172,13 @@ ul.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
     cursor = null; load(true);
   });
   $('more').addEventListener('click', function () { load(false); });
+  document.querySelectorAll('#tabs button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      type = b.getAttribute('data-type'); cursor = null;
+      document.querySelectorAll('#tabs button').forEach(function (x) { x.setAttribute('aria-selected', String(x === b)); });
+      load(true);
+    });
+  });
   $('out').addEventListener('click', function () { logout(false); });
   if (token) load(true);
 })();

@@ -5,6 +5,7 @@
 //   ANTHROPIC_API_KEY   Claude API key
 //   TURNSTILE_SECRET    Turnstile secret key
 //   PAGESPEED_KEY       Google PageSpeed Insights key (optional)
+// Optional binding: EMAIL (send_email) to forward contact-form messages to Fifi's inbox
 //   ADMIN_TOKEN         long random password for the log page (logs.html); without it /api/logs is off
 // Bindings (wrangler.jsonc): ASSETS, KV
 
@@ -25,6 +26,7 @@ export default {
     const url = new URL(request.url);
     if (url.pathname === '/api/check') return handleCheck(request, env, ctx);
     if (url.pathname === '/api/logs') return handleLogs(request, env, url);
+    if (url.pathname === '/api/contact') return handleContact(request, env, ctx);
     return env.ASSETS.fetch(request);
   },
 };
@@ -123,16 +125,86 @@ async function handleLogs(request, env, url) {
 
   const id = url.searchParams.get('id');
   if (id) {
-    if (!/^log:\d{16}:[0-9a-f]{8}$/.test(id)) return json({ error: 'bad_request' }, 400);
+    if (!/^(log|msg):\d{16}:[0-9a-f]{8}$/.test(id)) return json({ error: 'bad_request' }, 400);
     const rec = await env.KV.get(id, 'json');
     return rec ? json(rec) : json({ error: 'not_found' }, 404);
   }
   const cursor = url.searchParams.get('cursor') || undefined;
-  const page = await env.KV.list({ prefix: 'log:', limit: 20, cursor });
+  const prefix = url.searchParams.get('type') === 'msg' ? 'msg:' : 'log:';
+  const page = await env.KV.list({ prefix, limit: 20, cursor });
   return json({
     items: page.keys.map(k => ({ id: k.name, ...(k.metadata || {}) })),
     cursor: page.list_complete ? null : page.cursor,
   });
+}
+
+// ---------- contact form ----------
+// POST /api/contact  { name, email, company, service, timeline, message, website (honeypot), token, lang }
+// Stored in KV for the log page and, when the EMAIL binding exists, forwarded to Fifi's inbox.
+
+const CONTACT_LIMIT_IP = 3;      // messages per visitor per day
+const CONTACT_LIMIT_GLOBAL = 30; // messages for the whole site per day
+const MSG_TTL = 60 * 60 * 24 * 365;
+const SERVICES = { flow: '註冊・登入流程健檢', qa: '上線前 UI QA', web: '網站設計＋切版', rules: 'Notion＋AI 規則庫', unsure: '還不確定' };
+const TIMELINES = { soon: '1 個月內', mid: '1–3 個月', open: '還沒決定' };
+
+async function handleContact(request, env, ctx) {
+  if (request.method !== 'POST') return json({ error: 'method' }, 405);
+  if (!ALLOWED_ORIGINS.includes(request.headers.get('Origin') || '')) return json({ error: 'origin' }, 403);
+  let b;
+  try {
+    const raw = await request.text();
+    if (raw.length > 8000) return json({ error: 'too_long' }, 400);
+    b = JSON.parse(raw);
+  } catch { return json({ error: 'bad_request' }, 400); }
+
+  // bots that fill every field get a quiet "ok" and nothing is stored
+  if (typeof b.website === 'string' && b.website.trim()) return json({ ok: true });
+
+  const one = (v, n) => (typeof v === 'string' ? v.replace(/[\r\n\t]+/g, ' ').replace(/[<>]/g, '').trim().slice(0, n) : '');
+  const name = one(b.name, 60);
+  const email = one(b.email, 120);
+  const company = one(b.company, 80);
+  const service = SERVICES[b.service] ? b.service : 'unsure';
+  const timeline = TIMELINES[b.timeline] ? b.timeline : '';
+  const message = typeof b.message === 'string' ? b.message.replace(/[<>]/g, '').replace(/\r\n?/g, '\n').trim().slice(0, 2000) : '';
+  const lang = b.lang === 'en' ? 'en' : 'zh';
+  if (!name) return json({ error: 'name' }, 400);
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return json({ error: 'email' }, 400);
+  if (message.length < 10) return json({ error: 'message' }, 400);
+
+  const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+  if (!(await verifyTurnstile(env, b.token, ip))) return json({ error: 'turnstile' }, 403);
+
+  const day = new Date().toISOString().slice(0, 10);
+  const bucket = ip.includes(':') ? ip.split(':').slice(0, 4).join(':') + '::/64' : ip;
+  const ipKey = `cip:${day}:${bucket}`, gKey = `cg:${day}`;
+  const [ipCount, gCount] = await Promise.all([ipKey, gKey].map(k => env.KV.get(k).then(n => parseInt(n || '0', 10))));
+  if (ipCount >= CONTACT_LIMIT_IP || gCount >= CONTACT_LIMIT_GLOBAL) return json({ error: 'quota' }, 429);
+  await Promise.all([
+    env.KV.put(ipKey, String(ipCount + 1), { expirationTtl: 60 * 60 * 26 }),
+    env.KV.put(gKey, String(gCount + 1), { expirationTtl: 60 * 60 * 26 }),
+  ]);
+
+  const rec = { kind: 'contact', name, email, company, service: SERVICES[service], timeline: TIMELINES[timeline] || '', message, lang, at: new Date().toISOString() };
+  const key = `msg:${String(9e15 - Date.now()).padStart(16, '0')}:${crypto.randomUUID().slice(0, 8)}`;
+  await env.KV.put(key, JSON.stringify(rec), { expirationTtl: MSG_TTL, metadata: { url: `${name}｜${rec.service}`.slice(0, 200), lang, at: rec.at } });
+
+  if (env.EMAIL) {
+    const text = [
+      `名字：${name}`, `Email：${email}`, company ? `公司／品牌：${company}` : '', `想談：${rec.service}`,
+      rec.timeline ? `時程：${rec.timeline}` : '', `語言：${lang === 'en' ? '英文' : '中文'}`, '', message, '',
+      '— 來自 fifilee-design.com 接案表單，直接回覆這封信就會寄給對方。',
+    ].filter((l, i, a) => l !== '' || (a[i - 1] !== '' && i > 0)).join('\n');
+    ctx.waitUntil(env.EMAIL.send({
+      from: 'form@fifilee-design.com',
+      to: 'heather45681@gmail.com',
+      replyTo: email,
+      subject: `[接案表單] ${name}｜${rec.service}`,
+      text,
+    }).catch(e => console.log('email failed', e && e.message)));
+  }
+  return json({ ok: true });
 }
 
 // compare secrets without leaking how many characters matched

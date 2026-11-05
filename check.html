@@ -355,6 +355,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     $('radarT').textContent = t.radarT; $('radarS').textContent = t.radarS;
     np.forEach(function (n) { var li = el('li'); var q = el('q', '', n.quote); if (L === 'en') q.style.quotes = '"\u201C" "\u201D"'; li.appendChild(q); li.appendChild(el('p', '', n.note)); rl.appendChild(li); });
     $('closing').textContent = d.advice.closing;
+    $('ctaContact').href = 'services.html?lang=' + L + '&topic=check&site=' + encodeURIComponent(d.url) + (L === 'en' ? '#contact-en' : '#contact');
   }
 
   apply();

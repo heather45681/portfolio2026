@@ -168,6 +168,29 @@ a:hover .ar-r{transform:translateX(5px)}a:hover .ar-ne{transform:translate(3px,-
 .c-text p.sub{margin:0;font-size:15px;color:var(--dmute)}
 .c-list{flex:1 1 420px;min-width:0;list-style:none;margin:0;padding:0;border-top:1px solid var(--dline)}
 .c-list li{border-bottom:1px solid var(--dline)}
+/* contact form */
+.c-in{align-items:flex-start}
+.c-text .c-list{margin-top:24px;flex:none}
+.cf{flex:1 1 440px;min-width:0;background:var(--paper);color:var(--ink);border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:16px}
+.cf-h{margin:0;font-family:'Noto Serif TC',serif;font-size:22px;font-weight:700}
+.L-en .cf-h{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:28px}
+.cf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px 16px}
+.cf-f{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--ink2)}
+.cf-f i{font-style:normal;font-size:11px;color:var(--accent);margin-left:4px}
+.cf-f input,.cf-f select,.cf-f textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:10px;background:#fff;padding:11px 13px;font:inherit;font-size:15px;color:var(--ink)}
+.cf-f textarea{resize:vertical;min-height:120px;line-height:1.7}
+.cf-f input:focus,.cf-f select:focus,.cf-f textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(168,72,47,.15)}
+.cf-f [aria-invalid="true"]{border-color:#b2452d}
+.cf-hp{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+.cf-go{align-self:flex-start;border:0;border-radius:999px;background:var(--accent);color:var(--paper);font:inherit;font-size:15px;font-weight:500;letter-spacing:.06em;padding:13px 30px;cursor:pointer}
+.cf-go:hover{background:var(--accent-d)}
+.cf-go:disabled{opacity:.6;cursor:wait}
+.cf-go:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.cf-msg{margin:0;font-size:14px;min-height:1px}
+.cf-msg.err{color:#b2452d}
+.cf-msg.ok{color:#2f6b45;font-weight:500}
+.cf-note{margin:-6px 0 0;font-size:12px;color:var(--mute)}
+@media (max-width:520px){.cf{padding:22px 18px}.cf-go{width:100%}}
 .c-row{display:flex;align-items:center;gap:24px;padding:22px 0;color:var(--bg) !important;text-decoration:none}
 .c-row:hover{color:var(--accent-l) !important}
 .c-lab{flex:0 0 120px;display:inline-flex;align-items:center;gap:10px;line-height:1;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.12em;color:var(--accent-l)}
@@ -459,19 +482,35 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       <div class="c-text">
         <p class="eyebrow" style="color:var(--accent-l)">Contact|</p>
         <h2>一起讓你的產品<br>順利上線吧。</h2>
-        <p class="sub"><span style="display:inline-block">接案合作歡迎私訊或來信，</span><span style="display:inline-block">說明產品和想解決的問題就可以。</span></p>
+        <p class="sub">填下面的表單，或直接來信都可以。說明產品和想解決的問題就好，我會用 Email 回覆你。</p>
+          <ul class="c-list">
+          <li><a class="c-row" href="mailto:heather45681@gmail.com?subject=%E6%8E%A5%E6%A1%88%E5%90%88%E4%BD%9C%E8%A9%A2%E5%95%8F">
+            <span class="c-lab"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3.5 6.5 8.5 6.5 8.5-6.5"></path></svg>EMAIL</span>
+            <span class="c-val">heather45681@gmail.com</span><span aria-hidden="true" class="ar ar-r mono">→</span></a></li>
+          <li><a class="c-row" href="https://www.linkedin.com/in/heather45681/" target="_blank" rel="noopener">
+            <span class="c-lab"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 10.5V17"></path><path d="M8 7.25v.01"></path><path d="M12 17v-6.5"></path><path d="M12 13.5c0-1.7 1.2-3 2.75-3S17 11.6 17 13.3V17"></path></svg>LINKEDIN</span>
+            <span class="c-val">linkedin.com/in/heather45681</span><span aria-hidden="true" class="ar ar-ne mono">↗</span></a></li>
+          <li><a class="c-row" href="index.html">
+            <span class="c-lab"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 9h18"></path></svg>PORTFOLIO</span>
+            <span class="c-val">看完整作品集</span><span aria-hidden="true" class="ar ar-r mono">→</span></a></li>
+        </ul>
       </div>
-      <ul class="c-list">
-        <li><a class="c-row" href="mailto:heather45681@gmail.com?subject=%E6%8E%A5%E6%A1%88%E5%90%88%E4%BD%9C%E8%A9%A2%E5%95%8F">
-          <span class="c-lab"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3.5 6.5 8.5 6.5 8.5-6.5"></path></svg>EMAIL</span>
-          <span class="c-val">heather45681@gmail.com</span><span aria-hidden="true" class="ar ar-r mono">→</span></a></li>
-        <li><a class="c-row" href="https://www.linkedin.com/in/heather45681/" target="_blank" rel="noopener">
-          <span class="c-lab"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 10.5V17"></path><path d="M8 7.25v.01"></path><path d="M12 17v-6.5"></path><path d="M12 13.5c0-1.7 1.2-3 2.75-3S17 11.6 17 13.3V17"></path></svg>LINKEDIN</span>
-          <span class="c-val">linkedin.com/in/heather45681</span><span aria-hidden="true" class="ar ar-ne mono">↗</span></a></li>
-        <li><a class="c-row" href="index.html">
-          <span class="c-lab"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 9h18"></path></svg>PORTFOLIO</span>
-          <span class="c-val">看完整作品集</span><span aria-hidden="true" class="ar ar-r mono">→</span></a></li>
-      </ul>
+      <form class="cf" data-lang="zh" novalidate>
+        <p class="cf-h">告訴我你的需求</p>
+        <div class="cf-grid">
+          <label class="cf-f"><span>你的名字 <i>必填</i></span><input name="name" autocomplete="name" maxlength="60" required></label>
+          <label class="cf-f"><span>Email <i>必填</i></span><input name="email" type="email" autocomplete="email" maxlength="120" required></label>
+          <label class="cf-f"><span>公司或品牌</span><input name="company" autocomplete="organization" maxlength="80"></label>
+          <label class="cf-f"><span>想談哪一項？</span><select name="service"><option value="unsure">還不確定</option><option value="flow">註冊・登入流程健檢</option><option value="qa">上線前 UI QA</option><option value="web">網站設計＋切版</option><option value="rules">Notion＋AI 規則庫</option></select></label>
+          <label class="cf-f"><span>預計時程</span><select name="timeline"><option value="">請選擇</option><option value="soon">1 個月內</option><option value="mid">1–3 個月</option><option value="open">還沒決定</option></select></label>
+        </div>
+        <label class="cf-f"><span>想解決什麼問題？ <i>必填</i></span><textarea name="message" rows="5" maxlength="2000" required placeholder="例如：註冊轉換率偏低、下個月要上線想先驗收畫面……"></textarea></label>
+        <label class="cf-hp" aria-hidden="true">網站<input name="website" tabindex="-1" autocomplete="off"></label>
+        <div class="cf-ts"></div>
+        <button type="submit" class="cf-go">送出需求</button>
+        <p class="cf-msg" role="status"></p>
+        <p class="cf-note">資料只用來回覆你的詢問。</p>
+      </form>
     </div>
   </div>
 </section>
@@ -697,19 +736,35 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       <div class="c-text">
         <p class="eyebrow" style="color:var(--accent-l)">Contact|</p>
         <h2>Let's get your product<br>launched smoothly.</h2>
-        <p class="sub">For freelance work, message or email me with a note on your product and the problem you want solved.</p>
+        <p class="sub">Use the form below or email me directly. A note on your product and the problem you want solved is enough, and I'll reply by email.</p>
+          <ul class="c-list">
+          <li><a class="c-row" href="mailto:heather45681@gmail.com?subject=Freelance%20inquiry">
+            <span class="c-lab"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3.5 6.5 8.5 6.5 8.5-6.5"></path></svg>EMAIL</span>
+            <span class="c-val">heather45681@gmail.com</span><span aria-hidden="true" class="ar ar-r mono">→</span></a></li>
+          <li><a class="c-row" href="https://www.linkedin.com/in/heather45681/" target="_blank" rel="noopener">
+            <span class="c-lab"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 10.5V17"></path><path d="M8 7.25v.01"></path><path d="M12 17v-6.5"></path><path d="M12 13.5c0-1.7 1.2-3 2.75-3S17 11.6 17 13.3V17"></path></svg>LINKEDIN</span>
+            <span class="c-val">linkedin.com/in/heather45681</span><span aria-hidden="true" class="ar ar-ne mono">↗</span></a></li>
+          <li><a class="c-row" href="index.html?lang=en">
+            <span class="c-lab"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 9h18"></path></svg>PORTFOLIO</span>
+            <span class="c-val">See the full portfolio</span><span aria-hidden="true" class="ar ar-r mono">→</span></a></li>
+        </ul>
       </div>
-      <ul class="c-list">
-        <li><a class="c-row" href="mailto:heather45681@gmail.com?subject=Freelance%20inquiry">
-          <span class="c-lab"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3.5 6.5 8.5 6.5 8.5-6.5"></path></svg>EMAIL</span>
-          <span class="c-val">heather45681@gmail.com</span><span aria-hidden="true" class="ar ar-r mono">→</span></a></li>
-        <li><a class="c-row" href="https://www.linkedin.com/in/heather45681/" target="_blank" rel="noopener">
-          <span class="c-lab"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 10.5V17"></path><path d="M8 7.25v.01"></path><path d="M12 17v-6.5"></path><path d="M12 13.5c0-1.7 1.2-3 2.75-3S17 11.6 17 13.3V17"></path></svg>LINKEDIN</span>
-          <span class="c-val">linkedin.com/in/heather45681</span><span aria-hidden="true" class="ar ar-ne mono">↗</span></a></li>
-        <li><a class="c-row" href="index.html?lang=en">
-          <span class="c-lab"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 9h18"></path></svg>PORTFOLIO</span>
-          <span class="c-val">See the full portfolio</span><span aria-hidden="true" class="ar ar-r mono">→</span></a></li>
-      </ul>
+      <form class="cf" data-lang="en" novalidate>
+        <p class="cf-h">Tell me what you need</p>
+        <div class="cf-grid">
+          <label class="cf-f"><span>Your name <i>required</i></span><input name="name" autocomplete="name" maxlength="60" required></label>
+          <label class="cf-f"><span>Email <i>required</i></span><input name="email" type="email" autocomplete="email" maxlength="120" required></label>
+          <label class="cf-f"><span>Company or brand</span><input name="company" autocomplete="organization" maxlength="80"></label>
+          <label class="cf-f"><span>Which service?</span><select name="service"><option value="unsure">Not sure yet</option><option value="flow">Sign-up &amp; login flow review</option><option value="qa">UI QA before launch</option><option value="web">Web design &amp; front end</option><option value="rules">Notion + AI rule library</option></select></label>
+          <label class="cf-f"><span>Timeline</span><select name="timeline"><option value="">Choose one</option><option value="soon">Within a month</option><option value="mid">1–3 months</option><option value="open">Not decided</option></select></label>
+        </div>
+        <label class="cf-f"><span>What do you want to solve? <i>required</i></span><textarea name="message" rows="5" maxlength="2000" required placeholder="e.g. sign-up conversion is low, or we launch next month and want the screens checked first"></textarea></label>
+        <label class="cf-hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
+        <div class="cf-ts"></div>
+        <button type="submit" class="cf-go">Send</button>
+        <p class="cf-msg" role="status"></p>
+        <p class="cf-note">Your details are only used to reply to you.</p>
+      </form>
     </div>
   </div>
 </section>
@@ -724,6 +779,38 @@ function mark(){var l=h.getAttribute('data-lang');var hb=document.getElementById
 document.title=l==='en'?'Fifi Lee | UX freelance':'Fifi Lee｜UX 接案合作';}
 document.querySelectorAll('.lang button').forEach(function(b){b.addEventListener('click',function(){var l=b.getAttribute('data-set');h.setAttribute('data-lang',l);h.lang=l==='en'?'en':'zh-Hant';try{localStorage.setItem('fifi-lang',l);}catch(e){}mark();});});
 mark();})();
+</script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+<script>
+/* contact forms: Turnstile renders on first interaction, then posts to /api/contact */
+(function(){
+  var SITE_KEY='0x4AAAAAAFzC6bj4fMRM9qdd';
+  var MSG={zh:{name:'請填寫你的名字。',email:'Email 格式看起來不太對。',message:'請多寫一點想解決的問題（至少 10 個字）。',turnstile:'人機驗證沒有通過，請稍後再試。',wait:'請先完成下方的人機驗證。',quota:'今天送出太多次了，請直接來信 heather45681@gmail.com。',net:'送出失敗，請稍後再試，或直接來信。',ok:'收到了！我會盡快用 Email 回覆你。',sending:'送出中…'},
+           en:{name:'Please add your name.',email:"That email doesn't look right.",message:'Please tell me a bit more about the problem (at least 10 characters).',turnstile:"The human check didn't pass. Please try again shortly.",wait:'Please finish the human check below first.',quota:'Too many messages today. Please email heather45681@gmail.com directly.',net:"Couldn't send. Please try again later or email me directly.",ok:"Got it! I'll reply by email soon.",sending:'Sending…'}};
+  // arriving from the website check: prefill the message
+  var q={};try{q=Object.fromEntries(new URLSearchParams(location.search));}catch(e){}
+  document.querySelectorAll('form.cf').forEach(function(f){
+    var L=f.getAttribute('data-lang'),t=MSG[L],token='',wid=null,box=f.querySelector('.cf-ts'),out=f.querySelector('.cf-msg'),btn=f.querySelector('.cf-go');
+    if(q.topic==='check'&&q.site){var m=f.elements.message;m.value=(L==='en'?'I ran the free check on '+q.site+' and would like to talk about a full review.':'我用網站健檢看了 '+q.site+'，想聊聊完整健檢。');f.elements.service.value='flow';}
+    function say(x,cls){out.textContent=x||'';out.className='cf-msg'+(cls?' '+cls:'');}
+    function mount(){if(wid!==null)return;if(!window.turnstile){setTimeout(mount,200);return;}
+      wid=window.turnstile.render(box,{sitekey:SITE_KEY,language:L==='en'?'en':'zh-tw',callback:function(v){token=v;},'expired-callback':function(){token='';},'error-callback':function(){token='';}});}
+    f.addEventListener('focusin',mount);
+    f.addEventListener('submit',function(ev){
+      ev.preventDefault();mount();
+      var e=f.elements,bad=null;
+      [['name',!e.name.value.trim()],['email',!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e.email.value.trim())],['message',e.message.value.trim().length<10]].forEach(function(c){e[c[0]].setAttribute('aria-invalid',c[1]?'true':'false');if(c[1]&&!bad)bad=c[0];});
+      if(bad){say(t[bad],'err');e[bad].focus();return;}
+      if(!token){say(t.wait,'err');return;}
+      btn.disabled=true;say(t.sending);
+      fetch('/api/contact',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name:e.name.value,email:e.email.value,company:e.company.value,service:e.service.value,timeline:e.timeline.value,message:e.message.value,website:e.website.value,token:token,lang:L})})
+        .then(function(r){return r.json().catch(function(){return{error:'net'};});})
+        .then(function(d){if(d.ok){f.reset();say(t.ok,'ok');try{window.goatcounter&&window.goatcounter.count({path:'contact-sent',title:'Contact form sent',event:true});}catch(x){}}else{say(t[d.error]||t.net,'err');}})
+        .catch(function(){say(t.net,'err');})
+        .finally(function(){btn.disabled=false;token='';if(window.turnstile&&wid!==null)window.turnstile.reset(wid);});
+    });
+  });
+})();
 </script>
 </body>
 </html>
