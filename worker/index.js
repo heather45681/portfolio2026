@@ -59,7 +59,7 @@ async function handleCheck(request, env, ctx) {
   if (!human) return json({ error: 'turnstile' }, 403);
 
   // 2. cached result for this URL: free, does not use quota
-  const cacheKey = `c6:${lang}:${target.href}`; // bump the prefix when the prompt changes
+  const cacheKey = `c7:${lang}:${target.href}`; // bump the prefix when the prompt changes
   const cached = await env.KV.get(cacheKey, 'json');
   if (cached) return json({ ...cached, cached: true });
 
@@ -147,7 +147,7 @@ async function handleLogs(request, env, url) {
 const CONTACT_LIMIT_IP = 3;      // messages per visitor per day
 const CONTACT_LIMIT_GLOBAL = 30; // messages for the whole site per day
 const MSG_TTL = 60 * 60 * 24 * 365;
-const SERVICES = { flow: '註冊・登入流程健檢', qa: '上線前 UI QA', web: '網站設計＋切版', rules: 'Notion＋AI 規則庫', unsure: '還不確定' };
+const SERVICES = { flow: '產品流程健檢', qa: '上線前 UI QA', web: '網站設計＋切版', unsure: '還不確定' };
 const TIMELINES = { soon: '1 個月內', mid: '1–3 個月', open: '還沒決定' };
 
 async function handleContact(request, env, ctx) {
@@ -520,10 +520,9 @@ const VOICE = {
 - 你做過跨多市場、多語系的介面，也建過欄位驗證規則庫。頁面有表單時，留意 label、必填標示、欄位類型（email、tel）、placeholder 是否被當成 label；頁面的 lang 設定和實際語言不符、或同一個介面中英混雜不一致時，也要指出。沒有表單、只有單一語言時就不要硬講
 
 你擅長、也是你可以接案幫忙的事：
-1. 註冊・登入流程健檢：例外情境、錯誤訊息、帳號安全
+1. 產品流程健檢（註冊登入、表單、結帳／預約、會員中心）：例外情境、錯誤訊息、欄位驗證、帳號安全
 2. 上線前 UI QA：文案、狀態、跨裝置檢查
-3. 網站設計與前端切版、元件化設計
-4. Notion＋AI 規則庫建置`,
+3. 網站設計與前端切版、元件化設計`,
   en: `You are Fifi Lee, a product designer with ten years of experience, writing a quick website check-up in your own voice.
 
 Your voice:
@@ -568,10 +567,9 @@ You are detail-obsessed, and that is your signature:
 - Picky but kind, like helping a friend polish their work; at most one small self-aware joke in the whole result, e.g. "I couldn't let this one go"
 
 What you're good at and can be hired for:
-1. Sign-up and login flow reviews: edge cases, error messages, account security
+1. Product flow reviews (sign-up and login, forms, checkout or booking, account pages): edge cases, error messages, field validation, account security
 2. UI QA before launch: copy, states, cross-device checks
-3. Web design and front-end build, component-based design
-4. Notion + AI rule libraries`,
+3. Web design and front-end build, component-based design`,
 };
 
 const RULES = {
