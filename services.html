@@ -177,7 +177,7 @@ a:hover .ar-r{transform:translateX(5px)}a:hover .ar-ne{transform:translate(3px,-
 .cf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px 16px}
 .cf-f{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--ink2)}
 .cf-f i{font-style:normal;font-size:11px;color:var(--accent);margin-left:4px}
-.cf-f input,.cf-f select,.cf-f textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:11px 13px;font:inherit;font-size:15px;color:var(--ink)}
+.cf-f input,.cf-f select,.cf-f textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:11px 13px;font:inherit;font-size:16px;color:var(--ink)}
 .cf-f textarea{resize:vertical;min-height:120px;line-height:1.7}
 .cf-f input:focus,.cf-f select:focus,.cf-f textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(168,72,47,.15)}
 .cf-f [aria-invalid="true"]{border-color:#b2452d}
@@ -190,7 +190,18 @@ a:hover .ar-r{transform:translateX(5px)}a:hover .ar-ne{transform:translate(3px,-
 .cf-msg.err{color:#b2452d}
 .cf-msg.ok{color:#2f6b45;font-weight:500}
 .cf-note{margin:-6px 0 0;font-size:12px;color:var(--mute)}
-@media (max-width:520px){.cf{padding:22px 18px}.cf-go{width:100%}}
+@media (max-width:760px){
+  /* phones: drop the outer card so the form gets the full width */
+  .contact{padding:0}
+  .c-card{border:0;border-radius:0;padding:56px 16px 40px !important}
+  .c-in{gap:36px}
+  .cf{flex-basis:100%;padding:24px 18px;border-radius:14px;gap:14px;box-shadow:0 10px 30px -22px rgba(31,36,39,.35)}
+  .cf-grid{grid-template-columns:1fr;gap:12px}
+  .cf-f{gap:4px}
+  .cf-f input,.cf-f select{padding:10px 12px}
+  .cf-f textarea{min-height:110px}
+  .cf-go{width:100%;padding:14px}
+}
 .c-row{display:flex;align-items:center;gap:24px;padding:20px 0;color:var(--ink) !important;text-decoration:none}
 .c-row:hover{color:var(--accent) !important}
 .c-lab{flex:0 0 120px;display:inline-flex;align-items:center;gap:10px;line-height:1;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.12em;color:var(--accent)}
