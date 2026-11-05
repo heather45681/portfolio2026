@@ -48,6 +48,9 @@ input[type=url]:focus{outline:2px solid var(--accent);outline-offset:1px;border-
 .go:hover{background:var(--accent-d)}.go:disabled{background:#C9C3B4;cursor:not-allowed}
 .hint{margin:0;font-size:13px;color:var(--mute)}
 .err{margin:0;font-size:14px;color:var(--bad)}
+.f-err{margin:-4px 0 0 4px;font-size:13px;line-height:1.6;color:#b2452d}
+.f-err::before{content:'!';display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;margin-right:6px;border-radius:50%;background:#b2452d;color:#fff;font-size:10px;font-weight:700;vertical-align:1px}
+#u[aria-invalid="true"]{border-color:#b2452d}
 .pending{margin:0;display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--ink2)}
 .pending::before{content:'';flex:none;margin-top:5px;width:14px;height:14px;border-radius:50%;border:2px solid var(--line);border-top-color:var(--accent);animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -147,9 +150,10 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     <form id="f" novalidate>
       <label for="u" class="hint" data-t="label"></label>
       <div class="row">
-        <input id="u" type="url" inputmode="url" autocomplete="url" maxlength="300" placeholder="example.com" required>
+        <input id="u" type="text" inputmode="url" autocomplete="url" maxlength="300" placeholder="example.com" aria-describedby="uErr">
         <button class="go" id="go" type="submit" data-t="go"></button>
       </div>
+      <p class="f-err" id="uErr" hidden></p>
       <div id="ts"></div>
       <p class="pending" id="pending" role="status" hidden></p>
       <p class="err" id="err" role="alert" hidden></p>
@@ -277,7 +281,17 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     if (L === 'zh') return h ? h + ' 小時' + (m ? ' ' + m + ' 分鐘' : '') : m + ' 分鐘';
     return h ? h + (h > 1 ? ' hours' : ' hour') + (m ? ' ' + m + ' min' : '') : m + ' minutes';
   }
+  // URL field: format checked on blur, shown right under the field
+  function urlProblem(v) { return !v ? 'empty' : /^(https?:\/\/)?[^\s\/]+\.[^\s\/]{2,}(\/\S*)?$/i.test(v) ? '' : 'bad_url'; }
+  function fieldErr(code) {
+    var box = $('uErr');
+    if (!code) { box.hidden = true; $('u').setAttribute('aria-invalid', 'false'); return; }
+    box.textContent = T[L].e[code]; box.hidden = false; $('u').setAttribute('aria-invalid', 'true');
+  }
+  $('u').addEventListener('blur', function () { var v = $('u').value.trim(); fieldErr(v ? urlProblem(v) : ''); });
+  $('u').addEventListener('input', function () { if (!$('uErr').hidden) fieldErr(urlProblem($('u').value.trim())); });
   function showErr(code, d) {
+    if (code === 'bad_url' || code === 'empty') { fieldErr(code); $('u').focus(); return; }
     var t = T[L].e, msg = t[code] || t.net;
     if (code === 'busy') msg = msg.replace('{t}', wait(Math.max(1, (d && d.retryMin) || 60)));
     if (d && d.code) msg += (L === 'zh' ? '（錯誤代碼：' : ' (Error code: ') + String(d.code).slice(0, 20) + (L === 'zh' ? '）' : ')');
@@ -299,7 +313,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     ev.preventDefault();
     $('err').hidden = true;
     var url = $('u').value.trim();
-    if (!url) { showErr('empty'); return; }
+    var prob = urlProblem(url); if (prob) { showErr(prob); return; } fieldErr('');
     if (!token) { showErr('wait'); return; }
     $('pending').hidden = true;
     $('go').disabled = true; $('go').textContent = T[L].going; $('res').hidden = true; steps(true);

@@ -188,6 +188,10 @@ a:hover .ar-r{transform:translateX(5px)}a:hover .ar-ne{transform:translate(3px,-
 .cf-go:hover{background:var(--accent-d)}
 .cf-go:disabled{opacity:.6;cursor:wait}
 .cf-go:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.f-err{margin:6px 0 0 4px;font-size:13px;line-height:1.6;color:#b2452d}
+.f-err::before{content:'!';display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;margin-right:6px;border-radius:50%;background:#b2452d;color:#fff;font-size:10px;font-weight:700;vertical-align:1px}
+.qc .f-err{margin:-6px 0 0 20px}
+.qc-bar:has(input[aria-invalid="true"]){border-color:#b2452d}
 .cf-msg{margin:0;font-size:14px;min-height:1px}
 .cf-msg.err{color:#b2452d}
 .cf-msg.ok{color:#2f6b45;font-weight:500}
@@ -769,6 +773,25 @@ mark();})();
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 <script>
 /* contact forms: Turnstile renders on first interaction, then posts to /api/contact */
+/* hero check forms validate the URL inline; blank or malformed URLs never leave the page */
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('form.qc').forEach(function(f){
+    var en=!!f.querySelector('input[name=lang]'),u=f.elements.url;f.setAttribute('novalidate','');u.removeAttribute('required');
+    var r=fieldCheck(u,f.querySelector('.qc-bar'),function(v){if(!v)return en?'Please paste a URL first.':'請先貼上網址。';return /^(https?:\/\/)?[^\s\/]+\.[^\s\/]{2,}(\/\S*)?$/i.test(v)?'':(en?"That doesn't look like a URL. Try something like your-site.com.":'網址格式看起來不太對，請輸入像 your-site.com 這樣的網址。');},true);
+    f.addEventListener('submit',function(ev){if(!r.check()){ev.preventDefault();u.focus();}});
+  });
+});
+/* inline field errors: shown under the field on blur, cleared as soon as the value is fixed */
+window.fieldCheck=function(input,anchor,rule,lazyRequired){
+  var err=document.createElement('p');err.className='f-err';err.id=(input.id||input.name+'-'+Math.random().toString(36).slice(2,7))+'-err';err.hidden=true;
+  anchor.insertAdjacentElement('afterend',err);
+  input.setAttribute('aria-describedby',err.id);
+  var shown=false;
+  function run(force){var m=rule(input.value.trim());if(m&&(force||shown||input.value.trim()||input.dataset.touched)){err.textContent=m;err.hidden=false;input.setAttribute('aria-invalid','true');shown=true;}else if(!m){err.hidden=true;input.setAttribute('aria-invalid','false');shown=false;}return !m;}
+  input.addEventListener('input',function(){input.dataset.touched='1';if(shown)run();});
+  input.addEventListener('blur',function(){if(lazyRequired&&!input.value.trim()){err.hidden=true;input.removeAttribute('aria-invalid');shown=false;return;}run(true);});
+  return {check:function(){return run(true);},show:function(m){err.textContent=m;err.hidden=false;input.setAttribute('aria-invalid','true');shown=true;}};
+};
 (function(){
   var SITE_KEY='0x4AAAAAAFzC6bj4fMRM9qdd';
   var MSG={zh:{name:'請填寫你的名字。',email:'Email 格式看起來不太對。',message:'請多寫一點想解決的問題（至少 10 個字）。',turnstile:'人機驗證沒有通過，請稍後再試。',wait:'請先完成下方的人機驗證。',quota:'今天送出太多次了，請直接來信 heather45681@gmail.com。',net:'送出失敗，請稍後再試，或直接來信。',ok:'收到了！我會盡快用 Email 回覆你。',sending:'送出中…'},
@@ -779,19 +802,24 @@ mark();})();
     var L=f.getAttribute('data-lang'),t=MSG[L],token='',wid=null,box=f.querySelector('.cf-ts'),out=f.querySelector('.cf-msg'),btn=f.querySelector('.cf-go');
     if(q.topic==='check'&&q.site){var m=f.elements.message;m.value=(L==='en'?'I ran the free check on '+q.site+' and would like to talk about a full review.':'我用網站健檢看了 '+q.site+'，想聊聊完整健檢。');f.elements.service.value='flow';}
     function say(x,cls){out.textContent=x||'';out.className='cf-msg'+(cls?' '+cls:'');}
+    var E=f.elements,rules={
+      name:fieldCheck(E.name,E.name,function(v){return v?'':t.name;}),
+      email:fieldCheck(E.email,E.email,function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)?'':t.email;}),
+      message:fieldCheck(E.message,E.message,function(v){return v.length>=10?'':t.message;})
+    };
     function mount(){if(wid!==null)return;if(!window.turnstile){setTimeout(mount,200);return;}
       wid=window.turnstile.render(box,{sitekey:SITE_KEY,theme:'light',language:L==='en'?'en':'zh-tw',callback:function(v){token=v;},'expired-callback':function(){token='';},'error-callback':function(){token='';}});}
     f.addEventListener('focusin',mount);
     f.addEventListener('submit',function(ev){
       ev.preventDefault();mount();
       var e=f.elements,bad=null;
-      [['name',!e.name.value.trim()],['email',!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e.email.value.trim())],['message',e.message.value.trim().length<10]].forEach(function(c){e[c[0]].setAttribute('aria-invalid',c[1]?'true':'false');if(c[1]&&!bad)bad=c[0];});
-      if(bad){say(t[bad],'err');e[bad].focus();return;}
+      ['name','email','message'].forEach(function(k){if(!rules[k].check()&&!bad)bad=k;});
+      if(bad){say('');e[bad].focus();return;}
       if(!token){say(t.wait,'err');return;}
       btn.disabled=true;say(t.sending);
       fetch('/api/contact',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name:e.name.value,email:e.email.value,company:e.company.value,service:e.service.value,timeline:e.timeline.value,message:e.message.value,website:e.website.value,token:token,lang:L})})
         .then(function(r){return r.json().catch(function(){return{error:'net'};});})
-        .then(function(d){if(d.ok){f.reset();say(t.ok,'ok');try{window.goatcounter&&window.goatcounter.count({path:'contact-sent',title:'Contact form sent',event:true});}catch(x){}}else{say(t[d.error]||t.net,'err');}})
+        .then(function(d){if(d.ok){f.reset();say(t.ok,'ok');try{window.goatcounter&&window.goatcounter.count({path:'contact-sent',title:'Contact form sent',event:true});}catch(x){}}else if(rules[d.error]){say('');rules[d.error].show(t[d.error]);e[d.error].focus();}else{say(t[d.error]||t.net,'err');}})
         .catch(function(){say(t.net,'err');})
         .finally(function(){btn.disabled=false;token='';if(window.turnstile&&wid!==null)window.turnstile.reset(wid);});
     });
