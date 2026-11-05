@@ -75,6 +75,10 @@ input[type=url]:focus{outline:2px solid var(--accent);outline-offset:1px;border-
 .finds .n{font-family:'Cormorant Garamond',serif;font-size:34px;line-height:1;color:var(--accent);grid-row:span 5}
 .finds h3{margin:0;font-family:'Noto Serif TC',serif;font-size:19px;line-height:1.5}
 .finds p{margin:0;font-size:15px;color:var(--ink2)}
+/* label + text as two columns, so wrapped lines stay aligned like a table */
+.finds p,.tells li p{display:grid;grid-template-columns:40px minmax(0,1fr);column-gap:8px;align-items:baseline}
+html[lang="en"] .finds p,html[lang="en"] .tells li p{grid-template-columns:72px minmax(0,1fr)}
+.finds p .lab,.tells li p .lab{margin-right:0}
 .journey{margin:18px 0 26px;padding:16px 20px;border-left:3px solid var(--accent);background:rgba(170,74,46,.06);border-radius:0 12px 12px 0}
 .journey b{display:block;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--accent);margin-bottom:4px}
 .journey p{margin:0;font-size:15px;line-height:1.8;color:var(--ink2)}
@@ -104,6 +108,7 @@ input[type=url]:focus{outline:2px solid var(--accent);outline-offset:1px;border-
   .finds li{grid-template-columns:1fr;gap:6px}
   .finds .n{grid-row:auto;font-size:28px}
   .finds p{margin-top:6px}
+  .finds p,.tells li p,html[lang="en"] .finds p,html[lang="en"] .tells li p{display:block}
   .finds .lab,.tells .lab{display:block;margin:0 0 2px;color:var(--accent)}
 }
 .finds .lab{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--mute);margin-right:8px}
