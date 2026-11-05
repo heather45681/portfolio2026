@@ -13,6 +13,9 @@
     "binding": "ASSETS",
     "run_worker_first": ["/api/*"]
   },
+  "send_email": [
+    { "name": "EMAIL", "destination_address": "heather45681@gmail.com" }
+  ],
   "kv_namespaces": [
     { "binding": "KV", "id": "af64a2e49cbd4f98a8d11dad9d2c6702" }
   ]

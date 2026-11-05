@@ -1,3 +1,5 @@
+import { EmailMessage } from 'cloudflare:email';
+
 // fifilee-design.com Worker
 // Serves the static site (ASSETS) and the website health-check API at POST /api/check.
 //
@@ -196,15 +198,41 @@ async function handleContact(request, env, ctx) {
       rec.timeline ? `時程：${rec.timeline}` : '', `語言：${lang === 'en' ? '英文' : '中文'}`, '', message, '',
       '— 來自 fifilee-design.com 接案表單，直接回覆這封信就會寄給對方。',
     ].filter((l, i, a) => l !== '' || (a[i - 1] !== '' && i > 0)).join('\n');
-    ctx.waitUntil(env.EMAIL.send({
-      from: 'form@fifilee-design.com',
-      to: 'heather45681@gmail.com',
-      replyTo: email,
-      subject: `[接案表單] ${name}｜${rec.service}`,
-      text,
-    }).catch(e => console.log('email failed', e && e.message)));
+    ctx.waitUntil(sendMail(env, { replyTo: email, subject: `[接案表單] ${name}｜${rec.service}`, text }));
   }
   return json({ ok: true });
+}
+
+// Email to Fifi's verified inbox. Tries the newer send({...}) API first, then a plain MIME message.
+const MAIL_FROM = 'form@fifilee-design.com';
+const MAIL_TO = 'heather45681@gmail.com';
+async function sendMail(env, { replyTo, subject, text }) {
+  try {
+    await env.EMAIL.send({ from: { email: MAIL_FROM, name: 'Fifi Lee 網站表單' }, to: MAIL_TO, replyTo, subject, text });
+    return;
+  } catch (e) {
+    console.log('email send() failed, trying MIME', e && e.message);
+  }
+  try {
+    const b64 = str => btoa(String.fromCharCode(...new TextEncoder().encode(str)));
+    const body = b64(text).replace(/.{76}/g, '$&\r\n');
+    const raw = [
+      `From: =?UTF-8?B?${b64('Fifi Lee 網站表單')}?= <${MAIL_FROM}>`,
+      `To: <${MAIL_TO}>`,
+      `Reply-To: <${replyTo}>`,
+      `Subject: =?UTF-8?B?${b64(subject)}?=`,
+      `Date: ${new Date().toUTCString()}`,
+      `Message-ID: <${crypto.randomUUID()}@fifilee-design.com>`,
+      'MIME-Version: 1.0',
+      'Content-Type: text/plain; charset=UTF-8',
+      'Content-Transfer-Encoding: base64',
+      '',
+      body,
+    ].join('\r\n');
+    await env.EMAIL.send(new EmailMessage(MAIL_FROM, MAIL_TO, raw));
+  } catch (e) {
+    console.log('email failed', e && e.message);
+  }
 }
 
 // compare secrets without leaking how many characters matched
