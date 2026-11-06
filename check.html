@@ -146,7 +146,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
   </a>
   <nav class="nav" aria-label="Main">
     <a class="hide-sp" href="index.html" data-t="navWork" data-href-lang></a>
-    <a href="services.html" data-t="navSvc" data-href-lang></a>
+    <a href="services.html" id="navSvc" data-t="navSvc" data-href-lang></a>
     <span class="lang" role="group" aria-label="Language"><button type="button" data-set="zh">中文</button><button type="button" data-set="en">EN</button></span>
   </nav>
 </header>
@@ -202,7 +202,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
 </section>
 </main>
 
-<footer class="foot">© 2026 Fifi Lee · UX Designer · Taipei</footer>
+<footer class="foot">© 2026 Fifi Lee · Product Designer · Taipei</footer>
 
 <script>
 (function () {
@@ -271,6 +271,8 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
   // a URL handed over from the services page: fill it in and run once the human check passes
   var autoRun = false;
   try { var pre = new URLSearchParams(location.search).get('url'); if (pre) { $('u').value = pre.slice(0, 300); autoRun = true; } } catch (e) {}
+  // opened from the portfolio's Side Project card: keep the nav to the portfolio only
+  try { if (new URLSearchParams(location.search).get('from') === 'portfolio') $('navSvc').style.display = 'none'; } catch (e) {}
   function showPending() {
     // tell the visitor the check will start by itself
     if (!autoRun) return;
