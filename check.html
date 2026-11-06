@@ -272,7 +272,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
   var autoRun = false;
   try { var pre = new URLSearchParams(location.search).get('url'); if (pre) { $('u').value = pre.slice(0, 300); autoRun = true; } } catch (e) {}
   // opened from the portfolio's Side Project card: keep the nav to the portfolio only
-  try { if (new URLSearchParams(location.search).get('from') === 'portfolio') $('navSvc').style.display = 'none'; } catch (e) {}
+  try { if (new URLSearchParams(location.search).get('from') === 'portfolio') { $('navSvc').style.display = 'none'; $('ctaContact').parentNode.style.display = 'none'; } } catch (e) {}
   function showPending() {
     // tell the visitor the check will start by itself
     if (!autoRun) return;
