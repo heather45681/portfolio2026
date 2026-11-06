@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<script>
+/* moved to fifilee-design.com: send old github.io links to the same page there */
+if (location.hostname === 'heather45681.github.io') {
+  location.replace('https://fifilee-design.com' + location.pathname.replace(/^\/portfolio2026/, '') + location.search + location.hash);
+}
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>網站 UX 健檢工具｜Fifi Lee</title>
+<meta name="description" content="Side Project：輸入網址，一分鐘看出速度、無障礙、文案與表單問題。從定義問題、設計到開發上線，由 Fifi Lee 獨立完成。">
+<meta property="og:title" content="Website UX Health Check · 網站 UX 健檢工具｜Fifi Lee">
+<meta property="og:description" content="Side project: paste a URL and get a one-minute check on speed, accessibility, copy and forms. 輸入網址，一分鐘看出速度、無障礙、文案與表單問題。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://fifilee-design.com/side-project.html">
+<meta property="og:image" content="https://fifilee-design.com/img/og-check.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&amp;family=Noto+Sans+TC:wght@400;500;700&amp;family=Cormorant+Garamond:wght@500;600&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F3F0E8;--paper:#FBF9F4;--ink:#1F2427;--ink2:#3C403E;--mute:#5E625F;--line:#C9C3B4;--accent:#A8482F;--accent-d:#8A3A25;--accent-l:#E59A7F}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans TC',sans-serif;font-size:16px;line-height:1.9;letter-spacing:.04em}
+a{color:var(--ink)}a:hover{color:var(--accent)}
+img{display:block;max-width:100%}
+html[data-lang="en"] .L-zh,html[data-lang="zh"] .L-en{display:none !important}
+.eyebrow{margin:0;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.16em;color:var(--accent)}
+.ar{display:inline-block;transition:transform .25s ease}
+a:hover .ar-l{transform:translateX(-5px)}a:hover .ar-ne{transform:translate(3px,-3px)}
+@media (prefers-reduced-motion: reduce){.ar{transition:none}}
+
+/* header */
+.hd{max-width:1200px;margin:0 auto;padding:28px 24px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px}
+.brand{text-decoration:none;display:flex;align-items:baseline;gap:12px;white-space:nowrap}
+.brand b{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;letter-spacing:.02em}
+.brand span{font-family:'Noto Serif TC',serif;font-size:15px;color:var(--mute)}
+.hd-r{display:flex;align-items:center;gap:20px;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.12em}
+.hd-r a{text-decoration:none}
+.lang{display:inline-flex;border:1px solid var(--ink);border-radius:999px;overflow:hidden}
+.lang button{border:0;background:transparent;min-height:32px;padding:4px 14px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.08em;color:var(--ink);cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+
+/* page */
+main{max-width:1200px;margin:0 auto;padding:40px 24px 112px}
+.intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center;padding-bottom:72px;border-bottom:1px solid var(--line)}
+.intro h1{margin:14px 0 0;font-family:'Noto Serif TC',serif;font-size:40px;font-weight:700;line-height:1.45}
+.L-en .intro h1,.L-en h2{font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:0}
+.L-en .intro h1{font-size:48px;line-height:1.15}
+.intro .one{margin:18px 0 0;font-size:18px;color:var(--ink2);max-width:520px}
+.tags{margin:16px 0 0;font-size:13px;color:var(--mute)}
+.go{margin-top:28px;display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 26px;border-radius:999px;background:var(--accent);color:var(--paper) !important;text-decoration:none;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.12em;transition:background .2s}
+.go:hover{background:var(--accent-d)}
+.intro img{width:100%;height:auto;border-radius:12px;box-shadow:0 24px 50px -32px rgba(31,36,39,.5)}
+.sec{display:grid;grid-template-columns:220px minmax(0,1fr);gap:24px 56px;padding:56px 0;border-bottom:1px solid var(--line)}
+.sec:last-of-type{border-bottom:0}
+.sec h2{margin:0;font-family:'Noto Serif TC',serif;font-size:22px;font-weight:700;line-height:1.5}
+.L-en .sec h2{font-size:28px;line-height:1.25}
+.sec .body{max-width:720px}
+.sec p{margin:0}
+.sec p+p{margin-top:12px}
+.sec ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px}
+.sec li{position:relative;padding-left:22px}
+.sec li::before{content:'';position:absolute;left:2px;top:.8em;width:8px;height:1px;background:var(--accent)}
+.sec li b{font-weight:700}
+.sec .sub-h{margin:36px 0 12px;font-size:14px;font-weight:700;color:var(--accent);letter-spacing:.06em}
+.sec .sub-h:first-child{margin-top:0}
+.fix{display:grid;grid-template-columns:52px minmax(0,1fr);gap:4px 12px;padding:16px 18px;background:var(--paper);border:1px solid var(--line);border-radius:12px}
+.fix+.fix{margin-top:12px}
+.fix span{font-size:12px;color:var(--mute);padding-top:3px}
+.L-en .fix{grid-template-columns:72px minmax(0,1fr)}
+.back{display:inline-block;margin-top:24px;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.12em;text-decoration:none}
+.foot{text-align:center;padding:32px 24px;font-family:'DM Mono',monospace;font-size:12px;color:var(--mute);background:var(--paper)}
+@media (max-width:860px){
+  .intro{grid-template-columns:1fr;gap:36px;padding-bottom:56px}
+  .intro h1{font-size:32px}.L-en .intro h1{font-size:38px}
+  .sec{grid-template-columns:1fr;gap:16px;padding:44px 0}
+}
+@media (max-width:520px){
+  .hd-r .back-t{display:none}
+  .fix,.L-en .fix{grid-template-columns:1fr;gap:2px}
+  .go{width:100%;justify-content:center}
+}
+</style>
+<script>
+/* language: ?lang= first, then the choice shared with the portfolio pages */
+(function(){var l='zh';try{var q=new URLSearchParams(location.search).get('lang');if(q==='en'||q==='zh'){l=q;localStorage.setItem('fifi-lang',q);}else if(localStorage.getItem('fifi-lang')==='en'){l='en';}}catch(e){}document.documentElement.setAttribute('data-lang',l);if(l==='en')document.documentElement.lang='en';})();
+</script>
+<script>
+/* GoatCounter: only count visits on the live site, not previews */
+if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
+  var gc = document.createElement('script');
+  gc.async = true;
+  gc.src = 'https://gc.zgo.at/count.js';
+  gc.setAttribute('data-goatcounter', 'https://fifilee.goatcounter.com/count');
+  document.head.appendChild(gc);
+  /* Microsoft Clarity: session recordings and heatmaps */
+  (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","z8wub60myh");
+}
+</script>
+</head>
+<body>
+
+<header class="hd">
+  <a class="brand L-zh" href="index.html?lang=zh"><b>Fifi Lee</b><span>李芸澧</span></a>
+  <a class="brand L-en" href="index.html?lang=en"><b>Fifi Lee</b></a>
+  <div class="hd-r">
+    <a class="L-zh" href="index.html?lang=zh#works"><span class="ar ar-l">←</span> <span class="back-t">回作品集</span></a>
+    <a class="L-en" href="index.html?lang=en#works"><span class="ar ar-l">←</span> <span class="back-t">Back to work</span></a>
+    <span class="lang" role="group" aria-label="Language"><button type="button" data-set="zh">中文</button><button type="button" data-set="en">EN</button></span>
+  </div>
+</header>
+
+<!-- ===================== 中文 ===================== -->
+<main class="L-zh">
+  <section class="intro">
+    <div>
+      <p class="eyebrow">Side Project|</p>
+      <h1>網站 UX 健檢工具</h1>
+      <p class="one">輸入網址，一分鐘看出速度、無障礙、文案與表單問題。</p>
+      <p class="tags">#獨立開發　#AI 協作　#已上線</p>
+      <a class="go" href="check.html?lang=zh">試用工具 <span class="ar ar-ne">↗</span></a>
+    </div>
+    <img src="img/og-check.png" alt="網站 UX 健檢工具的示意圖：網址輸入列、四個 PageSpeed 分數，以及一條標示嚴重度高的建議" width="1200" height="630">
+  </section>
+
+  <section class="sec">
+    <h2>背景與問題</h2>
+    <div class="body"><p>很多店家和中小企業的網站，用的是模板或外包製作，速度、無障礙、表單設計常有問題，但他們自己看不出來，也不知道從哪裡改起。</p></div>
+  </section>
+
+  <section class="sec">
+    <h2>我的角色</h2>
+    <div class="body"><p>獨立完成，從定義問題、設計到開發上線都由我負責。</p></div>
+  </section>
+
+  <section class="sec">
+    <h2>關鍵設計決策</h2>
+    <div class="body"><ul>
+      <li><b>只要輸入網址、不用登入：</b>降低試用門檻。</li>
+      <li><b>每人每天 3 次：</b>控制成本，也避免被濫用。同一個網址 24 小時內重查會直接用上次的結果，不另外花費。</li>
+      <li><b>一分鐘內出結果：</b>使用者願意等的時間有限，等待時用三個步驟顯示進度。</li>
+      <li><b>四個面向加一個專題：</b>檢查速度、無障礙、文案、表單，外加模板網站常見的破綻，例如 icon 混用、沒換掉的範例文字、點了沒反應的連結。</li>
+      <li><b>報告寫成 UAT 單：</b>建議依影響大小排序，每條標出嚴重度（高／中／低）和位置，再分成「現況、預期、建議」三欄，修改建議寫到可以直接照做，例如直接給改好的文案。報告也會用第一次來的人的角度走一遍首頁，最後另列一區「細節雷達」，收錄用詞不一致、標點混用這類小地方。</li>
+    </ul></div>
+  </section>
+
+  <section class="sec">
+    <h2>怎麼做出來的</h2>
+    <div class="body">
+      <p class="sub-h">使用的工具</p>
+      <ul>
+        <li><b>Claude Code：</b>一起寫前後端程式、除錯和安全性檢查。</li>
+        <li><b>Claude Haiku（Anthropic API）：</b>在工具裡依我的口吻產生健檢建議。</li>
+        <li><b>Cloudflare Workers、KV、Turnstile：</b>部署網站與 API、記錄每日次數、擋機器人。</li>
+        <li><b>Google PageSpeed Insights API：</b>取得速度、無障礙與 SEO 分數。</li>
+        <li><b>GitHub：</b>推送後自動部署。</li>
+      </ul>
+      <p class="sub-h">AI 幫了什麼</p>
+      <p>寫程式、把我檢查網站的習慣轉成程式能抓的規則（例如 icon 混用、預設 favicon、中文網站留著英文按鈕），以及撰寫讓 AI 用我的口吻、照 UAT 單格式回覆的提示詞。</p>
+      <p class="sub-h">AI 哪裡出錯、我怎麼抓到並修正</p>
+      <div class="fix"><span>問題</span><p>拿自己的作品集實測，6 條建議裡有 4 條是誤判，例如把中英雙語版本當成重複文字、說首頁沒有聯絡入口。</p><span>修正</span><p>對照原始碼發現，工具讀到的是 JavaScript 執行前的 HTML。我補上規則：樣板變數、雙語版本和程式產生的按鈕，不能直接當成錯誤。</p></div>
+      <div class="fix"><span>問題</span><p>建議常常寫到一半就斷掉，畫面只顯示錯誤。</p><span>修正</span><p>查出模型預設會先「思考」，思考吃掉了輸出額度。關掉思考後，報告能完整產出，每次的成本也降低了。</p></div>
+      <div class="fix"><span>問題</span><p>一次改版後，網址輸入框的樣式整個跑掉，是我實際操作時看出來的。</p><span>修正</span><p>原因是程式改了欄位類型，樣式還綁在舊的類型上。改成直接指定這個欄位，之後再改類型也不會壞。</p></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>成果</h2>
+    <div class="body"><p>已上線，任何人都可以免費試用。</p><a class="go" href="check.html?lang=zh">試用工具 <span class="ar ar-ne">↗</span></a></div>
+  </section>
+
+  <section class="sec">
+    <h2>反思</h2>
+    <div class="body"><p>做這個工具，讓我練習用 AI 把一個產品從概念快速做到上線，同時為 AI 的產出品質把關。</p>
+    <a class="back" href="index.html?lang=zh#works"><span class="ar ar-l">←</span> 回作品集</a></div>
+  </section>
+</main>
+
+<!-- ===================== English ===================== -->
+<main class="L-en">
+  <section class="intro">
+    <div>
+      <p class="eyebrow">Side Project|</p>
+      <h1>Website UX Health Check</h1>
+      <p class="one">Paste a URL and get a one-minute check on speed, accessibility, copy and forms.</p>
+      <p class="tags">#Solo project　#AI-assisted　#Live</p>
+      <a class="go" href="check.html?lang=en">Try the tool <span class="ar ar-ne">↗</span></a>
+    </div>
+    <img src="img/og-check.png" alt="The Website UX Health Check: a URL bar, four PageSpeed scores and one high-severity finding" width="1200" height="630">
+  </section>
+
+  <section class="sec">
+    <h2>Background</h2>
+    <div class="body"><p>Many small businesses run template-based or outsourced websites with hidden issues in speed, accessibility and forms. They can't see these problems or know where to start.</p></div>
+  </section>
+
+  <section class="sec">
+    <h2>My role</h2>
+    <div class="body"><p>Solo project. I defined the problem, designed and built it, and shipped it.</p></div>
+  </section>
+
+  <section class="sec">
+    <h2>Key decisions</h2>
+    <div class="body"><ul>
+      <li><b>Just a URL, no login:</b> keeps the barrier to trying it low.</li>
+      <li><b>Three checks per person per day:</b> keeps costs down and limits abuse. Re-checking the same URL within 24 hours reuses the last result at no extra cost.</li>
+      <li><b>Results within a minute:</b> people won't wait long, so a three-step progress indicator shows what's happening.</li>
+      <li><b>Four areas plus one special focus:</b> speed, accessibility, copy and forms, plus the usual slips of template-built sites, like mixed icon sets, leftover sample text and links that go nowhere.</li>
+      <li><b>Findings written like UAT tickets:</b> sorted by impact, each tagged with severity (high, medium, low) and location, then split into current, expected and fix, with fixes concrete enough to apply as-is, such as rewritten copy. The report also walks the home page as a first-time visitor, and ends with a "detail radar" for small things like inconsistent wording or mixed punctuation.</li>
+    </ul></div>
+  </section>
+
+  <section class="sec">
+    <h2>How I built it</h2>
+    <div class="body">
+      <p class="sub-h">Tools</p>
+      <ul>
+        <li><b>Claude Code:</b> writing the front and back end together, debugging and security review.</li>
+        <li><b>Claude Haiku (Anthropic API):</b> writes the findings inside the tool, in my voice.</li>
+        <li><b>Cloudflare Workers, KV and Turnstile:</b> hosting the site and API, counting daily checks, and keeping bots out.</li>
+        <li><b>Google PageSpeed Insights API:</b> speed, accessibility and SEO scores.</li>
+        <li><b>GitHub:</b> automatic deploys on every push.</li>
+      </ul>
+      <p class="sub-h">What AI did</p>
+      <p>Wrote code, turned my habits for reviewing sites into rules a program can detect (mixed icon sets, default favicons, English buttons left on a Chinese site), and drafted the prompt that makes the tool answer in my voice and in UAT-ticket format.</p>
+      <p class="sub-h">Where AI got it wrong, and how I caught it</p>
+      <div class="fix"><span>Problem</span><p>Testing it on my own portfolio, 4 of 6 findings were false alarms, such as treating my Chinese and English versions as duplicate text, or saying the home page had no contact link.</p><span>Fix</span><p>Checking the source showed the tool reads HTML before JavaScript runs. I added rules so template variables, bilingual copies and script-generated buttons aren't reported as errors.</p></div>
+      <div class="fix"><span>Problem</span><p>Reports often stopped halfway and the page only showed an error.</p><span>Fix</span><p>The model "thinks" before answering by default, and that used up the output budget. Turning thinking off made reports complete and cut the cost of each check.</p></div>
+      <div class="fix"><span>Problem</span><p>After one update, the URL field lost all its styling, which I noticed while using it.</p><span>Fix</span><p>The code had changed the field's type while the styles still targeted the old one. They now target the field itself, so a type change can't break it again.</p></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>Outcome</h2>
+    <div class="body"><p>Live and free for anyone to try.</p><a class="go" href="check.html?lang=en">Try the tool <span class="ar ar-ne">↗</span></a></div>
+  </section>
+
+  <section class="sec">
+    <h2>Reflection</h2>
+    <div class="body"><p>Building this tool taught me to take a product from concept to launch quickly with AI, while staying responsible for the quality of what AI produced.</p>
+    <a class="back" href="index.html?lang=en#works"><span class="ar ar-l">←</span> Back to work</a></div>
+  </section>
+</main>
+
+<footer class="foot">© 2026 Fifi Lee</footer>
+
+<script>
+(function(){var h=document.documentElement;
+function mark(){var l=h.getAttribute('data-lang');document.querySelectorAll('.lang button').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-set')===l?'true':'false');});
+document.title=l==='en'?'Website UX Health Check | Fifi Lee':'網站 UX 健檢工具｜Fifi Lee';}
+document.querySelectorAll('.lang button').forEach(function(b){b.addEventListener('click',function(){var l=b.getAttribute('data-set');h.setAttribute('data-lang',l);h.lang=l==='en'?'en':'zh-Hant';try{localStorage.setItem('fifi-lang',l);}catch(e){}mark();});});
+mark();})();
+</script>
+</body>
+</html>
