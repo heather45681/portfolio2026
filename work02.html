@@ -187,6 +187,20 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
 </section>
 </sc-if>
 
+<section aria-label="{{tc.aria}}" style="max-width: 1200px; margin: 0 auto; padding: 72px 24px 24px">
+<div style="background: #1F2427; color: #F3F0E8; border-radius: 12px; padding: 40px; display: flex; flex-wrap: wrap; gap: 24px 40px; align-items: center; justify-content: space-between">
+<div style="flex: 1 1 360px; min-width: 0">
+<p style="margin: 0; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: #E59A7F">Contact|</p>
+<h2 style="margin: 8px 0 0; font-family: {{tc.hf}}; font-size: {{tc.hs}}; font-weight: {{tc.hw}}; line-height: 1.4">{{tc.h}}</h2>
+<p style="margin: 8px 0 0; font-size: 15px; color: #B9BDB8">{{tc.sub}}</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<a href="mailto:heather45681@gmail.com" style="color: #F3F0E8; background: #A8482F; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.1em; padding: 11px 22px; border: 1px solid #A8482F; border-radius: 999px; text-decoration: none">{{tc.mail}}</a>
+<a href="https://www.linkedin.com/in/heather45681/" target="_blank" rel="noopener" style="color: #F3F0E8; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.1em; padding: 11px 22px; border: 1px solid #F3F0E8; border-radius: 999px; text-decoration: none">LinkedIn <span class="ar ar-ne">↗</span></a>
+<a href="{{tc.cv}}" target="_blank" rel="noopener" style="color: #F3F0E8; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.1em; padding: 11px 22px; border: 1px solid #F3F0E8; border-radius: 999px; text-decoration: none">{{tc.cvl}} <span class="ar ar-ne">↗</span></a>
+</div>
+</div>
+</section>
 <nav aria-label="More work" style="border-top: 1px solid #1F2427; max-width: 1200px; margin: 0 auto; padding: 40px 24px 64px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 16px">
 <a href="work01.html" style="text-decoration: none; display: flex; flex-direction: column; gap: 6px; padding: 22px 24px; border: 1px solid #C9C3B4; border-radius: 12px; background: #FBF9F4"><span style="font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.12em; color: #A8482F"><span class="ar ar-l">←</span> {{t.pl}}</span><span style="font-family: 'Noto Serif TC', serif; font-size: 18px; font-weight: 700">{{t.pt}}</span></a>
 <a href="work03.html" style="text-decoration: none; display: flex; flex-direction: column; gap: 6px; padding: 22px 24px; border: 1px solid #C9C3B4; border-radius: 12px; background: #FBF9F4; align-items: flex-end; text-align: right"><span style="font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.12em; color: #A8482F">{{t.nl}} <span class="ar ar-r">→</span></span><span style="font-family: 'Noto Serif TC', serif; font-size: 18px; font-weight: 700">{{t.nt}}</span></a>
@@ -220,6 +234,7 @@ var t = isZh
 : { pl: 'PREVIOUS', pt: '01 Onboarding', nl: 'NEXT', nt: '03 Decision library', zoom: 'Enlarged image', close: 'Close', pan: 'Swipe to pan, tap to close', back: '← Works', prev: '← 01 Onboarding', all: 'All works', next: '03 Decision library →' };
 return {
 t: t,
+tc: isZh ? { aria: '聯絡方式', h: '想聊聊這個案例？', sub: '歡迎來信，或在 LinkedIn 找我。', mail: 'Email 聯絡我', cvl: '下載履歷', cv: 'https://drive.google.com/file/d/1tnToqKCTv_Ke2XTYoaLnVYg7BVWP9fC0/view?usp=drive_link', hf: "'Noto Serif TC', serif", hs: '26px', hw: '700' } : { aria: 'Contact', h: 'Want to talk about this case?', sub: 'Email me or find me on LinkedIn.', mail: 'Email me', cvl: 'Résumé', cv: 'https://drive.google.com/file/d/148EFTsk6rUbsjEoALWY6wrKdYOMi_BtY/view?usp=drive_link', hf: "'Cormorant Garamond', serif", hs: '32px', hw: '500' },
 isZh: isZh,
 isEn: !isZh,
 zhStyle: isZh ? on : off,
