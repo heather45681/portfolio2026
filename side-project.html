@@ -73,6 +73,22 @@ main{max-width:1200px;margin:0 auto;padding:40px 24px 112px}
 .fix span{font-size:12px;color:var(--mute);padding-top:3px}
 .L-en .fix{grid-template-columns:72px minmax(0,1fr)}
 .back{display:inline-block;margin-top:24px;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.12em;text-decoration:none}
+.cbox{margin-top:72px;background:var(--ink);color:var(--bg);border-radius:12px;padding:40px;display:flex;flex-wrap:wrap;gap:24px 40px;align-items:center;justify-content:space-between}
+.cbox h2{margin:8px 0 0;font-family:'Noto Serif TC',serif;font-size:26px;font-weight:700;line-height:1.4}
+.L-en .cbox h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:32px}
+.cbox .eyebrow{color:var(--accent-l)}
+.cbox p.s{margin:8px 0 0;font-size:15px;color:#B9BDB8}
+.cbox .bt{display:flex;flex-wrap:wrap;gap:10px}
+.cbox .bt a{color:var(--bg) !important;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.1em;padding:11px 22px;border:1px solid var(--bg);border-radius:999px;text-decoration:none}
+.cbox .bt a.pri{background:var(--accent);border-color:var(--accent)}
+.cbox .bt a.pri:hover{background:var(--accent-d);border-color:var(--accent-d)}
+.more{margin-top:24px;padding-top:40px;border-top:1px solid var(--ink);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px}
+.more a{text-decoration:none;display:flex;flex-direction:column;gap:6px;padding:22px 24px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+.more a span{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.12em;color:var(--accent)}
+.more a b{font-family:'Noto Serif TC',serif;font-size:18px}
+.more a.r{align-items:flex-end;text-align:right}
+a:hover .ar-r{transform:translateX(5px)}
+@media (max-width:520px){.cbox{padding:28px 20px}.cbox .bt a{flex:1 1 auto;text-align:center}}
 .foot{text-align:center;padding:32px 24px;font-family:'DM Mono',monospace;font-size:12px;color:var(--mute);background:var(--paper)}
 @media (max-width:860px){
   .intro{grid-template-columns:1fr;gap:36px;padding-bottom:56px}
@@ -175,9 +191,16 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
 
   <section class="sec">
     <h2>反思</h2>
-    <div class="body"><p>AI 寫程式很快，但它讀到的網站跟使用者看到的不一樣。6 條建議裡有 4 條誤判，讓我更確定：判斷什麼才是真正的問題，還是設計師的工作。</p>
-    <a class="back" href="index.html?lang=zh#works"><span class="ar ar-l">←</span> 回作品集</a></div>
+    <div class="body"><p>AI 寫程式很快，但它讀到的網站跟使用者看到的不一樣。6 條建議裡有 4 條誤判，讓我更確定：判斷什麼才是真正的問題，還是設計師的工作。</p></div>
   </section>
+  <section class="cbox" aria-label="聯絡方式">
+    <div><p class="eyebrow">Contact|</p><h2>想聊聊這個工具？</h2><p class="s">歡迎來信，或在 LinkedIn 找我。</p></div>
+    <div class="bt"><a class="pri" href="mailto:heather45681@gmail.com">Email 聯絡我</a><a href="https://www.linkedin.com/in/heather45681/" target="_blank" rel="noopener">LinkedIn <span class="ar ar-ne">↗</span></a><a href="https://drive.google.com/file/d/1tnToqKCTv_Ke2XTYoaLnVYg7BVWP9fC0/view?usp=drive_link" target="_blank" rel="noopener">下載履歷 <span class="ar ar-ne">↗</span></a></div>
+  </section>
+  <nav class="more" aria-label="More work">
+    <a href="work03.html"><span><span class="ar ar-l">←</span> 上一個</span><b>03 AI 決策庫</b></a>
+    <a class="r" href="index.html?lang=zh#works"><span>返回 <span class="ar ar-r">→</span></span><b>所有作品</b></a>
+  </nav>
 </main>
 
 <!-- ===================== English ===================== -->
@@ -241,9 +264,16 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
 
   <section class="sec">
     <h2>Reflection</h2>
-    <div class="body"><p>AI writes code fast, but what it reads isn't always what users see. When 4 of 6 findings turned out to be false alarms, it confirmed for me that deciding what's a real problem is still the designer's job.</p>
-    <a class="back" href="index.html?lang=en#works"><span class="ar ar-l">←</span> Back to work</a></div>
+    <div class="body"><p>AI writes code fast, but what it reads isn't always what users see. When 4 of 6 findings turned out to be false alarms, it confirmed for me that deciding what's a real problem is still the designer's job.</p></div>
   </section>
+  <section class="cbox" aria-label="Contact">
+    <div><p class="eyebrow">Contact|</p><h2>Want to talk about this tool?</h2><p class="s">Email me or find me on LinkedIn.</p></div>
+    <div class="bt"><a class="pri" href="mailto:heather45681@gmail.com">Email me</a><a href="https://www.linkedin.com/in/heather45681/" target="_blank" rel="noopener">LinkedIn <span class="ar ar-ne">↗</span></a><a href="https://drive.google.com/file/d/148EFTsk6rUbsjEoALWY6wrKdYOMi_BtY/view?usp=drive_link" target="_blank" rel="noopener">Résumé <span class="ar ar-ne">↗</span></a></div>
+  </section>
+  <nav class="more" aria-label="More work">
+    <a href="work03.html"><span><span class="ar ar-l">←</span> PREVIOUS</span><b>03 AI decision library</b></a>
+    <a class="r" href="index.html?lang=en#works"><span>BACK <span class="ar ar-r">→</span></span><b>All works</b></a>
+  </nav>
 </main>
 
 <footer class="foot">© 2026 Fifi Lee</footer>
