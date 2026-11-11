@@ -393,20 +393,21 @@ function render(){clearOverlays();if(S.page==='signup')renderSignup();else if(S.
 
 /* ---------- scenarios ---------- */
 function later(f,ms){setTimeout(f,ms||250);}
+function tap(id,m){var el=document.getElementById(id);if(el)el[m]();}
 function typeInto(id,val){var el=document.getElementById(id);if(!el)return;el.focus();el.value=val;el.dispatchEvent(new Event('input'));}
 function fill(k){ACT++;clearOverlays();var s=S.su;
  if(window.matchMedia&&matchMedia('(max-width:920px)').matches){try{phoneEl.scrollIntoView({behavior:'smooth',block:'start'});}catch(e){phoneEl.scrollIntoView();}}
  if(k==='carry'){S.page='signup';s.tab='user';s.v={username:'fifi2048',password:'Design#26',phone:'13924685793',ref:'100003'};s.err={};s.refOpen=true;render();later(function(){phoneEl.querySelector('[data-tab="phone"]').click();},500);}
- else if(k==='userBlur'){S.page='signup';s.tab='user';s.v.username='';s.err={};render();later(function(){typeInto('username','ab');later(function(){document.getElementById('username').blur();},900);});}
+ else if(k==='userBlur'){S.page='signup';s.tab='user';s.v.username='';s.err={};render();later(function(){typeInto('username','ab');later(function(){tap('username','blur');},900);});}
  else if(k==='pwCheck'){S.page='signup';s.tab='user';s.v.password='';s.err={};render();later(function(){typeInto('password','design');});}
- else if(k==='taken'){S.page='signup';s.tab='user';s.v={username:'demouser',password:'Design#26',phone:'13924685793',ref:''};s.err={};render();later(function(){document.getElementById('go').click();},400);}
- else if(k==='dupPhone'){S.page='signup';s.tab='phone';s.v.phone=DUP_PHONE;s.v.ref='';s.err={};render();later(function(){document.getElementById('go').click();},400);}
- else if(k==='loginLen'){if(S.page!=='login')enterLogin();S.li.tab='phone';S.li.phone.id='';S.li.err={};renderLogin();later(function(){typeInto('pid','123');later(function(){document.getElementById('pid').blur();},900);});}
- else if(k==='wrong'){S.locked.demouser=false;S.fails.demouser=0;if(S.page!=='login')enterLogin();S.li.tab='user';S.li.user={id:'demouser',pw:'Demo1234',chk:false,pre:false};S.li.err={};renderLogin();later(function(){document.getElementById('go').click();},400);}
- else if(k==='unverified'){S.locked.member77=false;S.fails.member77=0;if(S.page!=='login')enterLogin();S.li.tab='phone';S.li.phone={id:'13766667777',pw:PW,chk:false,pre:false};S.li.err={};renderLogin();later(function(){document.getElementById('go').click();},400);}
+ else if(k==='taken'){S.page='signup';s.tab='user';s.v={username:'demouser',password:'Design#26',phone:'13924685793',ref:''};s.err={};render();later(function(){tap('go','click');},400);}
+ else if(k==='dupPhone'){S.page='signup';s.tab='phone';s.v.phone=DUP_PHONE;s.v.ref='';s.err={};render();later(function(){tap('go','click');},400);}
+ else if(k==='loginLen'){if(S.page!=='login')enterLogin();S.li.tab='phone';S.li.phone.id='';S.li.err={};renderLogin();later(function(){typeInto('pid','123');later(function(){tap('pid','blur');},900);});}
+ else if(k==='wrong'){S.locked.demouser=false;S.fails.demouser=0;if(S.page!=='login')enterLogin();S.li.tab='user';S.li.user={id:'demouser',pw:'Demo1234',chk:false,pre:false};S.li.err={};renderLogin();later(function(){tap('go','click');},400);}
+ else if(k==='unverified'){S.locked.member77=false;S.fails.member77=0;if(S.page!=='login')enterLogin();S.li.tab='phone';S.li.phone={id:'13766667777',pw:PW,chk:false,pre:false};S.li.err={};renderLogin();later(function(){tap('go','click');},400);}
  else if(k==='lock'){S.locked.demouser=false;S.fails.demouser=0;if(S.page!=='login')enterLogin();S.li.tab='user';S.li.user={id:'demouser',pw:'wrongpass',chk:false,pre:false};S.li.err={};renderLogin();
   [0,1,2,3,4].forEach(function(i){later(function(){var g=document.getElementById('go');if(g&&S.page==='login')g.click();},400+i*1100);});}
- else if(k==='remember'){S.locked.demouser=false;S.fails.demouser=0;S.stored=null;enterLogin();S.li.tab='phone';S.li.phone={id:'13812345678',pw:PW,chk:true,pre:false};renderLogin();later(function(){document.getElementById('go').click();later(function(){var o=document.getElementById('out');o&&o.click();},2000);},400);}
+ else if(k==='remember'){S.locked.demouser=false;S.fails.demouser=0;S.stored=null;enterLogin();S.li.tab='phone';S.li.phone={id:'13812345678',pw:PW,chk:true,pre:false};renderLogin();later(function(){tap('go','click');later(function(){var o=document.getElementById('out');o&&o.click();},2000);},400);}
 }
 panel();enterLogin();
 })();
