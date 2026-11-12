@@ -284,6 +284,9 @@ function mark(){var l=h.getAttribute('data-lang');document.querySelectorAll('.la
 document.title=l==='en'?'Website UX Health Check | Fifi Lee':'網站 UX 健檢工具｜Fifi Lee';}
 document.querySelectorAll('.lang button').forEach(function(b){b.addEventListener('click',function(){var l=b.getAttribute('data-set');h.setAttribute('data-lang',l);h.lang=l==='en'?'en':'zh-Hant';try{localStorage.setItem('fifi-lang',l);}catch(e){}mark();});});
 mark();})();
+/* carry ?ref= (e.g. ref=upwork) through to the tool links, so the visit source survives the click */
+(function(){try{var r=new URLSearchParams(location.search).get('ref');if(!r)return;
+document.querySelectorAll('a[href^="check.html"]').forEach(function(a){var u=new URL(a.getAttribute('href'),location.href);u.searchParams.set('ref',r);a.setAttribute('href',u.pathname.replace(/^\//,'')+u.search);});}catch(e){}})();
 </script>
 </body>
 </html>
