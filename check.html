@@ -309,6 +309,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     if (d && d.code) msg += (L === 'zh' ? '（錯誤代碼：' : ' (Error code: ') + String(d.code).slice(0, 20) + (L === 'zh' ? '）' : ')');
     $('err').textContent = msg; $('err').hidden = false;
   }
+  function track(n, k, v) { try { if (window.clarity) { if (k) window.clarity('set', k, String(v)); window.clarity('event', n); } } catch (x) {} }
   var timers = [];
   function steps(on) {
     timers.forEach(clearTimeout); timers = [];
@@ -328,16 +329,16 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     var prob = urlProblem(url); if (prob) { showErr(prob); return; } fieldErr('');
     if (!token) { showErr('wait'); return; }
     $('pending').hidden = true;
-    $('go').disabled = true; $('go').textContent = T[L].going; $('res').hidden = true; steps(true);
+    $('go').disabled = true; $('go').textContent = T[L].going; $('res').hidden = true; steps(true); track('check_started');
     fetch('/api/check', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ url: url, token: token, lang: L }) })
       .then(function (r) { return r.json().catch(function () { return { error: 'net' }; }); })
       .then(function (d) {
         steps(false);
-        if (d.error) { showErr(d.error, d); return; }
-        last = d; render(d);
+        if (d.error) { track('check_failed', 'check_error', d.code || d.error); showErr(d.error, d); return; }
+        last = d; render(d); track('check_done');
         $('res').hidden = false; $('res').scrollIntoView({ behavior: 'smooth', block: 'start' });
       })
-      .catch(function () { steps(false); showErr('net'); })
+      .catch(function () { steps(false); track('check_failed', 'check_error', 'net'); showErr('net'); })
       .finally(function () {
         $('go').disabled = false; $('go').textContent = T[L].go; token = '';
         if (window.turnstile && widget !== null) window.turnstile.reset(widget);

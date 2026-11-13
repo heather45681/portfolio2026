@@ -827,7 +827,7 @@ window.fieldCheck=function(input,anchor,rule,lazyRequired){
       btn.disabled=true;say(t.sending);
       fetch('/api/contact',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name:e.name.value,email:e.email.value,company:e.company.value,service:e.service.value,timeline:e.timeline.value,message:e.message.value,website:e.website.value,token:token,lang:L})})
         .then(function(r){return r.json().catch(function(){return{error:'net'};});})
-        .then(function(d){if(d.ok){f.reset();say(t.ok,'ok');try{window.goatcounter&&window.goatcounter.count({path:'contact-sent',title:'Contact form sent',event:true});}catch(x){}}else if(rules[d.error]){say('');rules[d.error].show(t[d.error]);e[d.error].focus();}else{say(t[d.error]||t.net,'err');}})
+        .then(function(d){if(d.ok){f.reset();say(t.ok,'ok');try{window.goatcounter&&window.goatcounter.count({path:'contact-sent',title:'Contact form sent',event:true});}catch(x){}try{window.clarity&&window.clarity('event','contact_sent');}catch(x){}}else if(rules[d.error]){say('');rules[d.error].show(t[d.error]);e[d.error].focus();}else{say(t[d.error]||t.net,'err');}})
         .catch(function(){say(t.net,'err');})
         .finally(function(){btn.disabled=false;token='';if(window.turnstile&&wid!==null)window.turnstile.reset(wid);});
     });
