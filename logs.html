@@ -139,6 +139,12 @@ ul.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
     else sc.appendChild(el('span', '', '這次沒有 PageSpeed 分數'));
     box.appendChild(sc);
     if (a.summary) { box.appendChild(el('h3', '', '總評')); box.appendChild(el('p', '', a.summary)); }
+    if (a.highlights && a.highlights.length) {
+      box.appendChild(el('h3', '', '做得好的地方'));
+      var ulg = el('ul');
+      a.highlights.forEach(function (n) { var li = el('li'); li.appendChild(el('strong', '', '「' + n.quote + '」')); li.appendChild(el('p', '', n.note)); ulg.appendChild(li); });
+      box.appendChild(ulg);
+    }
     if (a.journey) { box.appendChild(el('h3', '', '新訪客路徑')); box.appendChild(el('p', '', a.journey)); }
     if (a.findings && a.findings.length) {
       box.appendChild(el('h3', '', '建議'));
