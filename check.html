@@ -359,6 +359,8 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; }
 
   // everything from the API is inserted as text, never as HTML
+  // the page adds its own quote marks, so drop any the model already put around a quote
+  function unq(v) { return String(v || '').trim().replace(/^[「『"“'‘]+/, '').replace(/[」』"”'’]+$/, '').trim(); }
   function render(d) {
     var t = T[L];
     $('resUrl').textContent = d.url;
@@ -391,7 +393,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     });
     var gd = d.advice.highlights || [], gl = $('goodL'); gl.textContent = '';
     $('good').hidden = !gd.length; $('goodT').textContent = t.goodT;
-    gd.forEach(function (n) { var li = el('li'); li.appendChild(el('q', '', n.quote)); li.appendChild(el('p', '', n.note)); gl.appendChild(li); });
+    gd.forEach(function (n) { var li = el('li'); li.appendChild(el('q', '', unq(n.quote))); li.appendChild(el('p', '', n.note)); gl.appendChild(li); });
     $('journey').hidden = !d.advice.journey;
     $('journeyT').textContent = t.journeyT; $('journeyP').textContent = d.advice.journey || '';
     var tl = d.advice.tells || [], tu = $('tellsL'); tu.textContent = '';
@@ -406,7 +408,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     var np = d.advice.nitpicks || [], rl = $('radarL'); rl.textContent = '';
     $('radar').hidden = !np.length;
     $('radarT').textContent = t.radarT; $('radarS').textContent = t.radarS;
-    np.forEach(function (n) { var li = el('li'); var q = el('q', '', n.quote); if (L === 'en') q.style.quotes = '"\u201C" "\u201D"'; li.appendChild(q); li.appendChild(el('p', '', n.note)); rl.appendChild(li); });
+    np.forEach(function (n) { var li = el('li'); var q = el('q', '', unq(n.quote)); if (L === 'en') q.style.quotes = '"\u201C" "\u201D"'; li.appendChild(q); li.appendChild(el('p', '', n.note)); rl.appendChild(li); });
     $('closing').textContent = d.advice.closing;
     $('ctaContact').href = 'services.html?lang=' + L + '&topic=check&site=' + encodeURIComponent(d.url) + (L === 'en' ? '#contact-en' : '#contact');
   }
