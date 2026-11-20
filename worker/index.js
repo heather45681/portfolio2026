@@ -87,6 +87,17 @@ async function handleCheck(request, env, ctx) {
   ]);
   if (!page) return json({ error: 'fetch_failed' }, 422);
 
+  // a page whose content is all drawn by JavaScript gives the model nothing to read:
+  // skip the AI call (no cost) and give the visitor their try back
+  const visible = page.headings.length + page.buttons.length + page.links.length + page.text.length;
+  if (visible < 3) {
+    ctx.waitUntil(Promise.all([
+      env.KV.put(ipKey, String(ipCount), { expirationTtl: 60 * 60 * 26 }),
+      env.KV.put(gKey, String(gCount), { expirationTtl: 60 * 60 * 26 }),
+    ]));
+    return json({ error: 'empty_page' }, 422);
+  }
+
   // 5. ask the model for advice in Fifi's voice
   let advice;
   try {
