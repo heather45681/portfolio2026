@@ -83,6 +83,7 @@ form{display:flex;flex-direction:column;gap:16px}
 .finds p,.tells li p{display:grid;grid-template-columns:40px minmax(0,1fr);column-gap:8px;align-items:baseline}
 html[lang="en"] .finds p,html[lang="en"] .tells li p{grid-template-columns:72px minmax(0,1fr)}
 .finds p .lab,.tells li p .lab{margin-right:0}
+.vis-note{margin:0 0 12px;padding:10px 14px;border:1px dashed var(--line);border-radius:10px;font-size:13px;line-height:1.7;color:var(--mute)}
 .good{margin:18px 0 0;padding:16px 20px;border-left:3px solid #3F7A55;background:rgba(63,122,85,.07);border-radius:0 12px 12px 0}
 .good h3{display:block;margin:0 0 4px;font-family:'DM Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.12em;color:#3F7A55}
 .good ul{list-style:none;margin:0;padding:0}
@@ -195,6 +196,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     <p class="hint" style="margin-bottom:10px" data-t="psTitle"></p>
     <div class="scores" id="scores"></div>
   </div>
+  <p class="vis-note" id="visNote" hidden></p>
   <p class="summary" id="sum"></p>
   <div class="good" id="good" hidden><h3 id="goodT"></h3><ul id="goodL"></ul></div>
   <div class="journey" id="journey" hidden><b id="journeyT"></b><p id="journeyP"></p></div>
@@ -230,7 +232,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       s1: '讀取網頁內容', s2: '檢查速度與無障礙（Google PageSpeed）', s3: '整理建議',
       resEyebrow: '健檢結果', psTitle: 'Google PageSpeed 分數（手機版）', noScores: '這次沒拿到 Google 的分數（Google 那邊忙碌或逾時），下面的建議不受影響。',
       perf: '效能', a11y: '無障礙', bp: '最佳做法', seo: 'SEO', lcp: '最大內容繪製',
-      why: '為什麼', fix: '建議', cur: '現況', exp: '預期', sev: { high: '嚴重度 高', medium: '嚴重度 中', low: '嚴重度 低' }, journeyT: '新訪客路徑', tellsNone: '這次沒有發現模板網站常見的破綻：icon、按鈕圓角、連結和範例文字都沒有明顯問題。', tellsT: '模板與快速生成網站的常見破綻', tellsS: '用模板或 AI 工具做的網站很方便，但這幾個地方最容易露餡。', evid: '線索', goodT: '做得好的地方', radarT: '細節雷達', radarS: '不影響使用，但我就是會注意到的小地方。',
+      why: '為什麼', fix: '建議', cur: '現況', exp: '預期', sev: { high: '嚴重度 高', medium: '嚴重度 中', low: '嚴重度 低' }, journeyT: '新訪客路徑', tellsNone: '這次沒有發現模板網站常見的破綻：icon、按鈕圓角、連結和範例文字都沒有明顯問題。', tellsT: '模板與快速生成網站的常見破綻', tellsS: '用模板或 AI 工具做的網站很方便，但這幾個地方最容易露餡。', evid: '線索', goodT: '做得好的地方', visNote: '這個網頁的內容是 JavaScript 載入後才畫出來的，這次是看瀏覽器畫好的畫面截圖來分析，連結網址、圖片 alt 這類看不到的細節不在範圍內',radarT: '細節雷達', radarS: '不影響使用，但我就是會注意到的小地方。',
       closeEyebrow: '想看得更完整？', ctaContact: '聊聊完整健檢 →', ctaSvc: '看服務項目',
       disclaimer: '這份結果由 AI 根據公開頁面內容自動產生，僅供參考，不代表完整的專業評估。',
       cached: '這個網址 24 小時內檢查過，以下是當時的結果。', checked: '檢查時間：',
@@ -245,7 +247,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       s1: 'Reading the page', s2: 'Checking speed and accessibility (Google PageSpeed)', s3: 'Writing up suggestions',
       resEyebrow: 'RESULTS', psTitle: 'Google PageSpeed scores (mobile)', noScores: "Google's scores didn't come back this time (busy or timed out). The suggestions below aren't affected.",
       perf: 'Performance', a11y: 'Accessibility', bp: 'Best practices', seo: 'SEO', lcp: 'Largest paint',
-      why: 'WHY', fix: 'FIX', cur: 'NOW', exp: 'EXPECTED', sev: { high: 'HIGH', medium: 'MEDIUM', low: 'LOW' }, goodT: 'WHAT WORKS', journeyT: 'FIRST-VISIT PATH', tellsNone: 'No common template slips found this time: icons, button corners, links and sample text all look fine.', tellsT: 'Common slips in template-built sites', tellsS: 'Templates and AI builders are fast, but these are the spots that usually give them away.', evid: 'CLUE', radarT: 'Detail radar', radarS: "Small things that don't break anything. I just can't not notice them.",
+      why: 'WHY', fix: 'FIX', cur: 'NOW', exp: 'EXPECTED', sev: { high: 'HIGH', medium: 'MEDIUM', low: 'LOW' }, goodT: 'WHAT WORKS', visNote: 'This page draws its content with JavaScript, so this check is based on a screenshot of the page as a browser drew it. Details a screenshot can\'t show, such as link targets and image alt text, aren\'t covered.',journeyT: 'FIRST-VISIT PATH', tellsNone: 'No common template slips found this time: icons, button corners, links and sample text all look fine.', tellsT: 'Common slips in template-built sites', tellsS: 'Templates and AI builders are fast, but these are the spots that usually give them away.', evid: 'CLUE', radarT: 'Detail radar', radarS: "Small things that don't break anything. I just can't not notice them.",
       closeEyebrow: 'WANT THE FULL PICTURE?', ctaContact: 'Talk about a full review →', ctaSvc: 'See services',
       disclaimer: 'These results are generated automatically by AI from the public page. They are a starting point, not a full professional review.',
       cached: 'This URL was checked in the last 24 hours; here is that result.', checked: 'Checked: ',
@@ -374,6 +376,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       var c = el('div', 'sc'); var b = el('b', x[0] === 'lcp' ? '' : tone(x[1]), String(x[1]));
       c.appendChild(b); c.appendChild(el('span', '', t[x[0]])); sc.appendChild(c);
     });
+    $('visNote').hidden = !d.visualOnly; $('visNote').textContent = t.visNote;
     $('sum').textContent = d.advice.summary;
     var ol = $('finds'); ol.textContent = '';
     d.advice.findings.forEach(function (f, i) {
