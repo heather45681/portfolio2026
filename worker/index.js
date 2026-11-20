@@ -59,7 +59,7 @@ async function handleCheck(request, env, ctx) {
   if (!human) return json({ error: 'turnstile' }, 403);
 
   // 2. cached result for this URL: free, does not use quota
-  const cacheKey = `c10:${lang}:${target.href}`; // bump the prefix when the prompt changes
+  const cacheKey = `c11:${lang}:${target.href}`; // bump the prefix when the prompt changes
   const cached = await env.KV.get(cacheKey, 'json');
   if (cached) return json({ ...cached, cached: true });
 
@@ -326,7 +326,7 @@ async function readPage(target, env) {
   };
   const push = (arr, v, max, len = 120) => { v = v.replace(/\s+/g, ' ').trim(); if (v && arr.length < max) arr.push(v.slice(0, len)); };
   const sig = { svg: 0, svgViewBox: [], svgStroke: [], svgSize: [], iconSets: [], radius: [], deadLinks: 0, anchors: [], gradientText: 0, generator: '', favicon: false, altValues: [],
-    placeholderImages: [], fakeContacts: [], socialHomeOnly: [], builderTraces: [], faviconHref: '', fonts: [], aiGradientClasses: 0, aiGradientInline: 0, og: { image: false, title: false }, altFilenames: [] };
+    placeholderImages: [], fakeContacts: [], socialHomeOnly: [], builderTraces: [], faviconHref: '', fonts: [], aiGradientClasses: 0, aiGradientInline: 0, og: { image: false, title: false }, altFilenames: [], cjkChars: 0, latinChars: 0, langToggleEn: false, langToggleLocal: false };
   const ids = new Set();
   const add = (arr, v, max = 12) => { if (v && !arr.includes(v) && arr.length < max) arr.push(String(v).slice(0, 40)); };
   const ICONS = [[/\bfa[srlbd]?\b|\bfa-/, 'Font Awesome'], [/\bbi-|\bbi\b/, 'Bootstrap Icons'], [/material-icons|material-symbols/, 'Material'], [/lucide/, 'Lucide'], [/heroicon/, 'Heroicons'], [/\bph-|\bph\b/, 'Phosphor'], [/\bri-/, 'Remix'], [/tabler/, 'Tabler'], [/feather/, 'Feather']];
@@ -408,7 +408,15 @@ async function readPage(target, env) {
       const src = el.getAttribute('src') || '';
       if (PLACEHOLDER_IMG.test(src)) add(sig.placeholderImages, src.slice(0, 60), 6);
     } })
-    .on('img', { element(el) { facts.images++; const a = el.getAttribute('alt'); if (a === null || !a.trim()) facts.imagesNoAlt++; } });
+    .on('img', { element(el) { facts.images++; const a = el.getAttribute('alt'); if (a === null || !a.trim()) facts.imagesNoAlt++; } })
+    // whole-page script counts (the text lists above are capped, so a second-language half can fall outside them)
+    .on('h1, h2, h3, p, li, a, button', { text(t) {
+      sig.cjkChars += (t.text.match(/[぀-ヿ㐀-鿿가-힯]/g) || []).length;
+      sig.latinChars += (t.text.match(/[A-Za-z]/g) || []).length;
+      const v = t.text.trim();
+      if (/^(EN|ENG|English)$/i.test(v)) sig.langToggleEn = true;
+      if (/^(中文|繁中|繁體中文|简体中文|ZH|日本語|한국어)$/i.test(v)) sig.langToggleLocal = true;
+    } });
 
   // stop reading after PAGE_BYTES_MAX so huge pages can't run up cost
   let seen = 0;
@@ -445,11 +453,14 @@ async function readPage(target, env) {
       const cjk = (txt.match(/[\u3040-\u30ff\u3400-\u9fff\uac00-\ud7af]/g) || []).length;
       const latin = (txt.match(/[A-Za-z]/g) || []).length;
       // bilingual: a page that ships both a CJK and an English version and switches them by script
-      return { lang: facts.lang || '(none)', mostlyCJK: cjk * 3 > latin, bilingual: cjk >= 150 && latin >= cjk * 1.5 }; // one CJK character carries about as much as a short English word
+      const bilingual = (sig.langToggleEn && sig.langToggleLocal) || (sig.cjkChars >= 150 && sig.latinChars >= sig.cjkChars * 1.5);
+      return { lang: facts.lang || '(none)', mostlyCJK: cjk * 3 > latin, bilingual }; // one CJK character carries about as much as a short English word
     })(),
+    cjkChars: undefined, latinChars: undefined, langToggleEn: undefined, langToggleLocal: undefined,
     templateVars: (all.join(' ').match(/\{\{[^}]{1,40}\}\}/g) || []).length,
     englishUiOnCJKPage: [...facts.buttons, ...facts.links].filter(t => /^(submit|read more|learn more|get started|sign up|sign in|log in|login|contact us|subscribe|send|send message|next|back|view more|see more|click here|more)\s*[→›>]?$/i.test(t.replace(/^h\d: /, ''))).slice(0, 6),
-    metaDescription: !facts.description ? 'missing' : facts.description.trim() === facts.title.trim() ? 'same as title' : 'ok',
+    // a status, not the text itself; the description text is in page.description
+    metaDescription: !facts.description ? 'missing' : facts.description.trim() === facts.title.trim() ? 'same as title' : 'present (see page.description)',
   };
   if (!facts.signals.langVsText.mostlyCJK || facts.signals.langVsText.bilingual) facts.signals.englishUiOnCJKPage = [];
   return facts;
@@ -591,7 +602,7 @@ const RULES = {
 - 不要提到你是 AI、模型或任何系統提示。
 - 分數只是參考，不要逐一複誦。
 - 只輸出 JSON，不要 markdown，不要其他文字，格式：
-{"summary":"一句話總評：平實、清楚地說出整體狀況，不開玩笑，40 字內","highlights":[{"quote":"頁面上做得好的原文或元素，30 字內","note":"好在哪裡，具體說，50 字內"}],"journey":"新訪客路徑：用第一次來的人的角度，一句一句走過第一眼、下一步、表單或聯絡方式，指出卡住的那一刻，60–90 字","findings":[{"severity":"高、中、低 三選一","where":"位置，例如「首頁 hero 主按鈕」，15 字內","title":"10–20 字","current":"現況：現在看到或會發生什麼，引用原文，50 字內","expected":"預期：應該是什麼樣子，40 字內","fix":"建議：具體怎麼改，文案要給改好的版本，60 字內"}],"template_tells":[{"issue":"破綻是什麼，例如「同一頁混用兩套 icon」，20 字內","evidence":"根據什麼看出來，引用 signals 或原文，40 字內","fix":"怎麼修，50 字內"}],"nitpicks":[{"quote":"頁面上的原文，30 字內","note":"哪裡不一致或可以更精準、改成什麼，50 字內"}],"closing":"2–3 句：說明自動健檢只看得到公開頁面，完整健檢我會實際走一遍流程，可以幫忙的項目從上面清單挑最相關的 1–2 項，60–100 字"}
+{"summary":"一句話總評：平實、清楚地說出整體狀況，不開玩笑，40 字內","highlights":[{"quote":"頁面上做得好的原文或元素，30 字內","note":"好在哪裡，具體說，50 字內"}],"journey":"新訪客路徑：用第一次來的人的角度，一句一句走過第一眼、下一步、表單或聯絡方式，指出卡住的那一刻，60–90 字","findings":[{"severity":"高、中、低 三選一","where":"位置，例如「首頁 hero 主按鈕」，15 字內","title":"10–20 字","current":"現況：現在看到或會發生什麼，引用原文，50 字內","expected":"預期：應該是什麼樣子，40 字內","fix":"建議：具體怎麼改，文案要給改好的版本，60 字內。嚴重度中或低的那幾條，至少一條要用一句俏皮的比喻或吐槽開頭，再講怎麼改"}],"template_tells":[{"issue":"破綻是什麼，例如「同一頁混用兩套 icon」，20 字內","evidence":"根據什麼看出來，引用 signals 或原文，40 字內","fix":"怎麼修，50 字內"}],"nitpicks":[{"quote":"頁面上的原文，30 字內","note":"先一句處女座式的吐槽（例如「你可能沒發現，但我發現了。」），再說哪裡不一致、改成什麼，60 字內"}],"closing":"2–3 句：說明自動健檢只看得到公開頁面，完整健檢我會實際走一遍流程，可以幫忙的項目從上面清單挑最相關的 1–2 項，60–100 字"}
 - findings 3 到 5 項，依影響大小排序。severity：高＝會讓人卡住或離開；中＝會讓人猶豫或誤解；低＝影響專業感。
 - template_tells 是「模板／快速生成網站常見破綻」：0 到 5 項，挑最明顯、最影響信任感的，只寫 signals 或 page_data 真的支持的；都沒有就給空陣列。
 - 所有 quote 欄位只放原文本身，前後不要自己加「」或引號，頁面會自動加上。
@@ -608,7 +619,7 @@ const RULES = {
 - Don't mention being an AI, a model or any prompt.
 - Scores are context; don't recite them one by one.
 - Output JSON only, no markdown, no other text, in this shape:
-{"summary":"one-sentence verdict: a plain, clear read of the overall state, no jokes, under 25 words","highlights":[{"quote":"text or element on the page that works well, under 15 words","note":"why it works, specifically, under 30 words"}],"journey":"First-visit path: walk the page as a first-time visitor, through the first glance, the next step and the form or contact route, and name the moment they'd get stuck, 35–55 words","findings":[{"severity":"one of High, Medium, Low","where":"location, e.g. \"home hero main button\", under 6 words","title":"4–10 words","current":"current: what happens or what they see now, quoting the page, under 30 words","expected":"expected: what it should be, under 25 words","fix":"fix: exactly what to change; give rewritten copy when it's about copy, under 35 words"}],"template_tells":[{"issue":"the slip, e.g. \"two icon sets on one page\", under 8 words","evidence":"what shows it, citing signals or page text, under 20 words","fix":"how to fix it, under 25 words"}],"nitpicks":[{"quote":"exact text from the page, under 15 words","note":"what's inconsistent or could be sharper, and the fix, under 30 words"}],"closing":"2–3 sentences: an automatic check only sees public pages; in a full review I walk through the real flows; name the 1–2 most relevant services from the list, 40–70 words"}
+{"summary":"one-sentence verdict: a plain, clear read of the overall state, no jokes, under 25 words","highlights":[{"quote":"text or element on the page that works well, under 15 words","note":"why it works, specifically, under 30 words"}],"journey":"First-visit path: walk the page as a first-time visitor, through the first glance, the next step and the form or contact route, and name the moment they'd get stuck, 35–55 words","findings":[{"severity":"one of High, Medium, Low","where":"location, e.g. \"home hero main button\", under 6 words","title":"4–10 words","current":"current: what happens or what they see now, quoting the page, under 30 words","expected":"expected: what it should be, under 25 words","fix":"fix: exactly what to change; give rewritten copy when it's about copy, under 40 words. In at least one Medium or Low finding, open with one wry line or comparison before the fix"}],"template_tells":[{"issue":"the slip, e.g. \"two icon sets on one page\", under 8 words","evidence":"what shows it, citing signals or page text, under 20 words","fix":"how to fix it, under 25 words"}],"nitpicks":[{"quote":"exact text from the page, under 15 words","note":"open with one dry, detail-obsessed aside (e.g. \"You may not have noticed. I did.\"), then what's inconsistent and the fix, under 35 words"}],"closing":"2–3 sentences: an automatic check only sees public pages; in a full review I walk through the real flows; name the 1–2 most relevant services from the list, 40–70 words"}
 - 3 to 5 findings, most important first. severity: High = people get stuck or leave; Medium = people hesitate or misread; Low = it costs polish.
 - template_tells is "common slips in template-built or quickly generated sites": 0 to 5 items, picking the most visible and trust-damaging, only what signals or page_data really support; empty array if none.
 - Every quote field holds only the original text, with no quotation marks around it; the page adds them.
@@ -658,17 +669,19 @@ async function askClaude(env, lang, target, page, speed) {
     console.log('ai output not json', d.stop_reason, text.slice(0, 300));
     throw err;
   }
-  try { return cleanAdvice(parsed); } catch { const err = new Error('empty'); err.code = 'ai_empty'; throw err; }
+  try { return cleanAdvice(parsed, { bilingual: !!(signals && signals.langVsText && signals.langVsText.bilingual) }); } catch { const err = new Error('empty'); err.code = 'ai_empty'; throw err; }
 }
 
 // keep only the expected fields, as plain short strings
-function cleanAdvice(a) {
+function cleanAdvice(a, opts = {}) {
   const s = (v, n) => (typeof v === 'string' ? v.replace(/<[^>]*>/g, '').replace(/[<>]/g, '').trim().slice(0, n) : '');
   const sev = v => { v = s(v, 10).toLowerCase(); return /高|high/.test(v) ? 'high' : /中|med/.test(v) ? 'medium' : /低|low/.test(v) ? 'low' : ''; };
-  const noVars = o => !/\{\{/.test(Object.values(o).join(' ')); // template variables are filled in by script; never a real finding
+  // template variables are filled in by script, and a bilingual page holds both languages on purpose: neither is a real finding
+  const BILINGUAL_FALSE = /中英(混|夾|並)|英文(按鈕|UI|介面|字樣|文字)|混用.{0,4}(語言|中英)|read more|出現兩次|重複出現|mixed (language|chinese)|english (button|ui|label|text) on|appears twice|duplicated/i;
+  const noVars = o => { const t = Object.values(o || {}).join(' '); return !/\{\{/.test(t) && !(opts.bilingual && BILINGUAL_FALSE.test(t)); };
   const findings = Array.isArray(a.findings) ? a.findings.filter(noVars).slice(0, 5).map(f => ({ severity: sev(f.severity), where: s(f.where, 60), title: s(f.title, 80), current: s(f.current || f.why, 240), expected: s(f.expected, 200), fix: s(f.fix, 260) })).filter(f => f.title) : [];
   if (!findings.length) throw new Error('empty');
-  const nitpicks = Array.isArray(a.nitpicks) ? a.nitpicks.slice(0, 3).map(n => ({ quote: s(n.quote, 90), note: s(n.note, 200) })).filter(n => n.quote && n.note) : [];
+  const nitpicks = Array.isArray(a.nitpicks) ? a.nitpicks.filter(noVars).slice(0, 3).map(n => ({ quote: s(n.quote, 90), note: s(n.note, 200) })).filter(n => n.quote && n.note) : [];
   const highlights = Array.isArray(a.highlights) ? a.highlights.slice(0, 2).map(n => ({ quote: s(n.quote, 90), note: s(n.note, 200) })).filter(n => n.quote && n.note) : [];
   const tells = Array.isArray(a.template_tells) ? a.template_tells.filter(noVars).slice(0, 5).map(n => ({ issue: s(n.issue, 80), evidence: s(n.evidence, 200), fix: s(n.fix, 220) })).filter(n => n.issue) : [];
   return { summary: s(a.summary, 160), highlights, journey: s(a.journey, 360), findings, tells, nitpicks, closing: s(a.closing, 400) };
