@@ -65,15 +65,16 @@ async function handleCheck(request, env, ctx) {
 
   // 3. daily quotas (the day resets at 00:00 UTC = 08:00 Taipei)
   const day = new Date().toISOString().slice(0, 10);
-  const busyUntil = parseInt((await env.KV.get('busy')) || '0', 10);
-  if (busyUntil > Date.now()) return busy(busyUntil);
+  const [busyAt, busyWhy] = ((await env.KV.get('busy')) || '0').split('|'); // stored as "until|reason"
+  const busyUntil = parseInt(busyAt, 10) || 0;
+  if (busyUntil > Date.now()) return busy(busyUntil, busyWhy);
   const ipKey = `ip:${day}:${ipBucket}`;
   const gKey = `g:${day}`;
   const [ipCount, gCount] = await Promise.all([
     env.KV.get(ipKey).then(n => parseInt(n || '0', 10)),
     env.KV.get(gKey).then(n => parseInt(n || '0', 10)),
   ]);
-  if (gCount >= DAILY_LIMIT_GLOBAL) return busy(nextResetMs());
+  if (gCount >= DAILY_LIMIT_GLOBAL) return busy(nextResetMs(), 'quota');
   if (ipCount >= DAILY_LIMIT_IP) return json({ error: 'quota_ip' }, 429);
   await Promise.all([
     env.KV.put(ipKey, String(ipCount + 1), { expirationTtl: 60 * 60 * 26 }),
@@ -114,8 +115,9 @@ async function handleCheck(request, env, ctx) {
       ctx.waitUntil(env.KV.put(ipKey, String(ipCount), { expirationTtl: 60 * 60 * 26 }));
       // out of credit: pause until the next reset; overloaded or rate limited: pause 10 minutes
       const until = e.busy === 'credit' ? nextResetMs() : Date.now() + 10 * 60 * 1000;
-      ctx.waitUntil(env.KV.put('busy', String(until), { expirationTtl: Math.max(60, Math.ceil((until - Date.now()) / 1000)) }));
-      return busy(until);
+      console.log('ai_busy', e.busy, e.code || '', e.detail || '');
+      ctx.waitUntil(env.KV.put('busy', `${until}|${e.busy}`, { expirationTtl: Math.max(60, Math.ceil((until - Date.now()) / 1000)) }));
+      return busy(until, e.busy);
     }
     console.log('ai_failed', e.code || '', e.message, e.detail || '');
     return json({ error: 'ai_failed', code: e.code || 'ai_other' }, 502);
@@ -262,9 +264,10 @@ function nextResetMs() {
   return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 1);
 }
 
-function busy(untilMs) {
+// reason: quota (the site's daily cap), credit (API balance or spend limit), overload (API busy or rate limited)
+function busy(untilMs, reason) {
   const retryMin = Math.max(1, Math.ceil((untilMs - Date.now()) / 60000));
-  return new Response(JSON.stringify({ error: 'busy', retryMin }), {
+  return new Response(JSON.stringify({ error: 'busy', reason: reason || 'other', retryMin }), {
     status: 503,
     headers: { 'content-type': 'application/json; charset=utf-8', 'retry-after': String(retryMin * 60), 'cache-control': 'no-store' },
   });

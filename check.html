@@ -352,7 +352,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       .then(function (r) { return r.json().catch(function () { return { error: 'net' }; }); })
       .then(function (d) {
         steps(false);
-        if (d.error) { track('check_failed', 'check_error', d.code || d.error); showErr(d.error, d); return; }
+        if (d.error) { track('check_failed', 'check_error', d.code || (d.reason ? d.error + '_' + d.reason : d.error)); showErr(d.error, d); return; }
         last = d; render(d); track('check_done');
         $('res').hidden = false; $('res').scrollIntoView({ behavior: 'smooth', block: 'start' });
       })
