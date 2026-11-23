@@ -113,8 +113,8 @@ async function handleCheck(request, env, ctx) {
       // (Other failures, such as a bad answer, did use tokens, so they still count. Otherwise a page
       // built to break the output could be re-checked without limit.)
       ctx.waitUntil(env.KV.put(ipKey, String(ipCount), { expirationTtl: 60 * 60 * 26 }));
-      // out of credit: pause until the next reset; overloaded or rate limited: pause 10 minutes
-      const until = e.busy === 'credit' ? nextResetMs() : Date.now() + 10 * 60 * 1000;
+      // out of credit: pause until the next reset; still overloaded or rate limited after one retry: pause 2 minutes
+      const until = e.busy === 'credit' ? nextResetMs() : Date.now() + 2 * 60 * 1000;
       console.log('ai_busy', e.busy, e.code || '', e.detail || '');
       ctx.waitUntil(env.KV.put('busy', `${until}|${e.busy}`, { expirationTtl: Math.max(60, Math.ceil((until - Date.now()) / 1000)) }));
       return busy(until, e.busy);
@@ -674,7 +674,22 @@ async function askClaude(env, lang, target, page, speed, shot) {
   const data = { url: target.href, signals, pagespeed_mobile: speed || 'unavailable', page: rest }; // signals first so the size cap never cuts them
   let payload = JSON.stringify(data);
   if (payload.length > 16000) payload = payload.slice(0, 16000); // hard cap on input size
-  const r = await fetch('https://api.anthropic.com/v1/messages', {
+  // a rate-limit or overload reply is often gone a moment later: wait briefly and try once more
+  // before giving up, so one busy second doesn't turn away this visitor and pause the whole site
+  let r;
+  for (let attempt = 0; attempt < 2; attempt++) {
+    r = await callAnthropic(env, lang, payload, shot);
+    if (r.ok || attempt === 1 || ![429, 503, 529].includes(r.status)) break;
+    const wait = Math.min(4000, Math.max(1000, (parseFloat(r.headers.get('retry-after')) || 2) * 1000));
+    console.log('anthropic retry', r.status, wait);
+    await r.text().catch(() => '');
+    await new Promise(res => setTimeout(res, wait));
+  }
+  return handleAnthropic(r, !!(signals && signals.langVsText && signals.langVsText.bilingual));
+}
+
+function callAnthropic(env, lang, payload, shot) {
+  return fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {
       'x-api-key': env.ANTHROPIC_API_KEY,
@@ -695,6 +710,9 @@ async function askClaude(env, lang, target, page, speed, shot) {
     }),
     signal: AbortSignal.timeout(AI_TIMEOUT_MS),
   });
+}
+
+async function handleAnthropic(r, bilingual) {
   if (!r.ok) {
     const err = new Error('ai ' + r.status);
     const body = await r.text().catch(() => '');
@@ -716,7 +734,7 @@ async function askClaude(env, lang, target, page, speed, shot) {
     console.log('ai output not json', d.stop_reason, text.slice(0, 300));
     throw err;
   }
-  try { return cleanAdvice(parsed, { bilingual: !!(signals && signals.langVsText && signals.langVsText.bilingual) }); } catch { const err = new Error('empty'); err.code = 'ai_empty'; throw err; }
+  try { return cleanAdvice(parsed, { bilingual }); } catch { const err = new Error('empty'); err.code = 'ai_empty'; throw err; }
 }
 
 // keep only the expected fields, as plain short strings
