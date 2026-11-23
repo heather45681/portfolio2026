@@ -11,15 +11,15 @@ import { EmailMessage } from 'cloudflare:email';
 //   ADMIN_TOKEN         long random password for the log page (logs.html); without it /api/logs is off
 // Bindings (wrangler.jsonc): ASSETS, KV
 
-const MODEL = 'claude-sonnet-5-5'; // about $0.04 a check; the account has $100 a month
+const MODEL = 'claude-haiku-5-5'; // about $0.002 a check
 const MAX_OUTPUT_TOKENS = 2400;
 const DAILY_LIMIT_IP = 3;       // checks per visitor per day
-const DAILY_LIMIT_GLOBAL = 50;  // checks for the whole site per day
+const DAILY_LIMIT_GLOBAL = 200; // checks for the whole site per day (about $0.40 a day at most on Haiku)
 const CACHE_TTL = 60 * 60 * 24; // same URL reuses its result for 24 hours
 const PAGE_BYTES_MAX = 1_500_000;
 const PAGE_TIMEOUT_MS = 8000;
 const PAGESPEED_TIMEOUT_MS = 45000; // a mobile Lighthouse run often takes 20–40 s
-const AI_TIMEOUT_MS = 60000; // Sonnet writes more slowly than Haiku
+const AI_TIMEOUT_MS = 30000;
 const LOG_TTL = 60 * 60 * 24 * 90; // keep check records for 90 days
 const ALLOWED_ORIGINS = ['https://fifilee-design.com', 'https://www.fifilee-design.com'];
 
@@ -59,7 +59,7 @@ async function handleCheck(request, env, ctx) {
   if (!human) return json({ error: 'turnstile' }, 403);
 
   // 2. cached result for this URL: free, does not use quota
-  const cacheKey = `c13:${lang}:${target.href}`; // bump the prefix when the prompt changes
+  const cacheKey = `c14:${lang}:${target.href}`; // bump the prefix when the prompt changes
   const cached = await env.KV.get(cacheKey, 'json');
   if (cached) return json({ ...cached, cached: true });
 
@@ -86,7 +86,14 @@ async function handleCheck(request, env, ctx) {
     readPage(target, env).catch(() => null),
     readPageSpeed(env, target).catch(e => { console.log('pagespeed failed', e && e.name); return null; }),
   ]);
-  if (!page) return json({ error: 'fetch_failed' }, 422);
+  if (!page) {
+    // nothing was billed: give back both the visitor's try and the site's
+    ctx.waitUntil(Promise.all([
+      env.KV.put(ipKey, String(ipCount), { expirationTtl: 60 * 60 * 26 }),
+      env.KV.put(gKey, String(gCount), { expirationTtl: 60 * 60 * 26 }),
+    ]));
+    return json({ error: 'fetch_failed' }, 422);
+  }
   const shot = speed && speed._shot;
   if (speed) delete speed._shot;
 
@@ -112,7 +119,10 @@ async function handleCheck(request, env, ctx) {
       // the API refused the call, so nothing was billed: give the visitor their try back.
       // (Other failures, such as a bad answer, did use tokens, so they still count. Otherwise a page
       // built to break the output could be re-checked without limit.)
-      ctx.waitUntil(env.KV.put(ipKey, String(ipCount), { expirationTtl: 60 * 60 * 26 }));
+      ctx.waitUntil(Promise.all([
+        env.KV.put(ipKey, String(ipCount), { expirationTtl: 60 * 60 * 26 }),
+        env.KV.put(gKey, String(gCount), { expirationTtl: 60 * 60 * 26 }),
+      ]));
       // out of credit: pause until the next reset; still overloaded or rate limited after one retry: pause 2 minutes
       const until = e.busy === 'credit' ? nextResetMs() : Date.now() + 2 * 60 * 1000;
       console.log('ai_busy', e.busy, e.code || '', e.detail || '');
