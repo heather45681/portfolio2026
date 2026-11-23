@@ -8,6 +8,8 @@
   "compatibility_date": "2026-10-01",
   "main": "worker/index.js",
   "placement": { "region": "aws:ap-northeast-1" },
+  // keep the worker's console.log lines (API errors, retries) so they can be searched in the dashboard
+  "observability": { "enabled": true },
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
