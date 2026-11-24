@@ -54,9 +54,41 @@ form{display:flex;flex-direction:column;gap:16px}
 .err{margin:0;display:flex;align-items:flex-start;gap:10px;padding:12px 16px;border-radius:10px;background:rgba(178,69,45,.08);border:1px solid rgba(178,69,45,.25);font-size:14px;font-weight:500;line-height:1.6;color:#8f3622}
 .err::before{content:'!';flex:none;display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;margin-top:2px;border-radius:50%;background:#b2452d;color:#fff;font-size:11px;font-weight:700}
 .err[hidden]{display:none}
-.meta{margin:4px 0 0;padding-top:14px;border-top:1px dashed var(--line);display:flex;flex-direction:column;gap:4px}
-.meta-k{margin:0;font-size:13px;font-weight:500;letter-spacing:.02em;color:var(--ink2)}
-.meta-p{margin:0;font-size:12px;line-height:1.7;color:var(--mute)}
+.usage{margin:4px 0 0;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px}
+.u-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 18px}
+.u-list li{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink2)}
+.u-list svg{width:16px;height:16px;fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.u-pv{font-size:12px;color:var(--mute)}
+.u-pv summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:4px;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line)}
+.u-pv summary::-webkit-details-marker{display:none}
+.u-pv summary::after{content:'›';display:inline-block;transition:transform .2s}
+.u-pv[open] summary::after{transform:rotate(90deg)}
+.u-pv p{margin:8px 0 0;line-height:1.7}
+.u-pv[open]{flex-basis:100%}
+.run{margin-top:22px;padding:22px 24px 18px;border-radius:14px;background:var(--bg)}
+.stepper{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);counter-reset:s}
+.stepper li{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;font-size:14px;color:var(--mute)}
+.stepper li:not(:first-child)::before{content:'';position:absolute;top:15px;right:calc(50% + 22px);width:calc(100% - 44px);height:2px;border-radius:2px;background:var(--line)}
+.stepper .dot{position:relative;z-index:1;width:32px;height:32px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;border:1.5px solid var(--line);background:#fff;font-family:'DM Mono',monospace;font-size:13px;color:var(--mute)}
+.stepper .s-t{display:flex;flex-direction:column;gap:2px;line-height:1.4;max-width:150px}
+.stepper small{font-size:11px;color:var(--mute);font-family:'DM Mono',monospace;letter-spacing:.02em}
+.stepper li.on{color:var(--ink);font-weight:500}
+.stepper li.on .dot{border-color:var(--accent);color:var(--accent);box-shadow:0 0 0 0 rgba(168,72,47,.35);animation:ring 1.4s ease-out infinite}
+.stepper li.done .dot{background:var(--good);border-color:var(--good);color:transparent}
+.stepper li.done .dot::after{content:'';position:absolute;width:6px;height:11px;border:solid #fff;border-width:0 2px 2px 0;transform:translateY(-1px) rotate(45deg)}
+.stepper li.done,.stepper li.on{color:var(--ink)}
+.stepper li.on::before,.stepper li.done::before{background:var(--good)}
+.run-time{margin:16px 0 0;text-align:center;font-size:12px;color:var(--mute)}
+@media (max-width:600px){
+  .run{padding:18px 20px 14px}
+  .stepper{grid-template-columns:1fr;gap:18px}
+  .stepper li{flex-direction:row;align-items:center;gap:14px;text-align:left}
+  .stepper li:not(:first-child)::before{top:auto;bottom:calc(100% - 2px);right:auto;left:15px;width:2px;height:22px}
+  .stepper .s-t{max-width:none;flex-direction:row;align-items:baseline;flex-wrap:wrap;gap:2px 8px}
+  .run-time{text-align:left;padding-left:46px}
+}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(168,72,47,.35)}100%{box-shadow:0 0 0 10px rgba(168,72,47,0)}}
+@media (prefers-reduced-motion:reduce){.stepper li.on .dot{animation:none}}
 .f-err{margin:-4px 0 0 4px;font-size:13px;line-height:1.6;color:#b2452d}
 .f-err::before{content:'!';display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;margin-right:6px;border-radius:50%;background:#b2452d;color:#fff;font-size:10px;font-weight:700;vertical-align:1px}
 #u[aria-invalid="true"]{border-color:#b2452d}
@@ -64,11 +96,6 @@ form{display:flex;flex-direction:column;gap:16px}
 .pending::before{content:'';flex:none;margin-top:5px;width:14px;height:14px;border-radius:50%;border:2px solid var(--line);border-top-color:var(--accent);animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion: reduce){.pending::before{animation:none}}
-.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:15px;color:var(--mute)}
-.steps li{display:flex;gap:10px;align-items:center}
-.steps li::before{content:'';width:10px;height:10px;border-radius:50%;border:1px solid var(--line)}
-.steps li.on{color:var(--ink)}.steps li.on::before{background:var(--accent);border-color:var(--accent);animation:pulse 1s ease-in-out infinite}
-.steps li.done::before{background:var(--good);border-color:var(--good);animation:none}
 @keyframes pulse{50%{opacity:.35}}
 @media (prefers-reduced-motion: reduce){.steps li.on::before{animation:none}}
 .res{display:flex;flex-direction:column;gap:28px;padding-bottom:80px}
@@ -207,11 +234,23 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       <div id="ts"></div>
       <p class="pending" id="pending" role="status" hidden></p>
       <p class="err" id="err" role="alert" hidden></p>
-      <div class="meta"><p class="meta-k" data-t="limitA"></p><p class="meta-p" data-t="limitB"></p></div>
+      <div class="usage">
+        <ul class="u-list">
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><span data-t="u1"></span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.4 2.6 14.6 0 17M12 3.5c-2.6 2.4-2.6 14.6 0 17"/></svg><span data-t="u2"></span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg><span data-t="u3"></span></li>
+        </ul>
+        <details class="u-pv"><summary data-t="pvSum"></summary><p data-t="limitB"></p></details>
+      </div>
     </form>
-    <ol class="steps" id="steps" hidden aria-live="polite">
-      <li data-t="s1"></li><li data-t="s2"></li><li data-t="s3"></li>
-    </ol>
+    <div class="run" id="steps" hidden aria-live="polite">
+      <ol class="stepper">
+        <li><span class="dot" aria-hidden="true">1</span><span class="s-t" data-t="s1"></span></li>
+        <li><span class="dot" aria-hidden="true">2</span><span class="s-t"><span data-t="s2"></span><small data-t="s2sub"></small></span></li>
+        <li><span class="dot" aria-hidden="true">3</span><span class="s-t" data-t="s3"></span></li>
+      </ol>
+      <p class="run-time" id="runTime"></p>
+    </div>
   </div>
 </section>
 
@@ -274,8 +313,9 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       eyebrow: '網站快速健檢｜免費', h1: '貼上網址，看看你的網站哪裡可以更好',
       lead: '我把自己看網站時會先檢查的重點，做成這個自動健檢：速度、無障礙、行動版，以及文案、按鈕、表單這些第一眼就會影響使用者的地方。大約 1 分鐘，結果會用我的口吻整理成幾點具體建議。',
       label: '要健檢的網址', go: '開始健檢', going: '健檢中…', waiting: '驗證中…', pending: '已收到你的網址，人機驗證通過後會自動開始健檢。如果下方出現驗證方塊，請點一下。',
-      limitA: '每人每天 3 次・只讀公開頁面・不需登入', limitB: '網址和結果保留 90 天，用來改善建議品質，不會記錄你是誰。網站使用 GoatCounter 與 Microsoft Clarity 了解使用情況。',
-      s1: '讀取網頁內容', s2: '檢查速度與無障礙（Google PageSpeed）', s3: '整理建議',
+      u1: '每人每天 3 次', u2: '只讀公開頁面', u3: '不需登入', pvSum: '資料怎麼使用',
+      limitB: '網址和結果保留 90 天，用來改善建議品質，不會記錄你是誰。網站使用 GoatCounter 與 Microsoft Clarity 了解使用情況。',
+      s1: '讀取網頁', s2: '速度與無障礙', s2sub: 'Google PageSpeed', s3: '整理建議', runTime: '已經過 {s} 秒，通常約 1 分鐘完成',
       resEyebrow: '健檢結果', psTitle: 'Google PageSpeed 分數（手機版）', noScores: '這次沒拿到 Google 的分數（Google 那邊忙碌或逾時），下面的建議不受影響。',
       perf: '效能', a11y: '無障礙', bp: '最佳做法', seo: 'SEO', lcp: '最大內容繪製',
       why: '為什麼', fix: '建議', cur: '現況', exp: '預期', sev: { high: '嚴重度 高', medium: '嚴重度 中', low: '嚴重度 低' }, journeyT: '新訪客路徑', tellsNone: '這次沒有發現模板網站常見的破綻：icon、按鈕圓角、連結和範例文字都沒有明顯問題。', tellsT: '模板與快速生成網站的常見破綻', tellsS: '用模板或 AI 工具做的網站很方便，但這幾個地方最容易露餡。', evid: '線索', goodT: '做得好的地方', visNote: '這個網頁的內容是 JavaScript 載入後才畫出來的，這次是看瀏覽器畫好的畫面截圖來分析，連結網址、圖片 alt 這類看不到的細節不在範圍內',radarT: '細節雷達', radarS: '不影響使用，但我就是會注意到的小地方。',
@@ -292,8 +332,9 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       eyebrow: 'WEBSITE QUICK CHECK · FREE', h1: 'Paste a URL and see where your site could do better',
       lead: 'This automates the first things I look at on any website: speed, accessibility, mobile, and the copy, buttons and forms people notice at first glance. In about a minute you get a few concrete suggestions, written the way I would explain them.',
       label: 'Website to check', go: 'Check it', going: 'Checking…', waiting: 'Verifying…', pending: 'Got your URL. The check starts automatically once the human check passes; if a box appears below, tap it.',
-      limitA: "3 checks a day · public pages only · no login", limitB: "URLs and results are kept for 90 days to improve the suggestions; nothing about who you are is recorded. The site uses GoatCounter and Microsoft Clarity to understand how it's used.",
-      s1: 'Reading the page', s2: 'Checking speed and accessibility (Google PageSpeed)', s3: 'Writing up suggestions',
+      u1: '3 checks a day', u2: 'Public pages only', u3: 'No login', pvSum: 'How your data is used',
+      limitB: "URLs and results are kept for 90 days to improve the suggestions; nothing about who you are is recorded. The site uses GoatCounter and Microsoft Clarity to understand how it's used.",
+      s1: 'Reading the page', s2: 'Speed & accessibility', s2sub: 'Google PageSpeed', s3: 'Writing it up', runTime: '{s} s so far · usually about a minute',
       resEyebrow: 'RESULTS', psTitle: 'Google PageSpeed scores (mobile)', noScores: "Google's scores didn't come back this time (busy or timed out). The suggestions below aren't affected.",
       perf: 'Performance', a11y: 'Accessibility', bp: 'Best practices', seo: 'SEO', lcp: 'Largest paint',
       why: 'WHY', fix: 'FIX', cur: 'NOW', exp: 'EXPECTED', sev: { high: 'HIGH', medium: 'MEDIUM', low: 'LOW' }, goodT: 'WHAT WORKS', visNote: 'This page draws its content with JavaScript, so this check is based on a screenshot of the page as a browser drew it. Details a screenshot can\'t show, such as link targets and image alt text, aren\'t covered.',journeyT: 'FIRST-VISIT PATH', tellsNone: 'No common template slips found this time: icons, button corners, links and sample text all look fine.', tellsT: 'Common slips in template-built sites', tellsS: 'Templates and AI builders are fast, but these are the spots that usually give them away.', evid: 'CLUE', radarT: 'Detail radar', radarS: "Small things that don't break anything. I just can't not notice them.",
@@ -376,12 +417,17 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
   }
   function track(n, k, v) { try { if (window.clarity) { if (k) window.clarity('set', k, String(v)); window.clarity('event', n); } } catch (x) {} }
   var timers = [];
+  var clock = null;
   function steps(on) {
     timers.forEach(clearTimeout); timers = [];
+    clearInterval(clock);
     var li = document.querySelectorAll('#steps li');
     $('steps').hidden = !on;
-    li.forEach(function (x) { x.className = ''; });
+    li.forEach(function (x) { x.className = ''; x.removeAttribute('aria-current'); });
     if (!on) return;
+    var t0 = Date.now(), rt = $('runTime');
+    var tick = function () { rt.textContent = T[L].runTime.replace('{s}', Math.floor((Date.now() - t0) / 1000)); };
+    tick(); clock = setInterval(tick, 1000);
     li[0].className = 'on';
     timers.push(setTimeout(function () { li[0].className = 'done'; li[1].className = 'on'; }, 3000));
     timers.push(setTimeout(function () { li[1].className = 'done'; li[2].className = 'on'; }, 25000));
