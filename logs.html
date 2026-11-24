@@ -39,6 +39,8 @@ ul.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
 .detail p:has(> .lab){display:grid;grid-template-columns:64px minmax(0,1fr);column-gap:8px;align-items:baseline}
 .scores{display:flex;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--ink2)}
 .more{margin-top:16px}
+.pin{margin:0 0 24px;padding:4px 18px 8px;border:1px solid var(--accent);border-radius:12px;background:var(--paper)}
+.pin-t{margin:14px 0 0;font-size:14px;color:var(--accent)}
 .tabs{display:flex;gap:6px;margin:0 0 16px}
 .tabs button{background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:6px 16px}
 .tabs button[aria-selected="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
@@ -63,6 +65,7 @@ ul.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
     <button type="button" role="tab" data-type="msg" aria-selected="false">聯絡表單</button>
   </div>
   <p class="msg" id="msg" role="alert" hidden></p>
+  <section class="pin" id="pin" hidden></section>
   <p class="count" id="count" hidden></p>
   <ul class="list" id="list"></ul>
   <button type="button" class="ghost more" id="more" hidden>載入更多</button>
@@ -198,8 +201,25 @@ ul.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
     var v = $('tok').value.trim(); if (!v) return;
     token = v; $('tok').value = '';
     try { sessionStorage.setItem('fifi-logs', token); } catch (e) {}
-    cursor = null; load(true);
+    cursor = null; start();
   });
+  // a link from a notification email (?type=fb&id=…) opens that tab with the record already expanded on top
+  var q = new URLSearchParams(location.search), wantType = q.get('type'), wantId = q.get('id');
+  function start() {
+    if (wantType && document.querySelector('#tabs button[data-type="' + wantType + '"]')) {
+      type = wantType;
+      document.querySelectorAll('#tabs button').forEach(function (x) { x.setAttribute('aria-selected', String(x.getAttribute('data-type') === type)); });
+    }
+    load(true);
+    if (!wantId || !/^(log|msg|fb):\d{16}:[0-9a-f]{8}$/.test(wantId)) return;
+    var id = wantId; wantId = null;
+    api('?id=' + encodeURIComponent(id)).then(function (r) {
+      if (!r || r.error) return;
+      var pin = $('pin'); pin.textContent = ''; pin.hidden = false;
+      pin.appendChild(el('h2', 'pin-t', '你從信件點進來的這一筆'));
+      var box = el('div', 'detail'); render(box, r); pin.appendChild(box);
+    }).catch(fail);
+  }
   $('more').addEventListener('click', function () { load(false); });
   document.querySelectorAll('#tabs button').forEach(function (b) {
     b.addEventListener('click', function () {
@@ -209,7 +229,7 @@ ul.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
     });
   });
   $('out').addEventListener('click', function () { logout(false); });
-  if (token) load(true);
+  if (token) start();
 })();
 </script>
 </body>

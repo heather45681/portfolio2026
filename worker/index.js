@@ -29,7 +29,7 @@ export default {
     if (url.pathname === '/api/check') return handleCheck(request, env, ctx);
     if (url.pathname === '/api/logs') return handleLogs(request, env, url);
     if (url.pathname === '/api/contact') return handleContact(request, env, ctx);
-    if (url.pathname === '/api/feedback') return handleFeedback(request, env);
+    if (url.pathname === '/api/feedback') return handleFeedback(request, env, ctx);
     return env.ASSETS.fetch(request);
   },
 };
@@ -178,7 +178,7 @@ const FEEDBACK_LIMIT_IP = 10;
 const FEEDBACK_LIMIT_GLOBAL = 300;
 const FEEDBACK_TAGS = { false_alarm: '誤判：說有問題其實沒有', missed: '漏掉明顯的問題', vague: '建議不夠具體', wrong_fact: '描述跟網站不符', tone: '語氣不對', other: '其他' };
 
-async function handleFeedback(request, env) {
+async function handleFeedback(request, env, ctx) {
   if (request.method !== 'POST') return json({ error: 'method' }, 405);
   if (!ALLOWED_ORIGINS.includes(request.headers.get('Origin') || '')) return json({ error: 'origin' }, 403);
   let b;
@@ -211,6 +211,23 @@ async function handleFeedback(request, env) {
   const rec = { kind: 'feedback', rating, tags: tags.map(t => FEEDBACK_TAGS[t]), comment, logId: b.logId, url: check.url, prompt: check.prompt || '', model: check.model || '', lang: b.lang === 'en' ? 'en' : 'zh', at: new Date().toISOString() };
   const key = `fb:${String(9e15 - Date.now()).padStart(16, '0')}:${crypto.randomUUID().slice(0, 8)}`;
   await env.KV.put(key, JSON.stringify(rec), { expirationTtl: LOG_TTL, metadata: { url: `${rating === 'up' ? '👍' : '👎'} ${check.url}`.slice(0, 200), lang: rec.lang, at: rec.at } });
+
+  // only "not accurate" is worth an email; thumbs-up stays on the log page
+  if (rating === 'down' && env.EMAIL) {
+    const text = [
+      `網址：${check.url}`,
+      rec.tags.length ? `哪裡不準：${rec.tags.join('、')}` : '',
+      `Prompt 版本：${[rec.prompt, rec.model].filter(Boolean).join('｜')}`,
+      `語言：${rec.lang === 'en' ? '英文' : '中文'}`,
+      '',
+      comment || '（沒有補充文字）',
+      '',
+      `當時的健檢結果：https://fifilee-design.com/logs?type=fb&id=${encodeURIComponent(key)}`,
+      '',
+      '— 來自 fifilee-design.com 健檢回饋。把這封信貼給 Claude，就能針對這一條調整 prompt。',
+    ].filter((l, i, a) => l !== '' || (i > 0 && a[i - 1] !== '')).join('\n');
+    ctx.waitUntil(sendMail(env, { subject: `[健檢回饋] 👎 ${check.url}`.slice(0, 150), text }));
+  }
   return json({ ok: true });
 }
 
@@ -282,7 +299,7 @@ const MAIL_FROM = 'form@fifilee-design.com';
 const MAIL_TO = 'heather45681@gmail.com';
 async function sendMail(env, { replyTo, subject, text }) {
   try {
-    await env.EMAIL.send({ from: { email: MAIL_FROM, name: 'Fifi Lee 網站表單' }, to: MAIL_TO, replyTo, subject, text });
+    await env.EMAIL.send({ from: { email: MAIL_FROM, name: 'Fifi Lee 網站表單' }, to: MAIL_TO, ...(replyTo ? { replyTo } : {}), subject, text });
     return;
   } catch (e) {
     console.log('email send() failed, trying MIME', e && e.message);
@@ -293,7 +310,7 @@ async function sendMail(env, { replyTo, subject, text }) {
     const raw = [
       `From: =?UTF-8?B?${b64('Fifi Lee 網站表單')}?= <${MAIL_FROM}>`,
       `To: <${MAIL_TO}>`,
-      `Reply-To: <${replyTo}>`,
+      ...(replyTo ? [`Reply-To: <${replyTo}>`] : []),
       `Subject: =?UTF-8?B?${b64(subject)}?=`,
       `Date: ${new Date().toUTCString()}`,
       `Message-ID: <${crypto.randomUUID()}@fifilee-design.com>`,
