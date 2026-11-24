@@ -29,6 +29,7 @@ export default {
     if (url.pathname === '/api/check') return handleCheck(request, env, ctx);
     if (url.pathname === '/api/logs') return handleLogs(request, env, url);
     if (url.pathname === '/api/contact') return handleContact(request, env, ctx);
+    if (url.pathname === '/api/feedback') return handleFeedback(request, env);
     return env.ASSETS.fetch(request);
   },
 };
@@ -133,10 +134,11 @@ async function handleCheck(request, env, ctx) {
     return json({ error: 'ai_failed', code: e.code || 'ai_other' }, 502);
   }
 
-  const result = { url: target.href, lang, scores: speed, advice, checkedAt: new Date().toISOString(), ...(visualOnly ? { visualOnly: true } : {}) };
-  ctx.waitUntil(env.KV.put(cacheKey, JSON.stringify(result), { expirationTtl: CACHE_TTL }));
-  // record for Fifi's log page: newest first (inverted timestamp), no IP or visitor details
+  // record for Fifi's log page: newest first (inverted timestamp), no IP or visitor details.
+  // logId goes back to the page so feedback can point at the exact result it's about.
   const logKey = `log:${String(9e15 - Date.now()).padStart(16, '0')}:${crypto.randomUUID().slice(0, 8)}`;
+  const result = { url: target.href, lang, scores: speed, advice, checkedAt: new Date().toISOString(), logId: logKey, prompt: cacheKey.split(':')[0], model: MODEL, ...(visualOnly ? { visualOnly: true } : {}) };
+  ctx.waitUntil(env.KV.put(cacheKey, JSON.stringify(result), { expirationTtl: CACHE_TTL }));
   ctx.waitUntil(env.KV.put(logKey, JSON.stringify(result), { expirationTtl: LOG_TTL, metadata: { url: target.href.slice(0, 200), lang, at: result.checkedAt } }));
   return json(result);
 }
@@ -154,17 +156,62 @@ async function handleLogs(request, env, url) {
 
   const id = url.searchParams.get('id');
   if (id) {
-    if (!/^(log|msg):\d{16}:[0-9a-f]{8}$/.test(id)) return json({ error: 'bad_request' }, 400);
+    if (!/^(log|msg|fb):\d{16}:[0-9a-f]{8}$/.test(id)) return json({ error: 'bad_request' }, 400);
     const rec = await env.KV.get(id, 'json');
     return rec ? json(rec) : json({ error: 'not_found' }, 404);
   }
   const cursor = url.searchParams.get('cursor') || undefined;
-  const prefix = url.searchParams.get('type') === 'msg' ? 'msg:' : 'log:';
+  const type = url.searchParams.get('type');
+  const prefix = type === 'msg' ? 'msg:' : type === 'fb' ? 'fb:' : 'log:';
   const page = await env.KV.list({ prefix, limit: 20, cursor });
   return json({
     items: page.keys.map(k => ({ id: k.name, ...(k.metadata || {}) })),
     cursor: page.list_complete ? null : page.cursor,
   });
+}
+
+// ---------- feedback on a check result ----------
+// POST /api/feedback  { logId, rating: 'up'|'down', tags: [...], comment, lang, website (honeypot) }
+// Lets visitors say whether a result was accurate, so the prompt can be tuned. Stored for the log page only.
+
+const FEEDBACK_LIMIT_IP = 10;
+const FEEDBACK_LIMIT_GLOBAL = 300;
+const FEEDBACK_TAGS = { false_alarm: '誤判：說有問題其實沒有', missed: '漏掉明顯的問題', vague: '建議不夠具體', wrong_fact: '描述跟網站不符', tone: '語氣不對', other: '其他' };
+
+async function handleFeedback(request, env) {
+  if (request.method !== 'POST') return json({ error: 'method' }, 405);
+  if (!ALLOWED_ORIGINS.includes(request.headers.get('Origin') || '')) return json({ error: 'origin' }, 403);
+  let b;
+  try {
+    const raw = await request.text();
+    if (raw.length > 4000) return json({ error: 'too_long' }, 400);
+    b = JSON.parse(raw);
+  } catch { return json({ error: 'bad_request' }, 400); }
+  if (typeof b.website === 'string' && b.website.trim()) return json({ ok: true });
+
+  const rating = b.rating === 'up' ? 'up' : b.rating === 'down' ? 'down' : '';
+  if (!rating) return json({ error: 'bad_request' }, 400);
+  if (typeof b.logId !== 'string' || !/^log:\d{16}:[0-9a-f]{8}$/.test(b.logId)) return json({ error: 'bad_request' }, 400);
+  const check = await env.KV.get(b.logId, 'json');
+  if (!check) return json({ error: 'not_found' }, 404); // only real, recent results can be rated
+  const tags = Array.isArray(b.tags) ? [...new Set(b.tags.filter(t => FEEDBACK_TAGS[t]))].slice(0, 6) : [];
+  const comment = typeof b.comment === 'string' ? b.comment.replace(/[<>]/g, '').replace(/\r\n?/g, '\n').trim().slice(0, 1000) : '';
+
+  const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+  const day = new Date().toISOString().slice(0, 10);
+  const bucket = ip.includes(':') ? ip.split(':').slice(0, 4).join(':') + '::/64' : ip;
+  const ipKey = `fip:${day}:${bucket}`, gKey = `fg:${day}`;
+  const [ipCount, gCount] = await Promise.all([ipKey, gKey].map(k => env.KV.get(k).then(n => parseInt(n || '0', 10))));
+  if (ipCount >= FEEDBACK_LIMIT_IP || gCount >= FEEDBACK_LIMIT_GLOBAL) return json({ error: 'quota' }, 429);
+  await Promise.all([
+    env.KV.put(ipKey, String(ipCount + 1), { expirationTtl: 60 * 60 * 26 }),
+    env.KV.put(gKey, String(gCount + 1), { expirationTtl: 60 * 60 * 26 }),
+  ]);
+
+  const rec = { kind: 'feedback', rating, tags: tags.map(t => FEEDBACK_TAGS[t]), comment, logId: b.logId, url: check.url, prompt: check.prompt || '', model: check.model || '', lang: b.lang === 'en' ? 'en' : 'zh', at: new Date().toISOString() };
+  const key = `fb:${String(9e15 - Date.now()).padStart(16, '0')}:${crypto.randomUUID().slice(0, 8)}`;
+  await env.KV.put(key, JSON.stringify(rec), { expirationTtl: LOG_TTL, metadata: { url: `${rating === 'up' ? '👍' : '👎'} ${check.url}`.slice(0, 200), lang: rec.lang, at: rec.at } });
+  return json({ ok: true });
 }
 
 // ---------- contact form ----------

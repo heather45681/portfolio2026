@@ -59,6 +59,7 @@ ul.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
   </form>
   <div class="tabs" role="tablist" id="tabs" hidden>
     <button type="button" role="tab" data-type="log" aria-selected="true">健檢紀錄</button>
+    <button type="button" role="tab" data-type="fb" aria-selected="false">健檢回饋</button>
     <button type="button" role="tab" data-type="msg" aria-selected="false">聯絡表單</button>
   </div>
   <p class="msg" id="msg" role="alert" hidden></p>
@@ -99,7 +100,7 @@ ul.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
       say(''); $('out').hidden = false; $('tabs').hidden = false;
       d.items.forEach(addRow); shown += d.items.length;
       cursor = d.cursor; $('more').hidden = !cursor;
-      $('count').textContent = shown ? '已載入 ' + shown + ' 筆' : (type === 'msg' ? '目前還沒有人填表單。' : '目前還沒有人健檢過。');
+      $('count').textContent = shown ? '已載入 ' + shown + ' 筆' : (type === 'msg' ? '目前還沒有人填表單。' : type === 'fb' ? '目前還沒有人留下回饋。' : '目前還沒有人健檢過。');
       $('count').hidden = false;
     }).catch(fail);
   }
@@ -124,6 +125,24 @@ ul.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
   function unq(v) { return String(v || '').trim().replace(/^[「『"“'‘]+/, '').replace(/[」』"”'’]+$/, '').trim(); }
   function render(box, r) {
     box.textContent = '';
+    if (r.kind === 'feedback') {
+      [['評價', r.rating === 'up' ? '👍 準' : '👎 不太準'], ['網址', r.url], ['哪裡不準', (r.tags || []).join('、')], ['Prompt 版本', [r.prompt, r.model].filter(Boolean).join('｜')], ['語言', r.lang === 'en' ? '英文' : '中文']].forEach(function (x) {
+        if (!x[1]) return;
+        var p = el('p'); p.appendChild(el('span', 'lab', x[0])); p.appendChild(document.createTextNode(x[1])); box.appendChild(p);
+      });
+      if (r.comment) box.appendChild(el('pre', '', r.comment));
+      if (r.logId) {
+        var sub = el('div'), btn = el('button', 'ghost more', '看當時的健檢結果');
+        btn.type = 'button';
+        btn.addEventListener('click', function () {
+          btn.disabled = true; btn.textContent = '讀取中…';
+          api('?id=' + encodeURIComponent(r.logId)).then(function (rec) { btn.remove(); if (rec && !rec.error) render(sub, rec); else sub.textContent = '這筆健檢紀錄已經過期了'; })
+            .catch(function (e) { btn.remove(); fail(e); });
+        });
+        box.appendChild(btn); box.appendChild(sub);
+      }
+      return;
+    }
     if (r.kind === 'contact') {
       [['名字', r.name], ['Email', r.email], ['公司／品牌', r.company], ['想談', r.service], ['時程', r.timeline], ['語言', r.lang === 'en' ? '英文' : '中文']].forEach(function (x) {
         if (!x[1]) return;

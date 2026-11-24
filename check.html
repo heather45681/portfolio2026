@@ -131,6 +131,30 @@ html[lang="en"] .good q{quotes:'\201C' '\201D'}
   .finds .lab,.tells .lab{display:block;margin:0 0 2px;color:var(--accent)}
 }
 .finds .lab{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--mute);margin-right:8px}
+.fb{margin:0;padding:20px 24px;border:1px solid var(--line);border-radius:14px;background:var(--paper);display:flex;flex-direction:column;gap:14px}
+.fb-q{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+.fb-t{margin:0;font-size:15px;font-weight:500;color:var(--ink)}
+.fb-r{display:flex;gap:8px}
+.fb-b{min-height:40px;padding:0 16px;border:1px solid var(--line);border-radius:999px;background:#fff;font:inherit;font-size:14px;color:var(--ink2);cursor:pointer}
+.fb-b:hover{border-color:var(--ink2)}
+.fb-b[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.fb-b:disabled{cursor:default}
+.fb-more{display:flex;flex-direction:column;gap:10px}
+.fb-more[hidden]{display:none}
+.fb-tags{margin:0;padding:0;border:0;display:flex;flex-wrap:wrap;gap:8px}
+.fb-tags[hidden]{display:none}
+.fb-tags legend{padding:0;margin:0 0 8px;font-size:13px;color:var(--mute)}
+.fb-tags label{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 12px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:13px;color:var(--ink2);cursor:pointer}
+.fb-tags input{accent-color:var(--accent);margin:0}
+.fb-tags label:has(input:checked){border-color:var(--accent);color:var(--accent-d);background:rgba(168,72,47,.06)}
+.fb-l{font-size:13px;color:var(--mute)}
+.fb textarea{width:100%;box-sizing:border-box;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;font:inherit;font-size:15px;line-height:1.6;resize:vertical}
+.fb textarea:focus,.fb-b:focus-visible,.fb-send:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.fb-a{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.fb-send{min-height:40px;padding:0 20px;border:0;border-radius:999px;background:var(--accent);color:#fff;font:inherit;font-size:14px;cursor:pointer}
+.fb-send:disabled{opacity:.6;cursor:default}
+.fb-err{font-size:13px;color:var(--bad)}
+.fb-done{margin:0;font-size:14px;color:var(--good)}
 .close{background:var(--ink);color:var(--bg);border-radius:12px;padding:32px;display:flex;flex-direction:column;gap:16px}
 .close p{margin:0;font-size:16px;color:#D6D3CA}
 .close .btns{display:flex;flex-wrap:wrap;gap:12px}
@@ -208,6 +232,23 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
   <ol class="finds" id="finds"></ol>
   <div class="tells" id="tells" hidden><h3 id="tellsT"></h3><p class="sub" id="tellsS"></p><ul id="tellsL"></ul></div>
   <div class="radar" id="radar" hidden><h3 id="radarT"></h3><p class="sub" id="radarS"></p><ul id="radarL"></ul></div>
+  <form class="fb" id="fb" hidden novalidate data-clarity-mask="true">
+    <div class="fb-q">
+      <p class="fb-t" id="fbQ" data-t="fbQ"></p>
+      <div class="fb-r" role="group" aria-labelledby="fbQ">
+        <button type="button" class="fb-b" data-r="up" aria-pressed="false"><span aria-hidden="true">👍</span> <span data-t="fbUp"></span></button>
+        <button type="button" class="fb-b" data-r="down" aria-pressed="false"><span aria-hidden="true">👎</span> <span data-t="fbDown"></span></button>
+      </div>
+    </div>
+    <div class="fb-more" id="fbMore" hidden>
+      <fieldset class="fb-tags" id="fbTags" hidden><legend data-t="fbTagsL"></legend></fieldset>
+      <label class="fb-l" for="fbC" data-t="fbCL"></label>
+      <textarea id="fbC" rows="3" maxlength="1000"></textarea>
+      <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+      <div class="fb-a"><button type="submit" class="fb-send" id="fbSend" data-t="fbSend"></button><span class="fb-err" id="fbErr" role="alert" hidden></span></div>
+    </div>
+    <p class="fb-done" id="fbDone" role="status" hidden></p>
+  </form>
   <div class="close">
     <p class="eyebrow" style="color:var(--accent-l)" data-t="closeEyebrow"></p>
     <p id="closing"></p>
@@ -238,6 +279,9 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       resEyebrow: '健檢結果', psTitle: 'Google PageSpeed 分數（手機版）', noScores: '這次沒拿到 Google 的分數（Google 那邊忙碌或逾時），下面的建議不受影響。',
       perf: '效能', a11y: '無障礙', bp: '最佳做法', seo: 'SEO', lcp: '最大內容繪製',
       why: '為什麼', fix: '建議', cur: '現況', exp: '預期', sev: { high: '嚴重度 高', medium: '嚴重度 中', low: '嚴重度 低' }, journeyT: '新訪客路徑', tellsNone: '這次沒有發現模板網站常見的破綻：icon、按鈕圓角、連結和範例文字都沒有明顯問題。', tellsT: '模板與快速生成網站的常見破綻', tellsS: '用模板或 AI 工具做的網站很方便，但這幾個地方最容易露餡。', evid: '線索', goodT: '做得好的地方', visNote: '這個網頁的內容是 JavaScript 載入後才畫出來的，這次是看瀏覽器畫好的畫面截圖來分析，連結網址、圖片 alt 這類看不到的細節不在範圍內',radarT: '細節雷達', radarS: '不影響使用，但我就是會注意到的小地方。',
+      fbQ: '這份健檢準嗎？', fbUp: '準', fbDown: '不太準', fbTagsL: '哪裡不準？（可複選）', fbCL: '想補充什麼？哪一條不對、漏了什麼都可以寫（選填）', fbSend: '送出回饋',
+      fbTags: { false_alarm: '誤判：說有問題其實沒有', missed: '漏掉明顯的問題', vague: '建議不夠具體', wrong_fact: '描述跟網站不符', tone: '語氣不對', other: '其他' },
+      fbDone: '謝謝你，我會拿這些回饋來調整健檢。', fbErr: '沒送出去，請稍後再試', fbQuota: '今天的回饋次數已達上限，謝謝你',
       closeEyebrow: '想看得更完整？', ctaContact: '聊聊完整健檢 →', ctaSvc: '看服務項目',
       disclaimer: '這份結果由 AI 根據公開頁面內容自動產生，僅供參考，不代表完整的專業評估。',
       cached: '這個網址 24 小時內檢查過，以下是當時的結果。', checked: '檢查時間：',
@@ -253,6 +297,9 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       resEyebrow: 'RESULTS', psTitle: 'Google PageSpeed scores (mobile)', noScores: "Google's scores didn't come back this time (busy or timed out). The suggestions below aren't affected.",
       perf: 'Performance', a11y: 'Accessibility', bp: 'Best practices', seo: 'SEO', lcp: 'Largest paint',
       why: 'WHY', fix: 'FIX', cur: 'NOW', exp: 'EXPECTED', sev: { high: 'HIGH', medium: 'MEDIUM', low: 'LOW' }, goodT: 'WHAT WORKS', visNote: 'This page draws its content with JavaScript, so this check is based on a screenshot of the page as a browser drew it. Details a screenshot can\'t show, such as link targets and image alt text, aren\'t covered.',journeyT: 'FIRST-VISIT PATH', tellsNone: 'No common template slips found this time: icons, button corners, links and sample text all look fine.', tellsT: 'Common slips in template-built sites', tellsS: 'Templates and AI builders are fast, but these are the spots that usually give them away.', evid: 'CLUE', radarT: 'Detail radar', radarS: "Small things that don't break anything. I just can't not notice them.",
+      fbQ: 'Was this check accurate?', fbUp: 'Yes', fbDown: 'Not really', fbTagsL: 'What was off? (pick any)', fbCL: 'Anything to add? Which point was wrong, or what it missed (optional)', fbSend: 'Send feedback',
+      fbTags: { false_alarm: 'Flagged something that isn\'t a problem', missed: 'Missed an obvious problem', vague: 'Suggestions too vague', wrong_fact: 'Described the site wrongly', tone: 'Tone felt off', other: 'Other' },
+      fbDone: "Thanks. I'll use this to tune the check.", fbErr: "That didn't go through. Please try again later.", fbQuota: "You've hit today's feedback limit. Thank you!",
       closeEyebrow: 'WANT THE FULL PICTURE?', ctaContact: 'Talk about a full review →', ctaSvc: 'See services',
       disclaimer: 'These results are generated automatically by AI from the public page. They are a starting point, not a full professional review.',
       cached: 'This URL was checked in the last 24 hours; here is that result.', checked: 'Checked: ',
@@ -419,8 +466,52 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     $('radarT').textContent = t.radarT; $('radarS').textContent = t.radarS;
     np.forEach(function (n) { var li = el('li'); var q = el('q', '', unq(n.quote)); if (L === 'en') q.style.quotes = '"\u201C" "\u201D"'; li.appendChild(q); li.appendChild(el('p', '', n.note)); rl.appendChild(li); });
     $('closing').textContent = d.advice.closing;
+    fbReset(d.logId);
     $('ctaContact').href = 'services.html?lang=' + L + '&topic=check&site=' + encodeURIComponent(d.url) + (L === 'en' ? '#contact-en' : '#contact');
   }
+
+  // ---- feedback on a result ----
+  var fbLog = '', fbRating = '';
+  function fbReset(logId) {
+    var t = T[L];
+    fbLog = logId || ''; fbRating = '';
+    $('fb').hidden = !fbLog; // results from before feedback existed have no id to attach to
+    $('fbQ').textContent = t.fbQ;
+    $('fbMore').hidden = true; $('fbDone').hidden = true; $('fbErr').hidden = true;
+    $('fbC').value = ''; $('fbSend').disabled = false;
+    $('fb').querySelectorAll('.fb-b').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); b.disabled = false; });
+    var fs = $('fbTags'); fs.querySelectorAll('label').forEach(function (l) { l.remove(); });
+    Object.keys(t.fbTags).forEach(function (k) {
+      var lab = el('label'), cb = el('input'); cb.type = 'checkbox'; cb.value = k;
+      lab.appendChild(cb); lab.appendChild(document.createTextNode(t.fbTags[k])); fs.appendChild(lab);
+    });
+  }
+  $('fb').querySelectorAll('.fb-b').forEach(function (b) {
+    b.addEventListener('click', function () {
+      fbRating = b.getAttribute('data-r');
+      $('fb').querySelectorAll('.fb-b').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      $('fbTags').hidden = fbRating !== 'down';
+      $('fbMore').hidden = false;
+    });
+  });
+  $('fb').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    if (!fbLog || !fbRating) return;
+    var t = T[L];
+    var tags = [].map.call($('fbTags').querySelectorAll('input:checked'), function (c) { return c.value; });
+    $('fbSend').disabled = true; $('fbErr').hidden = true;
+    fetch('/api/feedback', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({
+      logId: fbLog, rating: fbRating, tags: fbRating === 'down' ? tags : [], comment: $('fbC').value, lang: L,
+      website: $('fb').querySelector('input[name=website]').value,
+    }) }).then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); }).then(function (x) {
+      if (!x.ok) throw new Error(x.d && x.d.error === 'quota' ? 'quota' : 'fail');
+      $('fbMore').hidden = true; $('fbDone').textContent = t.fbDone; $('fbDone').hidden = false;
+      $('fb').querySelectorAll('.fb-b').forEach(function (b) { b.disabled = true; });
+      track('feedback_sent', 'feedback', fbRating);
+    }).catch(function (e) {
+      $('fbErr').textContent = e.message === 'quota' ? t.fbQuota : t.fbErr; $('fbErr').hidden = false; $('fbSend').disabled = false;
+    });
+  });
 
   apply();
 })();
