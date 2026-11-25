@@ -36,9 +36,13 @@ ul.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
 .detail ol,.detail ul{margin:4px 0;padding-left:20px}
 .detail li{margin:6px 0}
 .lab{font-size:12px;color:var(--mute)}
-.detail p:has(> .lab){display:grid;grid-template-columns:64px minmax(0,1fr);column-gap:8px;align-items:baseline}
+.detail p:has(> .lab){display:grid;grid-template-columns:84px minmax(0,1fr);column-gap:8px;align-items:baseline}
 .scores{display:flex;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--ink2)}
 .more{margin-top:16px}
+.rowwrap{display:flex;align-items:center;gap:8px}
+.rowwrap .row{flex:1 1 auto;min-width:0}
+.go{flex:none;font-size:13px;color:var(--accent);text-decoration:none;padding:6px 10px;border:1px solid var(--line);border-radius:99px;white-space:nowrap}
+.go:hover{border-color:var(--accent)}
 .pin{margin:0 0 24px;padding:4px 18px 8px;border:1px solid var(--accent);border-radius:12px;background:var(--paper)}
 .pin-t{margin:14px 0 0;font-size:14px;color:var(--accent)}
 .tabs{display:flex;gap:6px;margin:0 0 16px}
@@ -114,6 +118,9 @@ ul.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
     var t = el('time', '', it.at ? new Date(it.at).toLocaleString('zh-TW', { hour12: false }) : '');
     b.appendChild(t); b.appendChild(el('span', 'u', it.url || '')); b.appendChild(el('span', 'l', it.lang === 'en' ? '英文' : '中文'));
     var box = el('div', 'detail'); box.hidden = true;
+    var head = el('div', 'rowwrap'); head.appendChild(b);
+    var m = /https?:\/\/\S+/.exec(it.url || '');
+    if (m && type !== 'msg') { var go = link(m[0], '開啟 ↗'); go.className = 'go'; go.setAttribute('aria-label', '在新分頁開啟 ' + m[0]); head.appendChild(go); }
     b.addEventListener('click', function () {
       var open = box.hidden;
       box.hidden = !open; b.setAttribute('aria-expanded', String(open));
@@ -122,14 +129,27 @@ ul.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
         api('?id=' + encodeURIComponent(it.id)).then(function (r) { box.dataset.done = '1'; render(box, r); }).catch(function (e) { box.textContent = ''; fail(e); });
       }
     });
-    li.appendChild(b); li.appendChild(box); $('list').appendChild(li);
+    li.appendChild(head); li.appendChild(box); $('list').appendChild(li);
+  }
+
+  // only real web addresses become links; opened in a new tab without handing the log page to the site
+  function link(url, label) {
+    var a = el('a', '', label || url);
+    if (/^https?:\/\//i.test(url)) { a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+    return a;
+  }
+  function urlLine(box, label, url) {
+    if (!url) return;
+    var p = el('p'); p.appendChild(el('span', 'lab', label)); p.appendChild(link(url)); box.appendChild(p);
   }
 
   function unq(v) { return String(v || '').trim().replace(/^[「『"“'‘]+/, '').replace(/[」』"”'’]+$/, '').trim(); }
   function render(box, r) {
     box.textContent = '';
     if (r.kind === 'feedback') {
-      [['評價', r.rating === 'up' ? '👍 準' : '👎 不太準'], ['網址', r.url], ['哪裡不準', (r.tags || []).join('、')], ['Prompt 版本', [r.prompt, r.model].filter(Boolean).join('｜')], ['語言', r.lang === 'en' ? '英文' : '中文']].forEach(function (x) {
+      var p0 = el('p'); p0.appendChild(el('span', 'lab', '評價')); p0.appendChild(document.createTextNode(r.rating === 'up' ? '👍 準' : '👎 不太準')); box.appendChild(p0);
+      urlLine(box, '網址', r.url);
+      [['哪裡不準', (r.tags || []).join('、')], ['Prompt 版本', [r.prompt, r.model].filter(Boolean).join('｜')], ['語言', r.lang === 'en' ? '英文' : '中文']].forEach(function (x) {
         if (!x[1]) return;
         var p = el('p'); p.appendChild(el('span', 'lab', x[0])); p.appendChild(document.createTextNode(x[1])); box.appendChild(p);
       });
@@ -157,6 +177,7 @@ ul.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
       return;
     }
     var a = r.advice || {};
+    urlLine(box, '網址', r.url);
     var s = r.scores;
     var sc = el('div', 'scores');
     if (s) [['效能', s.performance], ['無障礙', s.accessibility], ['最佳做法', s.bestPractices], ['SEO', s.seo], ['LCP', s.lcp]].forEach(function (x) { if (x[1] !== null && x[1] !== undefined) sc.appendChild(el('span', '', x[0] + ' ' + x[1])); });
