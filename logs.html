@@ -38,12 +38,7 @@ ul.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
 .lab{font-size:12px;color:var(--mute)}
 .detail p:has(> .lab){display:grid;grid-template-columns:84px minmax(0,1fr);column-gap:8px;align-items:baseline}
 .scores{display:flex;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--ink2)}
-.more{margin-top:16px}
-.rowwrap{display:flex;align-items:center;gap:8px}
-.rowwrap .row{flex:1 1 auto;min-width:0}
-.go{flex:none;font-size:13px;color:var(--accent);text-decoration:none;padding:6px 10px;border:1px solid var(--line);border-radius:99px;white-space:nowrap}
-.go:hover{border-color:var(--accent)}
-.pin{margin:0 0 24px;padding:4px 18px 8px;border:1px solid var(--accent);border-radius:12px;background:var(--paper)}
+.more{margin-top:16px}.pin{margin:0 0 24px;padding:4px 18px 8px;border:1px solid var(--accent);border-radius:12px;background:var(--paper)}
 .pin-t{margin:14px 0 0;font-size:14px;color:var(--accent)}
 .tabs{display:flex;gap:6px;margin:0 0 16px}
 .tabs button{background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:6px 16px}
@@ -118,9 +113,6 @@ ul.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
     var t = el('time', '', it.at ? new Date(it.at).toLocaleString('zh-TW', { hour12: false }) : '');
     b.appendChild(t); b.appendChild(el('span', 'u', it.url || '')); b.appendChild(el('span', 'l', it.lang === 'en' ? '英文' : '中文'));
     var box = el('div', 'detail'); box.hidden = true;
-    var head = el('div', 'rowwrap'); head.appendChild(b);
-    var m = /https?:\/\/\S+/.exec(it.url || '');
-    if (m && type !== 'msg') { var go = link(m[0], '開啟 ↗'); go.className = 'go'; go.setAttribute('aria-label', '在新分頁開啟 ' + m[0]); head.appendChild(go); }
     b.addEventListener('click', function () {
       var open = box.hidden;
       box.hidden = !open; b.setAttribute('aria-expanded', String(open));
@@ -129,7 +121,7 @@ ul.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
         api('?id=' + encodeURIComponent(it.id)).then(function (r) { box.dataset.done = '1'; render(box, r); }).catch(function (e) { box.textContent = ''; fail(e); });
       }
     });
-    li.appendChild(head); li.appendChild(box); $('list').appendChild(li);
+    li.appendChild(b); li.appendChild(box); $('list').appendChild(li);
   }
 
   // only real web addresses become links; opened in a new tab without handing the log page to the site
