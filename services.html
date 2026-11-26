@@ -356,7 +356,6 @@ a:hover .ar-d{transform:translateY(3px)}
 @media (min-width:761px){.tier .tier-chips{min-height:62px;align-content:flex-start}}
 .tier .tier-list{margin:22px 0 28px;padding:20px 0 0;border-top:1px solid var(--line)}
 .tier .tier-list li{margin:0}
-.tier-feat .tier-list{border-top-color:#384044 !important}
 .tiers{align-items:stretch}
 .tier{position:relative;gap:0;padding:32px 30px 0;border-radius:20px;background:var(--paper);transition:transform .25s ease,box-shadow .25s ease}
 .tier:hover{transform:translateY(-3px);box-shadow:0 24px 44px -32px rgba(31,36,39,.5)}
@@ -379,15 +378,9 @@ a:hover .ar-d{transform:translateY(3px)}
 .tier-foot>div+div{border-left:1px solid var(--line)}
 .tier-foot dt{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--mute)}
 .tier-foot dd{margin:4px 0 0;font-size:15px;font-weight:500;color:var(--ink)}
-.tier-feat{background:var(--ink);border-color:var(--ink);color:var(--dtext)}
-.tier-feat h4,.tier-feat .price,.tier-feat .tier-foot dd{color:#F7F4EE}
-.tier-feat .tier-lv{color:var(--accent-l)}
-.tier-feat .tier-no,.tier-feat .price .cur,.tier-feat .price .from,.tier-feat .tier-foot dt{color:#9AA19D}
-.tier-feat .tier-chips li{background:#2C3336;color:var(--dtext)}
-.tier-feat .tier-list{border-top-color:#384044;color:var(--dtext)}
-.tier-feat .tier-list li::before{background-color:rgba(229,154,127,.18);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.2 2.2 4.8-4.9' fill='none' stroke='%23E59A7F' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
-.tier-feat .tier-foot{border-top-color:#384044}
-.tier-feat .tier-foot>div+div{border-left-color:#384044}
+.tier-feat{border:1.5px solid var(--accent);box-shadow:0 26px 48px -34px rgba(168,72,47,.55)}
+.tier-badge{position:absolute;top:-13px;right:28px;display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 14px;border-radius:999px;background:var(--accent);color:var(--paper);font-size:12.5px;font-weight:500;letter-spacing:.06em}
+.tier-badge::before{content:'★';font-size:11px}
 .addons{border:0;background:transparent;padding:0;gap:14px}
 .addons-h{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
 .addons-h .lab,.addons-h .addons-note{margin:0}
@@ -542,6 +535,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       <dl class="tier-foot"><div><dt>交付</dt><dd>3 個工作天</dd></div><div><dt>修改</dt><dd>1 次</dd></div></dl>
     </article>
     <article class="tier tier-feat">
+      <span class="tier-badge">推薦</span>
       <p class="tier-lv"><span class="tier-no">02</span>標準</p>
       <h4>註冊登入完整實測</h4>
       <p class="price"><span class="cur">NT$</span>5,800<span class="from">起</span></p>
@@ -839,6 +833,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       <dl class="tier-foot"><div><dt>Delivery</dt><dd>3 working days</dd></div><div><dt>Revisions</dt><dd>1</dd></div></dl>
     </article>
     <article class="tier tier-feat">
+      <span class="tier-badge">Recommended</span>
       <p class="tier-lv"><span class="tier-no">02</span>STANDARD</p>
       <h4>Full sign-up &amp; login test</h4>
       <p class="price"><span class="cur">NT$</span>5,800</p>
