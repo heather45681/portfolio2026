@@ -350,6 +350,62 @@ a:hover .ar-d{transform:translateY(3px)}
 .btn-s:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 @media (max-width:760px){.sample{grid-template-columns:1fr;padding:26px 22px;justify-items:center}.sample-img{max-width:220px}.btn-s{align-self:stretch;justify-content:center}}
 @media (prefers-reduced-motion: reduce){.sample-img{transition:none;transform:none}.sample-img:hover{transform:none}}
+/* pricing v2 */
+.tier .tier-chips{margin:18px 0 0;padding:0;border-top:0}
+.tier .tier-chips li{margin:0}
+@media (min-width:761px){.tier .tier-chips{min-height:62px;align-content:flex-start}}
+.tier .tier-list{margin:22px 0 28px;padding:20px 0 0;border-top:1px solid var(--line)}
+.tier .tier-list li{margin:0}
+.tier-feat .tier-list{border-top-color:#384044 !important}
+.tiers{align-items:stretch}
+.tier{position:relative;gap:0;padding:32px 30px 0;border-radius:20px;background:var(--paper);transition:transform .25s ease,box-shadow .25s ease}
+.tier:hover{transform:translateY(-3px);box-shadow:0 24px 44px -32px rgba(31,36,39,.5)}
+.tier-lv{display:flex;align-items:center;gap:10px}
+.tier-no{font-family:'Cormorant Garamond',serif;font-size:15px;letter-spacing:0;color:var(--mute)}
+.tier h4{margin-top:10px}
+.price{display:flex;align-items:baseline;gap:4px;margin:18px 0 0;font-size:52px;letter-spacing:-.01em}
+.price .cur{font-family:'DM Mono',monospace;font-size:14px;letter-spacing:.04em;color:var(--mute);align-self:flex-start;margin-top:8px}
+.price .from{font-family:'Noto Sans TC',sans-serif;font-size:14px;color:var(--mute);margin-left:4px}
+.tier-chips{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 0;padding:0}
+.tier-chips li{font-size:12.5px;line-height:1;padding:7px 11px;border-radius:999px;background:var(--bg);color:var(--ink2)}
+.tier-list{list-style:none;margin:22px 0 0;padding:20px 0 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px;font-size:14px;color:var(--ink2)}
+.tier-list li{position:relative;padding-left:26px;line-height:1.6}
+.tier-list li::before{content:'';position:absolute;left:0;top:3px;width:16px;height:16px;border-radius:50%;background:rgba(168,72,47,.12) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.2 2.2 4.8-4.9' fill='none' stroke='%23A8482F' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
+.tier-list li.inc{color:var(--ink);font-weight:500}
+.tier-list li.inc::before{background:var(--ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 4.5v7M4.5 8h7' fill='none' stroke='%23F7F4EE' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E") center/16px no-repeat}
+.tier-foot{display:grid;grid-template-columns:1fr 1fr;margin:auto -30px 0;padding:0;border-top:1px solid var(--line)}
+.tier-list{margin-bottom:28px}
+.tier-foot>div{padding:16px 30px 18px}
+.tier-foot>div+div{border-left:1px solid var(--line)}
+.tier-foot dt{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--mute)}
+.tier-foot dd{margin:4px 0 0;font-size:15px;font-weight:500;color:var(--ink)}
+.tier-feat{background:var(--ink);border-color:var(--ink);color:var(--dtext)}
+.tier-feat h4,.tier-feat .price,.tier-feat .tier-foot dd{color:#F7F4EE}
+.tier-feat .tier-lv{color:var(--accent-l)}
+.tier-feat .tier-no,.tier-feat .price .cur,.tier-feat .price .from,.tier-feat .tier-foot dt{color:#9AA19D}
+.tier-feat .tier-chips li{background:#2C3336;color:var(--dtext)}
+.tier-feat .tier-list{border-top-color:#384044;color:var(--dtext)}
+.tier-feat .tier-list li::before{background-color:rgba(229,154,127,.18);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.2 2.2 4.8-4.9' fill='none' stroke='%23E59A7F' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.tier-feat .tier-foot{border-top-color:#384044}
+.tier-feat .tier-foot>div+div{border-left-color:#384044}
+.addons{border:0;background:transparent;padding:0;gap:14px}
+.addons-h{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.addons-h .lab,.addons-h .addons-note{margin:0}
+.addons ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px}
+.addons li{display:flex;flex-direction:row;justify-content:space-between;align-items:center;gap:16px;padding:18px 22px;border:1px solid var(--line);border-bottom:1px solid var(--line);border-radius:14px;background:var(--paper)}
+.addons li:last-child{border-bottom:1px solid var(--line)}
+.ad-name{display:flex;flex-direction:column;gap:2px;font-size:14px;color:var(--ink)}
+.ad-note{font-size:12px;color:var(--mute)}
+.addons b{font-size:14px}
+@media (max-width:760px){
+  .tier{padding:26px 22px 0}
+  .tier-foot{margin:auto -22px 0}
+  .tier-foot>div{padding:14px 22px 16px}
+  .price{font-size:46px}
+  .addons{padding:0}
+  .addons li{flex-direction:row;padding:16px 18px}
+}
+@media (prefers-reduced-motion: reduce){.tier{transition:none}.tier:hover{transform:none}}
 /* language */
 .lang{display:inline-flex;border:1px solid var(--ink);border-radius:999px;overflow:hidden}
 .lang button{border:0;background:transparent;min-height:32px;padding:4px 14px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.08em;color:var(--ink);cursor:pointer}
@@ -478,50 +534,34 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
   </div>
   <div class="tiers">
     <article class="tier">
-      <p class="tier-lv">入門</p>
+      <p class="tier-lv"><span class="tier-no">01</span>入門</p>
       <h4>單一流程實測</h4>
-      <p class="price">NT$2,500</p>
-      <p class="tier-scope">1 個流程、8 個例外情境</p>
-      <ul>
-        <li>通過／失敗表與實機截圖</li>
-        <li>依影響排序的修正清單</li>
-      </ul>
-      <p class="tier-meta">3 個工作天交付・含 1 次修改</p>
+      <p class="price"><span class="cur">NT$</span>2,500<span class="from">起</span></p>
+      <ul class="tier-chips"><li>1 個流程</li><li>8 個例外情境</li></ul>
+      <ul class="tier-list"><li>通過／失敗表與實機截圖</li><li>依影響排序的修正清單</li></ul>
+      <dl class="tier-foot"><div><dt>交付</dt><dd>3 個工作天</dd></div><div><dt>修改</dt><dd>1 次</dd></div></dl>
     </article>
-    <article class="tier">
-      <p class="tier-lv">標準</p>
+    <article class="tier tier-feat">
+      <p class="tier-lv"><span class="tier-no">02</span>標準</p>
       <h4>註冊登入完整實測</h4>
-      <p class="price">NT$5,800</p>
-      <p class="tier-scope">註冊、登入、找回帳號，共 15 個情境，手機＋桌機</p>
-      <ul>
-        <li>通過／失敗表與實機截圖</li>
-        <li>依影響排序的修正清單</li>
-        <li>建議修正順序</li>
-      </ul>
-      <p class="tier-meta">5 個工作天交付・含 2 次修改</p>
+      <p class="price"><span class="cur">NT$</span>5,800<span class="from">起</span></p>
+      <ul class="tier-chips"><li>註冊・登入・找回帳號</li><li>15 個情境</li><li>手機＋桌機</li></ul>
+      <ul class="tier-list"><li>通過／失敗表與實機截圖</li><li>依影響排序的修正清單</li><li>建議修正順序</li></ul>
+      <dl class="tier-foot"><div><dt>交付</dt><dd>5 個工作天</dd></div><div><dt>修改</dt><dd>2 次</dd></div></dl>
     </article>
     <article class="tier">
-      <p class="tier-lv">進階</p>
+      <p class="tier-lv"><span class="tier-no">03</span>進階</p>
       <h4>實測＋修正稿＋複驗</h4>
-      <p class="price">NT$12,800</p>
-      <p class="tier-scope">標準方案全部內容，再加上：</p>
-      <ul>
-        <li>前 3 大問題的 Figma 修正稿</li>
-        <li>工程修改完成後複驗一次（交付後 30 天內）</li>
-      </ul>
-      <p class="tier-meta">7 個工作天交付・含 2 次修改</p>
+      <p class="price"><span class="cur">NT$</span>12,800<span class="from">起</span></p>
+      <ul class="tier-chips"><li>15 個情境</li><li>手機＋桌機</li><li>30 天內複驗</li></ul>
+      <ul class="tier-list"><li class="inc">標準方案全部內容</li><li>前 3 大問題的 Figma 修正稿</li><li>工程修改完成後複驗一次（交付後 30 天內）</li></ul>
+      <dl class="tier-foot"><div><dt>交付</dt><dd>7 個工作天</dd></div><div><dt>修改</dt><dd>2 次</dd></div></dl>
     </article>
   </div>
   <div class="addons">
-    <p class="lab">加購</p>
-    <ul>
-      <li><span>多測 5 個情境</span><b>NT$1,200</b></li>
-      <li><span>額外一次修改</span><b>NT$800</b></li>
-      <li><span>修正稿加做另一種尺寸（手機／桌機，僅限進階方案）</span><b>NT$3,800</b></li>
-    </ul>
-    <p class="addons-note">以上為起步價，之後會依案量調整。</p>
+    <div class="addons-h"><p class="lab">加購</p><p class="addons-note">以上為起步價，之後會依案量調整。</p></div>
+    <ul><li><span class="ad-name">多測 5 個情境</span><b>NT$1,200</b></li><li><span class="ad-name">額外一次修改</span><b>NT$800</b></li><li><span class="ad-name">修正稿加做另一種尺寸<span class="ad-note">手機／桌機，僅限進階方案</span></span><b>NT$3,800</b></li></ul>
   </div>
-
   <div class="sample">
     <a class="sample-img" href="img/sample-test-report-zh.pdf" target="_blank" rel="noopener" aria-label="打開範例實測報告（PDF）">
       <img src="img/sample-test-report-zh.jpg" alt="範例實測報告第 1 頁：嚴重度統計與依影響排序的修正清單" loading="lazy" width="640" height="905">
@@ -791,50 +831,34 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
   </div>
   <div class="tiers">
     <article class="tier">
-      <p class="tier-lv">STARTER</p>
+      <p class="tier-lv"><span class="tier-no">01</span>STARTER</p>
       <h4>One flow, tested</h4>
-      <p class="price">NT$2,500</p>
-      <p class="tier-scope">1 flow, 8 edge cases</p>
-      <ul>
-        <li>Pass/fail table with real-device screenshots</li>
-        <li>Fix list ranked by impact</li>
-      </ul>
-      <p class="tier-meta">Delivered in 3 working days · 1 revision</p>
+      <p class="price"><span class="cur">NT$</span>2,500</p>
+      <ul class="tier-chips"><li>1 flow</li><li>8 edge cases</li></ul>
+      <ul class="tier-list"><li>Pass/fail table with real-device screenshots</li><li>Fix list ranked by impact</li></ul>
+      <dl class="tier-foot"><div><dt>Delivery</dt><dd>3 working days</dd></div><div><dt>Revisions</dt><dd>1</dd></div></dl>
     </article>
-    <article class="tier">
-      <p class="tier-lv">STANDARD</p>
+    <article class="tier tier-feat">
+      <p class="tier-lv"><span class="tier-no">02</span>STANDARD</p>
       <h4>Full sign-up &amp; login test</h4>
-      <p class="price">NT$5,800</p>
-      <p class="tier-scope">Sign-up, login and account recovery: 15 cases on phone and desktop</p>
-      <ul>
-        <li>Pass/fail table with real-device screenshots</li>
-        <li>Fix list ranked by impact</li>
-        <li>Suggested order of fixes</li>
-      </ul>
-      <p class="tier-meta">Delivered in 5 working days · 2 revisions</p>
+      <p class="price"><span class="cur">NT$</span>5,800</p>
+      <ul class="tier-chips"><li>Sign-up · login · recovery</li><li>15 cases</li><li>Phone + desktop</li></ul>
+      <ul class="tier-list"><li>Pass/fail table with real-device screenshots</li><li>Fix list ranked by impact</li><li>Suggested order of fixes</li></ul>
+      <dl class="tier-foot"><div><dt>Delivery</dt><dd>5 working days</dd></div><div><dt>Revisions</dt><dd>2</dd></div></dl>
     </article>
     <article class="tier">
-      <p class="tier-lv">ADVANCED</p>
+      <p class="tier-lv"><span class="tier-no">03</span>ADVANCED</p>
       <h4>Test, fix designs, retest</h4>
-      <p class="price">NT$12,800</p>
-      <p class="tier-scope">Everything in Standard, plus:</p>
-      <ul>
-        <li>Figma fix designs for the top 3 issues</li>
-        <li>One retest after engineering fixes (within 30 days of delivery)</li>
-      </ul>
-      <p class="tier-meta">Delivered in 7 working days · 2 revisions</p>
+      <p class="price"><span class="cur">NT$</span>12,800</p>
+      <ul class="tier-chips"><li>15 cases</li><li>Phone + desktop</li><li>Retest within 30 days</li></ul>
+      <ul class="tier-list"><li class="inc">Everything in Standard</li><li>Figma fix designs for the top 3 issues</li><li>One retest after engineering fixes (within 30 days of delivery)</li></ul>
+      <dl class="tier-foot"><div><dt>Delivery</dt><dd>7 working days</dd></div><div><dt>Revisions</dt><dd>2</dd></div></dl>
     </article>
   </div>
   <div class="addons">
-    <p class="lab">ADD-ONS</p>
-    <ul>
-      <li><span>5 more test cases</span><b>NT$1,200</b></li>
-      <li><span>One extra revision</span><b>NT$800</b></li>
-      <li><span>Fix designs in a second size (phone or desktop, Advanced only)</span><b>NT$3,800</b></li>
-    </ul>
-    <p class="addons-note">These are starting prices and will change as bookings grow.</p>
+    <div class="addons-h"><p class="lab">ADD-ONS</p><p class="addons-note">These are starting prices and will change as bookings grow.</p></div>
+    <ul><li><span class="ad-name">5 more test cases</span><b>NT$1,200</b></li><li><span class="ad-name">One extra revision</span><b>NT$800</b></li><li><span class="ad-name">Fix designs in a second size<span class="ad-note">Phone or desktop, Advanced only</span></span><b>NT$3,800</b></li></ul>
   </div>
-
   <div class="sample">
     <a class="sample-img" href="img/sample-test-report-en.pdf" target="_blank" rel="noopener" aria-label="Open the sample test report (PDF)">
       <img src="img/sample-test-report-en.jpg" alt="Page 1 of the sample test report: severity counts and a fix list ranked by impact" loading="lazy" width="640" height="905">
