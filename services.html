@@ -338,6 +338,18 @@ a:hover .ar-d{transform:translateY(3px)}
   .addons li{flex-direction:column;gap:2px}
   .svc-row{grid-template-columns:1fr}
 }
+/* sample report */
+.sample{display:grid;grid-template-columns:minmax(0,240px) 1fr;gap:20px 48px;align-items:center;background:#DCE1D9;border-radius:20px;padding:36px 44px}
+.sample-img{display:block;border-radius:6px;overflow:hidden;box-shadow:0 22px 40px -24px rgba(31,36,39,.6);transform:rotate(-2deg);transition:transform .3s ease}
+.sample-img:hover{transform:rotate(0deg) scale(1.02)}
+.sample-img img{display:block;width:100%;height:auto}
+.sample-txt{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.sample .lab{margin:0;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.12em;color:var(--accent)}
+.btn-s{display:inline-flex;align-items:center;gap:8px;margin-top:6px;height:46px;padding:0 24px;border-radius:999px;background:var(--accent);color:var(--paper);text-decoration:none;font-size:14px;font-weight:500;transition:background .2s}
+.btn-s:hover{background:var(--ink);color:var(--paper)}
+.btn-s:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+@media (max-width:760px){.sample{grid-template-columns:1fr;padding:26px 22px;justify-items:center}.sample-img{max-width:220px}.btn-s{align-self:stretch;justify-content:center}}
+@media (prefers-reduced-motion: reduce){.sample-img{transition:none;transform:none}.sample-img:hover{transform:none}}
 /* language */
 .lang{display:inline-flex;border:1px solid var(--ink);border-radius:999px;overflow:hidden}
 .lang button{border:0;background:transparent;min-height:32px;padding:4px 14px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.08em;color:var(--ink);cursor:pointer}
@@ -508,6 +520,18 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       <li><span>修正稿加做另一種尺寸（手機／桌機，僅限進階方案）</span><b>NT$3,800</b></li>
     </ul>
     <p class="addons-note">以上為起步價，之後會依案量調整。</p>
+  </div>
+
+  <div class="sample">
+    <a class="sample-img" href="img/sample-test-report-zh.pdf" target="_blank" rel="noopener" aria-label="打開範例實測報告（PDF）">
+      <img src="img/sample-test-report-zh.jpg" alt="範例實測報告第 1 頁：嚴重度統計與依影響排序的修正清單" loading="lazy" width="640" height="905">
+    </a>
+    <div class="sample-txt">
+      <p class="lab">實際會拿到什麼</p>
+      <h3 class="sub-h">看一份範例實測報告</h3>
+      <p class="sub-p">以標準方案為例：15 個情境的通過／失敗表、依影響排序的修正清單、建議修正順序。產品是虛構的，格式跟正式報告一樣。</p>
+      <a class="btn-s" href="img/sample-test-report-zh.pdf" target="_blank" rel="noopener">打開範例報告（PDF，3 頁）<span class="ar ar-r">→</span></a>
+    </div>
   </div>
 
   <article class="svc-row">
@@ -809,6 +833,18 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       <li><span>Fix designs in a second size (phone or desktop, Advanced only)</span><b>NT$3,800</b></li>
     </ul>
     <p class="addons-note">These are starting prices and will change as bookings grow.</p>
+  </div>
+
+  <div class="sample">
+    <a class="sample-img" href="img/sample-test-report-en.pdf" target="_blank" rel="noopener" aria-label="Open the sample test report (PDF)">
+      <img src="img/sample-test-report-en.jpg" alt="Page 1 of the sample test report: severity counts and a fix list ranked by impact" loading="lazy" width="640" height="905">
+    </a>
+    <div class="sample-txt">
+      <p class="lab">WHAT YOU GET</p>
+      <h3 class="sub-h">See a sample test report</h3>
+      <p class="sub-p">Based on the Standard plan: a pass/fail table for 15 cases, a fix list ranked by impact, and a suggested order of fixes. The product is fictional; the format is the same as a real report.</p>
+      <a class="btn-s" href="img/sample-test-report-en.pdf" target="_blank" rel="noopener">Open the sample report (PDF, 3 pages)<span class="ar ar-r">→</span></a>
+    </div>
   </div>
 
   <article class="svc-row">
