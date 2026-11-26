@@ -11,7 +11,7 @@ if (location.hostname === 'heather45681.github.io') {
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fifi Lee｜UX 接案合作</title>
-<meta name="description" content="Fifi Lee — 10 年經驗的 UX 設計師。產品流程健檢、上線前 UI QA、網站設計與切版。">
+<meta name="description" content="Fifi Lee — 10 年經驗的 UX 設計師。產品流程實測（NT$2,500 起）、上線前 UI QA、網站設計與切版。">
 <meta property="og:title" content="Free website UX check · 免費網站健檢｜Fifi Lee">
 <meta property="og:description" content="Paste a URL and get a UX quick check in about a minute. 貼上網址，約 1 分鐘拿到速度、無障礙與 UX 建議。">
 <meta property="og:type" content="website">
@@ -231,6 +231,113 @@ a:hover .ar-r{transform:translateX(5px)}a:hover .ar-ne{transform:translate(3px,-
   .c-lab{flex-basis:100%}
   .mq{font-size:20px}
 }
+
+/* routes: two illustrated cards, one per kind of client */
+.routes{padding-bottom:112px;display:flex;flex-direction:column;gap:40px}
+.routes-h{display:flex;flex-direction:column;gap:4px;align-items:center;text-align:center}
+.route-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:24px}
+.route{display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--line);border-radius:24px;overflow:hidden;text-decoration:none;color:var(--ink);transition:transform .25s ease,box-shadow .25s ease,border-color .25s}
+.route:hover{color:var(--ink);border-color:var(--accent);transform:translateY(-4px);box-shadow:0 28px 50px -34px rgba(31,36,39,.55)}
+.route:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.route-art{position:relative;height:240px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.art-test{background:var(--ink)}
+.art-web{background:#E7D9C6}
+.route-body{flex:1;display:flex;flex-direction:column;gap:10px;padding:30px 34px 34px}
+.route-tag{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.1em;color:var(--accent)}
+.route-h{font-family:'Noto Serif TC',serif;font-size:28px;font-weight:700;line-height:1.4}
+.route-p{font-size:15px;line-height:1.8;color:var(--ink2);margin-bottom:8px}
+.route-list{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 0;border-top:1px solid var(--line);font-size:14px;color:var(--ink2)}
+.route-list b{font-weight:700;color:var(--ink);white-space:nowrap}
+.route-list b.hl{color:var(--accent)}
+.route-list+.route-list{margin-top:-10px}
+.route-go{align-self:flex-start;margin-top:auto;display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 22px;border:1px solid var(--accent);border-radius:999px;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.06em;color:var(--accent);transition:background .2s,color .2s}
+.route-body .route-list:last-of-type{border-bottom:1px solid var(--line);margin-bottom:22px}
+.route:hover .route-go{background:var(--accent);color:var(--paper)}
+a:hover .ar-d{transform:translateY(3px)}
+.L-en .route-h{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:32px;line-height:1.2}
+/* illustration: a sign-up form with review notes */
+.art-test{background:#DCE1D9;gap:22px}
+.ph{flex:none;width:108px;height:196px;background:var(--paper);border:2px solid var(--ink);border-radius:18px;padding:22px 10px 12px;display:flex;flex-direction:column;gap:9px;box-shadow:0 18px 30px -20px rgba(31,36,39,.55);transition:transform .35s ease}
+.ph-t{display:block;width:60%;height:8px;margin-bottom:4px;border-radius:4px;background:var(--ink)}
+.ph-f{display:block;height:18px;border:1.5px solid var(--line);border-radius:6px;background:#fff}
+.ph-f.bad{border-color:var(--accent);box-shadow:0 0 0 3px rgba(168,72,47,.15)}
+.ph-b{display:block;margin-top:auto;height:20px;border-radius:999px;background:var(--accent)}
+.notes{display:flex;flex-direction:column;gap:12px;max-width:200px;margin-top:52px}
+.note-c{position:relative;margin:0;display:flex;flex-direction:column;align-items:flex-start;gap:4px;background:#fff;border-radius:12px;padding:10px 13px;font-size:12.5px;line-height:1.5;color:var(--ink);box-shadow:0 12px 24px -16px rgba(31,36,39,.45);transition:transform .35s ease}
+.note-c b{font-family:'DM Mono',monospace;font-size:10.5px;font-weight:500;letter-spacing:.1em;padding:1px 8px;border-radius:999px}
+.note-c.ng b{background:rgba(168,72,47,.12);color:var(--accent)}
+.note-c.ok b{background:rgba(63,125,84,.13);color:#3F7D54}
+.note-c.ng::before{content:'';position:absolute;right:100%;top:50%;width:22px;border-top:1.5px dashed var(--accent)}
+.route:hover .ph{transform:translateY(-4px)}
+.route:hover .note-c.ng{transform:translateX(4px)}
+/* illustration: desktop and phone */
+.dv-desk{position:relative;width:min(66%,320px);aspect-ratio:16/10;background:var(--paper);border:2px solid var(--ink);border-radius:10px;padding:22px 14px 14px;display:flex;flex-direction:column;gap:10px;transform:translateX(-8%);transition:transform .35s ease}
+.dv-desk .dv-bar{position:absolute;top:7px;left:10px;width:30px;height:6px;border-radius:3px;background:radial-gradient(circle,var(--line) 3px,transparent 3.5px) 0 0/10px 6px repeat-x}
+.dv-hero{display:block;height:38%;border-radius:6px;background:var(--accent)}
+.dv-row{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.dv-row i{border-radius:5px;background:#E2D7C8}
+.dv-phone{position:absolute;right:15%;bottom:28px;width:min(19%,92px);aspect-ratio:9/18;background:var(--paper);border:2px solid var(--ink);border-radius:14px;padding:14px 7px 9px;display:flex;flex-direction:column;gap:6px;box-shadow:-10px 14px 30px -18px rgba(31,36,39,.6);transition:transform .35s ease}
+.dv-phone .dv-hero{height:34%}
+.dv-line{display:block;height:6px;border-radius:3px;background:#E2D7C8}
+.dv-line.s{width:65%}
+.dv-btn{display:block;margin-top:auto;height:14px;border-radius:999px;background:var(--ink)}
+.route:hover .dv-desk{transform:translateX(-10%) translateY(-4px)}
+.route:hover .dv-phone{transform:translateY(-8px) rotate(3deg)}
+@media (prefers-reduced-motion: reduce){.route,.ph,.note-c,.dv-desk,.dv-phone{transition:none}.route:hover,.route:hover .ph,.route:hover .note-c,.route:hover .dv-desk,.route:hover .dv-phone{transform:none}}
+/* pricing */
+.sub-h{margin:0;font-family:'Noto Serif TC',serif;font-size:24px;line-height:1.5}
+.sub-p{margin:0;font-size:15px;color:var(--ink2)}
+.tier-head{display:flex;flex-direction:column;gap:6px;margin-bottom:-28px}
+.tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:20px}
+.tier{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:32px 30px;display:flex;flex-direction:column;gap:10px}
+.tier-lv{margin:0;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;color:var(--accent)}
+.tier h4{margin:0;font-family:'Noto Serif TC',serif;font-size:21px;line-height:1.45}
+.price{margin:4px 0 2px;font-family:'Cormorant Garamond',serif;font-size:46px;font-weight:500;line-height:1}
+.tier-scope{margin:0;font-size:15px;font-weight:500;line-height:1.7}
+.tier ul{margin:0;padding:12px 0 0 1.1em;border-top:1px solid var(--line);font-size:14px;color:var(--ink2)}
+.tier ul li{margin:2px 0}
+.tier-meta{margin:auto 0 0;padding-top:14px;font-size:13px;color:var(--mute)}
+.addons{margin-top:-28px;border:1px dashed var(--line);border-radius:16px;padding:22px 30px;display:flex;flex-direction:column;gap:6px}
+.addons .lab{margin:0;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.12em;color:var(--mute)}
+.addons ul{list-style:none;margin:0;padding:0}
+.addons li{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+.addons li:last-child{border-bottom:0}
+.addons b{font-family:'DM Mono',monospace;font-weight:500;white-space:nowrap}
+.addons-note{margin:0;font-size:13px;color:var(--mute)}
+.svc-row{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px 48px;align-items:start;padding-top:40px;border-top:1px solid var(--line)}
+.svc-row>div{display:flex;flex-direction:column;gap:8px}
+.svc-row ul{margin:0;padding-left:1.1em;font-size:14px;color:var(--ink2)}
+.svc-price{grid-column:1/-1;margin:0;font-size:14px;font-weight:500;color:var(--accent)}
+/* website section, on paper */
+.web-wrap{background:var(--paper)}
+.benefits{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:32px}
+.benefits>div{display:flex;flex-direction:column;gap:8px}
+.benefits .num{font-family:'Cormorant Garamond',serif;font-size:40px;line-height:1;color:var(--accent)}
+.benefits h3{margin:0;font-family:'Noto Serif TC',serif;font-size:20px}
+.benefits p{margin:0;font-size:14px;color:var(--ink2)}
+.web-wrap .earlier{border-top-color:var(--line)}
+.web-wrap .e-item span{color:var(--accent)}
+.web-wrap .e-item p{color:var(--ink2)}
+.web-wrap .e-item img{background:var(--bg)}
+.L-en .sub-h,.L-en .tier h4,.L-en .benefits h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;line-height:1.3}
+@media (max-width:760px){
+  .routes{padding-bottom:80px;gap:28px}
+  .route-art{height:236px}
+  .art-test{gap:16px}
+  .ph{width:96px;height:180px}
+  .notes{max-width:170px}
+  .note-c{font-size:12px;padding:9px 11px}
+  .dv-phone{right:9%}
+  h2.sec{font-size:26px}
+  .L-en h2.sec{font-size:34px}
+  .route-body{padding:24px 22px 26px}
+  .route-h{font-size:24px}
+  .route-go{align-self:stretch;justify-content:center}
+  .tier{padding:26px 22px}
+  .addons{padding:18px 20px}
+  .addons li{flex-direction:column;gap:2px}
+  .svc-row{grid-template-columns:1fr}
+}
 /* language */
 .lang{display:inline-flex;border:1px solid var(--ink);border-radius:999px;overflow:hidden}
 .lang button{border:0;background:transparent;min-height:32px;padding:4px 14px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.08em;color:var(--ink);cursor:pointer}
@@ -272,13 +379,13 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
   <button type="button" class="hb" id="hb" aria-label="選單" aria-expanded="false" aria-controls="nav"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path id="hbI" d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   <nav class="nav" id="nav" aria-label="Main">
     <div class="lk">
-      <a class="L-zh" href="#services">服務</a>
-      <a class="L-zh" href="#cases">案例</a>
+      <a class="L-zh" href="#product">產品團隊</a>
+      <a class="L-zh" href="#web">網站</a>
       <a class="L-zh" href="#process">合作流程</a>
       <a class="L-zh" href="index.html?lang=zh">完整作品集</a>
       <a class="pill ct L-zh" href="#contact">與我聯繫</a>
-      <a class="L-en" href="#services-en">Services</a>
-      <a class="L-en" href="#cases-en">Work</a>
+      <a class="L-en" href="#product-en">Product teams</a>
+      <a class="L-en" href="#web-en">Websites</a>
       <a class="L-en" href="#process-en">Process</a>
       <a class="L-en" href="index.html?lang=en">Full portfolio</a>
       <a class="pill ct L-en" href="#contact-en">Get in touch</a>
@@ -291,10 +398,10 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
 <section id="top" class="wrap hero">
   <div class="hero-main">
     <p class="eyebrow">接案合作｜台北｜<span style="white-space:nowrap">可遠端（GMT+8）</span></p>
-    <h1>從規則到畫面<br>陪產品走上線</h1>
-    <p class="lead">10 年設計經驗、30+ 個 RWD 網站上線，近年專注註冊登入流程與上線前把關。<br>需要能把流程想清楚、也能和工程師對上話的設計夥伴，歡迎聊聊。</p>
+    <h1>讓第一次來的人<br>順利走到最後一步</h1>
+    <p class="lead">註冊卡住、表單送不出去、手機版跑版，都是客人默默離開的地方。<br>我是有 10 年經驗的 UX 設計師，幫你把這些地方找出來、修好。</p>
     <form class="qc" action="check.html" method="get" data-clarity-mask="true">
-      <p class="qc-h">不確定需要哪一項？先讓我免費看一下你的網站</p>
+      <p class="qc-h">先讓我免費看一下你的網站</p>
       <label class="qc-l" for="qc-u">你的網址</label>
       <div class="qc-bar">
         <input id="qc-u" name="url" type="text" inputmode="url" autocomplete="url" maxlength="300" placeholder="例如 your-site.com" required>
@@ -302,79 +409,130 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       </div>
       <p class="qc-note">約 1 分鐘，看速度、無障礙、文案和表單細節，還有模板網站常見的破綻。不用登入，每人每天 3 次。</p>
     </form>
-    <div class="tags">
-      <span>#產品流程健檢</span><span>#上線前 UI QA</span><span>#網站設計・切版</span><span>#中・英・日</span>
-    </div>
   </div>
 </section>
 
-<div class="mq" aria-hidden="true"><div class="mq-track"><span>UX review — 流程健檢 — UI QA before launch — 上線前把關 — Design &amp; front end — 設計・切版 — </span><span>UX review — 流程健檢 — UI QA before launch — 上線前把關 — Design &amp; front end — 設計・切版 — </span></div></div>
+<section id="services" class="wrap routes">
+  <div class="routes-h">
+    <p class="eyebrow">Services|</p>
+    <h2 class="sec">你是哪一種情況？</h2>
+  </div>
+  <div class="route-grid">
+    <a class="route" href="#product">
+      <div class="route-art art-test" aria-hidden="true">
+        <div class="ph"><i class="ph-t"></i><i class="ph-f"></i><i class="ph-f bad"></i><i class="ph-f"></i><i class="ph-b"></i></div>
+        <div class="notes"><p class="note-c ng"><b>FAIL</b><span>驗證碼過期後，沒說怎麼重送</span></p><p class="note-c ok"><b>PASS</b><span>連點兩次送出，只建立一個帳號</span></p></div>
+      </div>
+      <div class="route-body">
+        <span class="route-tag">新創・SaaS・會員制服務</span>
+        <span class="route-h">我有產品或 App</span>
+        <span class="route-p">上線前想知道註冊、登入、表單哪裡會卡住</span>
+        <span class="route-list"><span>產品流程實測</span><b class="hl">NT$2,500 起</b></span>
+        <span class="route-list"><span>上線前 UI QA</span><b>依範圍報價</b></span>
+        <span class="route-go">看產品團隊方案 <span class="ar ar-d">↓</span></span>
+      </div>
+    </a>
+    <a class="route" href="#web">
+      <div class="route-art art-web" aria-hidden="true">
+        <div class="dv-desk"><i class="dv-bar"></i><i class="dv-hero"></i><span class="dv-row"><i></i><i></i><i></i></span></div>
+        <div class="dv-phone"><i class="dv-hero"></i><i class="dv-line"></i><i class="dv-line s"></i><i class="dv-btn"></i></div>
+      </div>
+      <div class="route-body">
+        <span class="route-tag">店家・品牌・中小企業</span>
+        <span class="route-h">我需要一個網站</span>
+        <span class="route-p">要一個手機好用、之後自己改得動的網站</span>
+        <span class="route-list"><span>網站設計＋切版</span><b>依頁數報價</b></span>
+        <span class="route-list"><span>RWD 設計稿</span><b>電腦・平板・手機</b></span>
+        <span class="route-go">看網站方案 <span class="ar ar-d">↓</span></span>
+      </div>
+    </a>
+  </div>
+</section>
 
-<section id="services" class="wrap services">
+<div class="mq" aria-hidden="true"><div class="mq-track"><span>Hands-on flow testing — 產品流程實測 — UI QA before launch — 上線前把關 — Web design &amp; front end — 設計・切版 — </span><span>Hands-on flow testing — 產品流程實測 — UI QA before launch — 上線前把關 — Web design &amp; front end — 設計・切版 — </span></div></div>
+
+<section id="product" class="wrap services">
   <div class="sh">
     <div style="display:flex;flex-direction:column;gap:4px">
-      <p class="eyebrow">Services|</p>
-      <h2 class="sec">我可以幫你做什麼</h2>
+      <p class="eyebrow">For product teams|</p>
+      <h2 class="sec">給產品團隊：<br>上線前，先替你的用戶走一遍</h2>
     </div>
-    <p class="note">每一項都可以單獨接，也可以組合。範圍不確定也沒關係，先聊再一起決定。</p>
+    <p class="note">自動掃描工具看得到程式碼，看不到人會在哪裡卡住。我用真的手機和電腦一步步操作，把例外情境都試過一次。</p>
   </div>
 
-  <div class="svc-grid">
-    <article class="svc">
-      <span class="num">01</span>
-      <h3>產品流程健檢</h3>
-      <p class="pain">使用者在註冊、填表、結帳或預約時卡住，多半不是他們的問題，而是流程、欄位規則和錯誤訊息的漏洞。每個卡住的人，都是差一步就完成的客戶。</p>
-      <p class="fit">適合：轉換率不理想，客服常被問「登不進去」「表單送不出去」「付款卡住」的團隊。</p>
-      <span class="lab">交付內容</span>
-      <ul>
-        <li>實際走一遍關鍵流程：註冊登入、表單、結帳／預約、會員中心，整理問題清單與優先順序</li>
-        <li>例外情境與錯誤訊息盤點：欄位驗證、重複送出、帳號被鎖、找回失敗</li>
-        <li>改善建議與 mockup，兼顧好用與資安；有多語系的話一併檢查</li>
-      </ul>
-      <p class="proof">做過的事：三品牌註冊改版，註冊送出日均 +18.6%　<a href="#cases">看案例 →</a></p>
-    </article>
-
-    <article class="svc">
-      <span class="num">02</span>
-      <h3>上線前 UI QA</h3>
-      <p class="pain">錯字、漏做的按鈕狀態、手機跑版，上線後才發現，修起來比上線前貴得多，用戶也會先覺得「這產品不太可靠」。</p>
-      <p class="fit">適合：準備上線，但團隊裡沒有專職設計師幫忙驗收畫面的團隊。</p>
-      <span class="lab">交付內容</span>
-      <ul>
-        <li>依設計稿逐頁比對文案、間距、狀態與互動</li>
-        <li>跨裝置、跨平台檢查</li>
-        <li>工程師看得懂的問題單，可用中文或英文撰寫</li>
-      </ul>
-      <p class="proof">做過的事：一次改版的 UAT 開出 115 張問題單　<a href="work01.html">看案例 →</a></p>
-    </article>
-
-    <article class="svc">
-      <span class="num">03</span>
-      <h3>網站設計＋切版</h3>
-      <p class="pain">版面好看但改一個區塊就要整頁重做，或手機版一直跑版，網站很快就變成沒人敢動的負擔。</p>
-      <p class="fit">適合：需要官網、品牌網站、活動頁或會員功能的店家與中小企業。</p>
-      <span class="lab">交付內容</span>
-      <ul>
-        <li>RWD 設計稿（電腦、平板、手機）</li>
-        <li>需要時一併完成前端切版</li>
-        <li>元件化設計，之後擴充或改版更省力</li>
-      </ul>
-      <p class="proof">做過的事：30+ 個 RWD 網站上線，包含國語日報、台灣網際網路協會　<a href="#earlier">看作品 →</a></p>
-    </article>
-
+  <div class="tier-head">
+    <h3 class="sub-h">產品流程實測｜起步價</h3>
+    <p class="sub-p">會測的情境例如：欄位驗證、重複送出、驗證碼過期、帳號被鎖、找回失敗</p>
   </div>
+  <div class="tiers">
+    <article class="tier">
+      <p class="tier-lv">入門</p>
+      <h4>單一流程實測</h4>
+      <p class="price">NT$2,500</p>
+      <p class="tier-scope">1 個流程、8 個例外情境</p>
+      <ul>
+        <li>通過／失敗表與實機截圖</li>
+        <li>依影響排序的修正清單</li>
+      </ul>
+      <p class="tier-meta">3 個工作天交付・含 1 次修改</p>
+    </article>
+    <article class="tier">
+      <p class="tier-lv">標準</p>
+      <h4>註冊登入完整實測</h4>
+      <p class="price">NT$5,800</p>
+      <p class="tier-scope">註冊、登入、找回帳號，共 15 個情境，手機＋桌機</p>
+      <ul>
+        <li>通過／失敗表與實機截圖</li>
+        <li>依影響排序的修正清單</li>
+        <li>建議修正順序</li>
+      </ul>
+      <p class="tier-meta">5 個工作天交付・含 2 次修改</p>
+    </article>
+    <article class="tier">
+      <p class="tier-lv">進階</p>
+      <h4>實測＋修正稿＋複驗</h4>
+      <p class="price">NT$12,800</p>
+      <p class="tier-scope">標準方案全部內容，再加上：</p>
+      <ul>
+        <li>前 3 大問題的 Figma 修正稿</li>
+        <li>工程修改完成後複驗一次（交付後 30 天內）</li>
+      </ul>
+      <p class="tier-meta">7 個工作天交付・含 2 次修改</p>
+    </article>
+  </div>
+  <div class="addons">
+    <p class="lab">加購</p>
+    <ul>
+      <li><span>多測 5 個情境</span><b>NT$1,200</b></li>
+      <li><span>額外一次修改</span><b>NT$800</b></li>
+      <li><span>修正稿加做另一種尺寸（手機／桌機，僅限進階方案）</span><b>NT$3,800</b></li>
+    </ul>
+    <p class="addons-note">以上為起步價，之後會依案量調整。</p>
+  </div>
+
+  <article class="svc-row">
+    <div>
+      <h3 class="sub-h">上線前 UI QA</h3>
+      <p class="sub-p">錯字、漏做的按鈕狀態、手機跑版，上線後才發現，修起來比上線前貴得多。適合準備上線、但團隊裡沒有專職設計師驗收畫面的團隊。</p>
+    </div>
+    <ul>
+      <li>依設計稿逐頁比對文案、間距、狀態與互動</li>
+      <li>跨裝置、跨平台檢查</li>
+      <li>工程師看得懂的問題單，中文或英文</li>
+    </ul>
+    <p class="svc-price">依頁數與裝置範圍報價</p>
+  </article>
 </section>
 
-<section id="cases" class="dark cases">
+<section class="dark cases">
   <div class="wrap">
     <div class="sh">
       <div style="display:flex;flex-direction:column;gap:4px">
         <p class="eyebrow">Selected work|</p>
-        <h2 class="sec">做過的案例</h2>
+        <h2 class="sec">做過的事</h2>
       </div>
-      <p class="note">所有畫面皆已去識別化。每個案例都有完整版，想看細節可以點進去。</p>
+      <p class="note">畫面皆已去識別化，想看細節可以點進完整案例。</p>
     </div>
-
     <div class="case-grid">
       <article class="case">
         <img src="img/5a12622855edc63d02846815d123024b.png" alt="註冊頁改版前後對比：改版前一頁填完所有欄位，改版後分成帳號與手機號兩種註冊方式">
@@ -384,60 +542,65 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
         <dl>
           <dt>問題</dt><dd>舊註冊頁一次要填 5 個欄位，各品牌規則又不一致。</dd>
           <dt>做法</dt><dd>拆成手機與帳號兩種註冊方式，統一驗證規則與錯誤訊息。</dd>
+          <dt>驗收</dt><dd>一次改版的 UAT 開出 115 張問題單。</dd>
         </dl>
         <a class="btn" href="work01.html">閱讀完整案例 <span class="ar ar-r">→</span></a>
       </article>
-
-      <article class="case">
-        <img src="img/95342b3393697c6834d4032bd18d7de5.png" alt="同一套採購系統套用三種品牌主題，以及 Figma 元件庫的按鈕、勾選、開關、Modal 與狀態標籤">
-        <div class="top"><span>02</span><span>Design System・前端開發</span></div>
-        <h3>一套系統、三家公司，各用自己的品牌</h3>
-        <p class="out">三家公司都已上線使用，Design System 交付公司與工程師。</p>
-        <dl>
-          <dt>問題</dt><dd>原本只給一家公司用的採購系統，要擴增給三家共用，各自需要自己的 logo 與企業色。</dd>
-          <dt>做法</dt><dd>以 Bootstrap 建立可換膚的 Design System 與對應程式碼的 Figma 元件庫，並接手前端開發。</dd>
-        </dl>
-        <a class="btn" href="work02.html">閱讀完整案例 <span class="ar ar-r">→</span></a>
-      </article>
-
-      <article class="case">
-        <img src="img/ae63ed4d86440ceaf4572afe22014b19.png" alt="UIUX 決策庫的資料表畫面，標註品牌、市場、平台、模組與狀態（去識別化重繪）">
-        <div class="top"><span>03</span><span>Notion＋AI 決策庫</span></div>
-        <h3>讓 AI 在上線前，先抓出規格裡的矛盾</h3>
-        <p class="out">一搜就找到規則和出處，還抓到工程師打錯的文案。</p>
-        <dl>
-          <dt>問題</dt><dd>規則散在 mockup、Jira 和聊天紀錄裡，同一條規則被問好幾次。</dd>
-          <dt>做法</dt><dd>用 Notion 整理成可查詢的決策庫，再讓 AI 協助比對規格。</dd>
-        </dl>
-        <a class="btn" href="work03.html">閱讀完整案例 <span class="ar ar-r">→</span></a>
-      </article>
     </div>
+  </div>
+</section>
 
-    <div id="earlier" class="earlier">
-      <div style="display:flex;flex-direction:column;gap:4px">
-        <p class="eyebrow">Client projects|</p>
-        <h3>網站與 App 客戶專案</h3>
+<div id="web" class="web-wrap">
+<section class="wrap services">
+  <div class="sh">
+    <div style="display:flex;flex-direction:column;gap:4px">
+      <p class="eyebrow">For shops &amp; small businesses|</p>
+      <h2 class="sec">給店家與中小企業：<br>手機好用、自己改得動的網站</h2>
+    </div>
+    <p class="note">版面好看但改一個區塊就要整頁重做，網站很快就變成沒人敢動的負擔。我從設計一路做到切版，交給你一個之後改得動的網站。</p>
+  </div>
+  <div class="benefits">
+    <div><span class="num">01</span><h3>手機上好看也好按</h3><p>電腦、平板、手機三種尺寸都設計，按鈕和表單在手機上也好操作。</p></div>
+    <div><span class="num">02</span><h3>之後改得動</h3><p>元件化設計，換一個區塊、加一頁，不用整站重做。</p></div>
+    <div><span class="num">03</span><h3>設計到切版一次做完</h3><p>需要的話，設計稿和前端切版都由我完成，不用另外找工程師對接。</p></div>
+  </div>
+  <div class="svc-row">
+    <div>
+      <h3 class="sub-h">網站設計＋切版</h3>
+      <p class="sub-p">適合需要官網、品牌網站、活動頁或會員功能的店家與中小企業。</p>
+    </div>
+    <ul>
+      <li>RWD 設計稿（電腦、平板、手機）</li>
+      <li>需要時一併完成前端切版</li>
+      <li>元件化設計，之後擴充或改版更省力</li>
+    </ul>
+    <p class="svc-price">依頁數與功能報價，諮詢後提供書面報價</p>
+  </div>
+  <div id="earlier" class="earlier">
+    <div style="display:flex;flex-direction:column;gap:4px">
+      <p class="eyebrow">Client projects|</p>
+      <h3>30+ 個 RWD 網站上線，包括</h3>
+    </div>
+    <div class="e-grid">
+      <div class="e-item">
+        <img src="img/403a1b5a878fa37ce48402b13b3dc2fe.png" alt="國語小舖網站在電腦、平板、手機上的畫面">
+        <span>2019｜RWD 網站・會員系統</span>
+        <p>國語日報・國語小舖 訂閱網站</p>
       </div>
-      <div class="e-grid">
-        <div class="e-item">
-          <img src="img/403a1b5a878fa37ce48402b13b3dc2fe.png" alt="國語小舖網站在電腦、平板、手機上的畫面">
-          <span>2019｜RWD 網站・會員系統</span>
-          <p>國語日報・國語小舖 訂閱網站</p>
-        </div>
-        <div class="e-item">
-          <img src="img/1e5379076a3847fceb613e754d7bac29.png" alt="台灣網際網路協會官網主視覺">
-          <span>2019｜RWD 網站改版</span>
-          <p>台灣網際網路協會 官網改版</p>
-        </div>
-        <div class="e-item">
-          <img src="img/7f4288e47ab0e008b83c12693bea046e.png" alt="勝博殿餐飲 App 改版主視覺" style="object-position:left center">
-          <span>2018｜App 設計</span>
-          <p>勝博殿 Saboten 餐飲 App 改版</p>
-        </div>
+      <div class="e-item">
+        <img src="img/1e5379076a3847fceb613e754d7bac29.png" alt="台灣網際網路協會官網主視覺">
+        <span>2019｜RWD 網站改版</span>
+        <p>台灣網際網路協會 官網改版</p>
+      </div>
+      <div class="e-item">
+        <img src="img/7f4288e47ab0e008b83c12693bea046e.png" alt="勝博殿餐飲 App 改版主視覺" style="object-position:left center">
+        <span>2018｜App 設計</span>
+        <p>勝博殿 Saboten 餐飲 App 改版</p>
       </div>
     </div>
   </div>
 </section>
+</div>
 
 <section id="process" class="wrap process">
   <div class="head">
@@ -445,10 +608,10 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     <h2 class="sec">合作流程</h2>
   </div>
   <ol class="steps">
-    <li><span class="n">01</span><h3>免費諮詢 30 分鐘</h3><p>線上聊聊你的產品、想解決的問題和預計時程。這一步不收費，只釐清需求，不會先做設計。</p></li>
-    <li><span class="n">02</span><h3>書面報價與訂金</h3><p>我會用書面列出交付內容、時程、費用和包含的修改次數。雙方確認後收 50% 訂金，再開始動工。</p></li>
-    <li><span class="n">03</span><h3>分階段確認</h3><p>過程中分段給你看。每項交付含 2 次修改，請在 5 個工作天內回覆意見，逾期時程會順延；超出原本範圍的新需求另外報價。</p></li>
-    <li><span class="n">04</span><h3>交付與尾款</h3><p>收到尾款後交付設計原始檔與規格說明，讓工程師看得懂。上線前也可以協助確認畫面。</p></li>
+    <li><span class="n">01</span><h3>免費諮詢 30 分鐘</h3><p>線上聊聊你的產品和想解決的問題，不收費。</p></li>
+    <li><span class="n">02</span><h3>書面報價</h3><p>列清楚交付內容、時程和費用，雙方確認後開工。</p></li>
+    <li><span class="n">03</span><h3>分段確認</h3><p>過程中分段給你看，修改次數依方案。</p></li>
+    <li><span class="n">04</span><h3>交付</h3><p>交付報告或設計檔，上線前也可以協助確認畫面。</p></li>
   </ol>
 </section>
 
@@ -461,11 +624,15 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
   <div class="faq-list">
     <details>
       <summary>報價怎麼算？</summary>
-      <p>依案子範圍報價。先透過免費 30 分鐘諮詢了解需求，再用書面列出交付內容、修改次數、時程和費用，讓你清楚知道費用包含哪些項目。</p>
+      <p>產品流程實測有固定的起步價，請見上方三種方案。上線前 UI QA 和網站設計依範圍報價：先透過免費 30 分鐘諮詢了解需求，再用書面列出交付內容、修改次數、時程和費用。</p>
+    </details>
+    <details>
+      <summary>實測和免費健檢有什麼不同？</summary>
+      <p>免費健檢是自動讀取你的公開頁面，約 1 分鐘給出快速建議。實測是我本人用手機和電腦實際操作流程，連出錯、重試這類例外情境都試過，交付通過／失敗表與實機截圖。</p>
     </details>
     <details>
       <summary>包含幾次修改？</summary>
-      <p>每項交付含 2 次修改，例如字級、間距、文案或互動細節的調整。如果是改變原本談好的範圍，例如新增頁面或換掉整個流程，會另外報價，開工前先跟你確認。</p>
+      <p>產品流程實測依方案：入門含 1 次、標準與進階含 2 次，額外一次修改 NT$800。其他服務每項交付含 2 次修改，例如字級、間距、文案或互動細節的調整。請在 5 個工作天內回覆意見，逾期時程會順延；如果是改變原本談好的範圍，例如新增頁面或換掉整個流程，會另外報價，開工前先跟你確認。</p>
     </details>
     <details>
       <summary>怎麼付款？</summary>
@@ -473,7 +640,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     </details>
     <details>
       <summary>可以只做其中一小部分嗎？</summary>
-      <p>可以。例如只做一次流程健檢，或只在上線前幫忙驗收畫面，都可以單獨接。</p>
+      <p>可以。例如只測一個流程（入門方案），或只在上線前幫忙驗收畫面，都可以單獨接。</p>
     </details>
     <details>
       <summary>需要見面嗎？</summary>
@@ -512,7 +679,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
           <label class="cf-f"><span>你的名字 <i>必填</i></span><input name="name" autocomplete="name" maxlength="60" required></label>
           <label class="cf-f"><span>Email <i>必填</i></span><input name="email" type="email" autocomplete="email" maxlength="120" required></label>
           <label class="cf-f"><span>公司或品牌</span><input name="company" autocomplete="organization" maxlength="80"></label>
-          <label class="cf-f"><span>想談哪一項？</span><select name="service"><option value="unsure">還不確定</option><option value="flow">產品流程健檢</option><option value="qa">上線前 UI QA</option><option value="web">網站設計＋切版</option></select></label>
+          <label class="cf-f"><span>想談哪一項？</span><select name="service"><option value="unsure">還不確定</option><option value="flow">產品流程實測</option><option value="qa">上線前 UI QA</option><option value="web">網站設計＋切版</option></select></label>
           <label class="cf-f"><span>預計時程</span><select name="timeline"><option value="">請選擇</option><option value="soon">1 個月內</option><option value="mid">1–3 個月</option><option value="open">還沒決定</option></select></label>
         </div>
         <label class="cf-f"><span>想解決什麼問題？ <i>必填</i></span><textarea name="message" rows="5" maxlength="2000" required placeholder="例如：註冊轉換率偏低、下個月要上線想先驗收畫面……"></textarea></label>
@@ -531,11 +698,11 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
 <section id="top-en" class="wrap hero">
   <div class="hero-main">
     <p class="eyebrow">FREELANCE · TAIPEI · <span style="white-space:nowrap">OPEN TO REMOTE (GMT+8)</span></p>
-    <h1>From rules to screens,<br>I see products through to launch.</h1>
-    <p class="lead">Ten years in design and 30+ responsive sites shipped, lately focused on sign-up, login and pre-launch QA. A design partner who thinks flows through and talks shop with engineers.</p>
+    <h1>Get first-time visitors<br>all the way to the last step.</h1>
+    <p class="lead">A stuck sign-up, a form that won't submit, a layout that breaks on phones: that's where people quietly leave. I'm a UX designer with ten years of experience, and I find those spots and fix them.</p>
     <form class="qc" action="check.html" method="get" data-clarity-mask="true">
       <input type="hidden" name="lang" value="en">
-      <p class="qc-h">Not sure which one you need? Let me take a free look at your site first</p>
+      <p class="qc-h">Let me take a free look at your site first</p>
       <label class="qc-l" for="qc-u-en">Your website</label>
       <div class="qc-bar">
         <input id="qc-u-en" name="url" type="text" inputmode="url" autocomplete="url" maxlength="300" placeholder="e.g. your-site.com" required>
@@ -543,79 +710,130 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
       </div>
       <p class="qc-note">About a minute. Covers speed, accessibility, copy and form details, plus the usual slips of template-built sites. No login, 3 checks a day.</p>
     </form>
-    <div class="tags">
-      <span>#Product flow review</span><span>#UI QA before launch</span><span>#Web design &amp; front end</span><span>#ZH · EN · JA</span>
-    </div>
   </div>
 </section>
 
-<div class="mq" aria-hidden="true"><div class="mq-track"><span>UX review — 流程健檢 — UI QA before launch — 上線前把關 — Design &amp; front end — 設計・切版 — </span><span>UX review — 流程健檢 — UI QA before launch — 上線前把關 — Design &amp; front end — 設計・切版 — </span></div></div>
+<section id="services-en" class="wrap routes">
+  <div class="routes-h">
+    <p class="eyebrow">Services|</p>
+    <h2 class="sec">Which one sounds like you?</h2>
+  </div>
+  <div class="route-grid">
+    <a class="route" href="#product-en">
+      <div class="route-art art-test" aria-hidden="true">
+        <div class="ph"><i class="ph-t"></i><i class="ph-f"></i><i class="ph-f bad"></i><i class="ph-f"></i><i class="ph-b"></i></div>
+        <div class="notes"><p class="note-c ng"><b>FAIL</b><span>Code expired, no hint on how to resend</span></p><p class="note-c ok"><b>PASS</b><span>Double-click submit creates just one account</span></p></div>
+      </div>
+      <div class="route-body">
+        <span class="route-tag">Startups · SaaS · membership services</span>
+        <span class="route-h">I have a product or app</span>
+        <span class="route-p">You want to know where sign-up, login or forms break before launch</span>
+        <span class="route-list"><span>Hands-on flow testing</span><b class="hl">from NT$2,500</b></span>
+        <span class="route-list"><span>UI QA before launch</span><b>quoted by scope</b></span>
+        <span class="route-go">See plans for product teams <span class="ar ar-d">↓</span></span>
+      </div>
+    </a>
+    <a class="route" href="#web-en">
+      <div class="route-art art-web" aria-hidden="true">
+        <div class="dv-desk"><i class="dv-bar"></i><i class="dv-hero"></i><span class="dv-row"><i></i><i></i><i></i></span></div>
+        <div class="dv-phone"><i class="dv-hero"></i><i class="dv-line"></i><i class="dv-line s"></i><i class="dv-btn"></i></div>
+      </div>
+      <div class="route-body">
+        <span class="route-tag">Shops · brands · small businesses</span>
+        <span class="route-h">I need a website</span>
+        <span class="route-p">You want a site that works well on phones and that you can still change later</span>
+        <span class="route-list"><span>Web design + front end</span><b>quoted by pages</b></span>
+        <span class="route-list"><span>Responsive designs</span><b>desktop · tablet · phone</b></span>
+        <span class="route-go">See website plans <span class="ar ar-d">↓</span></span>
+      </div>
+    </a>
+  </div>
+</section>
 
-<section id="services-en" class="wrap services">
+<div class="mq" aria-hidden="true"><div class="mq-track"><span>Hands-on flow testing — 產品流程實測 — UI QA before launch — 上線前把關 — Web design &amp; front end — 設計・切版 — </span><span>Hands-on flow testing — 產品流程實測 — UI QA before launch — 上線前把關 — Web design &amp; front end — 設計・切版 — </span></div></div>
+
+<section id="product-en" class="wrap services">
   <div class="sh">
     <div style="display:flex;flex-direction:column;gap:4px">
-      <p class="eyebrow">Services|</p>
-      <h2 class="sec">What I can help with</h2>
+      <p class="eyebrow">For product teams|</p>
+      <h2 class="sec">For product teams:<br>I walk your users' path before they do</h2>
     </div>
-    <p class="note">Each service works on its own or combined with others. Not sure about the scope yet? We can talk it through and decide together.</p>
+    <p class="note">Automated scanners see the code, not where people get stuck. I go through each flow step by step on real phones and computers and try every edge case.</p>
   </div>
 
-  <div class="svc-grid">
-    <article class="svc">
-      <span class="num">01</span>
-      <h3>Product flow review</h3>
-      <p class="pain">When people get stuck signing up, filling in a form, checking out or booking, it’s rarely their fault; it’s gaps in the flow, the field rules and the error messages. Everyone stuck there is one step away from finishing.</p>
-      <p class="fit">For teams with weak conversion, whose support keeps hearing “I can’t log in,” “the form won’t submit” or “payment got stuck.”</p>
-      <span class="lab">DELIVERABLES</span>
-      <ul>
-        <li>A walkthrough of your key flows (sign-up and login, forms, checkout or booking, account pages) with a prioritized list of issues</li>
-        <li>An inventory of edge cases and error messages: field validation, duplicate submits, locked accounts, failed recovery</li>
-        <li>Recommendations and mockups that balance usability and security, including multi-language checks if you need them</li>
-      </ul>
-      <p class="proof">Done before: a three-brand sign-up redesign, with daily sign-up submits up 18.6%　<a href="#cases-en">See the case →</a></p>
-    </article>
-
-    <article class="svc">
-      <span class="num">02</span>
-      <h3>UI QA before launch</h3>
-      <p class="pain">Typos, missing button states and broken mobile layouts cost far more to fix after launch, and users decide the product feels unreliable before you do.</p>
-      <p class="fit">For teams about to launch without a dedicated designer to check the screens.</p>
-      <span class="lab">DELIVERABLES</span>
-      <ul>
-        <li>Page-by-page checks of copy, spacing, states and interactions against the designs</li>
-        <li>Checks across devices and platforms</li>
-        <li>Issue tickets engineers can act on, written in Chinese or English</li>
-      </ul>
-      <p class="proof">Done before: 115 issue tickets filed during one redesign's UAT　<a href="work01.html?lang=en">See the case →</a></p>
-    </article>
-
-    <article class="svc">
-      <span class="num">03</span>
-      <h3>Web design + front end</h3>
-      <p class="pain">A site that looks good but needs a full rebuild to change one section, or keeps breaking on phones, quickly becomes something nobody dares to touch.</p>
-      <p class="fit">For shops and small businesses that need a company site, a brand site, a campaign page or membership features.</p>
-      <span class="lab">DELIVERABLES</span>
-      <ul>
-        <li>Responsive designs for desktop, tablet and phone</li>
-        <li>Front-end build when needed</li>
-        <li>Component-based design, so later changes and redesigns take less effort</li>
-      </ul>
-      <p class="proof">Done before: 30+ responsive websites launched, including Mandarin Daily News and the Taiwan Internet Association　<a href="#earlier-en">See the work →</a></p>
-    </article>
-
+  <div class="tier-head">
+    <h3 class="sub-h">Hands-on flow testing · starting prices</h3>
+    <p class="sub-p">Cases I test include field validation, duplicate submits, expired codes, locked accounts and failed recovery</p>
   </div>
+  <div class="tiers">
+    <article class="tier">
+      <p class="tier-lv">STARTER</p>
+      <h4>One flow, tested</h4>
+      <p class="price">NT$2,500</p>
+      <p class="tier-scope">1 flow, 8 edge cases</p>
+      <ul>
+        <li>Pass/fail table with real-device screenshots</li>
+        <li>Fix list ranked by impact</li>
+      </ul>
+      <p class="tier-meta">Delivered in 3 working days · 1 revision</p>
+    </article>
+    <article class="tier">
+      <p class="tier-lv">STANDARD</p>
+      <h4>Full sign-up &amp; login test</h4>
+      <p class="price">NT$5,800</p>
+      <p class="tier-scope">Sign-up, login and account recovery: 15 cases on phone and desktop</p>
+      <ul>
+        <li>Pass/fail table with real-device screenshots</li>
+        <li>Fix list ranked by impact</li>
+        <li>Suggested order of fixes</li>
+      </ul>
+      <p class="tier-meta">Delivered in 5 working days · 2 revisions</p>
+    </article>
+    <article class="tier">
+      <p class="tier-lv">ADVANCED</p>
+      <h4>Test, fix designs, retest</h4>
+      <p class="price">NT$12,800</p>
+      <p class="tier-scope">Everything in Standard, plus:</p>
+      <ul>
+        <li>Figma fix designs for the top 3 issues</li>
+        <li>One retest after engineering fixes (within 30 days of delivery)</li>
+      </ul>
+      <p class="tier-meta">Delivered in 7 working days · 2 revisions</p>
+    </article>
+  </div>
+  <div class="addons">
+    <p class="lab">ADD-ONS</p>
+    <ul>
+      <li><span>5 more test cases</span><b>NT$1,200</b></li>
+      <li><span>One extra revision</span><b>NT$800</b></li>
+      <li><span>Fix designs in a second size (phone or desktop, Advanced only)</span><b>NT$3,800</b></li>
+    </ul>
+    <p class="addons-note">These are starting prices and will change as bookings grow.</p>
+  </div>
+
+  <article class="svc-row">
+    <div>
+      <h3 class="sub-h">UI QA before launch</h3>
+      <p class="sub-p">Typos, missing button states and broken mobile layouts cost far more to fix after launch. For teams about to launch without a dedicated designer to check the screens.</p>
+    </div>
+    <ul>
+      <li>Page-by-page checks of copy, spacing, states and interactions against the designs</li>
+      <li>Checks across devices and platforms</li>
+      <li>Issue tickets engineers can act on, in Chinese or English</li>
+    </ul>
+    <p class="svc-price">Quoted by number of pages and devices</p>
+  </article>
 </section>
 
-<section id="cases-en" class="dark cases">
+<section class="dark cases">
   <div class="wrap">
     <div class="sh">
       <div style="display:flex;flex-direction:column;gap:4px">
         <p class="eyebrow">Selected work|</p>
-        <h2 class="sec">Case studies</h2>
+        <h2 class="sec">Done before</h2>
       </div>
-      <p class="note">All screens are de-identified. Each case has a full write-up if you want the details.</p>
+      <p class="note">All screens are de-identified. The full case has the details.</p>
     </div>
-
     <div class="case-grid">
       <article class="case">
         <img src="img/5a12622855edc63d02846815d123024b.png" alt="Sign-up page before and after: one long form before, separate username and phone sign-up after">
@@ -625,60 +843,65 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
         <dl>
           <dt>PROBLEM</dt><dd>The old sign-up page asked for 5 fields at once, and the rules differed across brands.</dd>
           <dt>APPROACH</dt><dd>Split sign-up into phone and username paths, and unified validation rules and error messages.</dd>
+          <dt>QA</dt><dd>115 issue tickets filed during the redesign's UAT.</dd>
         </dl>
         <a class="btn" href="work01.html?lang=en">Read the full case <span class="ar ar-r">→</span></a>
       </article>
-
-      <article class="case">
-        <img src="img/95342b3393697c6834d4032bd18d7de5.png" alt="The same procurement system in three brand themes, with Figma library buttons, checkboxes, switches, a modal and status badges">
-        <div class="top"><span>02</span><span>Design System · front end</span></div>
-        <h3>One system, three companies, each in its own brand</h3>
-        <p class="out">Live at all three companies; the Design System was handed over to the company and its engineers.</p>
-        <dl>
-          <dt>PROBLEM</dt><dd>A procurement system built for one company had to serve three, each with its own logo and brand colors.</dd>
-          <dt>APPROACH</dt><dd>Built a themable Design System on Bootstrap and a Figma library that maps to code, and took over front-end development.</dd>
-        </dl>
-        <a class="btn" href="work02.html?lang=en">Read the full case <span class="ar ar-r">→</span></a>
-      </article>
-
-      <article class="case">
-        <img src="img/ae63ed4d86440ceaf4572afe22014b19.png" alt="The UI/UX decision library table, tagged by brand, market, platform, module and status (de-identified redraw)">
-        <div class="top"><span>03</span><span>Notion + AI decision library</span></div>
-        <h3>Letting AI catch contradictions in specs before launch</h3>
-        <p class="out">Rules and their sources are one search away, and it even caught copy an engineer had mistyped.</p>
-        <dl>
-          <dt>PROBLEM</dt><dd>Rules were scattered across mockups, Jira and chat, and the same rule was asked about again and again.</dd>
-          <dt>APPROACH</dt><dd>Organized them into a searchable Notion decision library, with AI helping compare specs.</dd>
-        </dl>
-        <a class="btn" href="work03.html?lang=en">Read the full case <span class="ar ar-r">→</span></a>
-      </article>
     </div>
+  </div>
+</section>
 
-    <div id="earlier-en" class="earlier">
-      <div style="display:flex;flex-direction:column;gap:4px">
-        <p class="eyebrow">Client projects|</p>
-        <h3>Website &amp; app client projects</h3>
+<div id="web-en" class="web-wrap">
+<section class="wrap services">
+  <div class="sh">
+    <div style="display:flex;flex-direction:column;gap:4px">
+      <p class="eyebrow">For shops &amp; small businesses|</p>
+      <h2 class="sec">For shops and small businesses:<br>a site that works on phones and stays easy to change</h2>
+    </div>
+    <p class="note">A site that needs a full rebuild to change one section soon becomes something nobody dares to touch. I take it from design through front-end build, so you get a site you can keep changing.</p>
+  </div>
+  <div class="benefits">
+    <div><span class="num">01</span><h3>Looks good, works on phones</h3><p>Designed for desktop, tablet and phone, with buttons and forms that are easy to use on a small screen.</p></div>
+    <div><span class="num">02</span><h3>Easy to change later</h3><p>Component-based design, so swapping a section or adding a page doesn't mean rebuilding the site.</p></div>
+    <div><span class="num">03</span><h3>Design to front end in one go</h3><p>If you need it, I do both the designs and the front-end build, so there is no separate developer to brief.</p></div>
+  </div>
+  <div class="svc-row">
+    <div>
+      <h3 class="sub-h">Web design + front end</h3>
+      <p class="sub-p">For shops and small businesses that need a company site, a brand site, a campaign page or membership features.</p>
+    </div>
+    <ul>
+      <li>Responsive designs for desktop, tablet and phone</li>
+      <li>Front-end build when needed</li>
+      <li>Component-based design, so later changes take less effort</li>
+    </ul>
+    <p class="svc-price">Quoted by pages and features, in writing after a free call</p>
+  </div>
+  <div id="earlier-en" class="earlier">
+    <div style="display:flex;flex-direction:column;gap:4px">
+      <p class="eyebrow">Client projects|</p>
+      <h3>30+ responsive sites launched, including</h3>
+    </div>
+    <div class="e-grid">
+      <div class="e-item">
+        <img src="img/403a1b5a878fa37ce48402b13b3dc2fe.png" alt="Mandarin Daily News shop on desktop, tablet and phone">
+        <span>2019｜RWD SITE・MEMBERSHIP</span>
+        <p>Mandarin Daily News subscription shop</p>
       </div>
-      <div class="e-grid">
-        <div class="e-item">
-          <img src="img/403a1b5a878fa37ce48402b13b3dc2fe.png" alt="Mandarin Daily News shop on desktop, tablet and phone">
-          <span>2019｜RWD SITE・MEMBERSHIP</span>
-          <p>Mandarin Daily News subscription shop</p>
-        </div>
-        <div class="e-item">
-          <img src="img/1e5379076a3847fceb613e754d7bac29.png" alt="Taiwan Internet Association website key visual">
-          <span>2019｜WEBSITE REDESIGN</span>
-          <p>Taiwan Internet Association website</p>
-        </div>
-        <div class="e-item">
-          <img src="img/7f4288e47ab0e008b83c12693bea046e.png" alt="Saboten restaurant app redesign key visual" style="object-position:left center">
-          <span>2018｜APP DESIGN</span>
-          <p>Saboten restaurant app redesign</p>
-        </div>
+      <div class="e-item">
+        <img src="img/1e5379076a3847fceb613e754d7bac29.png" alt="Taiwan Internet Association website key visual">
+        <span>2019｜WEBSITE REDESIGN</span>
+        <p>Taiwan Internet Association website</p>
+      </div>
+      <div class="e-item">
+        <img src="img/7f4288e47ab0e008b83c12693bea046e.png" alt="Saboten restaurant app redesign key visual" style="object-position:left center">
+        <span>2018｜APP DESIGN</span>
+        <p>Saboten restaurant app redesign</p>
       </div>
     </div>
   </div>
 </section>
+</div>
 
 <section id="process-en" class="wrap process">
   <div class="head">
@@ -686,10 +909,10 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     <h2 class="sec">How we work together</h2>
   </div>
   <ol class="steps">
-    <li><span class="n">01</span><h3>Free 30-minute call</h3><p>We talk through your product, the problem you want solved and your timeline online. It's free and only about understanding the need; no design work happens yet.</p></li>
-    <li><span class="n">02</span><h3>Written quote and deposit</h3><p>I put the deliverables, timeline, fee and included revision rounds in writing. Once we both agree, a 50% deposit starts the work.</p></li>
-    <li><span class="n">03</span><h3>Check in stage by stage</h3><p>You see the work in stages. Each deliverable includes 2 rounds of revisions; please send feedback within 5 working days, or the timeline moves with it. New requests outside the agreed scope are quoted separately.</p></li>
-    <li><span class="n">04</span><h3>Final payment and handoff</h3><p>Once the final payment is in, I hand over the source design files and specs engineers can follow, and I can help check screens before launch.</p></li>
+    <li><span class="n">01</span><h3>Free 30-minute call</h3><p>We talk through your product and the problem you want solved. No charge.</p></li>
+    <li><span class="n">02</span><h3>Written quote</h3><p>Deliverables, timeline and fee in writing; work starts once we both agree.</p></li>
+    <li><span class="n">03</span><h3>Check in by stage</h3><p>You see the work in stages; revision rounds depend on the plan.</p></li>
+    <li><span class="n">04</span><h3>Handoff</h3><p>You get the report or design files, and I can help check screens before launch.</p></li>
   </ol>
 </section>
 
@@ -702,11 +925,15 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
   <div class="faq-list">
     <details>
       <summary>How do you price a project?</summary>
-      <p>By scope. After a free 30-minute call about your needs, I put the deliverables, revision rounds, timeline and fee in writing, so you know exactly what the fee covers.</p>
+      <p>Hands-on flow testing has fixed starting prices; see the three plans above. UI QA and web design are quoted by scope: after a free 30-minute call, I put the deliverables, revision rounds, timeline and fee in writing.</p>
+    </details>
+    <details>
+      <summary>How is testing different from the free check?</summary>
+      <p>The free check reads your public pages automatically and gives quick suggestions in about a minute. In hands-on testing I go through the flow myself on real phones and computers, including errors and retries, and deliver a pass/fail table with real-device screenshots.</p>
     </details>
     <details>
       <summary>How many revisions are included?</summary>
-      <p>Each deliverable includes 2 rounds of revisions, such as type size, spacing, copy or interaction details. Changes to the agreed scope, like adding pages or replacing a whole flow, are quoted separately and confirmed with you before I start.</p>
+      <p>For flow testing it depends on the plan: 1 round in Starter, 2 in Standard and Advanced, and NT$800 for each extra round. Other services include 2 rounds per deliverable, such as type size, spacing, copy or interaction details. Please send feedback within 5 working days, or the timeline moves with it. Changes to the agreed scope, like adding pages or replacing a whole flow, are quoted separately and confirmed with you before I start.</p>
     </details>
     <details>
       <summary>How does payment work?</summary>
@@ -714,7 +941,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     </details>
     <details>
       <summary>Can you take on just one small part?</summary>
-      <p>Yes. A one-off flow review, or only checking screens before launch, can each be booked on its own.</p>
+      <p>Yes. Testing a single flow (the Starter plan), or only checking screens before launch, can each be booked on its own.</p>
     </details>
     <details>
       <summary>Do we need to meet in person?</summary>
@@ -753,7 +980,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
           <label class="cf-f"><span>Your name <i>required</i></span><input name="name" autocomplete="name" maxlength="60" required></label>
           <label class="cf-f"><span>Email <i>required</i></span><input name="email" type="email" autocomplete="email" maxlength="120" required></label>
           <label class="cf-f"><span>Company or brand</span><input name="company" autocomplete="organization" maxlength="80"></label>
-          <label class="cf-f"><span>Which service?</span><select name="service"><option value="unsure">Not sure yet</option><option value="flow">Product flow review</option><option value="qa">UI QA before launch</option><option value="web">Web design &amp; front end</option></select></label>
+          <label class="cf-f"><span>Which service?</span><select name="service"><option value="unsure">Not sure yet</option><option value="flow">Hands-on flow testing</option><option value="qa">UI QA before launch</option><option value="web">Web design &amp; front end</option></select></label>
           <label class="cf-f"><span>Timeline</span><select name="timeline"><option value="">Choose one</option><option value="soon">Within a month</option><option value="mid">1–3 months</option><option value="open">Not decided</option></select></label>
         </div>
         <label class="cf-f"><span>What do you want to solve? <i>required</i></span><textarea name="message" rows="5" maxlength="2000" required placeholder="e.g. sign-up conversion is low, or we launch next month and want the screens checked first"></textarea></label>

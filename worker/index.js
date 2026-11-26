@@ -241,7 +241,7 @@ async function handleFeedback(request, env, ctx) {
 const CONTACT_LIMIT_IP = 3;      // messages per visitor per day
 const CONTACT_LIMIT_GLOBAL = 30; // messages for the whole site per day
 const MSG_TTL = 60 * 60 * 24 * 365;
-const SERVICES = { flow: '產品流程健檢', qa: '上線前 UI QA', web: '網站設計＋切版', unsure: '還不確定' };
+const SERVICES = { flow: '產品流程實測', qa: '上線前 UI QA', web: '網站設計＋切版', unsure: '還不確定' };
 const TIMELINES = { soon: '1 個月內', mid: '1–3 個月', open: '還沒決定' };
 
 async function handleContact(request, env, ctx) {
