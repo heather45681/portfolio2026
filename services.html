@@ -11,7 +11,7 @@ if (location.hostname === 'heather45681.github.io') {
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fifi Lee｜UX 接案合作</title>
-<meta name="description" content="Fifi Lee — 10 年經驗的 UX 設計師。產品流程實測（NT$2,500 起）、上線前 UI QA、網站設計與切版。">
+<meta name="description" content="Fifi Lee — 10 年經驗的 UX 設計師。產品流程實測（早鳥 NT$1,200 起）、上線前 UI QA、網站設計與切版。">
 <meta property="og:title" content="Free website UX check · 免費網站健檢｜Fifi Lee">
 <meta property="og:description" content="Paste a URL and get a UX quick check in about a minute. 貼上網址，約 1 分鐘拿到速度、無障礙與 UX 建議。">
 <meta property="og:type" content="website">
@@ -408,6 +408,35 @@ a:hover .ar-d{transform:translateY(3px)}
 .svc-row ul{grid-column:2;grid-row:1 / span 2;align-self:stretch;display:flex;flex-direction:column;justify-content:center;gap:8px;margin:0;padding:28px 32px 28px 52px;border-radius:16px;background:var(--paper);font-size:14.5px}
 .web-wrap .svc-row ul{background:var(--bg)}
 @media (max-width:760px){.svc-row ul,.svc-row>div,.svc-row .svc-price{grid-column:1;grid-row:auto}.svc-row ul{padding:22px 22px 22px 40px}}
+/* client projects with role and link */
+.e-pic{display:block;border-radius:4px;overflow:hidden}
+.e-pic img{transition:transform .35s ease}
+.e-pic:hover img{transform:scale(1.03)}
+.e-item .e-role{font-size:13px;color:var(--mute);margin-top:-4px}
+.e-link{align-self:flex-start;font-size:13px;color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px}
+.e-link:hover{color:var(--ink)}
+.web-wrap .svc-row+.svc-row{margin-top:-24px}
+@media (prefers-reduced-motion: reduce){.e-pic img{transition:none}.e-pic:hover img{transform:none}}
+/* two plans + early bird */
+.tiers-2{grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));max-width:880px;margin-inline:auto;width:100%}
+.price .was{font-family:'DM Mono',monospace;font-size:15px;color:var(--mute);text-decoration:line-through;margin-left:10px;align-self:center}
+.tier-early{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:12px 0 0;font-size:13.5px;color:var(--ink2)}
+.tier-early b{color:var(--accent);font-weight:600}
+.early-tag{display:inline-flex;align-items:center;height:22px;padding:0 10px;border-radius:999px;background:rgba(168,72,47,.12);color:var(--accent);font-size:12px;font-weight:600;letter-spacing:.06em}
+.tiers-2 .tier .tier-chips{min-height:0}
+.tier-note{margin:-12px 0 24px;padding:10px 14px;border-radius:10px;background:var(--bg);font-size:13px;color:var(--ink2)}
+/* three plans again; single add-on */
+.tier-early-ph{visibility:hidden}
+@media (max-width:760px){.tier-early-ph{display:none}}
+.addons ul{grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),340px))}
+/* add-on as one line under the plans */
+.addons{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px 20px;padding:18px 4px 0;border-top:1px solid var(--line);border-radius:0}
+.addons-h{display:contents}
+.addons-h .lab{order:1}
+.addons ul{order:2;display:block}
+.addons-h .addons-note{order:3}
+.addons li,.addons li:last-child{display:inline-flex;gap:14px;padding:0;border:0;background:none;border-radius:0}
+@media (max-width:760px){.addons{grid-template-columns:auto 1fr}.addons-h .addons-note{grid-column:1/-1}}
 /* language */
 .lang{display:inline-flex;border:1px solid var(--ink);border-radius:999px;overflow:hidden}
 .lang button{border:0;background:transparent;min-height:32px;padding:4px 14px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.08em;color:var(--ink);cursor:pointer}
@@ -497,7 +526,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
         <span class="route-tag">新創・SaaS・會員制服務</span>
         <span class="route-h">我有產品或 App</span>
         <span class="route-p">上線前想知道註冊、登入、表單哪裡會卡住</span>
-        <span class="route-list"><span>產品流程實測</span><b class="hl">NT$2,500 起</b></span>
+        <span class="route-list"><span>產品流程實測</span><b class="hl">早鳥 NT$1,200 起</b></span>
         <span class="route-list"><span>上線前 UI QA</span><b>依範圍報價</b></span>
         <span class="route-go">看產品團隊方案 <span class="ar ar-d">↓</span></span>
       </div>
@@ -538,32 +567,36 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     <article class="tier">
       <p class="tier-lv"><span class="tier-no">01</span>入門</p>
       <h4>單一流程實測</h4>
-      <p class="price"><span class="cur">NT$</span>2,500<span class="from">起</span></p>
+      <p class="price"><span class="cur">NT$</span>1,200<span class="was">NT$1,800</span></p>
+      <p class="tier-early"><span class="early-tag">早鳥</span>前 3 位客人限定，<b data-early-left>剩 3 位</b></p>
       <ul class="tier-chips"><li>1 個流程</li><li>8 個例外情境</li></ul>
       <ul class="tier-list"><li>通過／失敗表與實機截圖</li><li>依影響排序的修正清單</li></ul>
+      <p class="tier-note">之後升級標準方案，已付金額全額折抵</p>
       <dl class="tier-foot"><div><dt>交付</dt><dd>3 個工作天</dd></div><div><dt>修改</dt><dd>1 次</dd></div></dl>
     </article>
     <article class="tier tier-feat">
       <span class="tier-badge">推薦</span>
       <p class="tier-lv"><span class="tier-no">02</span>標準</p>
-      <h4>註冊登入完整實測</h4>
-      <p class="price"><span class="cur">NT$</span>5,800<span class="from">起</span></p>
+      <h4>註冊登入實測 + 優化</h4>
+      <p class="price"><span class="cur">NT$</span>4,500<span class="from">起</span></p>
+      <p class="tier-early tier-early-ph" aria-hidden="true">&nbsp;</p>
       <ul class="tier-chips"><li>註冊・登入・找回帳號</li><li>15 個情境</li><li>手機 + 桌機</li></ul>
-      <ul class="tier-list"><li>通過／失敗表與實機截圖</li><li>依影響排序的修正清單</li><li>建議修正順序</li></ul>
-      <dl class="tier-foot"><div><dt>交付</dt><dd>5 個工作天</dd></div><div><dt>修改</dt><dd>2 次</dd></div></dl>
+      <ul class="tier-list"><li>通過／失敗表與實機截圖</li><li>依影響排序的修正清單與修正順序</li><li>前 3 大問題的 Figma 修正稿</li></ul>
+      <dl class="tier-foot"><div><dt>交付</dt><dd>7 個工作天</dd></div><div><dt>修改</dt><dd>2 次</dd></div></dl>
     </article>
     <article class="tier">
       <p class="tier-lv"><span class="tier-no">03</span>進階</p>
-      <h4>實測 + 修正稿 + 複驗</h4>
-      <p class="price"><span class="cur">NT$</span>12,800<span class="from">起</span></p>
-      <ul class="tier-chips"><li>15 個情境</li><li>手機 + 桌機</li><li>30 天內複驗</li></ul>
-      <ul class="tier-list"><li class="inc">標準方案全部內容</li><li>前 3 大問題的 Figma 修正稿</li><li>工程修改完成後複驗一次（交付後 30 天內）</li></ul>
-      <dl class="tier-foot"><div><dt>交付</dt><dd>7 個工作天</dd></div><div><dt>修改</dt><dd>2 次</dd></div></dl>
+      <h4>完整實測 + <span style="white-space:nowrap">雙尺寸修正稿 + 複驗</span></h4>
+      <p class="price"><span class="cur">NT$</span>8,800<span class="from">起</span></p>
+      <p class="tier-early tier-early-ph" aria-hidden="true">&nbsp;</p>
+      <ul class="tier-chips"><li>註冊・登入・找回帳號</li><li>20 個情境</li><li>手機 + 桌機</li><li>30 天內複驗</li></ul>
+      <ul class="tier-list"><li class="inc">標準方案全部內容</li><li>多測 5 個情境，共 20 個</li><li>修正稿做手機 + 桌機兩種尺寸</li><li>工程修改完成後複驗一次（交付後 30 天內）</li></ul>
+      <dl class="tier-foot"><div><dt>交付</dt><dd>10 個工作天</dd></div><div><dt>修改</dt><dd>2 次</dd></div></dl>
     </article>
   </div>
   <div class="addons">
     <div class="addons-h"><p class="lab">加購</p><p class="addons-note">以上為起步價，之後會依案量調整。</p></div>
-    <ul><li><span class="ad-name">多測 5 個情境</span><b>NT$1,200</b></li><li><span class="ad-name">額外一次修改</span><b>NT$800</b></li><li><span class="ad-name">修正稿加做另一種尺寸<span class="ad-note">手機／桌機，僅限進階方案</span></span><b>NT$3,800</b></li></ul>
+    <ul><li><span class="ad-name">額外一次修改</span><b>NT$800</b></li></ul>
   </div>
   <div class="sample">
     <a class="sample-img" href="img/sample-test-report-zh.pdf" target="_blank" rel="noopener" aria-label="打開範例實測報告（PDF）">
@@ -643,6 +676,18 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     </ul>
     <p class="svc-price">依頁數與功能報價，諮詢後提供書面報價</p>
   </div>
+  <div class="svc-row">
+    <div>
+      <h3 class="sub-h">App 介面設計</h3>
+      <p class="sub-p">已經有開發團隊、需要設計師把 App 的流程和畫面做出來。只做設計，不含開發與上架。</p>
+    </div>
+    <ul>
+      <li>架構與流程規劃</li>
+      <li>整體 UI 設計稿（Figma）</li>
+      <li>元件與標註，方便工程師照著做</li>
+    </ul>
+    <p class="svc-price">依畫面數報價，諮詢後提供書面報價</p>
+  </div>
   <div id="earlier" class="earlier">
     <div style="display:flex;flex-direction:column;gap:4px">
       <p class="eyebrow">Client projects|</p>
@@ -650,19 +695,30 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     </div>
     <div class="e-grid">
       <div class="e-item">
-        <img src="img/403a1b5a878fa37ce48402b13b3dc2fe.png" alt="國語小舖網站在電腦、平板、手機上的畫面">
-        <span>2019｜RWD 網站・會員系統</span>
-        <p>國語日報・國語小舖 訂閱網站</p>
+        <a class="e-pic" href="https://shop.mdnkids.com" target="_blank" rel="noopener"><img src="img/403a1b5a878fa37ce48402b13b3dc2fe.png" alt="國語小舖網站在電腦、平板、手機上的畫面" loading="lazy"></a>
+        <span>2019｜RWD 電商網站</span>
+        <p>國語日報・國語小舖</p>
+        <p class="e-role">負責：網站架構規劃、風格設計、切版</p>
+        <a class="e-link" href="https://shop.mdnkids.com" target="_blank" rel="noopener">看網站 <span class="ar ar-r">↗</span></a>
       </div>
       <div class="e-item">
-        <img src="img/1e5379076a3847fceb613e754d7bac29.png" alt="台灣網際網路協會官網主視覺">
+        <a class="e-pic" href="https://www.twia.org.tw/" target="_blank" rel="noopener"><img src="img/1e5379076a3847fceb613e754d7bac29.png" alt="台灣網際網路協會官網主視覺" loading="lazy"></a>
         <span>2019｜RWD 網站改版</span>
-        <p>台灣網際網路協會 官網改版</p>
+        <p>台灣網際網路協會 官網</p>
+        <p class="e-role">負責：風格設計、切版</p>
+        <a class="e-link" href="https://www.twia.org.tw/" target="_blank" rel="noopener">看網站 <span class="ar ar-r">↗</span></a>
       </div>
       <div class="e-item">
-        <img src="img/7f4288e47ab0e008b83c12693bea046e.png" alt="勝博殿餐飲 App 改版主視覺" style="object-position:left center">
+        <img src="img/client-shifang-2019.jpg" alt="十方苑日月蛋糕活動網站主視覺" loading="lazy">
+        <span>2019｜一頁式活動網站</span>
+        <p>十方苑 日月蛋糕 好禮二重送</p>
+        <p class="e-role">負責：風格設計、切版（活動已結束）</p>
+      </div>
+      <div class="e-item">
+        <img src="img/7f4288e47ab0e008b83c12693bea046e.png" alt="勝博殿餐飲 App 改版主視覺" loading="lazy" style="object-position:left center">
         <span>2018｜App 設計</span>
         <p>勝博殿 Saboten 餐飲 App 改版</p>
+        <p class="e-role">負責：架構流程規劃、整體 UI 設計</p>
       </div>
     </div>
   </div>
@@ -691,7 +747,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
   <div class="faq-list">
     <details>
       <summary>報價怎麼算？</summary>
-      <p>產品流程實測有固定的起步價，請見上方三種方案。上線前 UI QA 和網站設計依範圍報價：先透過免費 30 分鐘諮詢了解需求，再用書面列出交付內容、修改次數、時程和費用。</p>
+      <p>產品流程實測有固定的起步價，請見上方三種方案；入門方案升級標準方案時，已付金額全額折抵。上線前 UI QA 和網站設計依範圍報價：先透過免費 30 分鐘諮詢了解需求，再用書面列出交付內容、修改次數、時程和費用。</p>
     </details>
     <details>
       <summary>實測和免費健檢有什麼不同？</summary>
@@ -746,7 +802,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
           <label class="cf-f"><span>你的名字 <i>必填</i></span><input name="name" autocomplete="name" maxlength="60" required></label>
           <label class="cf-f"><span>Email <i>必填</i></span><input name="email" type="email" autocomplete="email" maxlength="120" required></label>
           <label class="cf-f"><span>公司或品牌</span><input name="company" autocomplete="organization" maxlength="80"></label>
-          <label class="cf-f"><span>想談哪一項？</span><select name="service"><option value="unsure">還不確定</option><option value="flow">產品流程實測</option><option value="qa">上線前 UI QA</option><option value="web">網站設計 + 切版</option></select></label>
+          <label class="cf-f"><span>想談哪一項？</span><select name="service"><option value="unsure">還不確定</option><option value="flow">產品流程實測</option><option value="qa">上線前 UI QA</option><option value="web">網站設計 + 切版</option><option value="app">App 介面設計</option></select></label>
           <label class="cf-f"><span>預計時程</span><select name="timeline"><option value="">請選擇</option><option value="soon">1 個月內</option><option value="mid">1–3 個月</option><option value="open">還沒決定</option></select></label>
         </div>
         <label class="cf-f"><span>想解決什麼問題？ <i>必填</i></span><textarea name="message" rows="5" maxlength="2000" required placeholder="例如：註冊轉換率偏低、下個月要上線想先驗收畫面……"></textarea></label>
@@ -795,7 +851,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
         <span class="route-tag">Startups · SaaS · membership services</span>
         <span class="route-h">I have a product or app</span>
         <span class="route-p">You want to know where sign-up, login or forms break before launch</span>
-        <span class="route-list"><span>Hands-on flow testing</span><b class="hl">from NT$2,500</b></span>
+        <span class="route-list"><span>Hands-on flow testing</span><b class="hl">from NT$1,200 (early bird)</b></span>
         <span class="route-list"><span>UI QA before launch</span><b>quoted by scope</b></span>
         <span class="route-go">See plans for product teams <span class="ar ar-d">↓</span></span>
       </div>
@@ -836,32 +892,36 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     <article class="tier">
       <p class="tier-lv"><span class="tier-no">01</span>STARTER</p>
       <h4>One flow, tested</h4>
-      <p class="price"><span class="cur">NT$</span>2,500</p>
+      <p class="price"><span class="cur">NT$</span>1,200<span class="was">NT$1,800</span></p>
+      <p class="tier-early"><span class="early-tag">EARLY BIRD</span>First 3 clients · <b data-early-left>3 left</b></p>
       <ul class="tier-chips"><li>1 flow</li><li>8 edge cases</li></ul>
       <ul class="tier-list"><li>Pass/fail table with real-device screenshots</li><li>Fix list ranked by impact</li></ul>
+      <p class="tier-note">Upgrade to Standard later and what you paid is fully credited</p>
       <dl class="tier-foot"><div><dt>Delivery</dt><dd>3 working days</dd></div><div><dt>Revisions</dt><dd>1</dd></div></dl>
     </article>
     <article class="tier tier-feat">
       <span class="tier-badge">Recommended</span>
       <p class="tier-lv"><span class="tier-no">02</span>STANDARD</p>
-      <h4>Full sign-up &amp; login test</h4>
-      <p class="price"><span class="cur">NT$</span>5,800</p>
+      <h4>Sign-up &amp; login test + fixes</h4>
+      <p class="price"><span class="cur">NT$</span>4,500</p>
+      <p class="tier-early tier-early-ph" aria-hidden="true">&nbsp;</p>
       <ul class="tier-chips"><li>Sign-up · login · recovery</li><li>15 cases</li><li>Phone + desktop</li></ul>
-      <ul class="tier-list"><li>Pass/fail table with real-device screenshots</li><li>Fix list ranked by impact</li><li>Suggested order of fixes</li></ul>
-      <dl class="tier-foot"><div><dt>Delivery</dt><dd>5 working days</dd></div><div><dt>Revisions</dt><dd>2</dd></div></dl>
+      <ul class="tier-list"><li>Pass/fail table with real-device screenshots</li><li>Fix list ranked by impact, with a suggested order</li><li>Figma fix designs for the top 3 issues</li></ul>
+      <dl class="tier-foot"><div><dt>Delivery</dt><dd>7 working days</dd></div><div><dt>Revisions</dt><dd>2</dd></div></dl>
     </article>
     <article class="tier">
       <p class="tier-lv"><span class="tier-no">03</span>ADVANCED</p>
-      <h4>Test, fix designs, retest</h4>
-      <p class="price"><span class="cur">NT$</span>12,800</p>
-      <ul class="tier-chips"><li>15 cases</li><li>Phone + desktop</li><li>Retest within 30 days</li></ul>
-      <ul class="tier-list"><li class="inc">Everything in Standard</li><li>Figma fix designs for the top 3 issues</li><li>One retest after engineering fixes (within 30 days of delivery)</li></ul>
-      <dl class="tier-foot"><div><dt>Delivery</dt><dd>7 working days</dd></div><div><dt>Revisions</dt><dd>2</dd></div></dl>
+      <h4>Full test + fixes + retest</h4>
+      <p class="price"><span class="cur">NT$</span>8,800</p>
+      <p class="tier-early tier-early-ph" aria-hidden="true">&nbsp;</p>
+      <ul class="tier-chips"><li>Sign-up · login · recovery</li><li>20 cases</li><li>Phone + desktop</li><li>Retest within 30 days</li></ul>
+      <ul class="tier-list"><li class="inc">Everything in Standard</li><li>5 more cases, 20 in total</li><li>Fix designs for both phone and desktop</li><li>One retest after engineering fixes (within 30 days of delivery)</li></ul>
+      <dl class="tier-foot"><div><dt>Delivery</dt><dd>10 working days</dd></div><div><dt>Revisions</dt><dd>2</dd></div></dl>
     </article>
   </div>
   <div class="addons">
     <div class="addons-h"><p class="lab">ADD-ONS</p><p class="addons-note">These are starting prices and will change as bookings grow.</p></div>
-    <ul><li><span class="ad-name">5 more test cases</span><b>NT$1,200</b></li><li><span class="ad-name">One extra revision</span><b>NT$800</b></li><li><span class="ad-name">Fix designs in a second size<span class="ad-note">Phone or desktop, Advanced only</span></span><b>NT$3,800</b></li></ul>
+    <ul><li><span class="ad-name">One extra revision</span><b>NT$800</b></li></ul>
   </div>
   <div class="sample">
     <a class="sample-img" href="img/sample-test-report-en.pdf" target="_blank" rel="noopener" aria-label="Open the sample test report (PDF)">
@@ -941,6 +1001,18 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     </ul>
     <p class="svc-price">Quoted by pages and features, in writing after a free call</p>
   </div>
+  <div class="svc-row">
+    <div>
+      <h3 class="sub-h">App UI design</h3>
+      <p class="sub-p">For teams that already have developers and need a designer for the app's flows and screens. Design only; development and store release are not included.</p>
+    </div>
+    <ul>
+      <li>Structure and flow planning</li>
+      <li>Full UI designs in Figma</li>
+      <li>Components and annotations engineers can build from</li>
+    </ul>
+    <p class="svc-price">Quoted by number of screens, in writing after a free call</p>
+  </div>
   <div id="earlier-en" class="earlier">
     <div style="display:flex;flex-direction:column;gap:4px">
       <p class="eyebrow">Client projects|</p>
@@ -948,19 +1020,30 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
     </div>
     <div class="e-grid">
       <div class="e-item">
-        <img src="img/403a1b5a878fa37ce48402b13b3dc2fe.png" alt="Mandarin Daily News shop on desktop, tablet and phone">
-        <span>2019｜RWD SITE・MEMBERSHIP</span>
-        <p>Mandarin Daily News subscription shop</p>
+        <a class="e-pic" href="https://shop.mdnkids.com" target="_blank" rel="noopener"><img src="img/403a1b5a878fa37ce48402b13b3dc2fe.png" alt="Mandarin Daily News shop on desktop, tablet and phone" loading="lazy"></a>
+        <span>2019｜RWD E-COMMERCE SITE</span>
+        <p>Mandarin Daily News shop</p>
+        <p class="e-role">My part: site structure, visual design, front-end build</p>
+        <a class="e-link" href="https://shop.mdnkids.com" target="_blank" rel="noopener">Visit site <span class="ar ar-r">↗</span></a>
       </div>
       <div class="e-item">
-        <img src="img/1e5379076a3847fceb613e754d7bac29.png" alt="Taiwan Internet Association website key visual">
+        <a class="e-pic" href="https://www.twia.org.tw/" target="_blank" rel="noopener"><img src="img/1e5379076a3847fceb613e754d7bac29.png" alt="Taiwan Internet Association website key visual" loading="lazy"></a>
         <span>2019｜WEBSITE REDESIGN</span>
         <p>Taiwan Internet Association website</p>
+        <p class="e-role">My part: visual design, front-end build</p>
+        <a class="e-link" href="https://www.twia.org.tw/" target="_blank" rel="noopener">Visit site <span class="ar ar-r">↗</span></a>
       </div>
       <div class="e-item">
-        <img src="img/7f4288e47ab0e008b83c12693bea046e.png" alt="Saboten restaurant app redesign key visual" style="object-position:left center">
+        <img src="img/client-shifang-2019.jpg" alt="Shifang cake campaign site key visual" loading="lazy">
+        <span>2019｜ONE-PAGE CAMPAIGN SITE</span>
+        <p>Shifang mooncake campaign</p>
+        <p class="e-role">My part: visual design, front-end build (campaign has ended)</p>
+      </div>
+      <div class="e-item">
+        <img src="img/7f4288e47ab0e008b83c12693bea046e.png" alt="Saboten restaurant app redesign key visual" loading="lazy" style="object-position:left center">
         <span>2018｜APP DESIGN</span>
         <p>Saboten restaurant app redesign</p>
+        <p class="e-role">My part: structure and flows, full UI design</p>
       </div>
     </div>
   </div>
@@ -989,7 +1072,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
   <div class="faq-list">
     <details>
       <summary>How do you price a project?</summary>
-      <p>Hands-on flow testing has fixed starting prices; see the three plans above. UI QA and web design are quoted by scope: after a free 30-minute call, I put the deliverables, revision rounds, timeline and fee in writing.</p>
+      <p>Hands-on flow testing has fixed starting prices; see the three plans above. If you upgrade from Starter to Standard, what you paid is fully credited. UI QA and web design are quoted by scope: after a free 30-minute call, I put the deliverables, revision rounds, timeline and fee in writing.</p>
     </details>
     <details>
       <summary>How is testing different from the free check?</summary>
@@ -1044,7 +1127,7 @@ if (/(^|\.)fifilee-design\.com$/.test(location.hostname)) {
           <label class="cf-f"><span>Your name <i>required</i></span><input name="name" autocomplete="name" maxlength="60" required></label>
           <label class="cf-f"><span>Email <i>required</i></span><input name="email" type="email" autocomplete="email" maxlength="120" required></label>
           <label class="cf-f"><span>Company or brand</span><input name="company" autocomplete="organization" maxlength="80"></label>
-          <label class="cf-f"><span>Which service?</span><select name="service"><option value="unsure">Not sure yet</option><option value="flow">Hands-on flow testing</option><option value="qa">UI QA before launch</option><option value="web">Web design &amp; front end</option></select></label>
+          <label class="cf-f"><span>Which service?</span><select name="service"><option value="unsure">Not sure yet</option><option value="flow">Hands-on flow testing</option><option value="qa">UI QA before launch</option><option value="web">Web design &amp; front end</option><option value="app">App UI design</option></select></label>
           <label class="cf-f"><span>Timeline</span><select name="timeline"><option value="">Choose one</option><option value="soon">Within a month</option><option value="mid">1–3 months</option><option value="open">Not decided</option></select></label>
         </div>
         <label class="cf-f"><span>What do you want to solve? <i>required</i></span><textarea name="message" rows="5" maxlength="2000" required placeholder="e.g. sign-up conversion is low, or we launch next month and want the screens checked first"></textarea></label>
