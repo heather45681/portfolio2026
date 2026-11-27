@@ -30,9 +30,31 @@ export default {
     if (url.pathname === '/api/logs') return handleLogs(request, env, url);
     if (url.pathname === '/api/contact') return handleContact(request, env, ctx);
     if (url.pathname === '/api/feedback') return handleFeedback(request, env, ctx);
+    // robots.txt and sitemap.xml aren't static files (the build only copies html, js and img), so they come from here
+    if (url.pathname === '/robots.txt') return textFile(ROBOTS_TXT, 'text/plain; charset=utf-8');
+    if (url.pathname === '/sitemap.xml') return textFile(sitemapXml(), 'application/xml; charset=utf-8');
     return env.ASSETS.fetch(request);
   },
 };
+
+// ---------- SEO ----------
+const SITE = 'https://fifilee-design.com';
+const SITEMAP_PATHS = ['/', '/services', '/check', '/side-project', '/work01', '/work02', '/work03'];
+const SITEMAP_LASTMOD = '2026-11-27'; // update when pages change meaningfully
+const ROBOTS_TXT = `User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /logs
+
+Sitemap: ${SITE}/sitemap.xml
+`;
+function sitemapXml() {
+  const urls = SITEMAP_PATHS.map(p => `  <url><loc>${SITE}${p}</loc><lastmod>${SITEMAP_LASTMOD}</lastmod></url>`).join('\n');
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
+}
+function textFile(body, type) {
+  return new Response(body, { headers: { 'content-type': type, 'cache-control': 'public, max-age=3600' } });
+}
 
 // ---------- API ----------
 
